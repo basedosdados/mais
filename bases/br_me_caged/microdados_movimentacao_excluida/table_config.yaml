@@ -1,3 +1,4 @@
+
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_me_caged
@@ -5,7 +6,7 @@ dataset_id: br_me_caged
 table_id: microdados_movimentacao_excluida
 
 # Título da tabela.
-title: Microdados - Movimentacação Excluída
+title: Microdados Movimentação Excluída
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -13,41 +14,72 @@ title: Microdados - Movimentacação Excluída
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
 description: Contém dados de movimentações excluídas com competência de declaração.
 
-# A máxima unidade espacial que a tabela cobre.
+# As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - continent: south_america
-#     country: br
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
 spatial_coverage:
     - sa.br
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
 temporal_coverage:
-    - 2020-01(1)2022-05
+    - 2020-04(1)2023-02
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
 observation_level:
+    - country: br
+      entity: state
+      columns:
+          - sigla_uf
+    - country: br
+      entity: municipality
+      columns:
+          - id_municipio
+          - id_municipio_6
+    - entity: year
+      columns:
+          - ano
+    - entity: month
+      columns:
+          - mes
 
-last_updated: 
-    metadata: "2022-07-14"
-    data: "2022-07-14 22:41:47"
+last_updated:
+    metadata: '2023-03-10'
+    data: '2023-03-10 12:00:00'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
-version: v1.1
+# Exemplos: v1.0, v1.1.3
+version: v1.2
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Crislane Alves
-    email: crislanealves@basedosdados.org
-    github_user: crislanealves
-    ckan_user: crislanealves
+    name: Arthur Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
@@ -61,13 +93,10 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Limpeza para consistência.
+data_cleaning_description: Limpeza para consistência
 
-# Url do código de limpeza dos dados.
+# Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code
-
-# Url do código de limpeza dos dados.
-data_cleaning_code_url:
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -103,8 +132,6 @@ partitions:
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
@@ -167,21 +194,6 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: id_municipio_6
-      bigquery_type: string
-      description: ID Município - IBGE 6 Dígitos
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: municipio
-          column_name: id_municipio_6
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: cnae_2_secao
       bigquery_type: string
       description: Classificação Nacional de Atividades Econômicas (CNAE 2.0 - Seção)
@@ -204,9 +216,9 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: 
-          table_id: 
-          column_name: 
+          dataset_id:
+          table_id:
+          column_name:
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -439,7 +451,8 @@ columns:
       is_partition: false
     - name: tamanho_estabelecimento_janeiro
       bigquery_type: string
-      description: Faixa de tamanho do estabelecimento em relação ao total de vínculos no início do ano
+      description: Faixa de tamanho do estabelecimento em relação ao total de vínculos
+          no início do ano
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -498,4 +511,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-06-01T13:11:33.601741'
+number_rows:
+
+metadata_modified: '2023-03-10T09:49:52.376942'

@@ -9,9 +9,9 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Crislane Alves
+Nome: Arthur Gusmão
 Código: 
-Email: crislanealves@basedosdados.org
+Email: arthur.gusmao@basedosdados.org
 Tratado por
 -----------
 Nome: Lucas Rodrigues Cavalcanti
@@ -31,7 +31,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 2020-01(1)2022-03
+- 2020-04(1)2023-02
 
 
 
@@ -45,7 +45,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Limpeza para consistência.
+Limpeza para consistência
 
 
 
