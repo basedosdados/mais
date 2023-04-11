@@ -135,7 +135,7 @@ columns:
       is_partition: false
     - name: logradouro
       bigquery_type: string
-      description: Logadouro
+      description: Logradouro
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
