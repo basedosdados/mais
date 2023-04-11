@@ -1,4 +1,4 @@
-None
+Contém dados de movimentações excluídas com competência de declaração.
 
 Para saber mais acesse:
 Website: 

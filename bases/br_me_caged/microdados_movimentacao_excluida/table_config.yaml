@@ -12,7 +12,7 @@ title: Microdados Movimentação Excluída
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description:
+description: Contém dados de movimentações excluídas com competência de declaração.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -96,7 +96,7 @@ data_cleaned_by:
 data_cleaning_description: Limpeza para consistência
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
