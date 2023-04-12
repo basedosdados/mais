@@ -6,7 +6,7 @@ dataset_id: br_bd_metadados
 table_id: tables
 
 # Título da tabela.
-title: Tabelas na BD+
+title:
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -16,25 +16,42 @@ description: Tabelas na BD+
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - sa.br
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
 spatial_coverage:
-   - world
+    - world
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
-  - '2023-03-15'
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+    - '2023-03-15'
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: day
 
 # Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
 observation_level:
     - entity: other
       columns:
-            - id
+          - id
 
 last_updated:
     metadata: '2023-03-07'
@@ -42,7 +59,7 @@ last_updated:
     release: '2023-03-07 14:54:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
+# Exemplos: v1.0, v1.1.3
 version: v1.0
 
 # Quem está preenchendo esses metadados?
@@ -66,7 +83,7 @@ data_cleaned_by:
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description:
 
-# Url do código de limpeza dos dados.
+# Url do código de limpeza dos dados do github.
 data_cleaning_code_url:
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
@@ -100,15 +117,13 @@ partitions:
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: dataset_id
       bigquery_type: string
       description: Dataset ID
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -123,7 +138,7 @@ columns:
       bigquery_type: string
       description: Dataset Name
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -133,12 +148,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false      
+      is_partition: false
     - name: id
       bigquery_type: string
       description: ID
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -153,7 +168,7 @@ columns:
       bigquery_type: string
       description: Name
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -168,7 +183,7 @@ columns:
       bigquery_type: date
       description: Date Created
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -183,7 +198,7 @@ columns:
       bigquery_type: date
       description: Last Modified Date
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -198,7 +213,7 @@ columns:
       bigquery_type: string
       description: Spatial Coverage
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -213,7 +228,7 @@ columns:
       bigquery_type: string
       description: Temporal Coverage
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -228,7 +243,7 @@ columns:
       bigquery_type: string
       description: Update Frequency
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -243,7 +258,7 @@ columns:
       bigquery_type: string
       description: Observation Level
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -258,7 +273,7 @@ columns:
       bigquery_type: int64
       description: Number Rows
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -273,7 +288,7 @@ columns:
       bigquery_type: int64
       description: Number Columns
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -288,7 +303,7 @@ columns:
       bigquery_type: int64
       description: Outdated
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -303,7 +318,7 @@ columns:
       bigquery_type: date
       description: Metadata Date
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -313,12 +328,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: false
     - name: data
       bigquery_type: date
       description: Date
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -328,12 +343,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false   
+      is_partition: false
     - name: release
       bigquery_type: date
       description: Release Date
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -348,7 +363,7 @@ columns:
       bigquery_type: string
       description: Published By
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -358,12 +373,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: false
     - name: cleaned_by
       bigquery_type: string
       description: Cleaned By
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -378,7 +393,7 @@ columns:
       bigquery_type: string
       description: Missing Metadata
       temporal_coverage:
-            - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -388,8 +403,8 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false                               
+      is_partition: false
 
 number_rows: 470
 
-metadata_modified:
+metadata_modified: '2023-04-11T19:44:43.395802'

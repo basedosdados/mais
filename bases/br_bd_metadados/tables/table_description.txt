@@ -1,4 +1,4 @@
-None
+Tabelas na BD+
 
 Para saber mais acesse:
 Website: 
@@ -9,12 +9,15 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: None
+Nome: Patrick Teixeira
 Código: 
+Email: Patrick.teixeira@basedosdados.org
 Tratado por
 -----------
-Nome: None
+Nome: Ricardo Dahis
 Código: 
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
 
 
 
@@ -23,12 +26,14 @@ Código:
 
 Cobertura Temporal
 ------------------
+- 2023-03-15
 
 
 
 
 Cobertura Espacial
 ------------------
+- world
 
 
 
