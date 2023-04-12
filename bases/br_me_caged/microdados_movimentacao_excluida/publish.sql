@@ -43,5 +43,5 @@ SAFE_CAST(indicador_trabalho_parcial AS STRING) indicador_trabalho_parcial,
 SAFE_CAST(tamanho_estabelecimento_janeiro AS STRING) tamanho_estabelecimento_janeiro,
 SAFE_CAST(indicador_aprendiz AS STRING) indicador_aprendiz,
 SAFE_CAST(origem_informacao AS STRING) origem_informacao,
-SAFE_CAST(indicador_fora_prazo AS STRING) indicador_fora_prazo
+SAFE_CAST(indicador_fora_prazo AS INT64) indicador_fora_prazo
 FROM basedosdados-dev.br_me_caged_staging.microdados_movimentacao_excluida AS t
