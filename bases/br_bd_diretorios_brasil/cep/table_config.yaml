@@ -5,7 +5,7 @@ dataset_id: br_bd_diretorios_brasil
 table_id: cep
 
 # Título da tabela.
-title: CEP (Código de Endereçamento Postal)
+title: Código de Endereçamento Postal (CEP)
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -247,7 +247,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: geometria
+    - name: centroide
       bigquery_type: geography
       description: Centróide do CEP
       temporal_coverage:
