@@ -93,7 +93,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Limpeza para consistência
+data_cleaning_description: 1. Acessar o FTP do Ministério do Trabalho e Previdência; 2. Baixar os arquivos brutos no formato '.7z'; 3. Renomear as colunas para o padrão definido no Manual de Estilo; 4. Remover as colunas "competenciamov", "sigla_uf", "regiao","competenciadec", "unidadesalariocodigo" e "valorsalariofixo"; 5. Salvar os arquivos nas diretórios particionadas no formato `/caged/output/ano=AAAA/mes=MM/sigla_uf=XX/`
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code
@@ -294,7 +294,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
+      measurement_unit: year
       has_sensitive_data: no
       observations: Quando acumulada representa a soma das idades
       is_in_staging: true
@@ -511,6 +511,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows:
+number_rows: 280932
 
 metadata_modified: '2023-03-10T09:49:52.376942'
