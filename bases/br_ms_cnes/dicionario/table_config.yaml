@@ -79,7 +79,7 @@ data_cleaned_by:
 data_cleaning_description:
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_cnes/code
+data_cleaning_code_url: 
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -182,4 +182,4 @@ columns:
 
 number_rows:
 
-metadata_modified: "2023-03-07T19:00:00.561772"
+metadata_modified: "2023-03-13T12:53:52.685998"
