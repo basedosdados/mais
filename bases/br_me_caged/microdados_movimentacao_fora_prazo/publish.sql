@@ -23,7 +23,6 @@ SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(id_municipio_6 AS STRING) id_municipio_6,
 SAFE_CAST(cnae_2_secao AS STRING) cnae_2_secao,
 SAFE_CAST(cnae_2_subclasse AS STRING) cnae_2_subclasse,
 SAFE_CAST(cbo_2002 AS STRING) cbo_2002,
@@ -44,5 +43,5 @@ SAFE_CAST(indicador_trabalho_parcial AS STRING) indicador_trabalho_parcial,
 SAFE_CAST(tamanho_estabelecimento_janeiro AS STRING) tamanho_estabelecimento_janeiro,
 SAFE_CAST(indicador_aprendiz AS STRING) indicador_aprendiz,
 SAFE_CAST(origem_informacao AS STRING) origem_informacao,
-SAFE_CAST(indicador_fora_prazo AS STRING) indicador_fora_prazo
+SAFE_CAST(indicador_fora_prazo AS INT64) indicador_fora_prazo
 FROM basedosdados-dev.br_me_caged_staging.microdados_movimentacao_fora_prazo AS t
