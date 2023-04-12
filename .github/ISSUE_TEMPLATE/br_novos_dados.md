@@ -19,18 +19,19 @@ assignees:
 
 4. Fonte original dos dados: <link>
 
-5. Cobertura espacial: <país/sigla_uf>
+5. Cobertura espacial: <area.slug>
 
-6. Cobertura temporal: de XXXX a YYYY
+6. Cobertura temporal: de YYYY-MM-DD a YYYY-MM-DD
 
 **Tarefas** (seguindo os passos da documentação [aqui](https://basedosdados.github.io/mais/colab_data/))
 
 - [ ] Baixar a pasta template e os dados originais
 - [ ] Preencher as tabelas de arquitetura - Marcar a equipe de dados na issue avisando quando finalizar
 - [ ] Escrever código de captura e limpeza de dados
+- [ ] Organizar arquivos brutos, se necessário
 - [ ] Organizar arquivos auxiliares, se necessário
 - [ ] Criar tabela dicionário, se necessário
 - [ ] Subir tabelas no BigQuery
-- [ ] Criar e preencher table_config e dataset_config
 - [ ] Fazer uma revisão seguindo o [nosso guia](https://github.com/basedosdados/.github/wiki/Dados#como-fazer-code-review)
 - [ ] Abrir o PR
+- [ ] Escrever a pipeline
