@@ -19,15 +19,16 @@ assignees:
 
 4. Fonte original dos dados
     * Endereço: <url>
-    * Tem API? <sim>/<não>
-    * É grátis? <sim>/<não>
+    * Tem API? <sim> / <não>
+    * É grátis? <sim> / <não>
     * Cobertura espacial: <area.slug>
     * Cobertura temporal: de YYYY-MM-DD a YYYY-MM-DD
+    * Frequência de atualização: <year> / <semester> / <quarter> / <month> / <day> / <hour> / <minute> / <second>
 
 5. Raspagem
-    * Nível de dificuldade: <baixo>/<médio>/<alto>
-    * Existe código semi-pronto? <sim>/<não>
-    * Dificuldades de big data (alta frequência, alto volume)? <sim>/<não>
+    * Nível de dificuldade: <baixo> / <médio> / <alto>
+    * Existe código semi-pronto? <sim> / <não>
+    * Dificuldades de big data (alta frequência, alto volume)? <sim> / <não>
 
 **Tarefas** (seguindo os passos da documentação [aqui](https://basedosdados.github.io/mais/colab_data/))
 
