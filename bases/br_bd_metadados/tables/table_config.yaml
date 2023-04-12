@@ -6,7 +6,7 @@ dataset_id: br_bd_metadados
 table_id: tables
 
 # Título da tabela.
-title:
+title: Tabelas na BD+
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -60,7 +60,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version: v1.0
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
