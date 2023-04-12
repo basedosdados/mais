@@ -17,11 +17,17 @@ assignees:
 
 3. Qual o nome da(s) tabela(s)? `table_id`
 
-4. Fonte original dos dados: <link>
+4. Fonte original dos dados
+    * Endereço: <url>
+    * Tem API? <sim>/<não>
+    * É grátis? <sim>/<não>
+    * Cobertura espacial: <area.slug>
+    * Cobertura temporal: de YYYY-MM-DD a YYYY-MM-DD
 
-5. Cobertura espacial: <area.slug>
-
-6. Cobertura temporal: de YYYY-MM-DD a YYYY-MM-DD
+5. Raspagem
+    * Nível de dificuldade: <baixo>/<médio>/<alto>
+    * Existe código semi-pronto? <sim>/<não>
+    * Dificuldades de big data (alta frequência, alto volume)? <sim>/<não>
 
 **Tarefas** (seguindo os passos da documentação [aqui](https://basedosdados.github.io/mais/colab_data/))
 
