@@ -247,9 +247,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: ponto_geografico
+    - name: geometria
       bigquery_type: geography
-      description: Ponto geográfico (latitude e longitude) do CEP
+      description: Centróide do CEP
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:

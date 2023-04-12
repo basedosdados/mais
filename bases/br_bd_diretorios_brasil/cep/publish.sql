@@ -28,5 +28,5 @@ SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(latitude AS FLOAT64) latitude,
 SAFE_CAST(longitude AS FLOAT64) longitude,
-ST_GEOGPOINT(SAFE_CAST(latitude AS FLOAT64), SAFE_CAST(longitude AS FLOAT64)) ponto_geografico
+ST_GEOGPOINT(SAFE_CAST(latitude AS FLOAT64), SAFE_CAST(longitude AS FLOAT64)) geometria
 FROM basedosdados-dev.br_bd_diretorios_brasil_staging.cep AS t
