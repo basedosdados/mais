@@ -1,89 +1,95 @@
-
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_anatel_banda_larga_fixa
 
 table_id: microdados
 
+# Título da tabela.
+title: Microdados
+
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Microdados de banda larga fixa (também conhecido como Serviço de Comunicação
-    Multimídia) a partir de 2007 que traz dados mensais acerca da empresa ofertante
-    e das especificações técnicas do serviço.
+description: Microdados de banda larga fixa (também conhecido como Serviço de Comunicação Multimídia) a partir de 2007 que traz dados mensais acerca da empresa ofertante e das especificações técnicas do serviço.
 
-# A máxima unidade espacial que a tabela cobre.
+# As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - continent: south_america
-#     country: br
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
 spatial_coverage:
-    - continent: south_america
-      country: br
+    - sa.br
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
 temporal_coverage:
-    - 2007(1)2022
+    - 2007-03(1)2023-02
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
 observation_level:
-    - country: br
-      entity: municipality
-      column:
-          - id_municipio
     - entity: year
       columns:
           - ano
     - entity: month
       columns:
           - mes
-    - columns:
-          - cnpj
-    - columns:
-          - tecnologia
-    - columns:
-          - transmissao
-    - columns:
-          - velocidade
+    - country: br
+      entity: municipality
+      columns:
+          - id_municipio
 
 last_updated:
-    metadata: '2022-04-07'
-    data: '2022-04-07'
-    release: ''
+    metadata: '2023-04-13'
+    data: '2023-04-13 23:14:00'
+    release: '2023-04-13 23:14:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
-version: v1.0
+# Exemplos: v1.0, v1.1.3
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Lucas Nascimento Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
-    ckan_user: lucasnascm
-    website:
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Lucas Nascimento Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
-    ckan_user: lucasnascm
-    website:
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
+    website: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "Download da base em https://informacoes.anatel.gov.br/paineis/acessos/banda-larga-fixa;\n\
-    Alteração do nome das variáveis para compatibilização com a BD+\n"
+data_cleaning_description: Renomeando as colunas
 
-# Url do código de limpeza dos dados.
+# Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
@@ -112,6 +118,7 @@ project_id_staging: basedosdados-dev
 # Se não houver partições, não modifique abaixo.
 partitions:
     - ano
+    - mes
     - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
@@ -119,8 +126,6 @@ partitions:
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
@@ -136,7 +141,7 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       observations:
-      is_in_staging: true
+      is_in_staging: True
       is_partition: true
     - name: mes
       bigquery_type: int64
@@ -151,8 +156,8 @@ columns:
       measurement_unit: month
       has_sensitive_data: no
       observations: Entre os anos de 2007 a 2010 os dados eram fornecidos trimestralmente
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: true
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
@@ -166,7 +171,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
+      is_in_staging: True
       is_partition: true
     - name: id_municipio
       bigquery_type: string
@@ -181,8 +186,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
     - name: cnpj
       bigquery_type: string
       description: Cadastro Nacional de Pessoa Jurídica
@@ -196,8 +201,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
     - name: empresa
       bigquery_type: string
       description: Nome da empresa
@@ -211,8 +216,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
     - name: porte_empresa
       bigquery_type: string
       description: Porte da empresa
@@ -226,8 +231,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
     - name: tecnologia
       bigquery_type: string
       description: Tecnologia
@@ -241,8 +246,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
     - name: transmissao
       bigquery_type: string
       description: Meios de transmissão
@@ -256,8 +261,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
     - name: velocidade
       bigquery_type: string
       description: Velocidade contratada
@@ -271,8 +276,23 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
+    - name: produto
+      bigquery_type: string
+      description: Tipo de Produto
+      temporal_coverage:
+          - 2021(1)2023
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
     - name: acessos
       bigquery_type: int64
       description: Número total de contratos
@@ -286,7 +306,9 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
 
-metadata_modified: '2022-03-28T23:43:05.453593'
+number_rows: 39060942
+
+metadata_modified: '2023-04-04T15:29:10.821535'
