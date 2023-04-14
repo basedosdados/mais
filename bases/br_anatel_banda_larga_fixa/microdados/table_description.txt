@@ -9,20 +9,21 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Nascimento Moreira
+Nome: Patrick Teixeira
 Código: 
-Email: lucas.moreira@basedosdados.org
+Email: patrick.teixeira@basedosdados.org
 Tratado por
 -----------
-Nome: Lucas Nascimento Moreira
+Nome: Patrick Teixeira
 Código: 
-Email: lucas.moreira@basedosdados.org
+Email: patrick.teixeira@basedosdados.org
 
 
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
+- mes
 - sigla_uf
 
 
@@ -30,23 +31,21 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 2007(1)2022
+- 2007-03(1)2023-02
 
 
 
 
 Cobertura Espacial
 ------------------
-- {'continent': 'south_america', 'country': 'br'}
+- sa.br
 
 
 
 
 Tratamento
 ----------
-Download da base em https://informacoes.anatel.gov.br/paineis/acessos/banda-larga-fixa;
-Alteração do nome das variáveis para compatibilização com a BD+
-
+Renomeando as colunas
 
 
 
