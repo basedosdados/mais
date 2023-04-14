@@ -387,10 +387,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-<<<<<<< HEAD
-number_rows: 1280
-=======
 number_rows: 1124
->>>>>>> update_br_inep_saeb
 
 metadata_modified: "2023-03-15T19:10:32.456649"
