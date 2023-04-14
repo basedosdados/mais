@@ -1,0 +1,51 @@
+Na tabela, é possível encontrar a numeração dos CEPs, juntamente com informações sobre suas localidades, tais como logradouros, bairros e cidades, além de complementos e identificação geográfica compostos pela latitude e longitude. Os dados foram obtidos através de uma base aberta no Kaggle e validados em relação aos seus pontos de geolocalização.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- sigla_uf
+
+
+
+
+Cobertura Temporal
+------------------
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+1. Selecionar as colunas relevantes do dataframe e excluir aquelas que possuem informações similares ou que variam pelo tempo; 2. Modificar os nomes das colunas para padronização; 3. Criar uma nova coluna "geometria_estado" no dataframe para armazenar a geometria correspondente à sigla_uf de cada CEP; 4. Verificar se os pontos de latitude e longitude estão contidos na "geometria_estado" (polígono) da UF. Caso contrário, substituir as informações dessas colunas por valores nulos; 6. Remover as colunas que não serão usadas no arquivo de saída e salvar os arquivos particionados por UF.
+
+
+
+Frequencia de Atualização
+-------------------------
+uncertain
