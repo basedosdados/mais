@@ -49,14 +49,14 @@ update_frequency: month
 #           - sigla_uf
 observation_level:
     - entity: year
-      column:
+      columns:
           - ano
     - entity: month
-      column:
+      columns:
           - mes
     - country: br
       entity: municipality
-      column:
+      columns:
           - id_municipio
 
 last_updated:
