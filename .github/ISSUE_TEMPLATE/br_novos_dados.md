@@ -17,20 +17,28 @@ assignees:
 
 3. Qual o nome da(s) tabela(s)? `table_id`
 
-4. Fonte original dos dados: <link>
+4. Fonte original dos dados
+    * Endereço: <url>
+    * Tem API? <sim> / <não>
+    * É grátis? <sim> / <não>
+    * Cobertura espacial: <area.slug>
+    * Cobertura temporal: de YYYY-MM-DD a YYYY-MM-DD
+    * Frequência de atualização: <year> / <semester> / <quarter> / <month> / <day> / <hour> / <minute> / <second>
 
-5. Cobertura espacial: <país/sigla_uf>
-
-6. Cobertura temporal: de XXXX a YYYY
+5. Raspagem
+    * Nível de dificuldade: <baixo> / <médio> / <alto>
+    * Existe código semi-pronto? <sim> / <não>
+    * Dificuldades de big data (alta frequência, alto volume)? <sim> / <não>
 
 **Tarefas** (seguindo os passos da documentação [aqui](https://basedosdados.github.io/mais/colab_data/))
 
 - [ ] Baixar a pasta template e os dados originais
 - [ ] Preencher as tabelas de arquitetura - Marcar a equipe de dados na issue avisando quando finalizar
 - [ ] Escrever código de captura e limpeza de dados
+- [ ] Organizar arquivos brutos, se necessário
 - [ ] Organizar arquivos auxiliares, se necessário
 - [ ] Criar tabela dicionário, se necessário
 - [ ] Subir tabelas no BigQuery
-- [ ] Criar e preencher table_config e dataset_config
 - [ ] Fazer uma revisão seguindo o [nosso guia](https://github.com/basedosdados/.github/wiki/Dados#como-fazer-code-review)
 - [ ] Abrir o PR
+- [ ] Escrever a pipeline
