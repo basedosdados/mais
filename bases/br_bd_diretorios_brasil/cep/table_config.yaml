@@ -158,6 +158,20 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
+    - name: complemento
+      bigquery_type: string
+      description: Complemento do endereço
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: bairro
       bigquery_type: string
       description: Bairro
@@ -186,20 +200,6 @@ columns:
       observations: É possível que dentro da variável surja o nome da cidade, do distrito
           ou do município. Caso o nome da cidade ou do distrito seja mencionado, o
           nome do município aparecerá entre parênteses em conjunto logo após.
-      is_in_staging: true
-      is_partition: false
-    - name: complemento
-      bigquery_type: string
-      description: Complemento do endereço
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio

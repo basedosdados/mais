@@ -21,9 +21,9 @@ CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.cep AS
 SELECT 
 SAFE_CAST(cep AS STRING) cep,
 SAFE_CAST(logradouro AS STRING) logradouro,
+SAFE_CAST(complemento AS STRING) complemento,
 SAFE_CAST(bairro AS STRING) bairro,
 SAFE_CAST(cidade AS STRING) cidade,
-SAFE_CAST(complemento AS STRING) complemento,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(latitude AS FLOAT64) latitude,
