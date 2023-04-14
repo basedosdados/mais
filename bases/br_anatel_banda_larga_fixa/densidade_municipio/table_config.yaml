@@ -1,78 +1,95 @@
-
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_anatel_banda_larga_fixa
 
 table_id: densidade_municipio
 
+# Título da tabela.
+title: Densidade Municipio
+
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Total de acessos e densidade por domicílio da Banda Larga Fixa nos municípios brasileiros por mês e ano desde março de 2007
+description: Total de acessos e densidade por domicílio da Banda Larga Fixa nos municípios brasileiros por mês e ano desde março de 2007.
 
-# A máxima unidade espacial que a tabela cobre.
+# As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - continent: south_america
-#     country: br
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
 spatial_coverage:
-    - continent: south_america
-      country: br
+    - sa.br
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
 temporal_coverage:
-    - 2007(1)2022
+    - 2007-03(1)2022-02
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
 observation_level:
-     - entity: year
-       column:
+    - entity: year
+      columns:
           - ano
-     - entity: month
-       column:
+    - entity: month
+      columns:
           - mes
-     - country: br
-       entity: municipality
-       column:
+    - country: br
+      entity: municipality
+      columns:
           - id_municipio
 
 last_updated:
-    metadata: '2022-03-28'
-    data: '2022-03-28'
-    release:
+    metadata: '2023-04-13'
+    data: '2023-04-13 23:14:00'
+    release: '2023-04-13 23:14:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
-version: v1.0
+# Exemplos: v1.0, v1.1.3
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Lucas Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
-    ckan_user: lucasnascm
-    website:
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Lucas Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
-    ckan_user: lucasnascm
-    website:
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
+    website: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Agrupamento do total de acessos a nível municipal; Merge com a base de densidade
+data_cleaning_description: Renomear as colunas
 
-# Url do código de limpeza dos dados.
+# Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
@@ -106,15 +123,13 @@ partitions:
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
       bigquery_type: int64
       description: Ano
-      temporal_coverage: 
-        - (1)
+      temporal_coverage:
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -123,23 +138,23 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
     - name: mes
       bigquery_type: int64
       description: Mês
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
-      directory_column: 
+      directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: mes
           column_name: mes
       measurement_unit: month
       has_sensitive_data: no
-      observations: 
-      is_in_staging: true
-      is_partition: false
+      observations:
+      is_in_staging: True
+      is_partition: False
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
@@ -153,8 +168,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
@@ -168,13 +183,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
-    - name: acessos
-      bigquery_type: int64
-      description: Total de acessos
-      temporal_coverage: 
-        - (1)
+      is_in_staging: True
+      is_partition: False
+    - name: densidade
+      bigquery_type: float64
+      description: Densidade de acessos por 100 domicílios
+      temporal_coverage:
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -183,22 +198,9 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
-    - name: densidade
-      bigquery_type: float64
-      description: Densidade de acessos por 100 domicílios
-      temporal_coverage: 
-        - (1)
-      covered_by_dictionary: no
-      directory_column: 
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
 
-metadata_modified: '2022-03-29T00:20:43.040207'
+number_rows: 899680
+
+metadata_modified: '2022-09-12T23:33:27.265012'
