@@ -18,11 +18,6 @@ Código:
 
 
 
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- year
-- country_id_iso_3
-
 
 
 

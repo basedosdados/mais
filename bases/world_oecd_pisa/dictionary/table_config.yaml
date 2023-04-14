@@ -103,7 +103,7 @@ partitions:
 columns:
     - name: table_id
       bigquery_type: string
-      description: Table's ID
+      description: Indicates the table of the column_name, key and value.
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -116,7 +116,7 @@ columns:
       is_partition: False
     - name: column
       bigquery_type: string
-      description: column's name
+      description: Indicates the column name of the key and value.
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -129,7 +129,7 @@ columns:
       is_partition: False
     - name: key
       bigquery_type: string
-      description: Key
+      description: A key to be mapped in the given table_id and column_name.
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -155,7 +155,7 @@ columns:
       is_partition: False
     - name: value
       bigquery_type: string
-      description: Value
+      description: The description of the given key
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -166,5 +166,7 @@ columns:
       has_sensitive_data: no
       is_in_staging: True
       is_partition: False
+
+number_rows: 9664
 
 metadata_modified:

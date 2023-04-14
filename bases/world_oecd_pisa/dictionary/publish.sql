@@ -20,8 +20,8 @@ TIPOS:
 CREATE VIEW basedosdados-dev.world_oecd_pisa.dictionary AS
 SELECT 
 SAFE_CAST(table_id AS STRING) table_id,
-SAFE_CAST(coluna AS STRING) coluna,
-SAFE_CAST(chave AS STRING) chave,
-SAFE_CAST(cobertura_temporal AS STRING) cobertura_temporal,
-SAFE_CAST(valor AS STRING) valor
+SAFE_CAST(column_name AS STRING) column_name,
+SAFE_CAST(key AS STRING) key,
+SAFE_CAST(temporal_coverage AS STRING) temporal_coverage,
+SAFE_CAST(value AS STRING) value
 FROM basedosdados-dev.world_oecd_pisa_staging.dictionary AS t
