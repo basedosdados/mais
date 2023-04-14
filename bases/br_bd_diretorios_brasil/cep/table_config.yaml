@@ -11,7 +11,11 @@ title: Código de Endereçamento Postal (CEP)
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Na tabela, é possível encontrar a numeração dos CEPs juntamente com informações sobre suas localidades, tais como logradouros, bairros e cidades, além de complementos e identificação geográfica, compostos pela latitude e longitude. Os dados foram obtidos através de uma base aberta no kaggle.
+description: Na tabela, é possível encontrar a numeração dos CEPs, juntamente com
+    informações sobre suas localidades, tais como logradouros, bairros e cidades,
+    além de complementos e identificação geográfica compostos pela latitude e longitude.
+    Os dados foram obtidos através de uma base aberta no Kaggle e validados em relação
+    aos seus pontos de geolocalização.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -34,7 +38,7 @@ temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: uncertain 
+update_frequency: uncertain
 
 # Nível de observação da tabela: o que representa cada linha.
 # A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -47,10 +51,10 @@ update_frequency: uncertain
 #       columns:
 #           - sigla_uf
 observation_level:
-     - country: br
-       entity: zip_code
-       columns:
-           - cep
+    - country: br
+      entity: zip_code
+      columns:
+          - cep
 
 last_updated:
     metadata: '2023-04-11'
@@ -80,7 +84,14 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Organização e modificação dos nomes das colunas para os padrões da BD.
+data_cleaning_description: 1. Selecionar as colunas relevantes do dataframe e excluir
+    aquelas que possuem informações similares ou que variam pelo tempo; 2. Modificar
+    os nomes das colunas para padronização; 3. Criar uma nova coluna "geometria_estado"
+    no dataframe para armazenar a geometria correspondente à sigla_uf de cada CEP;
+    4. Verificar se os pontos de latitude e longitude estão contidos na "geometria_estado"
+    (polígono) da UF. Caso contrário, substituir as informações dessas colunas por
+    valores nulos; 6. Remover as colunas que não serão usadas no arquivo de saída
+    e salvar os arquivos particionados por UF.
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
@@ -174,7 +185,7 @@ columns:
       has_sensitive_data: no
       observations: É possível que dentro da variável surja o nome da cidade, do distrito
           ou do município. Caso o nome da cidade ou do distrito seja mencionado, o
-          nome do município aparecerá entre parênteses logo após.
+          nome do município aparecerá entre parênteses em conjunto logo após.
       is_in_staging: true
       is_partition: false
     - name: complemento
@@ -217,7 +228,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true 
+      is_in_staging: true
       is_partition: true
     - name: latitude
       bigquery_type: float64
@@ -230,7 +241,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: As coordenadas de latitude e longitude que estão fora dos limites
+          do polígono do estado associado ao CEP foram substituídas por valores nulos.
+          No entanto, é importante destacar que existem casos em que pontos de latitude
+          e longitude estão associados a municípios que podem aparecer fora dos limites
+          geográficos do próprio município. Isso ocorre porque alguns municípios possuem
+          áreas administrativas que abrangem locais diferentes das barreiras geográficas,
+          mas que ainda estão dentro dos limites da mesma unidade federativa.
       is_in_staging: true
       is_partition: false
     - name: longitude
@@ -244,7 +261,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: As coordenadas de latitude e longitude que estão fora dos limites
+          do polígono do estado associado ao CEP foram substituídas por valores nulos.
+          No entanto, é importante destacar que existem casos em que pontos de latitude
+          e longitude estão associados a municípios que podem aparecer fora dos limites
+          geográficos do próprio município. Isso ocorre porque alguns municípios possuem
+          áreas administrativas que abrangem locais diferentes das barreiras geográficas,
+          mas que ainda estão dentro dos limites da mesma unidade federativa.
       is_in_staging: true
       is_partition: false
     - name: centroide
@@ -258,7 +281,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: As coordenadas de latitude e longitude que estão fora dos limites
+          do polígono do estado associado ao CEP foram substituídas por valores nulos.
+          No entanto, é importante destacar que existem casos em que pontos de latitude
+          e longitude estão associados a municípios que podem aparecer fora dos limites
+          geográficos do próprio município. Isso ocorre porque alguns municípios possuem
+          áreas administrativas que abrangem locais diferentes das barreiras geográficas,
+          mas que ainda estão dentro dos limites da mesma unidade federativa.
       is_in_staging: false
       is_partition: false
 
