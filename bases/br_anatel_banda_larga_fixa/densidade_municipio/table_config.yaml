@@ -49,14 +49,14 @@ update_frequency: month
 #           - sigla_uf
 observation_level:
     - entity: year
-      column:
+      columns:
           - ano
     - entity: month
-      column:
+      columns:
           - mes
     - country: br
       entity: municipality
-      column:
+      columns:
           - id_municipio
 
 last_updated:
@@ -66,7 +66,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version: v1.0
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:

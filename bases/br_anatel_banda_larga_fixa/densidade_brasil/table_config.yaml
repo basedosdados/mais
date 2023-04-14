@@ -49,10 +49,10 @@ update_frequency: month
 #           - sigla_uf
 observation_level:
     - entity: year
-      column:
+      columns:
           - ano
     - entity: month
-      column:
+      columns:
           - mes
 
 last_updated:
