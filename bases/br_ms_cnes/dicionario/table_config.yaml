@@ -138,8 +138,8 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
+      is_in_staging: True
+      is_partition: False
     - name: chave
       bigquery_type: string
       description: Chave
@@ -182,4 +182,4 @@ columns:
 
 number_rows:
 
-metadata_modified: "2023-03-13T12:53:52.685998"
+metadata_modified:
