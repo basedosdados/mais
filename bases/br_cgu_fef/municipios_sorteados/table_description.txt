@@ -1,0 +1,43 @@
+Municípios sorteados no programa de auditorias de corrupção.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: None
+Código: 
+Tratado por
+-----------
+Nome: None
+Código: 
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2003(1)2015
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+
+
+
+Frequencia de Atualização
+-------------------------
+unique
