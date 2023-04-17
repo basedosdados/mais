@@ -3,7 +3,7 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_rj_isp_estatisticas_seguranca
 
-table_id: evolucao_mensal_upp
+table_id: armas_fogo_apreendidas_mensal
 
 # Título da tabela.
 title:
@@ -142,7 +142,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: id_upp
+    - name: id_cisp
       bigquery_type:
       description:
       temporal_coverage:
@@ -156,7 +156,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: nome
+    - name: id_aisp
       bigquery_type:
       description:
       temporal_coverage:
@@ -170,7 +170,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_homicidio_doloso
+    - name: id_risp
       bigquery_type:
       description:
       temporal_coverage:
@@ -184,7 +184,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_latrocinio
+    - name: quantidade_arma_fabricacao_caseira
       bigquery_type:
       description:
       temporal_coverage:
@@ -198,7 +198,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_lesao_corporal_morte
+    - name: quantidade_carabina
       bigquery_type:
       description:
       temporal_coverage:
@@ -212,7 +212,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_homicidio_intervencao_policial
+    - name: quantidade_espingarda
       bigquery_type:
       description:
       temporal_coverage:
@@ -226,7 +226,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_tentativa_homicidio
+    - name: quantidade_fuzil
       bigquery_type:
       description:
       temporal_coverage:
@@ -240,7 +240,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_lesao_corporal_dolosa
+    - name: quantidade_garrucha
       bigquery_type:
       description:
       temporal_coverage:
@@ -254,7 +254,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_estupro
+    - name: quantidade_garruchao
       bigquery_type:
       description:
       temporal_coverage:
@@ -268,7 +268,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_homicidio_culposo
+    - name: quantidade_metralhadora
       bigquery_type:
       description:
       temporal_coverage:
@@ -282,7 +282,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_lesao_corporal_culposa
+    - name: quantidade_outros
       bigquery_type:
       description:
       temporal_coverage:
@@ -296,7 +296,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_roubo_transeunte
+    - name: quantidade_pistola
       bigquery_type:
       description:
       temporal_coverage:
@@ -310,7 +310,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_roubo_corporal_coletivo
+    - name: quantidade_revolver
       bigquery_type:
       description:
       temporal_coverage:
@@ -324,7 +324,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_roubo_veiculo
+    - name: quantidade_submetralhadora
       bigquery_type:
       description:
       temporal_coverage:
@@ -338,301 +338,7 @@ columns:
       observations:
       is_in_staging:
       is_partition:
-    - name: quantidade_roubo_carga
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_roubo_comercio
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_roubo_residencia
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_roubo_banco
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_roubo_caixa_eletronico
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_roubo_conducao_saque
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_total_roubos
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_furto_veiculos
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_total_furto
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_sequestro
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_extorsao
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_sequestro_relampago
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_estelionato
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_apreensao_droga
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_registro_veiculo_recuperado
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_ameaca
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_pessoa_desaparecida
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_encontro_cadaver
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_encontro_ossada
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_policial_militar_morto_servico
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_policial_civil_morto_servico
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_registro_ocorrencia
+    - name: total
       bigquery_type:
       description:
       temporal_coverage:

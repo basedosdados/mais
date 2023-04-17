@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -13,54 +12,49 @@ Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
 # para algo um pouco mais explícito.
 
 TIPOS:
-    - Para modificar tipos de colunas, basta substituir INT64 por outro tipo válido.
+    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
 
-CREATE VIEW basedosdados-dev.br_isp_estatisticas_seguranca.evolucao_mensal_upp AS
+CREATE VIEW basedosdados-dev.br_rj_isp_estatisticas_seguranca.evolucao_mensal_upp AS
 SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
+SAFE_CAST(ano AS STRING) ano,
+SAFE_CAST(mes AS STRING) mes,
 SAFE_CAST(id_upp AS STRING) id_upp,
-SAFE_CAST(upp AS STRING) upp,
-SAFE_CAST(hom_doloso AS INT64) hom_doloso,
-SAFE_CAST(lesao_corp_morte AS INT64) lesao_corp_morte,
-SAFE_CAST(latrocinio AS INT64) latrocinio,
-SAFE_CAST(hom_por_interv_policial AS INT64) hom_por_interv_policial,
-SAFE_CAST(tentat_hom AS INT64) tentat_hom,
-SAFE_CAST(lesao_corp_dolosa AS INT64) lesao_corp_dolosa,
-SAFE_CAST(estupro AS INT64) estupro,
-SAFE_CAST(hom_culposo AS INT64) hom_culposo,
-SAFE_CAST(lesao_corp_culposa AS INT64) lesao_corp_culposa,
-SAFE_CAST(roubo_comercio AS INT64) roubo_comercio,
-SAFE_CAST(roubo_residencia AS INT64) roubo_residencia,
-SAFE_CAST(roubo_veiculo AS INT64) roubo_veiculo,
-SAFE_CAST(roubo_carga AS INT64) roubo_carga,
-SAFE_CAST(roubo_transeunte AS INT64) roubo_transeunte,
-SAFE_CAST(roubo_em_coletivo AS INT64) roubo_em_coletivo,
-SAFE_CAST(roubo_banco AS INT64) roubo_banco,
-SAFE_CAST(roubo_cx_eletronico AS INT64) roubo_cx_eletronico,
-SAFE_CAST(roubo_celular AS INT64) roubo_celular,
-SAFE_CAST(roubo_conducao_saque AS INT64) roubo_conducao_saque,
-SAFE_CAST(total_roubos AS INT64) total_roubos,
-SAFE_CAST(furto_veiculos AS INT64) furto_veiculos,
-SAFE_CAST(total_furtos AS INT64) total_furtos,
-SAFE_CAST(sequestro AS INT64) sequestro,
-SAFE_CAST(extorsao AS INT64) extorsao,
-SAFE_CAST(sequestro_relampago AS INT64) sequestro_relampago,
-SAFE_CAST(estelionato AS INT64) estelionato,
-SAFE_CAST(apreensao_drogas AS INT64) apreensao_drogas,
-SAFE_CAST(recuperacao_veiculos AS INT64) recuperacao_veiculos,
-SAFE_CAST(armas_apreendidas AS INT64) armas_apreendidas,
-SAFE_CAST(cump_mandado_prisao AS INT64) cump_mandado_prisao,
-SAFE_CAST(ocorr_flagrante AS INT64) ocorr_flagrante,
-SAFE_CAST(ameaca AS INT64) ameaca,
-SAFE_CAST(pessoas_desaparecidas AS INT64) pessoas_desaparecidas,
-SAFE_CAST(encontro_cadaver AS INT64) encontro_cadaver,
-SAFE_CAST(encontro_ossada AS INT64) encontro_ossada,
-SAFE_CAST(pol_militares_mortos_serv AS INT64) pol_militares_mortos_serv,
-SAFE_CAST(pol_civis_mortos_serv AS INT64) pol_civis_mortos_serv,
-SAFE_CAST(registro_ocorrencias AS INT64) registro_ocorrencias
-from basedosdados-dev.br_isp_estatisticas_seguranca_staging.evolucao_mensal_upp as t
+SAFE_CAST(nome AS STRING) nome,
+SAFE_CAST(quantidade_homicidio_doloso AS STRING) quantidade_homicidio_doloso,
+SAFE_CAST(quantidade_latrocinio AS STRING) quantidade_latrocinio,
+SAFE_CAST(quantidade_lesao_corporal_morte AS STRING) quantidade_lesao_corporal_morte,
+SAFE_CAST(quantidade_homicidio_intervencao_policial AS STRING) quantidade_homicidio_intervencao_policial,
+SAFE_CAST(quantidade_tentativa_homicidio AS STRING) quantidade_tentativa_homicidio,
+SAFE_CAST(quantidade_lesao_corporal_dolosa AS STRING) quantidade_lesao_corporal_dolosa,
+SAFE_CAST(quantidade_estupro AS STRING) quantidade_estupro,
+SAFE_CAST(quantidade_homicidio_culposo AS STRING) quantidade_homicidio_culposo,
+SAFE_CAST(quantidade_lesao_corporal_culposa AS STRING) quantidade_lesao_corporal_culposa,
+SAFE_CAST(quantidade_roubo_transeunte AS STRING) quantidade_roubo_transeunte,
+SAFE_CAST(quantidade_roubo_corporal_coletivo AS STRING) quantidade_roubo_corporal_coletivo,
+SAFE_CAST(quantidade_roubo_veiculo AS STRING) quantidade_roubo_veiculo,
+SAFE_CAST(quantidade_roubo_carga AS STRING) quantidade_roubo_carga,
+SAFE_CAST(quantidade_roubo_comercio AS STRING) quantidade_roubo_comercio,
+SAFE_CAST(quantidade_roubo_residencia AS STRING) quantidade_roubo_residencia,
+SAFE_CAST(quantidade_roubo_banco AS STRING) quantidade_roubo_banco,
+SAFE_CAST(quantidade_roubo_caixa_eletronico AS STRING) quantidade_roubo_caixa_eletronico,
+SAFE_CAST(quantidade_roubo_conducao_saque AS STRING) quantidade_roubo_conducao_saque,
+SAFE_CAST(quantidade_total_roubos AS STRING) quantidade_total_roubos,
+SAFE_CAST(quantidade_furto_veiculos AS STRING) quantidade_furto_veiculos,
+SAFE_CAST(quantidade_total_furto AS STRING) quantidade_total_furto,
+SAFE_CAST(quantidade_sequestro AS STRING) quantidade_sequestro,
+SAFE_CAST(quantidade_extorsao AS STRING) quantidade_extorsao,
+SAFE_CAST(quantidade_sequestro_relampago AS STRING) quantidade_sequestro_relampago,
+SAFE_CAST(quantidade_estelionato AS STRING) quantidade_estelionato,
+SAFE_CAST(quantidade_apreensao_droga AS STRING) quantidade_apreensao_droga,
+SAFE_CAST(quantidade_registro_veiculo_recuperado AS STRING) quantidade_registro_veiculo_recuperado,
+SAFE_CAST(quantidade_ameaca AS STRING) quantidade_ameaca,
+SAFE_CAST(quantidade_pessoa_desaparecida AS STRING) quantidade_pessoa_desaparecida,
+SAFE_CAST(quantidade_encontro_cadaver AS STRING) quantidade_encontro_cadaver,
+SAFE_CAST(quantidade_encontro_ossada AS STRING) quantidade_encontro_ossada,
+SAFE_CAST(quantidade_policial_militar_morto_servico AS STRING) quantidade_policial_militar_morto_servico,
+SAFE_CAST(quantidade_policial_civil_morto_servico AS STRING) quantidade_policial_civil_morto_servico,
+SAFE_CAST(quantidade_registro_ocorrencia AS STRING) quantidade_registro_ocorrencia
+FROM basedosdados-dev.br_rj_isp_estatisticas_seguranca_staging.evolucao_mensal_upp AS t
