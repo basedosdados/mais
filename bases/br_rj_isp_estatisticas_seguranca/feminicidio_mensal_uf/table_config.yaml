@@ -1,4 +1,3 @@
-
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_rj_isp_estatisticas_seguranca
@@ -115,86 +114,92 @@ partitions:
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Ano
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: mes
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Mês
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: id_cisp
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: 'Identificador da circunscrição onde ocorreu o fato '
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_morte_feminicidio
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Feminicídios consumados
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: person
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_tentativa_feminicidio
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Tentativas de feminicídio
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: person
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: tipo_fase
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: Tipo de fase (e.g. Consolidado sem errata, Consolidado com errata)
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:

@@ -1,4 +1,3 @@
-
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_rj_isp_estatisticas_seguranca
@@ -115,772 +114,833 @@ partitions:
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Ano da ocorrência
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_homicidio_doloso
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Homicídio doloso por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_latrocinio
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Latrocínio por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_lesao_corporal_morte
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Lesão corporal seguida de morte por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_crimes_violentos_letais_intencionais
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Crimes Violentos Letais Intencionais (CVLI) por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_homicidio_intervencao_policial
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Morte por intervenção de agente do Estadopor 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_letalidade_violenta
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Letalidade violenta por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_tentativa_homicidio
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Tentativa de homicídio por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_lesao_corporal_dolosa
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Lesão corporal dolosa por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_estupro
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Estupro por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_homicidio_culposo
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Homicídio culposo (trânsito) por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_lesao_corporal_culposa
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Lesão corporal culposa (trânsito) por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_transeunte
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo a transeunte por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_celular
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo ao telefone celular por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_corporal_coletivo
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo em coletivo por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_rua
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo de rua por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_veiculo
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo de veículo por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_carga
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo de carga por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_comercio
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo a estabelecimento comercial por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_residencia
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo a residência por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_banco
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo a banco por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_caixa_eletronico
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo de caixa eletrônico por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_conducao_saque
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo com condução da vítima para saque em instituição financeira
+          por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_apos_saque
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo após saque em instituição financeira por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_roubo_bicicleta
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Roubo de bicicleta por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_outros_roubos
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Outros roubos que não os listados acima por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_total_roubos
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Taxa Total de roubos por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_furto_veiculos
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Furto de veículo por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_furto_transeunte
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Furto a transeunte por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_furto_coletivo
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Furto em coletivo por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_furto_celular
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Furto de telefone celular por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_furto_bicicleta
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Furto de bicicleta por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_outros_furtos
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Outros furtos que não os listados acima por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_total_furtos
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Total de furtos por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_sequestro
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Extorsão mediante sequestro (sequestro clássico) por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_extorsao
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Extorsão por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_sequestro_relampago
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Extorsão com momentânea privação da liberdade (sequestro relâmpago)
+          por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_estelionato
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Estelionato por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_apreensao_drogas
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Apreensão de drogas por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_registro_posse_drogas
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Número de registros que possuem algum título referente a posse
+          de drogas por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_registro_trafico_drogas
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Número de registros que possuem algum título referente a tráfico
+          de drogas por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_registro_apreensao_drogas_sem_autor
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Número de registros que possuem algum título referente a apreensão
+          de drogas sem autor por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_registro_veiculo_recuperado
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Recuperação de veículo por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_apf
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Número de autos de Prisão em Flagrante (APF) por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_aaapai
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Número de autos de Apreensão de Adolescente por Prática de Ato
+          Infracional (AAAPAI) por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_cmp
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Cumprimento de Mandado de Prisão (CMP) por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_cmba
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Cumprimento de Mandado de Busca e Apreensão (CMB) por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_ameaca
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Ameaça por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_pessoas_desaparecidas
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Pessoas desaparecidas por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_encontro_cadaver
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Encontro de cadáver por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_encontro_ossada
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Encontro de ossada por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_policial_militar_morto_servico
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Policiais Militares mortos em serviço por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_policial_civil_morto_servico
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Policiais Civis mortos em serviço por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: taxa_registro_ocorrencia
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Registro de ocorrências por 100 mil habitantes
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: tipo_fase
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: Tipo de fase (e.g. Consolidado sem errata, Consolidado com errata)
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:

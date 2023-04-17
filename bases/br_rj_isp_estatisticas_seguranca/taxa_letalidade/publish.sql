@@ -19,10 +19,10 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_rj_isp_estatisticas_seguranca.taxa_letalidade AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(regiao AS STRING) regiao,
 SAFE_CAST(delito AS STRING) delito,
-SAFE_CAST(contagem_delito AS STRING) contagem_delito,
-SAFE_CAST(populacao AS STRING) populacao,
-SAFE_CAST(taxa_cem_mil_habitantes AS STRING) taxa_cem_mil_habitantes
+SAFE_CAST(contagem_delito AS FLOAT64) contagem_delito,
+SAFE_CAST(populacao AS FLOAT64) populacao,
+SAFE_CAST(taxa_cem_mil_habitantes AS FLOAT64) taxa_cem_mil_habitantes
 FROM basedosdados-dev.br_rj_isp_estatisticas_seguranca_staging.taxa_letalidade AS t

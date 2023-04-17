@@ -1,4 +1,3 @@
-
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_rj_isp_estatisticas_seguranca
@@ -115,240 +114,257 @@ partitions:
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Ano
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: day
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: mes
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Mês
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: id_cisp
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: 'Número da circunscrição onde ocorreu o fato '
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: id_aisp
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: Número da Área Integrada de Segurança Pública
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: id_risp
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: Número da Região Integrada de Segurança Pública
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_arma_fabricacao_caseira
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Arma de fabricação caseira
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_carabina
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Carabinas
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_espingarda
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Espingardas
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_fuzil
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Fuzils
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_garrucha
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Garruchas
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_garruchao
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Garruchãos
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_metralhadora
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Metralhadoras
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_outros
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Outros
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_pistola
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Pistolas
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_revolver
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Revolvers
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_submetralhadora
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Submetralhadoras
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: total
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Total
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:

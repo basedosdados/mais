@@ -1,4 +1,3 @@
-
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_rj_isp_estatisticas_seguranca
@@ -115,100 +114,107 @@ partitions:
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Ano
       temporal_coverage:
-      covered_by_dictionary:
+          - 2003-1(1)2006-12
+      covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: mes
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Mês
       temporal_coverage:
-      covered_by_dictionary:
+          - 2003-1(1)2006-12
+      covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: id_municipio
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-      covered_by_dictionary:
+          - 2003-1(1)2006-12
+      covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: id_cisp
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: 'Número da circunscrição onde ocorreu o fato '
       temporal_coverage:
-      covered_by_dictionary:
+          - 2003-1(1)2006-12
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: id_aisp
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: Número da Área Integrada de Segurança Pública
       temporal_coverage:
-      covered_by_dictionary:
+          - 2003-1(1)2006-12
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: id_risp
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: Número da Região Integrada de Segurança Pública
       temporal_coverage:
-      covered_by_dictionary:
+          - 2003-1(1)2006-12
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
     - name: quantidade_arma_fogo_apreendida
-      bigquery_type:
-      description:
+      bigquery_type: int64
+      description: Quantidade de armas de fogo apreendidas mensalmente
       temporal_coverage:
-      covered_by_dictionary:
+          - 2003-1(1)2006-12
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging:
       is_partition:
