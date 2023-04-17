@@ -17,11 +17,16 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_anatel_banda_larga_fixa.densidade_municipio AS
+CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.cep AS
 SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(cep AS STRING) cep,
+SAFE_CAST(logradouro AS STRING) logradouro,
+SAFE_CAST(complemento AS STRING) complemento,
+SAFE_CAST(bairro AS STRING) bairro,
+SAFE_CAST(cidade AS STRING) cidade,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(densidade AS FLOAT64) densidade
-FROM basedosdados-dev.br_anatel_banda_larga_fixa_staging.densidade_municipio AS t
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(latitude AS FLOAT64) latitude,
+SAFE_CAST(longitude AS FLOAT64) longitude,
+ST_GEOGPOINT(SAFE_CAST(longitude AS FLOAT64),SAFE_CAST(latitude AS FLOAT64)) centroide
+FROM basedosdados-dev.br_bd_diretorios_brasil_staging.cep AS t

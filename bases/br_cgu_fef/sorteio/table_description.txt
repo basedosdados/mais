@@ -1,4 +1,4 @@
-Total de acessos e densidade por domicílio da Banda Larga Fixa nos estados por mês e ano desde março de 2007
+Dados sobre sorteios de auditorias CGU.
 
 Para saber mais acesse:
 Website: 
@@ -9,14 +9,14 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Patrick Teixeira
+Nome: Ricardo Dahis
 Código: 
-Email: patrick.teixeira@basedosdados.org
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
 Tratado por
 -----------
-Nome: Patrick Teixeira
+Nome: None
 Código: 
-Email: patrick.teixeira@basedosdados.org
 
 
 
@@ -25,7 +25,7 @@ Email: patrick.teixeira@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 2007(1)2023
+- 2003(1)2015
 
 
 
@@ -37,12 +37,9 @@ Cobertura Espacial
 
 
 
-Tratamento
-----------
-Renomear as colunas
 
 
 
 Frequencia de Atualização
 -------------------------
-month
+unique
