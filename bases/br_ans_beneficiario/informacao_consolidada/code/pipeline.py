@@ -109,9 +109,9 @@ def process(df: pd.DataFrame):
         'DE_ABRG_GEOGRAFICA_PLANO': 'abrangencia_beneficiario',
         'COBERTURA_ASSIST_PLAN': 'cobertura_assistencia_beneficiario',
         'TIPO_VINCULO': 'tipo_vinculo',
-        'QT_BENEFICIARIO_ATIVO': 'qtd_beneficiario_ativo',
-        'QT_BENEFICIARIO_ADERIDO': 'qtd_beneficiario_aderido',
-        'QT_BENEFICIARIO_CANCELADO': 'qtd_beneficiario_cancelado'
+        'QT_BENEFICIARIO_ATIVO': 'quantidade_beneficiario_ativo',
+        'QT_BENEFICIARIO_ADERIDO': 'quantidade_beneficiario_aderido',
+        'QT_BENEFICIARIO_CANCELADO': 'quantidade_beneficiario_cancelado'
     }, inplace=True)
 
     df['cnpj'] = df['cnpj'].str.zfill(14)
@@ -139,7 +139,7 @@ if __name__ == '__main__':
 
             if input_path.exists():
                 logger.debug(f"reading input in {input_path}")
-                df = pd.read_csv(input_path, encoding="utf-8", dtype=RAW_COLLUNS_TYPE)
+                df = pd.read_csv(input_path, encoding="utf-8", dtype=RAW_COLLUNS_TYPE, index_col=0)
             else:
                 # Wtf, pq tem um repositorio aqui? 
                 # https://dadosabertos.ans.gov.br/FTP/PDA/informacoes_consolidadas_de_beneficiarios/201602/201607/
@@ -158,6 +158,7 @@ if __name__ == '__main__':
             # delete partition columns
             del df['ano']
             del df['mes']
+            del df['sigla_uf']
 
             logger.info(f"Writing to output {output_path.as_posix()}")
             df.to_parquet(output_path, index=False)
