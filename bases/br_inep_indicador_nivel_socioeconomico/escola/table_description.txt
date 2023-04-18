@@ -9,21 +9,16 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Moreira
+Nome: Luiza Vilela
 Código: 
-Email: lucas.moreira@basedosdados.org
+Email: luiza.vilela@basedosdados.org
 Tratado por
 -----------
-Nome: Lucas Moreira
-Email: lucas.moreira@basedosdados.org
+Nome: Luiza Vilela
+Código: 
+Email: luiza.vilela@basedosdados.org
 
 
-
-
-Colunas identificando linhas unicamente
--------------------
-- ano
-- id_escola
 
 
 
@@ -33,22 +28,21 @@ Cobertura Temporal
 - 2013
 - 2015
 - 2019
+- 2021
 
 
 
 
 Cobertura Espacial
 ------------------
-- b
-- r
-- a
+- sa.br
 
 
 
 
 Tratamento
 ----------
-Renomeei as colunas, compatibilizei a escala do INSE e agrupei todos os anos
+1 - Desprezar colunas com informações repetidas; 2 - Renomear as colunas seguindo o padrão da BD; 3 - Compatibilizar a escala do INSE; 4 - Append com os dados publicados na BD
 
 
 
