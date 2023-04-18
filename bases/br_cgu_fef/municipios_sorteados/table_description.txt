@@ -1,4 +1,4 @@
-Dicionário da base de Comércio Exterior
+Municípios sorteados no programa de auditorias de corrupção.
 
 Para saber mais acesse:
 Website: 
@@ -9,14 +9,12 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Patrick Teixeira
+Nome: None
 Código: 
-Email: patrick.teixeira@basedosdados.org
 Tratado por
 -----------
-Nome: Lucas Moreira
+Nome: None
 Código: 
-Email: lucas.moreira@basedosdados.org
 
 
 
@@ -25,19 +23,18 @@ Email: lucas.moreira@basedosdados.org
 
 Cobertura Temporal
 ------------------
+- 2003(1)2015
 
 
 
 
 Cobertura Espacial
 ------------------
+- sa.br
 
 
 
 
-Tratamento
-----------
-Compatibilização de dicionários para alguma das variáveis
 
 
 

@@ -1,18 +1,18 @@
 
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: br_inep_indicador_nivel_socioeconomico
+dataset_id: br_cgu_fef
 
-table_id: dicionario
+table_id: municipios_sorteados
 
 # Título da tabela.
-title: Dicionário
+title: Programa de Fiscalização em Entes Federativos (FEF)
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Dicionário para a base do Indicador de Nível Socioeconomico (INSE).
+description: Municípios sorteados no programa de auditorias de corrupção.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -22,6 +22,7 @@ description: Dicionário para a base do Indicador de Nível Socioeconomico (INSE
 #  
 #    - world
 spatial_coverage:
+     - sa.br
 
 # Anos cobertos pela tabela.
 # Exemplos:
@@ -31,10 +32,11 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
+    - 2003(1)2015
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency:
+update_frequency: unique
 
 # Nível de observação da tabela: o que representa cada linha.
 # A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -47,44 +49,51 @@ update_frequency:
 #       columns:
 #           - sigla_uf
 observation_level:
+    - entity: municipality
+      country: br
+      columns:
+        - id_municipio
+    - entity: other
+      columns:
+        - sorteio
 
 last_updated:
-    metadata: '2023-04-12'
-    data: '2023-04-12 19:24:00'
-    release: '2023-04-12 19:24:00'
+    metadata:
+    data:
+    release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version: v1.1
+version: 'v1.0'
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Luiza Vilela
-    email: luiza.vilela@basedosdados.org
-    github_user: vilelaluiza
-    ckan_user: vileluiza
+    name:
+    email:
+    github_user:
+    ckan_user:
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Luiza Vilela
-    email: luiza.vilela@basedosdados.org
-    github_user: vilelaluiza
-    ckan_user: vileluiza
+    name:
+    email:
+    github_user:
+    ckan_user:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: 1. Coletar informações de dicionários e notas técnicas do INEP
+data_cleaning_description:
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url:
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
-    name: ''
-    organization_id: ''
+    name:
+    organization_id:
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -105,7 +114,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions:  
+partitions:
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -114,72 +123,42 @@ partitions:
 # preencherá automaticamente as colunas.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: id_tabela
+    - name: sigla_uf
       bigquery_type: string
-      description: ID Tabela
-      temporal_coverage: 
-        - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: coluna
-      bigquery_type: string
-      description: Coluna
+      description: Sigla da unidade da federação (UF)
       temporal_coverage:
-        - (1)  
-      covered_by_dictionary: no
+         - (1)
+      covered_by_dictionary:
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
       measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
-    - name: chave
+    - name: id_municipio
       bigquery_type: string
-      description: Chave
-      temporal_coverage: 
-        - (1) 
-      covered_by_dictionary: no
+      description:
+      temporal_coverage:
+         - (1)
+      covered_by_dictionary:
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
-    - name: cobertura_temporal
-      bigquery_type: string
-      description: Cobertura Temporal
-      temporal_coverage: 
-        - (1) 
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: valor
-      bigquery_type: string
-      description: Valor
-      temporal_coverage:  
-        - (1)
-      covered_by_dictionary: no
+    - name: sorteio
+      bigquery_type: int64
+      description:
+      temporal_coverage:
+         - (1)
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -190,6 +169,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 93
+number_rows:
 
-metadata_modified: '2022-09-12T22:53:38.256557'
+metadata_modified:
