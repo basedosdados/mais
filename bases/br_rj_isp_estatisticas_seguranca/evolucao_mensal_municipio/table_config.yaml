@@ -1000,6 +1000,6 @@ columns:
       is_in_staging: True
       is_partition: False
 
-number_rows: 14720
+number_rows: 10120
 
 metadata_modified:
