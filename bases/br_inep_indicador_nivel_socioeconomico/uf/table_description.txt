@@ -9,21 +9,16 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Moreira
+Nome: Luiza Vilela
 Código: 
-Email: lucas.moreira@basedosdados.org
+Email: luiza.vilela@basedosdados.org
 Tratado por
 -----------
-Nome: Lucas Moreira
-Email: lucas.moreira@basedosdados.org
+Nome: Luiza Vilela
+Código: 
+Email: luiza.vilela@basedosdados.org
 
 
-
-
-Colunas identificando linhas unicamente
--------------------
-- ano
-- sigla_uf
 
 
 
@@ -31,22 +26,21 @@ Colunas identificando linhas unicamente
 Cobertura Temporal
 ------------------
 - 2019
+- 2021
 
 
 
 
 Cobertura Espacial
 ------------------
-- b
-- r
-- a
+- sa.br
 
 
 
 
 Tratamento
 ----------
-Padronização da base conforme as diretrizes da BD
+1 - Desprezar colunas com informações repetidas; 2 - Renomear as colunas seguindo o padrão da BD; 3 - Append com os dados publicados na BD
 
 
 
