@@ -57,7 +57,7 @@ observation_level:
 
 last_updated:
     metadata: '2023-04-17'
-    data: '2023-04-17 218:14:00'
+    data: '2023-04-17 18:14:00'
     release: '2023-04-17 18:14:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -97,7 +97,7 @@ partner_organization:
 raw_files_url:
 
 # Url dos arquivos auxiliares no GCP Storage.
-auxiliary_files_url:
+auxiliary_files_url: 
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
