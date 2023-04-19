@@ -17,7 +17,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-379403.br_ans_beneficiario.informacao_consolidada AS
+CREATE VIEW basedosdados.br_ans_beneficiario.informacao_consolidada AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -37,7 +37,7 @@ SAFE_CAST(segmentacao_beneficiario AS STRING) segmentacao_beneficiario,
 SAFE_CAST(abrangencia_beneficiario AS STRING) abrangencia_beneficiario,
 SAFE_CAST(cobertura_assistencia_beneficiario AS STRING) cobertura_assistencia_beneficiario,
 SAFE_CAST(tipo_vinculo AS STRING) tipo_vinculo,
-SAFE_CAST(qtd_beneficiario_ativo AS INT64) qtd_beneficiario_ativo,
-SAFE_CAST(qtd_beneficiario_aderido AS INT64) qtd_beneficiario_aderido,
-SAFE_CAST(qtd_beneficiario_cancelado AS INT64) qtd_beneficiario_cancelado
-FROM basedosdados-staging-379403.br_ans_beneficiario_staging.informacao_consolidada AS t
+SAFE_CAST(quantidade_beneficiario_ativo AS INT64) quantidade_beneficiario_ativo,
+SAFE_CAST(quantidade_beneficiario_aderido AS INT64) quantidade_beneficiario_aderido,
+SAFE_CAST(quantidade_beneficiario_cancelado AS INT64) quantidade_beneficiario_cancelado
+FROM basedosdados-dev.br_ans_beneficiario_staging.informacao_consolidada AS t

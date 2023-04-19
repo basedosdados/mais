@@ -391,7 +391,7 @@ columns:
       observations: "'Titular', 'Depedente' or 'Nao Informado'"
       is_in_staging: true
       is_partition: false
-    - name: qtd_beneficiario_ativo
+    - name: quantidade_beneficiario_ativo
       bigquery_type: int64
       description: Quantidade de beneficiários ativos na competência
       temporal_coverage:
@@ -406,7 +406,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: qtd_beneficiario_aderido
+    - name: quantidade_beneficiario_aderido
       bigquery_type: int64
       description: Quantidade de beneficiários aderidos na competência
       temporal_coverage:
@@ -421,7 +421,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: qtd_beneficiario_cancelado
+    - name: quantidade_beneficiario_cancelado
       bigquery_type: int64
       description: Quantidade de beneficiários cancelados na competência
       temporal_coverage:
