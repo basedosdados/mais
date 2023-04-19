@@ -1,4 +1,4 @@
-Série histórica mensal por município desde 01/2014 (taxas por 100 mil habitantes)
+Letalidade violenta
 
 Para saber mais acesse:
 Website: 
@@ -25,7 +25,7 @@ Email: gabriel.pisa@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 2014-01(1)2023-03
+- 1991(1)2022
 
 
 
@@ -45,4 +45,4 @@ Tratamento
 
 Frequencia de Atualização
 -------------------------
-month
+year

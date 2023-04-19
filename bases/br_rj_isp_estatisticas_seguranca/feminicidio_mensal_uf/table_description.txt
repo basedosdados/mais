@@ -1,4 +1,4 @@
-Série histórica mensal por município desde 01/2014 (taxas por 100 mil habitantes)
+Feminicídio (Lei 7.448/2016) série histórica mensal por área de delegacia desde 10/2016
 
 Para saber mais acesse:
 Website: 
@@ -25,7 +25,7 @@ Email: gabriel.pisa@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 2014-01(1)2023-03
+- 2016-10(1)2023-02
 
 
 

@@ -5,13 +5,13 @@ dataset_id: br_rj_isp_estatisticas_seguranca
 table_id: taxa_letalidade
 
 # Título da tabela.
-title:
+title: Taxa de letalidade
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description:
+description: Letalidade violenta
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -21,6 +21,7 @@ description:
 #  
 #    - world
 spatial_coverage:
+    - sa.br.rj
 
 # Anos cobertos pela tabela.
 # Exemplos:
@@ -30,10 +31,11 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
+    - 1991(1)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency:
+update_frequency: year
 
 # Nível de observação da tabela: o que representa cada linha.
 # A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -46,39 +48,42 @@ update_frequency:
 #       columns:
 #           - sigla_uf
 observation_level:
+    - entity: year
+      columns:
+          - ano
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: '2023-04-17'
+    data: '2023-04-17 218:14:00'
+    release: '2023-04-17 18:14:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version:
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
-    website:
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
+    name: Gabriel Pisa Folhes
+    email: gabriel.pisa@basedosdados.org
+    github_user: folhesgabriel
+    ckan_user: pisa_gab
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: 1. renomeação de colunas; 2. replace dos identificadores pela descrição na variavél tipo_fase
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_rj_isp_estatisticas_seguranca/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -117,7 +122,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-          - 1991(1)2022
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_data_tempo
@@ -126,13 +131,13 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: regiao
       bigquery_type: string
       description: Região do Rio de Janeiro
       temporal_coverage:
-          - 1991(1)2022
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -141,13 +146,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: delito
       bigquery_type: string
       description: Delito
       temporal_coverage:
-          - 1991(1)2022
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -156,13 +161,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: contagem_delito
       bigquery_type: float64
       description: Contagem de delitos por 100 mil habitantes
       temporal_coverage:
-          - 1991(1)2022
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -171,13 +176,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: populacao
       bigquery_type: float64
       description: População
       temporal_coverage:
-          - 1991(1)2022
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -186,13 +191,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: taxa_cem_mil_habitantes
       bigquery_type: float64
       description: Taxa de delito por 100 mil habitantes
       temporal_coverage:
-          - 1991(1)2022
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -201,9 +206,9 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
 
-number_rows:
+number_rows: 383
 
 metadata_modified:

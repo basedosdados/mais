@@ -2,16 +2,16 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_rj_isp_estatisticas_seguranca
 
-table_id: armas_fogo_apreendidas_mensal
+table_id: armas_fopo_apreendidas_mensal
 
 # Título da tabela.
-title:
+title: Armas de fogo apreendidas
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description:
+description: Série histórica mensal por área de delegacia (01/2003 a 12/2006)
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -20,7 +20,8 @@ description:
 #    - sa.br.sp
 #  
 #    - world
-spatial_coverage:
+spatial_coverage: 
+    - sa.br.rj
 
 # Anos cobertos pela tabela.
 # Exemplos:
@@ -30,10 +31,11 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
+    - 2003-01(1)2006-12
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency:
+update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
 # A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -46,39 +48,49 @@ update_frequency:
 #       columns:
 #           - sigla_uf
 observation_level:
+    - entity: year
+      columns:
+          - ano
+    - entity: month
+      columns:
+          - mes
+    - country: br
+      entity: municipality
+      columns:
+          - id_municipio
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: '2023-04-17'
+    data: '2023-04-17 218:14:00'
+    release: '2023-04-17 18:14:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version:
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
-    website:
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
+    name: Gabriel Pisa Folhes
+    email: gabriel.pisa@basedosdados.org
+    github_user: folhesgabriel
+    ckan_user: pisa_gab
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: 1. renomeação de colunas; 2. replace dos identificadores pela descrição na variavél tipo_fase
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_rj_isp_estatisticas_seguranca/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -123,11 +135,11 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
-      measurement_unit: day
+      measurement_unit: year
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: mes
       bigquery_type: int64
       description: Mês
@@ -135,17 +147,32 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
+          dataset_id: br_bd_diretorios_brasil
           table_id: mes
           column_name: mes
       measurement_unit: month
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
+    - name: id_municipio
+      bigquery_type: string
+      description: ID Município - IBGE 7 Dígitos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
     - name: id_cisp
       bigquery_type: string
-      description: 'Número da circunscrição onde ocorreu o fato '
+      description: Número da circunscrição onde ocorreu o fato
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -156,8 +183,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: id_aisp
       bigquery_type: string
       description: Número da Área Integrada de Segurança Pública
@@ -171,8 +198,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: id_risp
       bigquery_type: string
       description: Número da Região Integrada de Segurança Pública
@@ -186,11 +213,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_arma_fabricacao_caseira
+      is_in_staging: True
+      is_partition: False
+    - name: quantidade_arma_fogo_apreendida
       bigquery_type: int64
-      description: Arma de fabricação caseira
+      description: Quantidade de armas de fogo apreendidas mensalmente
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -201,174 +228,9 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_carabina
-      bigquery_type: int64
-      description: Carabinas
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_espingarda
-      bigquery_type: int64
-      description: Espingardas
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_fuzil
-      bigquery_type: int64
-      description: Fuzils
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_garrucha
-      bigquery_type: int64
-      description: Garruchas
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_garruchao
-      bigquery_type: int64
-      description: Garruchãos
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_metralhadora
-      bigquery_type: int64
-      description: Metralhadoras
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_outros
-      bigquery_type: int64
-      description: Outros
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_pistola
-      bigquery_type: int64
-      description: Pistolas
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_revolver
-      bigquery_type: int64
-      description: Revolvers
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: quantidade_submetralhadora
-      bigquery_type: int64
-      description: Submetralhadoras
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging:
-      is_partition:
-    - name: total
-      bigquery_type: int64
-      description: Total
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
 
-number_rows:
+number_rows: 6206
 
 metadata_modified:

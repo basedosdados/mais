@@ -1,4 +1,4 @@
-Série histórica mensal por município desde 01/2014 (taxas por 100 mil habitantes)
+Série histórica mensal por área de delegacia (01/2003 a 12/2006)
 
 Para saber mais acesse:
 Website: 
@@ -25,7 +25,7 @@ Email: gabriel.pisa@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 2014-01(1)2023-03
+- 2003-01(1)2006-12
 
 
 

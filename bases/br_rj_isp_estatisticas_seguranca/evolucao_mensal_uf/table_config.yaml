@@ -5,13 +5,13 @@ dataset_id: br_rj_isp_estatisticas_seguranca
 table_id: evolucao_mensal_uf
 
 # Título da tabela.
-title:
+title: Evolução mensal no Estado
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description:
+description: Série histórica mensal no estado desde 01/1991
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -21,6 +21,7 @@ description:
 #  
 #    - world
 spatial_coverage:
+     -  sa.br.rj
 
 # Anos cobertos pela tabela.
 # Exemplos:
@@ -30,10 +31,11 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
+     - 1991-01(1)2023-03
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency:
+update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
 # A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -46,39 +48,45 @@ update_frequency:
 #       columns:
 #           - sigla_uf
 observation_level:
+    - entity: year
+      columns:
+          - ano
+    - entity: month
+      columns:
+          - mes
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: '2023-04-17'
+    data: '2023-04-17 218:14:00'
+    release: '2023-04-17 18:14:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version:
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
-    website:
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
+    name: Gabriel Pisa Folhes
+    email: gabriel.pisa@basedosdados.org
+    github_user: folhesgabriel
+    ckan_user: pisa_gab
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: 1. renomeação de colunas; 2. replace dos identificadores pela descrição na variavél tipo_fase
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_rj_isp_estatisticas_seguranca/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -126,8 +134,8 @@ columns:
       measurement_unit: day
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: mes
       bigquery_type: int64
       description: Mês da ocorrência
@@ -141,8 +149,8 @@ columns:
       measurement_unit: month
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_homicidio_doloso
       bigquery_type: int64
       description: Homicídio doloso
@@ -156,8 +164,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_latrocinio
       bigquery_type: int64
       description: Latrocínio
@@ -171,8 +179,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_lesao_corporal_morte
       bigquery_type: int64
       description: Lesão corporal seguida de morte
@@ -186,8 +194,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_crimes_violentos_letais_intencionais
       bigquery_type: int64
       description: Crimes Violentos Letais Intencionais (CVLI)
@@ -201,8 +209,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_homicidio_intervencao_policial
       bigquery_type: int64
       description: Morte por intervenção de agente do Estado
@@ -216,8 +224,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_letalidade_violenta
       bigquery_type: int64
       description: Letalidade violenta
@@ -231,8 +239,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_tentativa_homicidio
       bigquery_type: int64
       description: Tentativa de homicídio
@@ -246,8 +254,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_lesao_corporal_dolosa
       bigquery_type: int64
       description: Lesão corporal dolosa
@@ -261,8 +269,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_estupro
       bigquery_type: int64
       description: Estupro
@@ -276,8 +284,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_homicidio_culposo
       bigquery_type: int64
       description: Homicídio culposo (trânsito)
@@ -291,8 +299,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_lesao_corporal_culposa
       bigquery_type: int64
       description: Lesão corporal culposa (trânsito)
@@ -306,8 +314,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_transeunte
       bigquery_type: int64
       description: Roubo a transeunte
@@ -321,8 +329,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_celular
       bigquery_type: int64
       description: Roubo ao telefone celular
@@ -336,8 +344,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_corporal_coletivo
       bigquery_type: int64
       description: Roubo em coletivo
@@ -351,8 +359,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_rua
       bigquery_type: int64
       description: Roubo de rua
@@ -366,8 +374,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_veiculo
       bigquery_type: int64
       description: Roubo de veículo
@@ -381,8 +389,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_carga
       bigquery_type: int64
       description: Roubo de carga
@@ -396,8 +404,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_comercio
       bigquery_type: int64
       description: Roubo a estabelecimento comercial
@@ -411,8 +419,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_residencia
       bigquery_type: int64
       description: Roubo a residência
@@ -426,8 +434,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_banco
       bigquery_type: int64
       description: Roubo a banco
@@ -441,8 +449,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_caixa_eletronico
       bigquery_type: int64
       description: Roubo de caixa eletrônico
@@ -456,8 +464,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_conducao_saque
       bigquery_type: int64
       description: Roubo com condução da vítima para saque em instituição financeira
@@ -471,8 +479,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_apos_saque
       bigquery_type: int64
       description: Roubo após saque em instituição financeira
@@ -486,8 +494,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_roubo_bicicleta
       bigquery_type: int64
       description: Roubo de bicicleta
@@ -501,8 +509,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_outros_roubo
       bigquery_type: int64
       description: Outros roubos que não os listados acima
@@ -516,8 +524,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_total_roubos
       bigquery_type: int64
       description: Total de roubos
@@ -531,8 +539,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_furto_veiculos
       bigquery_type: int64
       description: Furto de veículo
@@ -546,8 +554,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_furto_transeunte
       bigquery_type: int64
       description: Furto a transeunte
@@ -561,8 +569,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_furto_coletivo
       bigquery_type: int64
       description: Furto em coletivo
@@ -576,8 +584,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_furto_celular
       bigquery_type: int64
       description: Furto de telefone celular
@@ -591,8 +599,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_furto_bicicleta
       bigquery_type: int64
       description: Furto de bicicleta
@@ -606,8 +614,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_outros_furto
       bigquery_type: int64
       description: Outros furtos que não os listados acima
@@ -621,8 +629,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_total_furtos
       bigquery_type: int64
       description: Total de furtos
@@ -636,8 +644,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_sequestro
       bigquery_type: int64
       description: Extorsão mediante sequestro (sequestro clássico)
@@ -651,8 +659,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_extorsao
       bigquery_type: int64
       description: Extorsão
@@ -666,8 +674,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_sequestro_relampago
       bigquery_type: int64
       description: Extorsão com momentânea privação da liberdade (sequestro relâmpago)
@@ -681,8 +689,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_estelionato
       bigquery_type: int64
       description: Estelionato
@@ -696,8 +704,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_apreensao_droga
       bigquery_type: int64
       description: Apreensão de drogas
@@ -711,8 +719,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_registro_posse_drogas
       bigquery_type: int64
       description: Número de registros que possuem algum título referente a posse
@@ -727,8 +735,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_registro_trafico_drogas
       bigquery_type: int64
       description: Número de registros que possuem algum título referente a tráfico
@@ -743,8 +751,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_registro_apreensao_drogas_sem_autor
       bigquery_type: int64
       description: Número de registros que possuem algum título referente a apreensão
@@ -759,8 +767,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_registro_veiculo_recuperado
       bigquery_type: int64
       description: Recuperação de veículo
@@ -774,8 +782,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_apf
       bigquery_type: int64
       description: Número de autos de Prisão em Flagrante (APF)
@@ -789,8 +797,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_aaapai
       bigquery_type: int64
       description: Número de autos de Apreensão de Adolescente por Prática de Ato
@@ -805,8 +813,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_cmp
       bigquery_type: int64
       description: Cumprimento de Mandado de Prisão (CMP)
@@ -820,8 +828,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_cmba
       bigquery_type: int64
       description: Cumprimento de Mandado de Busca e Apreensão (CMB)
@@ -835,11 +843,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_ameaca
       bigquery_type: int64
-      description: 'Ameaça '
+      description: Ameaça 
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -850,8 +858,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_pessoa_desaparecida
       bigquery_type: int64
       description: Pessoas desaparecidas
@@ -865,8 +873,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_encontro_cadaver
       bigquery_type: int64
       description: Encontro de cadáver
@@ -880,8 +888,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_encontro_ossada
       bigquery_type: int64
       description: Encontro de ossada
@@ -895,8 +903,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_policial_militar_morto_servico
       bigquery_type: int64
       description: Policiais Militares mortos em serviço
@@ -910,8 +918,8 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_policial_civil_morto_servico
       bigquery_type: int64
       description: Policiais Civis mortos em serviço
@@ -925,8 +933,8 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: quantidade_registro_ocorrencia
       bigquery_type: int64
       description: Registro de ocorrências
@@ -940,8 +948,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: tipo_fase
       bigquery_type: string
       description: Tipo de fase (e.g. Consolidado sem errata, Consolidado com errata)
@@ -955,9 +963,9 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
 
-number_rows:
+number_rows:  366
 
 metadata_modified:
