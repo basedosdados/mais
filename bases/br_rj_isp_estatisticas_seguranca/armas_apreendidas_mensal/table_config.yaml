@@ -131,7 +131,7 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
-      measurement_unit: day
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: True

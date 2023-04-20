@@ -58,6 +58,11 @@ observation_level:
       entity: municipality
       columns:
           - id_municipio
+    - entity: other
+      columns:
+          - id_cisp
+          - id_aisp
+          - id_risp
 
 last_updated:
     metadata: '2023-04-17'
