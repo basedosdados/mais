@@ -2,19 +2,19 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_inep_indicador_nivel_socioeconomico
 
-table_id: municipio
+table_id: brasil
 
 # Título da tabela.
-title: Município
+title: Brasil
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
 description: A tabela indica o  Indicador de Nível Socioeconômico (INSE)  ao nível
-    do município a partir das informações de posse de bens domésticos, renda e contratação
+    do Brasil a partir das informações de posse de bens domésticos, renda e contratação
     de serviços pela família dos alunos e pelo nível de escolaridade de seus pais
-    nas respostas do questionário socioeconômico de exames como SAEB e ENEM
+    nas respostas do questionário socioeconômico de exames como SAEB e ENEM.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -34,7 +34,6 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
-    - 2019
     - 2021
 
 # A unidade temporal com qual a tabela é atualizada.
@@ -52,13 +51,12 @@ update_frequency: uncertain
 #       columns:
 #           - sigla_uf
 observation_level:
-    - country: br
-      entity: municipality
-      columns:
-          - id_municipio
     - entity: year
       columns:
           - ano
+    - entity: other
+      columns:
+          - area
     - entity: other
       columns:
           - rede
@@ -67,13 +65,13 @@ observation_level:
           - tipo_localizacao
 
 last_updated:
-    metadata: '2023-04-12'
-    data: '2023-04-12 17:21:00'
-    release: '2023-04-12 17:21:00'
+    metadata: '2023-04-13'
+    data: '2023-04-13 09:05:00'
+    release: '2023-04-13 09:05:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version: v1.1
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -94,7 +92,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: 1 - Desprezar colunas com informações repetidas; 2 - Renomear as colunas seguindo o padrão da BD; 3 - Append com os dados publicados na BD
+data_cleaning_description: 1. Modificar os nomes das colunas para padronização
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicador_nivel_socioeconomico/code
@@ -134,9 +132,9 @@ partitions:
 columns:
     - name: ano
       bigquery_type: int64
-      description: Ano
+      description: Ano de aplicação do Saeb
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -147,33 +145,16 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: sigla_uf
+    - name: area
       bigquery_type: string
-      description: Sigla da Unidade da Federação
+      description: Área da escola (relacionada ao município)
       temporal_coverage:
-          - 2019, 2021
-      covered_by_dictionary: no
+          - 2021
+      covered_by_dictionary: yes
       directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: uf
-          column_name: sigla
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: id_municipio
-      bigquery_type: string
-      description: ID do Município - IBGE 7 Dígitos. Foi calculado o INSE apenas para
-          os Municípios e estratos que atingiram o mínimo de 10 alunos e o percentual
-          de participação de 50%
-      temporal_coverage:
-          - 2019, 2021
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: municipio
-          column_name: id_municipio
+          dataset_id:
+          table_id:
+          column_name:
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -183,7 +164,7 @@ columns:
       bigquery_type: string
       description: Rede Escolar
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -198,7 +179,7 @@ columns:
       bigquery_type: string
       description: Tipo de Localização
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -212,9 +193,9 @@ columns:
     - name: quantidade_alunos_inse
       bigquery_type: int64
       description: Quantidade de Alunos com INSE calculado utilizado para o cálculo
-          das médias por Município.
+          das médias.
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -228,9 +209,9 @@ columns:
     - name: inse
       bigquery_type: float64
       description: Média ponderada do Indicador de Nível Socioeconômico dos alunos
-          do estrato do município.
+          do estrato.
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -243,9 +224,9 @@ columns:
       is_partition: false
     - name: percentual_nivel_1
       bigquery_type: float64
-      description: Percentual de alunos da Escola classificados no Nível I
+      description: Percentual de alunos da Escola classificados no Nível I.
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -258,9 +239,9 @@ columns:
       is_partition: false
     - name: percentual_nivel_2
       bigquery_type: float64
-      description: Percentual de alunos da Escola classificados no Nível II
+      description: Percentual de alunos da Escola classificados no Nível II.
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -273,9 +254,9 @@ columns:
       is_partition: false
     - name: percentual_nivel_3
       bigquery_type: float64
-      description: Percentual de alunos da Escola classificados no Nível III
+      description: Percentual de alunos da Escola classificados no Nível III.
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -288,9 +269,9 @@ columns:
       is_partition: false
     - name: percentual_nivel_4
       bigquery_type: float64
-      description: Percentual de alunos da Escola classificados no Nível IV
+      description: Percentual de alunos da Escola classificados no Nível IV.
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -303,9 +284,9 @@ columns:
       is_partition: false
     - name: percentual_nivel_5
       bigquery_type: float64
-      description: Percentual de alunos da Escola classificados no Nível V
+      description: Percentual de alunos da Escola classificados no Nível V.
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -318,9 +299,9 @@ columns:
       is_partition: false
     - name: percentual_nivel_6
       bigquery_type: float64
-      description: Percentual de alunos da Escola classificados no Nível VI
+      description: Percentual de alunos da Escola classificados no Nível VI.
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -333,9 +314,9 @@ columns:
       is_partition: false
     - name: percentual_nivel_7
       bigquery_type: float64
-      description: Percentual de alunos da Escola classificados no Nível VII
+      description: Percentual de alunos da Escola classificados no Nível VII.
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -348,9 +329,9 @@ columns:
       is_partition: false
     - name: percentual_nivel_8
       bigquery_type: float64
-      description: Percentual de alunos da Escola classificados no Nível VIII
+      description: Percentual de alunos da Escola classificados no Nível VIII.
       temporal_coverage:
-          - 2019, 2021
+          - 2021
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -362,6 +343,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 169302
+number_rows: 63
 
 metadata_modified:

@@ -600,14 +600,27 @@ for i, _ in enumerate(file):
             df[x] = df[x].str.rstrip("ª")
             df[x] = df[x].str.rstrip("º")
             df[x] = df[x].str.lstrip("0")
-        if 5 <= ano[i] <= 11:
-            add_05_12 = pd.DataFrame(columns=["natureza_juridica"])
-            df = pd.concat([df, add_05_12])
-        elif ano[i] == 12 and mes[i] <= 5:
-            add_05_12 = pd.DataFrame(columns=["natureza_juridica"])
-            df = pd.concat([df, add_05_12])
-        df.rename(columns=rename, inplace=True)
-        df = df[ordem]
+        
+        def check_and_create_column(df: pd.DataFrame, col_name:str)-> pd.DataFrame:
+                    """
+                    Check if a column exists in a Pandas DataFrame. If it doesn't, create a new column with the given name
+                    and fill it with NaN values. If it does exist, do nothing.
+                    
+                    Parameters:
+                    df (Pandas DataFrame): The DataFrame to check.
+                    col_name (str): The name of the column to check for or create.
+                    
+                    Returns:
+                    Pandas DataFrame: The modified DataFrame.
+                    """
+                    if col_name not in df.columns:
+                        df[col_name] = ''
+                    return df
+        
+        #renomeia as colunas
+        df.rename(columns = rename, inplace=True)
+        print('renomeia')
+        df = df[ordem_colunas]
         df = df.drop_duplicates()
         if 5 <= ano[i] <= 9:
             df.to_csv(
