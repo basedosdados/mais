@@ -9,9 +9,9 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Arthur de Figueiredo Gusmão
+Nome: Patrick Teixeira
 Código: 
-Email: arthur.gusmao@basedosdados.org
+Email: patrick.teixeira@basedosdados.org
 Tratado por
 -----------
 Nome: Arthur de Figueiredo Gusmão
@@ -43,6 +43,4 @@ Renomeação e ordenamento das variáveis, criação de identificadores de Unida
 
 
 
-Frequencia de Atualização
--------------------------
-['ten_years']
+
