@@ -56,7 +56,7 @@ observation_level:
           - mes
     - entity: neighborhood
       columns:
-          - id_upp  
+          - id_upp
 
 last_updated:
     metadata: '2023-04-17'

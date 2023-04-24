@@ -51,6 +51,12 @@ observation_level:
     - entity: year
       columns:
           - ano
+    - entity: region
+      columns:
+          - regiao
+    - entity: other
+      columns:
+          - delito
 
 last_updated:
     metadata: '2023-04-17'

@@ -54,15 +54,9 @@ observation_level:
     - entity: month
       columns:
           - mes
-    - country: br
-      entity: municipality
-      columns:
-          - id_municipio
-    - entity: other
+    - entity: neighborhood
       columns:
           - id_cisp
-          - id_aisp
-          - id_risp
 
 last_updated:
     metadata: '2023-04-17'

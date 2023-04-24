@@ -2,10 +2,10 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_rj_isp_estatisticas_seguranca
 
-table_id: feminicidio_mensal_uf
+table_id: feminicidio_mensal_cisp
 
 # Título da tabela.
-title: Feminicidio mensal no Estado
+title: Feminicidio mensal CISP
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -53,6 +53,9 @@ observation_level:
     - entity: month
       columns:
           - mes
+    - entity: neighborhood
+      columns:
+          - id_cisp
 
 last_updated:
     metadata: '2023-04-17'
