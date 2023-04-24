@@ -1,0 +1,48 @@
+Série histórica mensal por área de delegacia (01/2003 a 12/2006)
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Patrick Teixeira
+Código: 
+Email: patrick.teixeira@basedosdados.org
+Tratado por
+-----------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2003-01(1)2006-12
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br.rj
+
+
+
+
+Tratamento
+----------
+1. renomeação de colunas; 2. replace dos identificadores pela descrição na variavél tipo_fase
+
+
+
+Frequencia de Atualização
+-------------------------
+month
