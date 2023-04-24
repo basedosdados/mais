@@ -25,7 +25,7 @@ def dict_original():
     'ArmasApreendidasEvolucaoCisp.xlsx' : 'armas_fogo_apreendidas_mensal.csv', #no 
     'ArmasDP2003_2006.csv' : 'armas_apreendidas_mensal.csv', 
     'PoliciaisMortos.csv' : 'evolucao_policial_morto_servico_mensal.csv', #no
-    'BaseFeminicidioEvolucaoMensalCisp.csv' : 'feminicidio_mensal_uf.csv', 
+    'BaseFeminicidioEvolucaoMensalCisp.csv' : 'feminicidio_mensal_cisp.csv', 
     'SeriesHistoricas.csv' : 'taxa_letalidade.csv' #no
     }
 
@@ -45,7 +45,7 @@ def dict_arquitetura():
     'armas_apreendidas_mensal.csv' : 'https://docs.google.com/spreadsheets/d/19gynYMOxzfgjd7HsPjH4LbOkgV9844WSoVBiqAgp340/edit#gid=0', 
     'armas_fogo_apreendidas_mensal.csv' : 'https://docs.google.com/spreadsheets/d/14wV3BkjG_9GDWKDUAbOVe2KOh0Bi6FAA/edit#gid=1673208544',
     'evolucao_policial_morto_servico_mensal.csv' : 'https://docs.google.com/spreadsheets/d/1wuRr-I73jje0nkSeF_9LEJSpRmuwIftX/edit#gid=1573015202',
-    'feminicidio_mensal_uf.csv' : 'https://docs.google.com/spreadsheets/d/1DLb9GQAZR-TRbJp0YYc1w71OsEwXPYa8/edit#gid=1573015202', 
+    'feminicidio_mensal_cisp.csv' : 'https://docs.google.com/spreadsheets/d/1DLb9GQAZR-TRbJp0YYc1w71OsEwXPYa8/edit#gid=1573015202', 
     'taxa_letalidade.csv': 'https://docs.google.com/spreadsheets/d/1wMbutt7Gs17ZlGEZ_-SBT4bwtF_QSWd5KLR-m8KaBMo/edit#gid=0'
     }
 
@@ -130,15 +130,35 @@ def get_links():
             links.append(a["href"])
     return links
 
-def download_files():
-    links = get_links()
-    path = r'C:\Users\gabri\OneDrive\vida_profissional\Projetos\base_dos_dados\br_rj_isp_seguranca_publica'
-    for link in links:
-        file_name = link.split("/")[-1]
-        if not os.path.exists(file_name):
-            print("Downloading file: ", file_name)
-            r = requests.get(link, allow_redirects=True)
-            open(file_name, "wb").write(r.content)
-            print("File downloaded: ", file_name)
-        else:
-            print("File already exists: ", file_name)
+def download_files(
+    urls: str,
+    save_dir: str
+    )-> None:
+    """
+    Downloads CSV files from a list of URLs and saves them to a specified directory.
+
+    Args:
+        urls (list): List of URLs to download CSV files from.
+        save_dir (str): Path of directory to save the downloaded CSV files to.
+    """
+    for url in urls:
+        url = 'http://www.ispdados.rj.gov.br/' + url
+        
+        print(f'Downloading file from {url}')
+        # Extract the filename from the URL
+        filename = os.path.basename(url)
+
+        # Create the full path of the file
+        file_path = os.path.join(save_dir, filename)
+
+        # Send a GET request to the URL
+        response = requests.get(url)
+
+        # Raise an exception if the response was not successful
+        response.raise_for_status()
+
+        # Write the content of the response to a file
+        with open(file_path, 'wb') as f:
+            f.write(response.content)
+
+        print(f"CSV file downloaded and saved to {file_path}") 
