@@ -1,0 +1,48 @@
+Série histórica mensal por município desde 01/2014 (taxas por 100 mil habitantes)
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Patrick Teixeira
+Código: 
+Email: patrick.teixeira@basedosdados.org
+Tratado por
+-----------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2014-01(1)2023-03
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br.rj
+
+
+
+
+Tratamento
+----------
+1. renomeação de colunas; 2. replace dos identificadores pela descrição na variavél tipo_fase
+
+
+
+Frequencia de Atualização
+-------------------------
+month
