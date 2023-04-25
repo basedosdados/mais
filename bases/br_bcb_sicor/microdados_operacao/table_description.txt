@@ -1,4 +1,4 @@
-A tabela de Operações contém os microdados das contratações de crédito de cada estado brasileiro, realizadas durante 2013 e julho de 2022. Nela, estão presentes principais informações (categoria de produtor; fonte de recursos; instituição credora; produto financiado e etc) das mais de 19 milhôes de operações de crédito rural registradas no SICOR no período. É importante salientar que cada linha não necessariamente representa uma operação completa. É possível que uma unica operação (identificada pelo id_referencia_bacen) contenha diversos itens e, portanto, seja subdividida em ordems. A coluna nu_ordem indica justamente o número de ordems que uma determinada operação possui.
+A tabela de Operações contém os microdados das contratações de crédito de cada estado brasileiro. Nela, estão presentes principais informações (categoria de produtor; fonte de recursos; instituição credora; produto financiado e etc) das mais de 19 milhôes de operações de crédito rural registradas no SICOR no período. É importante salientar que cada linha não necessariamente representa uma operação completa. É possível que uma unica operação (identificada pelo id_referencia_bacen) contenha diversos itens e, portanto, seja subdividida em ordens.
 
 Para saber mais acesse:
 Website: 
@@ -9,14 +9,14 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Moreira
+Nome: Gabriel Pisa Folhes
 Código: 
-Email: lucas.moreira@basedosdados.org
+Email: gabriel.pisa@basedosdados.org
 Tratado por
 -----------
 Nome: Gabriel Pisa Folhes
 Código: 
-Email: pisagabriel09@gmail.com
+Email: gabriel.pisa@basedosdados.org
 
 
 
@@ -31,7 +31,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 2013(1)2022
+- 2013-01(1)2023-03
 
 
 
@@ -45,7 +45,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Renomear colunas; formatar as datas; criar as variáveis ano_safra_emissao e ano_safra vencimento; particionar os dados por ano, mês e uf
+1. Corrigir tipos dos dados; 2. Renomear colunas; 3. formatar datas; 4. Criar ano e mês; 5. Criar plano_safra_emissao e plano_safra_vencimento; 6. Ordenar colunas; 7. Particionar tabelas
 
 
 

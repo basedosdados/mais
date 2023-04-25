@@ -2,20 +2,18 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_bcb_sicor
 
-table_id: microdados_saldo
+table_id: recurso_publico_cooperado
 
 # Título da tabela.
-title: Microdados - Saldo
+title: Recurso Público - Cooperado
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Esta tabela contém microdados sobre a evolução contábil mensal das operações
-    de crédito rural em curso e já quitadas. 
-    Para o aproveitamento completo, sugere-se que esta seja utilizada em conjunto
-    com as tabelas de Operações (microdados_operacao) e liberações (microdados_liberacao)
-    a depender das necessidades de análise.
+description: Em 2023 o Banco Central do Brasil (BCB) liberou informações adicionais das operações de crédito 
+ que foram financiadas com recursos públicos. Esta tabela identifica o repasse do crédito a cada menbro de uma cooperativa, caso exista.
+
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -39,7 +37,8 @@ temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: month
+update_frequency:
+    - month
 
 # Nível de observação da tabela: o que representa cada linha.
 # A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -52,19 +51,13 @@ update_frequency: month
 #       columns:
 #           - sigla_uf
 observation_level:
-    - entity: year
-      columns:
-        - ano
-    - entity: month
-      columns:
-        - mes
     - entity: other
       columns:
         - id_referencia_bacen
     - entity: other
       columns:
         - numero_ordem
-
+        
 last_updated:
     metadata: '2023-04-24'
     data: '2023-04-24 19:27:35'
@@ -72,7 +65,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version: v1.1
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -89,14 +82,16 @@ data_cleaned_by:
     name: Gabriel Pisa Folhes
     email: gabriel.pisa@basedosdados.org
     github_user: folhesgabriel
-    ckan_user: pisa_gab
+    ckan_user:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: 1. Corrigir tipos dos dados; 2. Renomear colunas; 3. Reordenar
-    colunas; 4. Salvar dados particionados, 5. Ler dados de cada partição;  6. concatenar as tabelas; 7. Salvar tabela final
+    colunas
+
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_bcb_sicor/code
+
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -123,8 +118,6 @@ project_id_staging: basedosdados-dev
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions:
-    - ano
-    - mes
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -133,36 +126,6 @@ partitions:
 # preencherá automaticamente as colunas.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: ano
-      bigquery_type: int64
-      description: Ano de referência do saldo
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: ano
-          column_name: ano
-      measurement_unit: year
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: true
-    - name: mes
-      bigquery_type: int64
-      description: Mês de referência do saldo
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: mes
-          column_name: mes
-      measurement_unit: month
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: true
     - name: id_referencia_bacen
       bigquery_type: string
       description: Identificador único de cada operação de crédito
@@ -193,15 +156,30 @@ columns:
       has_sensitive_data: no
       observations: Uma operação de crédito pode ter uma ou mais ordens, a depender
           da diversidade de produtos, atividades, finalidades e outras características
-          da operação de crédito.
+          da operação.
       is_in_staging: true
       is_partition: false
-    - name: id_situacao_operacao
+    - name: tipo_cpf_cnpj
       bigquery_type: string
-      description: Situação da operação 
+      description: CPF ou CNPJ do cooperado 
       temporal_coverage:
           - (1)
-      covered_by_dictionary: yes
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: 
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_pessoa
+      bigquery_type: string
+      description: Tipo da pessoa jurídica
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -211,39 +189,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: valor_medio_diario
-      bigquery_type: float64 
-      description: Saldo médio diário
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: brl
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: valor_medio_diario_vincendo
-      bigquery_type: float64 
-      description: Saldo médio diário vincendo
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: brl
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: valor_ultimo_dia
-      bigquery_type: float64 
-      description: Saldo do último dia
+    - name: valor_parcela
+      bigquery_type: float64
+      description: Valor da parcela de crédito do cooperado
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -257,6 +205,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 451067498
+number_rows: 68119
 
-metadata_modified: '2022-10-14T21:39:56.934260'
+metadata_modified: '2022-12-20T18:44:42.047407'

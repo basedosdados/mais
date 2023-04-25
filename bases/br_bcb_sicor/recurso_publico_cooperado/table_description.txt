@@ -1,0 +1,48 @@
+Em 2023 o Banco Central do Brasil (BCB) liberou informações adicionais das operações de crédito que foram financiadas com recursos públicos. Esta tabela identifica o repasse do crédito a cada menbro de uma cooperativa, caso exista.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+Tratado por
+-----------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2013-01(1)2023-03
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+1. Corrigir tipos dos dados; 2. Renomear colunas; 3. Reordenar colunas
+
+
+
+Frequencia de Atualização
+-------------------------
+['month']

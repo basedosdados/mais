@@ -5,51 +5,85 @@ dataset_id: br_bcb_sicor
 table_id: microdados_liberacao
 
 # Título da tabela.
-title: Liberação
+title: Microdados de Liberação
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Apresenta o registro dos recursos liberados pelas instituições financeiras no decorrer de uma operação de crédito, durante 2013 a julho de 2022. A liberação obedece o cronograma de liberação de recursos estipulado no ato da assinatura do contrato que formaliza a operação de crédito rural. Por meio desta base é possível descobrir o montante de recursos efetivamente liberado bem como o status da operação de crédito. Recomenda-se que seja utilizado em conjunto com a tabela de Operações (microdados_operações) e de Saldos (microdados_saldos) a depender das necessidades de análise. 
+description: Apresenta o registro dos recursos liberados pelas instituições financeiras
+    no decorrer de uma operação de crédito, durante 2013 a julho de 2022. A liberação
+    obedece o cronograma de liberação de recursos estipulado no ato da assinatura
+    do contrato que formaliza a operação de crédito rural. Por meio desta base é possível
+    descobrir o montante de recursos efetivamente liberado bem como o status da operação
+    de crédito. Recomenda-se que seja utilizado em conjunto com a tabela de Operações
+    (microdados_operações) e de Saldos (microdados_saldos) a depender das necessidades
+    de análise.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - sa.br
-spatial_coverage: 
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
     - sa.br
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
-    - 2013(1)2022
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+    - 2013-01(1)2023-03
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: one_year
+update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
-observation_level: 
-    - entity: transaction
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+    - entity: year
+      columns:
+        - ano
+    - entity: month
+      columns:
+        - mes
+    - entity: other
       columns:
         - id_referencia_bacen
+    - entity: other
+      columns:
+        - numero_ordem
 
+   
 last_updated:
-    metadata: '2022-09-20'
-    data: '2022-09-20 19:27:35'
-    release: '2022-09-20 19:27:40'
+    metadata: '2023-04-24'
+    data: '2023-04-24 19:27:35'
+    release: '2023-04-24 19:27:40'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
-version: v1.0
+# Exemplos: v1.0, v1.1.3
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Lucas Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
-    ckan_user: lucasnascm
+    name: Gabriel Pisa Folhes
+    email: gabriel.pisa@basedosdados.org
+    github_user: folhesgabriel
+    ckan_user: pisa_gab
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
@@ -59,14 +93,15 @@ data_cleaned_by:
     name: Gabriel Pisa Folhes
     email: pisagabriel09@gmail.com
     github_user: folhesgabriel
-    ckan_user:
+    ckan_user: pisa_gab
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Renomear colunas; formatar as datas e particionar os dados por ano e mês.
+data_cleaning_description: 1. Corrigir tipos dos dados; 2. Renomear colunas; 3. Formatar datas, 4. Reordenar
+    colunas; 5. Salvar dados tratados
 
-# Url do código de limpeza dos dados.
-data_cleaning_code_url: https://github.com/folhesgabriel/code_br_bcb_sicor/blob/main/wrang_br_bcb_sicor_liberacao.R
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_bcb_sicor/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -101,13 +136,11 @@ partitions:
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
       bigquery_type: int64
-      description: Ano de liberação da parcela de crédito total ou parcial
+      description: Ano de referência do valor liberado total ou parcial
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -120,13 +153,13 @@ columns:
       observations: Início da vigência
       is_in_staging: true
       is_partition: true
-    - name: mes 
+    - name: mes
       bigquery_type: int64
-      description: Mês de liberação da parcela de crédito total ou parcial
+      description: Mês de referência do valor liberado total ou parcial
       temporal_coverage:
-         - (1)
+          - (1)
       covered_by_dictionary: no
-      directory_column: 
+      directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: mes
           column_name: mes
@@ -145,7 +178,7 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: data
           column_name: data
-      measurement_unit:
+      measurement_unit: day
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -156,7 +189,7 @@ columns:
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
-      directory_column: 
+      directory_column:
           dataset_id:
           table_id:
           column_name:
@@ -182,7 +215,8 @@ columns:
       is_partition: false
     - name: numero_ordem
       bigquery_type: string
-      description: Identificador da quantidade de ordens que compõem uma operação de crédito
+      description: Identificador da quantidade de ordens que compõem uma operação
+          de crédito
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -192,10 +226,12 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Uma operação de crédito pode ter uma ou mais ordens, a depender da diversidade de produtos, atividades, finalidades e outras características da operação de crédito.
+      observations: Uma operação de crédito pode ter uma ou mais ordens, a depender
+          da diversidade de produtos, atividades, finalidades e outras características
+          da operação de crédito.
       is_in_staging: true
       is_partition: false
 
-number_rows: 13296822
+number_rows: 14773640
 
-metadata_modified:
+metadata_modified: '2022-10-14T21:38:16.068130'

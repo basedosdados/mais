@@ -17,12 +17,12 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_bcb_sicor.microdados_liberacao AS
+CREATE VIEW basedosdados-dev.br_bcb_sicor.recurso_publico_propriedade AS
 SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(data_liberacao AS DATE) data_liberacao,
-SAFE_CAST(valor_liberado AS FLOAT64) valor_liberado,
 SAFE_CAST(id_referencia_bacen AS STRING) id_referencia_bacen,
-SAFE_CAST(numero_ordem AS STRING) numero_ordem
-FROM basedosdados-dev.br_bcb_sicor_staging.microdados_liberacao AS t
+SAFE_CAST(numero_ordem AS STRING) numero_ordem,
+SAFE_CAST(tipo_cpf_cnpj AS STRING) tipo_cpf_cnpj,
+SAFE_CAST(id_sncr AS STRING) id_sncr,
+SAFE_CAST(id_nirf AS STRING) id_nirf,
+SAFE_CAST(id_car AS STRING) id_car
+FROM basedosdados-dev.br_bcb_sicor_staging.recurso_publico_propriedade AS t

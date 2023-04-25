@@ -1,4 +1,4 @@
-Esta tabela contém dados sobre a evolução contábil mensal das operações de crédito rural em curso e daquelas já quitadas, durante 2013 a julho de 2022. Para o aproveitamento completo, sugere-se que esta seja utilizada em conjunto com as tabelas de Operações (microdados_operacao) e liberações (microdados_liberacao) a depender das necessidades de análise.
+Esta tabela contém microdados sobre a evolução contábil mensal das operações de crédito rural em curso e já quitadas. Para o aproveitamento completo, sugere-se que esta seja utilizada em conjunto com as tabelas de Operações (microdados_operacao) e liberações (microdados_liberacao) a depender das necessidades de análise.
 
 Para saber mais acesse:
 Website: 
@@ -9,14 +9,14 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Moreira
+Nome: Gabriel Pisa Folhes
 Código: 
-Email: lucas.moreira@basedosdados.org
+Email: gabriel.pisa@basedosdados.org
 Tratado por
 -----------
 Nome: Gabriel Pisa Folhes
 Código: 
-Email: pisagabriel09@gmail.com
+Email: gabriel.pisa@basedosdados.org
 
 
 
@@ -30,7 +30,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 2013(1)2022
+- 2013-01(1)2023-03
 
 
 
@@ -44,7 +44,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Renomear colunas; formatar as datas e particionar os dados por ano e mês.
+1. Corrigir tipos dos dados; 2. Renomear colunas; 3. Reordenar colunas; 4. Salvar dados particionados, 5. Ler dados de cada partição;  6. concatenar as tabelas; 7. Salvar tabela final
 
 
 

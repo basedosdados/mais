@@ -9,9 +9,9 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Moreira
+Nome: Gabriel Pisa Folhes
 Código: 
-Email: lucas.moreira@basedosdados.org
+Email: gabriel.pisa@basedosdados.org
 Tratado por
 -----------
 Nome: Gabriel Pisa Folhes
@@ -30,7 +30,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 2013(1)2022
+- 2013-01(1)2023-03
 
 
 
@@ -44,7 +44,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Renomear colunas; formatar as datas e particionar os dados por ano e mês.
+1. Corrigir tipos dos dados; 2. Renomear colunas; 3. Formatar datas, 4. Reordenar colunas; 5. Salvar dados tratados
 
 
 
