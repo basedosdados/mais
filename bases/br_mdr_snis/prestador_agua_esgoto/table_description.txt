@@ -1,0 +1,48 @@
+Está tabela contém informações e indicadores desagregados por prestador de serviço de água e esgoto, fornecendo um panorama detalhado do histórico e do estado da arte da oferta de serviços saneamento básico no Brasil. Atenção! este dataset não representa o conjunto total de dados disponíveis no SNIS. Para saber detalhes sobre como fizemos a seleção dos dados na fonte original basta realizar o download dos arquivos auxíliares no final da página.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+Tratado por
+-----------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 1995(1)2021
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+1. retirar a linha de totais no final do csv extraido diretamente do SNIS na mão; 2. Renomear colunas; 3. Adicionar id_municipio de 7 dígitos do ibge; 4. deletar colunas; 5. tirar .0 de ints; 6. Remover acentos de strings; 7. Ordenar colunas
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
