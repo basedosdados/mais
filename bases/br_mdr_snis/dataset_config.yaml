@@ -1,0 +1,49 @@
+
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-mdr-snis
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Sistema Nacional de Informações sobre Saneamento (SNIS)
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Se a organização não estiver na lista acima ou o nome não estiver conforme o manual de estilo
+# criar ou renomear a organização em https://basedosdados.org/organization/
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization: br-mdr
+
+# Descrição do conjunto
+notes:  Criado em 1996, o SNIS é uma unidade vinculada à Secretaria Nacional de Saneamento (SNS) do Ministério do Desenvolvimento Regional (MDR). Com abrangência nacional, reúne informações de caráter institucional, administrativo, operacional, gerencial, econômico-financeiro, contábil e de qualidade da prestação de serviços de saneamento básico em áreas urbanas das quatro componentes do saneamento básico.  Objetivos do SNIS - Planejamento e execução de políticas públicas; - Orientação da aplicação de recursos; - Conhecimento e avaliação do setor saneamento; - Avaliação de desempenho dos serviços; - Aperfeiçoamento da gestão; - Orientação de atividades regulatórias e de fiscalização; - Exercício do controle social. Anualmente, o SNIS coleta dados dos municípios e dos prestadores de serviços de saneamento e os estrutura e disponibiliza à sociedade por meio dos Diagnósticos (Água e Esgotos, Manejo de Resíduos Sólidos Urbanos e Drenagem e Manejo de Águas Pluviais Urbanas) e da aplicação web SNIS Série Histórica. A partir do ano de 2019, o SNIS passa a divulgar o Painel de Informações sobre Saneamento que traz um panorama do setor e permite que as principais informações e indicadores sejam acessados de forma interativa.
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+    - saude
+    - urbanizacao
+    - meio-ambiente
+
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos:
+#    - fertilidade
+#    - preco
+#    - desmatamento
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - saneamento
+    - esgoto
+    - agua
+    - poluicao
+    - residuo
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified:
