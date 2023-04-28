@@ -2,7 +2,7 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_mdr_snis
 
-table_id: municipio_agua_esgoto
+table_id: prestador_agua_esgoto
 
 # Título da tabela.
 title: Informações e indicadores Desagregados por Prestador de Serviço de Água e Esgoto
@@ -57,6 +57,10 @@ observation_level:
     - entity: year
       columns:
           - ano
+    - country: br
+      entity: municipality
+      columns:
+          - id_municipio
     - entity: company
       columns:
           - id_prestador
@@ -148,7 +152,7 @@ columns:
       is_partition: false
     - name: id_municipio
       bigquery_type: string
-      description: "ID Município - IBGE 7 Dígitos\n"
+      description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -408,9 +412,9 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
       measurement_unit: year
       has_sensitive_data: no
       observations:
@@ -423,9 +427,9 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
       measurement_unit: year
       has_sensitive_data: no
       observations:
