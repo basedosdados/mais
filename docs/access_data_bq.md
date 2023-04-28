@@ -122,4 +122,4 @@ aprendizado quanto no dia-a-dia:
 
 - [Lista de funções em SQL da W3](https://www.w3schools.com/sql/default.Asp)
 - [Curso SQL na Codeacademy](https://www.codecademy.com/learn/learn-sql)
-- [Programação Dinâmica usando nosso datalake](https://www.youtube.com/watch?v=z32438Yehl4&list=PL5TJqBvpXQv5n1N15kcK1m9oKJm_cv-m6&index=2)
+- [Curso de SQL do Programação Dinâmica](https://www.youtube.com/watch?v=z32438Yehl4&list=PL5TJqBvpXQv5n1N15kcK1m9oKJm_cv-m6&index=2)
