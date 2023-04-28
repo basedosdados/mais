@@ -1,4 +1,4 @@
-Dicionário da base Sinopse Estatística da Educação Básica.
+A base conta com o total de matrículas por município para todas as etapas de ensino e o tempo ofertado de aulas, seja integral ou regular
 
 Para saber mais acesse:
 Website: 
@@ -14,11 +14,16 @@ Código:
 Email: lucas.moreira@basedosdados.org
 Tratado por
 -----------
-Nome: Ingrid de Sales Rabelo
+Nome: Lucas Moreira
 Código: 
-Email: ingrid.rabelo@basedosdados.org
+Email: lucas.moreira@basedosdados.org
 
 
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
 
 
 
@@ -39,10 +44,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Compatibilização em um único arquivo dos dicionários entre anos
+Junção das diferentes planilhas originais, reshape pro formato long, partição por UF
 
 
 
 Frequencia de Atualização
 -------------------------
-unique
+one_year
