@@ -17,13 +17,13 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_inep_sinopse_estatistica_educacao_basica.municipio_matricula_localizacao_rede AS
+CREATE VIEW basedosdados-dev.br_inep_sinopse_estatistica_educacao_basica.tempo_ensino AS
 SELECT 
-SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(ano AS STRING) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(localizacao AS STRING) localizacao,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(etapa_ensino AS STRING) etapa_ensino,
-SAFE_CAST(quantidade_matricula AS INT64) quantidade_matricula
-FROM basedosdados-dev.br_inep_sinopse_estatistica_educacao_basica_staging.municipio_matricula_localizacao_rede AS t
+SAFE_CAST(tempo_ensino AS STRING) tempo_ensino,
+SAFE_CAST(quantidade_matricula AS STRING) quantidade_matricula
+FROM basedosdados-dev.br_inep_sinopse_estatistica_educacao_basica_staging.tempo_ensino AS t
