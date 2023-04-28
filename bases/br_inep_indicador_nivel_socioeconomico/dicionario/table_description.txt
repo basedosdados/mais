@@ -9,23 +9,16 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Moreira
+Nome: Luiza Vilela
 Código: 
-Email: lucas.moreira@basedosdados.org
+Email: luiza.vilela@basedosdados.org
 Tratado por
 -----------
-Nome: Lucas Moreira
-Email: lucas.moreira@basedosdados.org
+Nome: Luiza Vilela
+Código: 
+Email: luiza.vilela@basedosdados.org
 
 
-
-
-Colunas identificando linhas unicamente
--------------------
-- id_tabela
-- coluna
-- chave
-- cobertura_temporal
 
 
 
@@ -44,7 +37,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Coletei informações de dicionários e notas técnicas do INEP
+1. Coletar informações de dicionários e notas técnicas do INEP
 
 
 

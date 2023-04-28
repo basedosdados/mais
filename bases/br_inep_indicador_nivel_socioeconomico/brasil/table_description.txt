@@ -1,0 +1,48 @@
+A tabela indica o  Indicador de Nível Socioeconômico (INSE)  ao nível do Brasil a partir das informações de posse de bens domésticos, renda e contratação de serviços pela família dos alunos e pelo nível de escolaridade de seus pais nas respostas do questionário socioeconômico de exames como SAEB e ENEM.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Luiza Vilela
+Código: 
+Email: luiza.vilela@basedosdados.org
+Tratado por
+-----------
+Nome: Luiza Vilela
+Código: 
+Email: luiza.vilela@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2021
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+1. Modificar os nomes das colunas para padronização
+
+
+
+Frequencia de Atualização
+-------------------------
+uncertain

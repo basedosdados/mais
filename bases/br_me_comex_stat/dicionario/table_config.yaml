@@ -1,4 +1,3 @@
-
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_me_comex_stat
@@ -16,38 +15,54 @@ description: Dicionário da base de Comércio Exterior
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - sa.br
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
 spatial_coverage:
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
 temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency:
-    - unique
+update_frequency: unique
 
 # Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
 observation_level:
 
 last_updated:
-    metadata: '2022-07-30'
-    data: '2022-07-30 08:42:11'
-    release: '2022-07-30'
+    metadata: '2023-04-08'
+    data: '2023-04-08 15:03:00'
+    release: '2023-04-08 15:03:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
-version: v1.0
+# Exemplos: v1.0, v1.1.3
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Lucas Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
-    ckan_user: lucasnascm
-    website:
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -62,7 +77,7 @@ data_cleaned_by:
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Compatibilização de dicionários para alguma das variáveis
 
-# Url do código de limpeza dos dados.
+# Url do código de limpeza dos dados do github.
 data_cleaning_code_url:
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
@@ -96,13 +111,11 @@ partitions:
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: id_tabela
       bigquery_type: string
-      description: ID Tabela
+      description: ID da tabela
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -171,4 +184,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-07-28T22:50:51.556718'
+number_rows: 1740
+
+metadata_modified: '2022-12-18T02:14:00.900674'
