@@ -2,80 +2,101 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_inep_sinopse_estatistica_educacao_basica
 
-table_id: municipio_matricula_localizacao_rede
+table_id: etapa_ensino_serie
 
 # Título da tabela.
-title: Matrículas por Município, Localização e Rede
+title: Matrículas por etapa ensino e série
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Os dados referentes às matrículas da Sinopse da Educação Básica, considerando as matrículas por município, por localização, por rede e por etapa de ensino.
+description: A base conta com o total de matrículas por município para todas as etapas e subetapas de ensino, além da discriminação dos anos para Anos Iniciais e Finais do Ensino Fundamental, bem como as série do Ensino Médio
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - sa.br
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
 spatial_coverage:
     - sa.br
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
-    - 2010(1)2021
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+    - 2007(1)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: one_year
 
 # Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
 observation_level:
     - entity: year
       columns:
         - ano
-    - entity: municipality
+    - country: br
+      entity: municipality
       columns:
         - id_municipio
     - entity: other
       columns:
-        - localizacao
+        - rede
     - entity: other
       columns:
-        - rede
+        - etapa_ensino
+    - entity: other
+      columns:
+        - serie
 
 last_updated:
-    metadata: '2022-08-16'
-    data: '2022-08-16 17:23:37'
-    release: '2022-08-16 17:23:37'
+    metadata: '2023-04-05'
+    data: '2023-04-05 10:13:00'
+    release: '2023-04-05 10:13:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
-version: v1.0
+# Exemplos: v1.0, v1.1.3
+version: v2.0
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Ingrid de Sales Rabelo
-    email: ingrid.rabelo@basedosdados.org
-    github_user: IngridSRabelo
-    ckan_user: ingrid_rabelo
+    name: Lucas Moreira
+    email: lucas.moreira@basedosdados.org
+    github_user: lucasnascm
+    ckan_user: lucasnascm
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Ingrid de Sales Rabelo
-    email: ingrid.rabelo@basedosdados.org
-    github_user: IngridSRabelo
-    ckan_user: ingrid_rabelo
+    name: Lucas Moreira
+    email: lucas.moreira@basedosdados.org
+    github_user: lucasnascm
+    ckan_user: lucasnascm
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Processo de ETL consistiu em transformar 9 abas do arquivo em .xlsx em uma tabela só, considerando o nível de agregação por município, localização e rede.
+data_cleaning_description: Junção das diferentes planilhas originais, reshape pro formato long, partição por UF
 
-# Url do código de limpeza dos dados.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_sinopse_estatistica_educacao_basica/code/municipio_matricula_localizacao_rede
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_sinopse_estatistica_educacao_basica/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -110,8 +131,6 @@ partitions:
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
@@ -127,7 +146,7 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       observations:
-      is_in_staging: true 
+      is_in_staging: true
       is_partition: true
     - name: sigla_uf
       bigquery_type: string
@@ -159,21 +178,6 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: localizacao
-      bigquery_type: string
-      description: Localização (e.g. zona urbana, zona rural)
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: rede
       bigquery_type: string
       description: Rede Escolar (e.g. federal, estadual, municipal e privada)
@@ -191,7 +195,23 @@ columns:
       is_partition: false
     - name: etapa_ensino
       bigquery_type: string
-      description: Etapa/nível de ensino
+      description: 'Etapa e/ou Sub-etapas de ensino (e.g. Creche, Pré-escola, Anos
+          Iniciais, Anos Finais, Ensino Fundamental - EJA, ...) '
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: serie
+      bigquery_type: int64
+      description: Série/Ano de ensino
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -220,6 +240,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 4811400
+number_rows: 8129500
 
-metadata_modified: "2022-10-06T12:11:19.706687"
+metadata_modified: 
