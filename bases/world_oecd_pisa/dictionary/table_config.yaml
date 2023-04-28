@@ -114,7 +114,7 @@ columns:
       has_sensitive_data: no
       is_in_staging: True
       is_partition: False
-    - name: column
+    - name: column_name
       bigquery_type: string
       description: Indicates the column name of the key and value.
       temporal_coverage:
@@ -167,6 +167,6 @@ columns:
       is_in_staging: True
       is_partition: False
 
-number_rows: 9664
+number_rows: 6339
 
 metadata_modified:

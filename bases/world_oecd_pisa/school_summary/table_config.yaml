@@ -11,7 +11,7 @@ title: School Summary
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: A subset of variables from PISA data for the years 2000 - 2018, collected from the R package 'learning-tower'. This is an excellent dataset for exploring and visualizing data.
+description: A subset of variables from PISA data for the years 2000 - 2018 at the school level, collected from the R package 'learning-tower'. This is an excellent dataset for exploring and visualizing data about schools.
 
 
 # As máximas unidades espaciais que a tabela cobre.
@@ -26,7 +26,7 @@ spatial_coverage:
 
 # Anos cobertos pela tabela.
 # Exemplos:
-#     - 1995(1)2019
+#     - 1995(3)2019
 # Caso a cobertura não seja contínua:
 #     - 2002(2)2010
 #     - 2016
@@ -55,6 +55,7 @@ observation_level:
      - entity: school
        columns:
            - school_id
+           - country_id_iso_3
 
 last_updated:
     metadata: '2023-04-14'
@@ -127,7 +128,7 @@ columns:
       bigquery_type: int64
       description: Year
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -138,16 +139,16 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: id_country_iso_3
+    - name: country_id_iso_3
       bigquery_type: string
       description: Country 3 character code
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+      directory_column: 
+          dataset_id: br_bd_diretorios_mundo
+          table_id: pais
+          column_name: sigla_pais_iso3
       measurement_unit:
       has_sensitive_data: no
       observations: Note that some regions/territories are coded as country for ease
@@ -159,7 +160,7 @@ columns:
       description: The school identification number, unique for each country and year
           combination.
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -174,7 +175,7 @@ columns:
       bigquery_type: string
       description: Is the school a public or private school
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -189,7 +190,7 @@ columns:
       bigquery_type: float64
       description: Percentage of total funding for school year from government
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -205,7 +206,7 @@ columns:
       description: Percentage of total funding for school year from student fees or
           school charges paid by parents
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -221,7 +222,7 @@ columns:
       description: Percentage of total funding for school year from benefactors, donations,
           bequests, sponsorship, parent fundraising
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -236,7 +237,7 @@ columns:
       bigquery_type: int64
       description: Number of boys in the school
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -251,7 +252,7 @@ columns:
       bigquery_type: int64
       description: Number of girls in the school
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -266,7 +267,7 @@ columns:
       bigquery_type: int64
       description: Number of students in the school
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -281,7 +282,7 @@ columns:
       bigquery_type: float64
       description: Student-Teacher ratio
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -296,7 +297,7 @@ columns:
       bigquery_type: float64
       description: Shortage of staff
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -311,7 +312,7 @@ columns:
       bigquery_type: float64
       description: The final survey weight score for the schools
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:

@@ -25,7 +25,7 @@ spatial_coverage:
 
 # Anos cobertos pela tabela.
 # Exemplos:
-#     - 1995(1)2019
+#     - 1995(3)2019
 # Caso a cobertura não seja contínua:
 #     - 2002(2)2010
 #     - 2016
@@ -58,7 +58,7 @@ observation_level:
 last_updated:
     metadata: '2022-07-21'
     data: '2022-07-21 08:30:07'
-    release: '2020-10-01'
+    release: '2020-10-01 08:30:07'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
@@ -128,7 +128,7 @@ columns:
       bigquery_type: int64
       description: Year
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -143,11 +143,11 @@ columns:
       bigquery_type: string
       description: Country ID ISO3
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_mundo
-          table_id: sigla_pais_iso3
+          table_id: pais
           column_name: sigla_pais_iso3
       measurement_unit:
       has_sensitive_data: no
@@ -158,11 +158,11 @@ columns:
       bigquery_type: string
       description: Country Identifier
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_mundo
-          table_id: id_pais_m49
+          table_id: pais
           column_name: id_pais_m49
       measurement_unit:
       has_sensitive_data: no
@@ -173,7 +173,7 @@ columns:
       bigquery_type: string
       description: School ID
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -188,7 +188,7 @@ columns:
       bigquery_type: string
       description: Student ID
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -204,7 +204,7 @@ columns:
       description: PISA Assessment Cycle (2 digits + 2 character Assessment type -
           MS/FT)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -219,7 +219,7 @@ columns:
       bigquery_type: string
       description: National Centre 6-digit Code
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -234,7 +234,7 @@ columns:
       bigquery_type: string
       description: Stratum ID 7-character (cnt + region ID + original stratum ID)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -250,7 +250,7 @@ columns:
       description: Adjudicated sub-region code 7-digit code (3-digit country code
           + region ID + stratum ID)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -265,7 +265,7 @@ columns:
       bigquery_type: string
       description: Boolean variable for OECD country
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -280,7 +280,7 @@ columns:
       bigquery_type: string
       description: Mode of Respondent
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -295,7 +295,7 @@ columns:
       bigquery_type: string
       description: Language of Questionnaire
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -310,7 +310,7 @@ columns:
       bigquery_type: string
       description: Language of Assessment
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -325,7 +325,7 @@ columns:
       bigquery_type: string
       description: Form Identifier
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -340,7 +340,7 @@ columns:
       bigquery_type: string
       description: Student International Grade (Derived)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -355,7 +355,7 @@ columns:
       bigquery_type: int64
       description: Student (Standardized) Birth - Month
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -370,7 +370,7 @@ columns:
       bigquery_type: int64
       description: Student (Standardized) Birth - Year
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -385,7 +385,7 @@ columns:
       bigquery_type: string
       description: Student (Standardized) Gender
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -430,7 +430,7 @@ columns:
       bigquery_type: string
       description: ISCO-08 Occupation code - Mother
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -445,7 +445,7 @@ columns:
       bigquery_type: string
       description: ISCO-08 Occupation code - Father
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -460,7 +460,7 @@ columns:
       bigquery_type: string
       description: ISCO-08 Occupation code - Self
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -475,7 +475,7 @@ columns:
       bigquery_type: int64
       description: Grade compared to modal grade in country
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -490,7 +490,7 @@ columns:
       bigquery_type: float64
       description: Age
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -505,7 +505,7 @@ columns:
       bigquery_type: string
       description: Unique national study programme code
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -520,7 +520,7 @@ columns:
       bigquery_type: string
       description: Country of Birth National Categories- Self
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -535,7 +535,7 @@ columns:
       bigquery_type: string
       description: Country of Birth National Categories- Mother
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -550,7 +550,7 @@ columns:
       bigquery_type: string
       description: Country of Birth National Categories- Father
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -565,7 +565,7 @@ columns:
       bigquery_type: string
       description: Language at home (3-digit code)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -580,7 +580,7 @@ columns:
       bigquery_type: string
       description: ISCED level
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -595,7 +595,7 @@ columns:
       bigquery_type: string
       description: ISCED designation
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -610,7 +610,7 @@ columns:
       bigquery_type: string
       description: ISCED orientation
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -625,7 +625,7 @@ columns:
       bigquery_type: string
       description: Mothers Education (ISCED)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -640,7 +640,7 @@ columns:
       bigquery_type: string
       description: Fathers Education (ISCED)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -655,7 +655,7 @@ columns:
       bigquery_type: string
       description: Highest Education of parents (ISCED)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -667,10 +667,10 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: index_highest_parent_years_schooling
-      bigquery_type: int64
+      bigquery_type: float64
       description: Index highest parental education in years of schooling
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -727,7 +727,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: index_highest_parent_international_years_schooling
-      bigquery_type: int64
+      bigquery_type: float64
       description: Index highest parental education (international years of schooling
           scale)
       temporal_coverage:
@@ -746,7 +746,7 @@ columns:
       bigquery_type: float64
       description: ISEI of mother
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -761,7 +761,7 @@ columns:
       bigquery_type: float64
       description: ISEI of father
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -776,7 +776,7 @@ columns:
       bigquery_type: float64
       description: Index highest parental occupational status
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -791,7 +791,7 @@ columns:
       bigquery_type: string
       description: Index Immigration status
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -806,7 +806,7 @@ columns:
       bigquery_type: string
       description: Duration in early childhood education and care
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -821,7 +821,7 @@ columns:
       bigquery_type: string
       description: Grade Repetition
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -836,7 +836,7 @@ columns:
       bigquery_type: float64
       description: Students expected occupational status (SEI)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -851,7 +851,7 @@ columns:
       bigquery_type: int64
       description: Learning time (minutes per week) - <Mathematics>
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -866,7 +866,7 @@ columns:
       bigquery_type: int64
       description: Learning time (minutes per week) - <test language>
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -881,7 +881,7 @@ columns:
       bigquery_type: int64
       description: Learning time (minutes per week) - <science>
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -896,7 +896,7 @@ columns:
       bigquery_type: int64
       description: Learning time (minutes per week) - in total
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -911,7 +911,7 @@ columns:
       bigquery_type: string
       description: Number of school changes
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -926,7 +926,7 @@ columns:
       bigquery_type: int64
       description: Number of changes in educational biography (Sum)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -956,7 +956,7 @@ columns:
       bigquery_type: float64
       description: Index of economic, social and cultural status
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1016,7 +1016,7 @@ columns:
       bigquery_type: int64
       description: ICT available at home
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1031,7 +1031,7 @@ columns:
       bigquery_type: int64
       description: ICT available at school
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1046,7 +1046,7 @@ columns:
       bigquery_type: float64
       description: Home possessions index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1061,7 +1061,7 @@ columns:
       bigquery_type: float64
       description: Cultural possessions at home index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1076,7 +1076,7 @@ columns:
       bigquery_type: float64
       description: Home educational resources index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1091,7 +1091,7 @@ columns:
       bigquery_type: float64
       description: Family wealth index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1106,7 +1106,7 @@ columns:
       bigquery_type: float64
       description: ICT resources index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1121,7 +1121,7 @@ columns:
       bigquery_type: float64
       description: Teacher support in test language lessons index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1136,7 +1136,7 @@ columns:
       bigquery_type: float64
       description: Perceived feedback index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1151,7 +1151,7 @@ columns:
       bigquery_type: float64
       description: Parents' emotional support perceived by student index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1166,7 +1166,7 @@ columns:
       bigquery_type: float64
       description: 'Subjective well-being: Sense of belonging to school index (WLE)'
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1181,7 +1181,7 @@ columns:
       bigquery_type: float64
       description: ICT use outside of school (leisure) index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1197,7 +1197,7 @@ columns:
       description: Use of ICT outside of school (for school work activities) index
           (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1212,7 +1212,7 @@ columns:
       bigquery_type: float64
       description: Use of ICT at school in general index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1227,7 +1227,7 @@ columns:
       bigquery_type: float64
       description: Interest in ICT index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1242,7 +1242,7 @@ columns:
       bigquery_type: float64
       description: Perceived ICT competence index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1257,7 +1257,7 @@ columns:
       bigquery_type: float64
       description: Perceived autonomy related to ICT use index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1272,7 +1272,7 @@ columns:
       bigquery_type: float64
       description: ICT as a topic in social interaction index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1287,7 +1287,7 @@ columns:
       bigquery_type: float64
       description: Current parental support for learning at home index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1302,7 +1302,7 @@ columns:
       bigquery_type: float64
       description: Parents' emotional support index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1317,7 +1317,7 @@ columns:
       bigquery_type: float64
       description: Parents' perceived school quality index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1332,7 +1332,7 @@ columns:
       bigquery_type: float64
       description: School policies for parental involvement index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1347,7 +1347,7 @@ columns:
       bigquery_type: float64
       description: Previous parental support for learning at home index (WLE)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2040,7 +2040,7 @@ columns:
       bigquery_type: float64
       description: Final trimmed nonresponse adjusted student weight
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2056,7 +2056,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           1
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2073,7 +2073,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           2
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2090,7 +2090,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           3
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2107,7 +2107,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           4
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2124,7 +2124,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           5
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2141,7 +2141,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           6
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2158,7 +2158,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           7
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2175,7 +2175,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           8
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2192,7 +2192,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           9
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2209,7 +2209,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           10
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2226,7 +2226,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           11
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2243,7 +2243,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           12
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2260,7 +2260,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           13
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2277,7 +2277,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           14
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2294,7 +2294,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           15
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2311,7 +2311,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           16
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2328,7 +2328,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           17
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2345,7 +2345,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           18
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2362,7 +2362,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           19
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2379,7 +2379,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           20
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2396,7 +2396,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           21
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2413,7 +2413,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           22
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2430,7 +2430,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           23
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2447,7 +2447,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           24
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2464,7 +2464,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           25
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2481,7 +2481,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           26
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2498,7 +2498,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           27
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2515,7 +2515,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           28
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2532,7 +2532,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           29
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2549,7 +2549,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           30
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2566,7 +2566,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           31
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2583,7 +2583,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           32
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2600,7 +2600,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           33
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2617,7 +2617,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           34
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2634,7 +2634,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           35
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2651,7 +2651,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           36
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2668,7 +2668,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           37
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2685,7 +2685,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           38
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2702,7 +2702,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           39
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2719,7 +2719,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           40
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2736,7 +2736,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           41
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2753,7 +2753,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           42
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2770,7 +2770,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           43
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2787,7 +2787,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           44
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2804,7 +2804,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           45
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2821,7 +2821,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           46
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2838,7 +2838,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           47
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2855,7 +2855,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           48
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2872,7 +2872,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           49
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2889,7 +2889,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           50
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2906,7 +2906,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           51
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2923,7 +2923,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           52
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2940,7 +2940,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           53
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2957,7 +2957,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           54
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2974,7 +2974,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           55
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2991,7 +2991,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           56
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3008,7 +3008,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           57
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3025,7 +3025,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           58
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3042,7 +3042,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           59
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3059,7 +3059,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           60
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3076,7 +3076,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           61
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3093,7 +3093,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           62
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3110,7 +3110,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           63
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3127,7 +3127,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           64
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3144,7 +3144,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           65
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3161,7 +3161,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           66
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3178,7 +3178,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           67
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3195,7 +3195,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           68
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3212,7 +3212,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           69
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3229,7 +3229,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           70
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3246,7 +3246,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           71
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3263,7 +3263,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           72
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3280,7 +3280,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           73
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3297,7 +3297,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           74
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3314,7 +3314,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           75
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3331,7 +3331,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           76
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3348,7 +3348,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           77
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3365,7 +3365,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           78
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3382,7 +3382,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           79
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3399,7 +3399,7 @@ columns:
       description: Final trimmed nonresponse adjusted student replicate BRR-Fay weights
           80
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3415,7 +3415,7 @@ columns:
       bigquery_type: int64
       description: Randomly assigned unit number
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3430,7 +3430,7 @@ columns:
       bigquery_type: int64
       description: Randomized final variance stratum
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3445,7 +3445,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 1 in Mathematics
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3460,7 +3460,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 2 in Mathematics
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3475,7 +3475,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 3 in Mathematics
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3490,7 +3490,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 4 in Mathematics
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3505,7 +3505,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 5 in Mathematics
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3520,7 +3520,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 6 in Mathematics
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3535,7 +3535,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 7 in Mathematics
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3550,7 +3550,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 8 in Mathematics
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3565,7 +3565,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 9 in Mathematics
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3580,7 +3580,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 10 in Mathematics
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3595,7 +3595,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 1 in Reading
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3610,7 +3610,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 2 in Reading
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3625,7 +3625,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 3 in Reading
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3640,7 +3640,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 4 in Reading
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3655,7 +3655,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 5 in Reading
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3670,7 +3670,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 6 in Reading
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3685,7 +3685,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 7 in Reading
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3700,7 +3700,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 8 in Reading
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3715,7 +3715,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 9 in Reading
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3730,7 +3730,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 10 in Reading
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3745,7 +3745,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 1 in Science
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3760,7 +3760,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 2 in Science
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3775,7 +3775,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 3 in Science
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3790,7 +3790,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 4 in Science
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3805,7 +3805,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 5 in Science
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3820,7 +3820,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 6 in Science
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3835,7 +3835,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 7 in Science
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3850,7 +3850,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 8 in Science
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3865,7 +3865,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 9 in Science
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3880,7 +3880,7 @@ columns:
       bigquery_type: float64
       description: Plausible Value 10 in Science
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3895,7 +3895,7 @@ columns:
       bigquery_type: float64
       description: Senate Weight (sum of 5000 per country)
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3910,7 +3910,7 @@ columns:
       bigquery_type: date
       description: Date of the database creation
       temporal_coverage:
-          - (1)
+          - (3)
       covered_by_dictionary: no
       directory_column:
           dataset_id:

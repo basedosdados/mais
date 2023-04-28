@@ -1,4 +1,4 @@
-None
+This table includes contextual information, estimates of student performance and parent-questionnaire data
 
 Para saber mais acesse:
 Website: 
@@ -9,12 +9,14 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: None
+Nome: Laura Amaral
 Código: 
+Email: laura.amaral@basedosdados.org
 Tratado por
 -----------
-Nome: None
+Nome: Laura Amaral
 Código: 
+Email: laura.amaral@basedosdados.org
 
 
 
@@ -28,17 +30,24 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
+- 2015(3)2018
 
 
 
 
 Cobertura Espacial
 ------------------
+- world
 
 
 
 
+Tratamento
+----------
+1. Open spss data 2.Select columns 3.Rename columns 4.Adjust datatypes 5. Partition data
 
 
 
-
+Frequencia de Atualização
+-------------------------
+three_years
