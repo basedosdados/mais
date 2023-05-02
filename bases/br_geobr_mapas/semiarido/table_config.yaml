@@ -1,0 +1,167 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_geobr_mapas
+
+table_id: semiarido
+
+# Título da tabela.
+title: Semiárido
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+    - 2017
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: uncertain
+
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+    - country: br
+      entity: municipality
+      column:
+          - id_municipio
+
+last_updated:
+    metadata: '2022-04-28'
+    data: '2022-04-28 14:10:10'
+    release: '2022-04-28 14:10:10'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplos: v1.0, v1.1.3
+version: 'v1.0'
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Gustavo Alcântara
+    email: gustavo.alcantara@basedosdados.org
+    github_user: gustavoalcantara
+    ckan_user: gustavoalcantara
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Rafael H.M Pereira
+    email: rafael.pereira@ipea.gov.br
+    github_user: rafaelpereirabr
+    ckan_user:
+    website: https://github.com/ipeaGIT/geobr
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: 1. Rename das Colunas; 2.Seleção das variáveis. 
+
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_geobr_mapas/code/semiarido
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: id_municipio
+      bigquery_type: string
+      description: ID Município IBGE - 7 Dígitos
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade de Federação
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: geometria
+      bigquery_type: geography
+      description: Multipoligono da região do Semiárido
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 1262
+
+metadata_modified: '2022-12-20T18:45:28.942265'
