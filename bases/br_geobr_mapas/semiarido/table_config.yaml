@@ -81,7 +81,7 @@ data_cleaned_by:
     website: https://github.com/ipeaGIT/geobr
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: 1. Rename das Colunas; 2.Seleção das variáveis. 
+data_cleaning_description:  1. Rename das Colunas; 2.Seleção das variáveis. 
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_geobr_mapas/code/semiarido
@@ -164,4 +164,4 @@ columns:
 
 number_rows: 1262
 
-metadata_modified: '2022-12-20T18:45:28.942265'
+metadata_modified: 
