@@ -12,7 +12,7 @@ title: Recurso Público - Cooperado
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
 description: Em 2023 o Banco Central do Brasil (BCB) liberou informações adicionais das operações de crédito 
- que foram financiadas com recursos públicos. Esta tabela identifica o repasse do crédito a cada menbro de uma cooperativa, caso exista.
+ que foram financiadas com recursos públicos. Esta tabela identifica o repasse do crédito a cada membro de uma cooperativa, caso exista.
 
 
 # As máximas unidades espaciais que a tabela cobre.
@@ -207,4 +207,4 @@ columns:
 
 number_rows: 68119
 
-metadata_modified: '2022-12-20T18:44:42.047407'
+metadata_modified: 

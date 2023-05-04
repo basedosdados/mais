@@ -170,7 +170,7 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: basedosdados
+          dataset_id: br_bd_diretorios_brasil
           table_id: uf
           column_name: sigla_uf
       measurement_unit:
@@ -185,10 +185,10 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: basedosdados
+          dataset_id: br_bd_diretorios_data_tempo
           table_id: data
           column_name: data
-      measurement_unit: day
+      measurement_unit: 
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -230,10 +230,10 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: basedosdados
+          dataset_id: br_bd_diretorios_data_tempo
           table_id: data
           column_name: data
-      measurement_unit: day
+      measurement_unit: 
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -331,7 +331,7 @@ columns:
           - (1)
       covered_by_dictionary: yes
       directory_column:
-          dataset_id: basedosdados
+          dataset_id: br_bcb_sicor
           table_id: empreendimento
           column_name: id_empreendimento
       measurement_unit:
@@ -611,10 +611,10 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: basedosdados
+          dataset_id: br_bd_diretorios_data_tempo 
           table_id: data
           column_name: data
-      measurement_unit: day
+      measurement_unit: 
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -626,10 +626,10 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: basedosdados
+          dataset_id: br_bd_diretorios_data_tempo 
           table_id: data
           column_name: data
-      measurement_unit: day
+      measurement_unit: 
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -641,10 +641,10 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: basedosdados
+          dataset_id: br_bd_diretorios_data_tempo 
           table_id: data
           column_name: data
-      measurement_unit: day
+      measurement_unit: 
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -656,10 +656,10 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: basedosdados
+          dataset_id: br_bd_diretorios_data_tempo 
           table_id: data
           column_name: data
-      measurement_unit: day
+      measurement_unit: 
       has_sensitive_data: no
       observations:
       is_in_staging: true

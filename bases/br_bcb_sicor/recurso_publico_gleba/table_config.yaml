@@ -177,31 +177,33 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false 
-    - name: indice_indice_gleba
-      bigquery_type:
-      description:
+    - name: indice_gleba
+      bigquery_type: int64
+      description: Número da gleba
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false 
-    - name: indice_indice_ponto
-      bigquery_type:
-      description:
+    - name: indice_ponto
+      bigquery_type: int64
+      description: Número do ponto
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: 
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false 
@@ -253,4 +255,4 @@ columns:
 
 number_rows: 91164672
 
-metadata_modified: '2022-12-20T18:44:42.047407'
+metadata_modified: 

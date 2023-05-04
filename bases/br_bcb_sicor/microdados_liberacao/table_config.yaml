@@ -178,7 +178,7 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: data
           column_name: data
-      measurement_unit: day
+      measurement_unit: 
       has_sensitive_data: no
       observations:
       is_in_staging: true
