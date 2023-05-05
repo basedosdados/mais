@@ -188,15 +188,14 @@ columns:
       is_partition: false
     - name: cep_revenda
       bigquery_type: string
-      description: Número do Código do Endereço Postal (CEP) do logradouro da revenda
-          pesquisada
+      description: Número do Código do Endereço Postal (CEP) do logradouro da revenda pesquisada
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+      directory_column: 
+          dataset_id: br_bd_diretorios_brasil
+          table_id: cep
+          column_name: cep
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -340,4 +339,4 @@ columns:
 
 number_rows: 81289341
 
-metadata_modified: '2022-12-15T00:09:17.341935'
+metadata_modified: '2023-04-21T09:47:54.649504'
