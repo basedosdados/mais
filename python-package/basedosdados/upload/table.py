@@ -48,7 +48,8 @@ class Table(Base):
         """
         Load table_config.yaml
         """
-        return self._load_yaml(self.table_folder / "table_config.yaml")
+        # return self._load_yaml(self.table_folder / "table_config.yaml")
+        return self._backend.get_table_config(self.dataset_id, self.table_id)
 
     def _get_table_obj(self, mode):
         """
@@ -74,11 +75,12 @@ class Table(Base):
         raise ValueError("Partitions must be a list or None")
 
     def _load_schema(self, mode="staging"):
-        """Load schema from table_config.yaml
+        """Load schema from table config
 
         Args:
             mode (bool): Which dataset to create [prod|staging].
         """
+        # TODO: review this function
 
         self._check_mode(mode)
 
@@ -92,7 +94,7 @@ class Table(Base):
                 is_in_staging = (
                     True if c.get("is_in_staging") is None else c["is_in_staging"]
                 )
-                # append columns declared in table_config.yaml to schema only if is_in_staging: True
+                # append columns declared in table config to schema only if is_in_staging: True
                 if is_in_staging and not c.get("is_partition"):
                     c["type"] = "STRING"
                     new_columns.append(c)
@@ -103,7 +105,7 @@ class Table(Base):
         elif mode == "prod":
             schema = self._get_table_obj(mode).schema
 
-            # get field names for fields at schema and at table_config.yaml
+            # get field names for fields at schema and at table config
             column_names = [c["name"] for c in columns]
             schema_names = [s.name for s in schema]
 
@@ -175,6 +177,8 @@ class Table(Base):
         */
         """
 
+        # TODO: review this method
+
         # remove triple quotes extra space
         publish_txt = inspect.cleandoc(publish_txt)
         publish_txt = textwrap.dedent(publish_txt)
@@ -218,8 +222,10 @@ class Table(Base):
             publish_txt
         )
 
-    def _make_template(self, columns, partition_columns, if_table_config_exists, force_columns):
-        # create table_config.yaml with metadata
+    def _make_template(
+        self, columns, partition_columns, if_table_config_exists, force_columns
+    ):
+        # create table config with metadata
         self.metadata.create(
             if_exists=if_table_config_exists,
             columns=partition_columns + columns,
@@ -237,7 +243,9 @@ class Table(Base):
         """
         url = columns_config_url_or_path.replace("edit#gid=", "export?format=csv&gid=")
         try:
-            return pd.read_csv(StringIO(requests.get(url, timeout=10).content.decode("utf-8")))
+            return pd.read_csv(
+                StringIO(requests.get(url, timeout=10).content.decode("utf-8"))
+            )
         except Exception as e:
             raise BaseDosDadosException(
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
@@ -278,6 +286,7 @@ class Table(Base):
                 Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
 
         """
+        # TODO: see if this method will be deprecated
         ruamel = ryaml.YAML()
         ruamel.preserve_quotes = True
         ruamel.indent(mapping=4, sequence=6, offset=4)
@@ -416,7 +425,7 @@ class Table(Base):
         if_folder_exists="raise",
         if_table_config_exists="raise",
         source_format="csv",
-        force_columns = False,
+        force_columns=False,
         columns_config_url_or_path=None,
     ):  # sourcery skip: low-code-quality
         """Initialize table folder at metadata_path at `metadata_path/<dataset_id>/<table_id>`.
@@ -461,8 +470,8 @@ class Table(Base):
             FileExistsError: If folder exists and replace is False.
             NotImplementedError: If data sample is not in supported type or format.
         """
+        # TODO: review this method
         if not self.dataset_folder.exists():
-
             raise FileExistsError(
                 f"Dataset folder {self.dataset_folder} folder does not exists. "
                 "Create a dataset before adding tables."
@@ -495,7 +504,6 @@ class Table(Base):
             data_sample_path = Path(data_sample_path)
 
             if data_sample_path.is_dir():
-
                 data_sample_path = [
                     f
                     for f in data_sample_path.glob("**/*")
@@ -511,7 +519,6 @@ class Table(Base):
             columns = Datatype(self, source_format).header(data_sample_path)
 
         else:
-
             columns = ["column_name"]
 
         if if_table_config_exists == "pass":
@@ -527,25 +534,38 @@ class Table(Base):
                     "You must provide a path to correctly create config files"
                 )
             else:
-                self._make_template(columns, partition_columns, if_table_config_exists, force_columns=force_columns)
+                self._make_template(
+                    columns,
+                    partition_columns,
+                    if_table_config_exists,
+                    force_columns=force_columns,
+                )
 
         elif if_table_config_exists == "raise":
-
             # Check if config files already exist
             if (
                 Path(self.table_folder / "table_config.yaml").is_file()
                 and Path(self.table_folder / "publish.sql").is_file()
             ):
-
                 raise FileExistsError(
                     f"table_config.yaml and publish.sql already exists at {self.table_folder}"
                 )
             # if config files don't exist, create them
-            self._make_template(columns, partition_columns, if_table_config_exists, force_columns=force_columns)
+            self._make_template(
+                columns,
+                partition_columns,
+                if_table_config_exists,
+                force_columns=force_columns,
+            )
 
         else:
             # Raise: without a path to data sample, should not replace config files with empty template
-            self._make_template(columns, partition_columns, if_table_config_exists, force_columns=force_columns)
+            self._make_template(
+                columns,
+                partition_columns,
+                if_table_config_exists,
+                force_columns=force_columns,
+            )
 
         if columns_config_url_or_path is not None:
             self.update_columns(columns_config_url_or_path)
@@ -635,7 +655,6 @@ class Table(Base):
         """
 
         if path is None:
-
             # Look if table data already exists at Storage
             data = self.client["storage_staging"].list_blobs(
                 self.bucket_name, prefix=f"staging/{self.dataset_id}/{self.table_id}"
@@ -655,7 +674,6 @@ class Table(Base):
                 Path,
             ),
         ):
-
             Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
                 path,
                 mode="staging",
@@ -665,7 +683,6 @@ class Table(Base):
 
         # Create Dataset if it doesn't exist
         if force_dataset:
-
             dataset_obj = Dataset(self.dataset_id, **self.main_vars)
 
             try:
@@ -683,7 +700,7 @@ class Table(Base):
             if_table_config_exists=if_table_config_exists,
             columns_config_url_or_path=columns_config_url_or_path,
             source_format=source_format,
-            force_columns=force_columns
+            force_columns=force_columns,
         )
 
         table = bigquery.Table(self.table_full_name["staging"])
@@ -702,19 +719,15 @@ class Table(Base):
             pass
 
         if isinstance(table_ref, google.cloud.bigquery.table.Table):
-
             if if_table_exists == "pass":
-
                 return None
 
             if if_table_exists == "raise":
-
                 raise FileExistsError(
                     "Table already exists, choose replace if you want to overwrite it"
                 )
 
         if if_table_exists == "replace":
-
             self.delete(mode="staging")
 
         self.client["bigquery_staging"].create_table(table)
@@ -740,7 +753,6 @@ class Table(Base):
 
         mode = ["prod", "staging"] if mode == "all" else [mode]
         for m in mode:
-
             try:
                 table = self._get_table_obj(m)
             except google.api_core.exceptions.NotFound:
@@ -799,6 +811,7 @@ class Table(Base):
 
             * Check if all required fields are filled
         """
+        # TODO: review this method
 
         if if_exists == "replace":
             self.delete(mode="prod")

@@ -179,7 +179,6 @@ def delete_dataset(ctx, dataset_id, mode):
     """
 
     if click.confirm(f"Are you sure you want to delete `{dataset_id}`?"):
-
         Dataset(dataset_id=dataset_id, **ctx.obj).delete(mode=mode)
 
     click.echo(
@@ -341,7 +340,6 @@ def create_table(
     location,
     chunk_size,
 ):
-
     """
     Create staging table in BigQuery.
     """
@@ -394,49 +392,50 @@ def update_table(ctx, dataset_id, table_id, mode):
     )
 
 
-@cli_table.command(
-    name="update_columns", help="Update columns fields in tables_config.yaml "
-)
-@click.argument("dataset_id")
-@click.argument("table_id")
-@click.option(
-    "--columns_config_url_or_path",
-    default=None,
-    help="""\nFills columns in table_config.yaml automatically using a public google sheets URL or a local file. Also regenerate
-        \npublish.sql and autofill type using bigquery_type.\n
+# TODO: Review if this is still necessary
+# @cli_table.command(
+#     name="update_columns", help="Update columns fields in tables_config.yaml "
+# )
+# @click.argument("dataset_id")
+# @click.argument("table_id")
+# @click.option(
+#     "--columns_config_url_or_path",
+#     default=None,
+#     help="""\nFills columns in table_config.yaml automatically using a public google sheets URL or a local file. Also regenerate
+#         \npublish.sql and autofill type using bigquery_type.\n
 
-    \nThe sheet must contain the columns:\n
-        - name: column name\n
-        - description: column description\n
-        - bigquery_type: column bigquery type\n
-        - measurement_unit: column mesurement unit\n
-        - covered_by_dictionary: column related dictionary\n
-        - directory_column: column related directory in the format <dataset_id>.<table_id>:<column_name>\n
-        - temporal_coverage: column temporal coverage\n
-        - has_sensitive_data: the column has sensitive data\n
-        - observations: column observations\n
-    \nArgs:\n
-    \ncolumns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.\n
-        Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.\n
-        Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.\n
-""",
-)
-@click.pass_context
-def update_columns(ctx, dataset_id, table_id, columns_config_url_or_path):
-    """
-    Update columns fields in tables_config.yaml
-    """
+#     \nThe sheet must contain the columns:\n
+#         - name: column name\n
+#         - description: column description\n
+#         - bigquery_type: column bigquery type\n
+#         - measurement_unit: column mesurement unit\n
+#         - covered_by_dictionary: column related dictionary\n
+#         - directory_column: column related directory in the format <dataset_id>.<table_id>:<column_name>\n
+#         - temporal_coverage: column temporal coverage\n
+#         - has_sensitive_data: the column has sensitive data\n
+#         - observations: column observations\n
+#     \nArgs:\n
+#     \ncolumns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.\n
+#         Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.\n
+#         Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.\n
+# """,
+# )
+# @click.pass_context
+# def update_columns(ctx, dataset_id, table_id, columns_config_url_or_path):
+#     """
+#     Update columns fields in tables_config.yaml
+#     """
 
-    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).update_columns(
-        columns_config_url_or_path=columns_config_url_or_path,
-    )
+#     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).update_columns(
+#         columns_config_url_or_path=columns_config_url_or_path,
+#     )
 
-    click.echo(
-        click.style(
-            f"Columns from `{dataset_id}.{table_id}` were updated in table_config.yaml",
-            fg="green",
-        )
-    )
+#     click.echo(
+#         click.style(
+#             f"Columns from `{dataset_id}.{table_id}` were updated in table_config.yaml",
+#             fg="green",
+#         )
+#     )
 
 
 @cli_table.command(name="publish", help="Publish staging table to prod")
@@ -499,7 +498,6 @@ def delete_table(ctx, dataset_id, table_id, mode):
 def upload_table(
     ctx, dataset_id, table_id, filepath, partitions, if_exists, chunk_size
 ):
-
     """
     Upload data to BigQuery table.
     """
@@ -582,10 +580,9 @@ def init_storage(ctx, bucket_name, replace, very_sure):
 def upload_storage(
     ctx, dataset_id, table_id, filepath, mode, partitions, if_exists, chunk_size
 ):
-
-    '''
+    """
     Upload file to bucket.
-    '''
+    """
 
     ctx.obj.pop("bucket_name")
     Storage(dataset_id, table_id, **ctx.obj).upload(
@@ -885,7 +882,7 @@ def cli_metadata():
     default=True,
     help=(
         "Force the creation of `table_config.yaml` file only if `dataset_conf"
-        "ig.yaml` doesn't exist."
+        "ig.yaml` doesn't exist."  # TODO: Review YAML mentions here
     ),
 )
 @click.pass_context
@@ -975,7 +972,7 @@ def cli_validate_metadata(ctx, dataset_id, table_id):
     default=False,
     help=(
         "Force the publishment of metadata specified in both `dataset_config."
-        "yaml` and `table_config.yaml` at once."
+        "yaml` and `table_config.yaml` at once."  # TODO: Review YAML mentions here
     ),
 )
 @click.option(
@@ -1149,5 +1146,4 @@ cli.add_command(cli_metadata)
 
 
 if __name__ == "__main__":
-
     cli()

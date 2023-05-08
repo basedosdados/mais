@@ -30,6 +30,7 @@ def update_columns(table_obj: bd.Table, columns_config_url_or_path=None):
             Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
             Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
     """
+    # TODO: deprecate this function
     ruamel = ryaml.YAML()
     ruamel.preserve_quotes = True
     ruamel.indent(mapping=4, sequence=6, offset=4)
@@ -180,7 +181,6 @@ def to_partitions(data: pd.DataFrame, partition_columns: List[str], savepath: st
     """
 
     if isinstance(data, (pd.core.frame.DataFrame)):
-
         savepath = Path(savepath)
 
         # create unique combinations between partition columns

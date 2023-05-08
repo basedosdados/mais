@@ -29,10 +29,10 @@ class Dataset(Base):
         """
         Dataset config file.
         """
-
-        return self._load_yaml(
-            self.metadata_path / self.dataset_id / "dataset_config.yaml"
-        )
+        # return self._load_yaml(
+        #     self.metadata_path / self.dataset_id / "dataset_config.yaml"
+        # )
+        return self._backend.get_dataset_config(self.dataset_id)
 
     def _loop_modes(self, mode="all"):
         """
@@ -73,6 +73,7 @@ class Dataset(Base):
         Write README.md file.
         """
 
+        # TODO: review README content
         readme_content = (
             f"Como capturar os dados de {self.dataset_id}?\n\nPara cap"
             f"turar esses dados, basta verificar o link dos dados orig"
@@ -89,38 +90,29 @@ class Dataset(Base):
         with open(readme_path, "w", encoding="utf-8") as readmefile:
             readmefile.write(readme_content)
 
-    def init(self, replace=False):
-        """Initialize dataset folder at metadata_path at `metadata_path/<dataset_id>`.
-
-        The folder should contain:
-
-        * `dataset_config.yaml`
-        * `README.md`
+    def init(self, replace: bool = False):
+        """Initialize dataset in the backend.
 
         Args:
-            replace (str): Optional. Whether to replace existing folder.
+            replace (bool): Optional. Whether to replace existing.
 
         Raises:
             FileExistsError: If dataset folder already exists and replace is False
         """
 
-        # Create dataset folder
+        # create dataset config with metadata
         try:
-            self.dataset_folder.mkdir(exist_ok=replace, parents=True)
-        except FileExistsError as e:
-            raise FileExistsError(
-                f"Dataset {str(self.dataset_folder.stem)} folder does not exists. "
-                "Set replace=True to replace current files."
-            ) from e
-
-        # create dataset_config.yaml with metadata
-        self.metadata.create(if_exists="replace")
+            self.metadata.create(if_exists="replace" if replace else "raise")
+        except:
+            raise NotImplementedError(
+                "Metadata.create() is not implemented yet."
+            )  # TODO: implement metadata.create()
 
         # create README.md file
         self._write_readme_file()
 
-        # Add code folder
-        (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
+        # # Add code folder
+        # (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
 
         return self
 
@@ -133,7 +125,6 @@ class Dataset(Base):
         """
 
         for m in self._loop_modes(mode):
-
             dataset = m["client"].get_dataset(m["id"])
             entries = dataset.access_entries
             # TODO https://github.com/basedosdados/mais/pull/1020
@@ -213,13 +204,11 @@ class Dataset(Base):
         if if_exists == "replace":
             self.delete(mode)
         elif if_exists == "update":
-
             self.update()
             return
 
         # Set dataset_id to the ID of the dataset to create.
         for m in self._loop_modes(mode):
-
             # Construct a full Dataset object to send to the API.
             dataset_obj = self._setup_dataset_object(m["id"], location=location)
 
@@ -252,7 +241,6 @@ class Dataset(Base):
         """
 
         for m in self._loop_modes(mode):
-
             m["client"].delete_dataset(m["id"], delete_contents=True, not_found_ok=True)
         logger.info(
             " {object} {object_id}_{mode} was {action}!",
@@ -273,7 +261,6 @@ class Dataset(Base):
         """
 
         for m in self._loop_modes(mode):
-
             # Send the dataset to the API to update, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.

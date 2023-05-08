@@ -21,6 +21,7 @@ from jinja2 import Template
 import tomlkit
 import requests
 
+from basedosdados.backend import Backend
 from basedosdados.constants import config, constants
 
 warnings.filterwarnings("ignore")
@@ -60,6 +61,8 @@ class Base:  # pylint: disable=too-many-instance-attributes
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
 
         self.base_url = self.config["api"]["url"]
+        self._graphql_url = self.base_url + "/graphql"  # TODO: review this
+        self._backend = Backend(self._graphql_url)
 
     @staticmethod
     def _decode_env(env: str) -> str:
@@ -151,7 +154,6 @@ class Base:  # pylint: disable=too-many-instance-attributes
         """
 
         while True:
-
             res = self._input_validator(first_question, default_yn, with_lower)
 
             if res == "y":
@@ -229,7 +231,6 @@ class Base:  # pylint: disable=too-many-instance-attributes
                 f.close()
 
         if (not config_file.exists()) or (force):
-
             # Load config file
             c_file = tomlkit.parse(
                 (Path(__file__).resolve().parents[1] / "configs" / "config.toml")
@@ -368,6 +369,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
             (self.config_path / "config.toml").open("r", encoding="utf-8").read()
         )
 
+    # TODO: Remove this method
     @staticmethod
     def _load_yaml(file):
         """
