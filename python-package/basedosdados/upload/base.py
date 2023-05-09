@@ -338,7 +338,32 @@ class Base:  # pylint: disable=too-many-instance-attributes
 
             c_file["bucket_name"] = bucket_name
 
-            ############# STEP 6 - SET TEMPLATES #######################
+            ############# STEP 6 - CONFIGURE API #######################
+
+            api_base_url = self._input_validator(
+                "\n********* STEP 6 **********\n"
+                "What is the URL of the API that you are going to use?"
+                "[https://staging.api.basedosdados.org]",
+                "https://staging.api.basedosdados.org",
+            )
+
+            c_file["api"]["url"] = api_base_url
+
+            # username = self._input_validator(
+            #     "What is your e-mail for authentication?\n", None
+            # )
+
+            # if username:
+            #     c_file["api"]["username"] = username
+
+            #     password = self._input_validator(
+            #         "What is your password for authentication?\n", None
+            #     )
+
+            #     # TODO (future): encrypt password and store it?
+            #     c_file["api"]["password"] = password
+
+            ############# STEP 7 - SET TEMPLATES #######################
 
             c_file["templates_path"] = str(self.config_path / "templates")
 

@@ -19,6 +19,9 @@ templates_path =  ""
     name = ""
     credentials_path = ""
 
+[api]
+url = ""
+
 # Data about you to auto-fill config
 # TODO: issue 20
 [user]
