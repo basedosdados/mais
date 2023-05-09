@@ -43,7 +43,7 @@ class Table(Base):
         self.table_full_name.update(dict(all=deepcopy(self.table_full_name)))
         self.metadata = Metadata(self.dataset_id, self.table_id, **kwargs)
 
-    @property
+    # @property
     # def table_config(self):
     #     """
     #     Load table_config.yaml
