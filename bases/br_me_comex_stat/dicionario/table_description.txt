@@ -9,9 +9,9 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Moreira
+Nome: Patrick Teixeira
 Código: 
-Email: lucas.moreira@basedosdados.org
+Email: patrick.teixeira@basedosdados.org
 Tratado por
 -----------
 Nome: Lucas Moreira
@@ -37,10 +37,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Compatbilização de dicionários para alguma das variáveis
+Compatibilização de dicionários para alguma das variáveis
 
 
 
 Frequencia de Atualização
 -------------------------
-['unique']
+unique

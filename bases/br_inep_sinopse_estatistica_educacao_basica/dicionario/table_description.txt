@@ -9,9 +9,9 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Ingrid de Sales Rabelo
+Nome: Lucas Moreira
 Código: 
-Email: ingrid.rabelo@basedosdados.org
+Email: lucas.moreira@basedosdados.org
 Tratado por
 -----------
 Nome: Ingrid de Sales Rabelo
@@ -25,6 +25,7 @@ Email: ingrid.rabelo@basedosdados.org
 
 Cobertura Temporal
 ------------------
+- 2007(1)2022
 
 
 
@@ -36,9 +37,12 @@ Cobertura Espacial
 
 
 
+Tratamento
+----------
+Compatibilização em um único arquivo dos dicionários entre anos
 
 
 
 Frequencia de Atualização
 -------------------------
-['unique']
+unique
