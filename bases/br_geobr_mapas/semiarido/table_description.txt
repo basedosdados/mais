@@ -1,0 +1,49 @@
+O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gustavo Alcântara
+Código: 
+Email: gustavo.alcantara@basedosdados.org
+Tratado por
+-----------
+Nome: Rafael H.M Pereira
+Código: 
+Website: https://github.com/ipeaGIT/geobr
+Email: rafael.pereira@ipea.gov.br
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2017
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+1. Rename das Colunas; 2.Seleção das variáveis.
+
+
+
+Frequencia de Atualização
+-------------------------
+uncertain
