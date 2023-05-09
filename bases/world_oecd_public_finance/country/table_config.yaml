@@ -2605,6 +2605,6 @@ columns:
       is_in_staging: True
       is_partition: False
 
-number_rows:
+number_rows: 2646
 
 metadata_modified:
