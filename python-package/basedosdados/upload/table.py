@@ -34,14 +34,14 @@ class Table(Base):
 
         self.table_id = table_id.replace("-", "_")
         self.dataset_id = dataset_id.replace("-", "_")
-        self.dataset_folder = Path(self.metadata_path / self.dataset_id)
-        self.table_folder = self.dataset_folder / table_id
+        # self.dataset_folder = Path(self.metadata_path / self.dataset_id)
+        # self.table_folder = self.dataset_folder / table_id
         self.table_full_name = dict(
             prod=f"{self.client['bigquery_prod'].project}.{self.dataset_id}.{self.table_id}",
             staging=f"{self.client['bigquery_staging'].project}.{self.dataset_id}_staging.{self.table_id}",
         )
         self.table_full_name.update(dict(all=deepcopy(self.table_full_name)))
-        self.metadata = Metadata(self.dataset_id, self.table_id, **kwargs)
+        # self.metadata = Metadata(self.dataset_id, self.table_id, **kwargs)
 
     @property
     def table_config(self):
