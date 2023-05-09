@@ -391,52 +391,6 @@ def update_table(ctx, dataset_id, table_id, mode):
     )
 
 
-# TODO: Review if this is still necessary
-# @cli_table.command(
-#     name="update_columns", help="Update columns fields in tables_config.yaml "
-# )
-# @click.argument("dataset_id")
-# @click.argument("table_id")
-# @click.option(
-#     "--columns_config_url_or_path",
-#     default=None,
-#     help="""\nFills columns in table_config.yaml automatically using a public google sheets URL or a local file. Also regenerate
-#         \npublish.sql and autofill type using bigquery_type.\n
-
-#     \nThe sheet must contain the columns:\n
-#         - name: column name\n
-#         - description: column description\n
-#         - bigquery_type: column bigquery type\n
-#         - measurement_unit: column mesurement unit\n
-#         - covered_by_dictionary: column related dictionary\n
-#         - directory_column: column related directory in the format <dataset_id>.<table_id>:<column_name>\n
-#         - temporal_coverage: column temporal coverage\n
-#         - has_sensitive_data: the column has sensitive data\n
-#         - observations: column observations\n
-#     \nArgs:\n
-#     \ncolumns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.\n
-#         Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.\n
-#         Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.\n
-# """,
-# )
-# @click.pass_context
-# def update_columns(ctx, dataset_id, table_id, columns_config_url_or_path):
-#     """
-#     Update columns fields in tables_config.yaml
-#     """
-
-#     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).update_columns(
-#         columns_config_url_or_path=columns_config_url_or_path,
-#     )
-
-#     click.echo(
-#         click.style(
-#             f"Columns from `{dataset_id}.{table_id}` were updated in table_config.yaml",
-#             fg="green",
-#         )
-#     )
-
-
 @cli_table.command(name="publish", help="Publish staging table to prod")
 @click.argument("dataset_id")
 @click.argument("table_id")
