@@ -44,12 +44,12 @@ class Table(Base):
         self.metadata = Metadata(self.dataset_id, self.table_id, **kwargs)
 
     @property
-    def table_config(self):
-        """
-        Load table_config.yaml
-        """
-        # return self._load_yaml(self.table_folder / "table_config.yaml")
-        return self._backend.get_table_config(self.dataset_id, self.table_id)
+    # def table_config(self):
+    #     """
+    #     Load table_config.yaml
+    #     """
+    #     # return self._load_yaml(self.table_folder / "table_config.yaml")
+    #     return self._backend.get_table_config(self.dataset_id, self.table_id)
 
     def _get_table_obj(self, mode):
         """
@@ -62,6 +62,8 @@ class Table(Base):
         Check if table is partitioned
         """
         ## check if the table are partitioned, need the split because of a change in the type of partitions in pydantic
+        ## TODO: check if this is still necessary
+        ## TODO now this come from graphql metadata
         partitions = self.table_config["partitions"]
         if partitions is None or len(partitions) == 0:
             return False
@@ -85,7 +87,9 @@ class Table(Base):
         self._check_mode(mode)
 
         json_path = self.table_folder / f"schema-{mode}.json"
-        columns = self.table_config["columns"]
+        columns = self.table_config[
+            "columns"
+        ]  ## TODO now this come from graphql metadata
 
         if mode == "staging":
             new_columns = []
@@ -120,9 +124,15 @@ class Table(Base):
                     "all your column names between table_config.yaml, publish.sql and "
                     "{project_id}.{dataset_id}.{table_id} are the same?".format(
                         error_columns=not_in_columns,
-                        project_id=self.table_config["project_id_prod"],
-                        dataset_id=self.table_config["dataset_id"],
-                        table_id=self.table_config["table_id"],
+                        project_id=self.table_config[
+                            "project_id_prod"
+                        ],  ## TODO now this come from graphql metadata
+                        dataset_id=self.table_config[
+                            "dataset_id"
+                        ],  ## TODO now this come from graphql metadata
+                        table_id=self.table_config[
+                            "table_id"
+                        ],  ## TODO now this come from graphql metadata
                     )
                 )
 
@@ -133,9 +143,15 @@ class Table(Base):
                     "all your column names between table_config.yaml, publish.sql and "
                     "{project_id}.{dataset_id}.{table_id} are the same?".format(
                         error_columns=not_in_schema,
-                        project_id=self.table_config["project_id_prod"],
-                        dataset_id=self.table_config["dataset_id"],
-                        table_id=self.table_config["table_id"],
+                        project_id=self.table_config[
+                            "project_id_prod"
+                        ],  ## TODO now this come from graphql metadata
+                        dataset_id=self.table_config[
+                            "dataset_id"
+                        ],  ## TODO now this come from graphql metadata
+                        table_id=self.table_config[
+                            "table_id"
+                        ],  ## TODO now this come from graphql metadata
                     )
                 )
 
@@ -191,12 +207,16 @@ class Table(Base):
 
         if self._is_partitioned():
             columns = sorted(
-                self.table_config["columns"],
+                self.table_config[
+                    "columns"
+                ],  ## TODO now this come from graphql metadata
                 key=lambda k: (k["is_partition"] is not None, k["is_partition"]),
                 reverse=True,
             )
         else:
-            columns = self.table_config["columns"]
+            columns = self.table_config[
+                "columns"
+            ]  ## TODO now this come from graphql metadata
 
         # add columns in publish.sql
         for col in columns:
@@ -236,21 +256,6 @@ class Table(Base):
 
         self._make_publish_sql()
 
-    @staticmethod
-    def _sheet_to_df(columns_config_url_or_path):
-        """
-        Convert sheet to dataframe
-        """
-        url = columns_config_url_or_path.replace("edit#gid=", "export?format=csv&gid=")
-        try:
-            return pd.read_csv(
-                StringIO(requests.get(url, timeout=10).content.decode("utf-8"))
-            )
-        except Exception as e:
-            raise BaseDosDadosException(
-                "Check if your google sheet Share are: Anyone on the internet with this link can view"
-            ) from e
-
     def table_exists(self, mode):
         """Check if table exists in BigQuery.
 
@@ -264,160 +269,6 @@ class Table(Base):
             ref = None
 
         return bool(ref)
-
-    def update_columns(self, columns_config_url_or_path=None):
-        """
-        Fills columns in table_config.yaml automatically using a public google sheets URL or a local file. Also regenerate
-        publish.sql and autofill type using bigquery_type.
-
-        The sheet must contain the columns:
-            - name: column name
-            - description: column description
-            - bigquery_type: column bigquery type
-            - measurement_unit: column mesurement unit
-            - covered_by_dictionary: column related dictionary
-            - directory_column: column related directory in the format <dataset_id>.<table_id>:<column_name>
-            - temporal_coverage: column temporal coverage
-            - has_sensitive_data: the column has sensitive data
-            - observations: column observations
-        Args:
-            columns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.
-                Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
-                Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
-
-        """
-        # TODO: see if this method will be deprecated
-        ruamel = ryaml.YAML()
-        ruamel.preserve_quotes = True
-        ruamel.indent(mapping=4, sequence=6, offset=4)
-        table_config_yaml = ruamel.load(
-            (self.table_folder / "table_config.yaml").open(encoding="utf-8")
-        )
-
-        if "https://docs.google.com/spreadsheets/d/" in columns_config_url_or_path:
-            if (
-                "edit#gid=" not in columns_config_url_or_path
-                or "https://docs.google.com/spreadsheets/d/"
-                not in columns_config_url_or_path
-                or not columns_config_url_or_path.split("=")[1].isdigit()
-            ):
-                raise BaseDosDadosException(
-                    "The Google sheet url not in correct format."
-                    "The url must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>"
-                )
-            df = self._sheet_to_df(columns_config_url_or_path)
-        else:
-            file_type = columns_config_url_or_path.split(".")[-1]
-            if file_type == "csv":
-                df = pd.read_csv(columns_config_url_or_path, encoding="utf-8")
-            elif file_type in ["xls", "xlsx", "xlsm", "xlsb", "odf", "ods", "odt"]:
-                df = pd.read_excel(columns_config_url_or_path)
-            else:
-                raise BaseDosDadosException(
-                    "File not suported. Only csv, xls, xlsx, xlsm, xlsb, odf, ods, odt are supported."
-                )
-
-        df = df.fillna("NULL")
-
-        required_columns = [
-            "name",
-            "bigquery_type",
-            "description",
-            "temporal_coverage",
-            "covered_by_dictionary",
-            "directory_column",
-            "measurement_unit",
-            "has_sensitive_data",
-            "observations",
-        ]
-
-        not_found_columns = required_columns.copy()
-        for sheet_column in df.columns.tolist():
-            for required_column in required_columns:
-                if sheet_column == required_column:
-                    not_found_columns.remove(required_column)
-        if not_found_columns:
-            raise BaseDosDadosException(
-                f"The following required columns are not found: {', '.join(not_found_columns)}."
-            )
-
-        columns_parameters = zip(
-            *[df[required_column].tolist() for required_column in required_columns]
-        )
-        for (
-            name,
-            bigquery_type,
-            description,
-            temporal_coverage,
-            covered_by_dictionary,
-            directory_column,
-            measurement_unit,
-            has_sensitive_data,
-            observations,
-        ) in columns_parameters:
-            for col in table_config_yaml["columns"]:
-                if col["name"] == name:
-                    col["bigquery_type"] = (
-                        col["bigquery_type"]
-                        if bigquery_type == "NULL"
-                        else bigquery_type.lower()
-                    )
-
-                    col["description"] = (
-                        col["description"] if description == "NULL" else description
-                    )
-
-                    col["temporal_coverage"] = (
-                        col["temporal_coverage"]
-                        if temporal_coverage == "NULL"
-                        else [temporal_coverage]
-                    )
-
-                    col["covered_by_dictionary"] = (
-                        "no"
-                        if covered_by_dictionary == "NULL"
-                        else covered_by_dictionary
-                    )
-
-                    dataset = directory_column.split(".")[0]
-                    col["directory_column"]["dataset_id"] = (
-                        col["directory_column"]["dataset_id"]
-                        if dataset == "NULL"
-                        else dataset
-                    )
-
-                    table = directory_column.split(".")[-1].split(":")[0]
-                    col["directory_column"]["table_id"] = (
-                        col["directory_column"]["table_id"]
-                        if table == "NULL"
-                        else table
-                    )
-
-                    column = directory_column.split(".")[-1].split(":")[-1]
-                    col["directory_column"]["column_name"] = (
-                        col["directory_column"]["column_name"]
-                        if column == "NULL"
-                        else column
-                    )
-                    col["measurement_unit"] = (
-                        col["measurement_unit"]
-                        if measurement_unit == "NULL"
-                        else measurement_unit
-                    )
-
-                    col["has_sensitive_data"] = (
-                        "no" if has_sensitive_data == "NULL" else has_sensitive_data
-                    )
-
-                    col["observations"] = (
-                        col["observations"] if observations == "NULL" else observations
-                    )
-
-        with open(self.table_folder / "table_config.yaml", "w", encoding="utf-8") as f:
-            ruamel.dump(table_config_yaml, f)
-
-        # regenerate publish.sql
-        self._make_publish_sql()
 
     def init(
         self,
@@ -470,27 +321,28 @@ class Table(Base):
             FileExistsError: If folder exists and replace is False.
             NotImplementedError: If data sample is not in supported type or format.
         """
-        # TODO: review this method
-        if not self.dataset_folder.exists():
-            raise FileExistsError(
-                f"Dataset folder {self.dataset_folder} folder does not exists. "
-                "Create a dataset before adding tables."
-            )
+        # # TODO: review this method
+        ## TODO nao precisamos mais de arquivos de configuração?
+        # if not self.dataset_folder.exists():
+        #     raise FileExistsError(
+        #         f"Dataset folder {self.dataset_folder} folder does not exists. "
+        #         "Create a dataset before adding tables."
+        #     )
 
-        try:
-            self.table_folder.mkdir(exist_ok=(if_folder_exists == "replace"))
-        except FileExistsError as e:
-            if if_folder_exists == "raise":
-                raise FileExistsError(
-                    f"Table folder already exists for {self.table_id}. "
-                ) from e
-            if if_folder_exists == "pass":
-                return self
+        # try:
+        #     self.table_folder.mkdir(exist_ok=(if_folder_exists == "replace"))
+        # except FileExistsError as e:
+        #     if if_folder_exists == "raise":
+        #         raise FileExistsError(
+        #             f"Table folder already exists for {self.table_id}. "
+        #         ) from e
+        #     if if_folder_exists == "pass":
+        #         return self
 
-        if not data_sample_path and if_table_config_exists != "pass":
-            raise BaseDosDadosException(
-                "You must provide a path to correctly create config files"
-            )
+        # if not data_sample_path and if_table_config_exists != "pass":
+        #     raise BaseDosDadosException(
+        #         "You must provide a path to correctly create config files"
+        #     )
 
         partition_columns = []
         if isinstance(
@@ -521,56 +373,56 @@ class Table(Base):
         else:
             columns = ["column_name"]
 
-        if if_table_config_exists == "pass":
-            # Check if config files exists before passing
-            if (
-                Path(self.table_folder / "table_config.yaml").is_file()
-                and Path(self.table_folder / "publish.sql").is_file()
-            ):
-                pass
-            # Raise if no sample to determine columns
-            elif not data_sample_path:
-                raise BaseDosDadosException(
-                    "You must provide a path to correctly create config files"
-                )
-            else:
-                self._make_template(
-                    columns,
-                    partition_columns,
-                    if_table_config_exists,
-                    force_columns=force_columns,
-                )
+        # if if_table_config_exists == "pass":
+        #     # Check if config files exists before passing
+        #     if (
+        #         Path(self.table_folder / "table_config.yaml").is_file()
+        #         and Path(self.table_folder / "publish.sql").is_file()
+        #     ):
+        #         pass
+        #     # Raise if no sample to determine columns
+        #     elif not data_sample_path:
+        #         raise BaseDosDadosException(
+        #             "You must provide a path to correctly create config files"
+        #         )
+        #     else:
+        #         self._make_template(
+        #             columns,
+        #             partition_columns,
+        #             if_table_config_exists,
+        #             force_columns=force_columns,
+        #         )
 
-        elif if_table_config_exists == "raise":
-            # Check if config files already exist
-            if (
-                Path(self.table_folder / "table_config.yaml").is_file()
-                and Path(self.table_folder / "publish.sql").is_file()
-            ):
-                raise FileExistsError(
-                    f"table_config.yaml and publish.sql already exists at {self.table_folder}"
-                )
-            # if config files don't exist, create them
-            self._make_template(
-                columns,
-                partition_columns,
-                if_table_config_exists,
-                force_columns=force_columns,
-            )
+        # elif if_table_config_exists == "raise":
+        #     # Check if config files already exist
+        #     if (
+        #         Path(self.table_folder / "table_config.yaml").is_file()
+        #         and Path(self.table_folder / "publish.sql").is_file()
+        #     ):
+        #         raise FileExistsError(
+        #             f"table_config.yaml and publish.sql already exists at {self.table_folder}"
+        #         )
+        #     # if config files don't exist, create them
+        #     self._make_template(
+        #         columns,
+        #         partition_columns,
+        #         if_table_config_exists,
+        #         force_columns=force_columns,
+        #     )
 
-        else:
-            # Raise: without a path to data sample, should not replace config files with empty template
-            self._make_template(
-                columns,
-                partition_columns,
-                if_table_config_exists,
-                force_columns=force_columns,
-            )
+        # else:
+        #     # Raise: without a path to data sample, should not replace config files with empty template
+        #     self._make_template(
+        #         columns,
+        #         partition_columns,
+        #         if_table_config_exists,
+        #         force_columns=force_columns,
+        #     )
 
-        if columns_config_url_or_path is not None:
-            self.update_columns(columns_config_url_or_path)
+        # if columns_config_url_or_path is not None:
+        #     self.update_columns(columns_config_url_or_path)
 
-        return self
+        # return self
 
     def create(
         self,
@@ -705,7 +557,10 @@ class Table(Base):
 
         table = bigquery.Table(self.table_full_name["staging"])
         table.external_data_configuration = Datatype(
-            self, source_format, "staging", partitioned=self._is_partitioned()
+            self,
+            source_format,
+            "staging",
+            partitioned=self._is_partitioned(),  ## TODO need to know if is partitioned before metadata is created
         ).external_config
 
         # Lookup if table alreay exists

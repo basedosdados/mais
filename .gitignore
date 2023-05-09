@@ -5,6 +5,10 @@ bases/pytest/*
 bases/test/
 test/
 
+.DS_Storage
+*/*/.DS_Storage
+
+
 # NEW repo name
 .mais
 mais/pytest/*
