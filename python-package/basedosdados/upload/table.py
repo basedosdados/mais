@@ -7,11 +7,11 @@ import json
 from copy import deepcopy
 import textwrap
 import inspect
-from io import StringIO
+from io import BytesIO
+from functools import lru_cache
 
 from loguru import logger
 from google.cloud import bigquery
-import ruamel.yaml as ryaml
 import requests
 import pandas as pd
 import google.api_core.exceptions
@@ -44,6 +44,7 @@ class Table(Base):
         # self.metadata = Metadata(self.dataset_id, self.table_id, **kwargs)
 
     @property
+    @lru_cache(256)
     def table_config(self):
         """
         Load table_config.yaml
@@ -85,20 +86,15 @@ class Table(Base):
 
         self._check_mode(mode)
 
-        json_path = self.table_folder / f"schema-{mode}.json"
-        columns = self.table_config[
-            "columns"
-        ]  ## TODO now this come from graphql metadata
+        columns = self.table_config["columns"]
 
         if mode == "staging":
             new_columns = []
             for c in columns:
                 # case is_in_staging are None then must be True
-                is_in_staging = (
-                    True if c.get("is_in_staging") is None else c["is_in_staging"]
-                )
+                is_in_staging = c["isInStaging"]
                 # append columns declared in table config to schema only if is_in_staging: True
-                if is_in_staging and not c.get("is_partition"):
+                if is_in_staging and not c["isPartition"]:
                     c["type"] = "STRING"
                     new_columns.append(c)
 
@@ -123,15 +119,9 @@ class Table(Base):
                     "all your column names between table_config.yaml, publish.sql and "
                     "{project_id}.{dataset_id}.{table_id} are the same?".format(
                         error_columns=not_in_columns,
-                        project_id=self.table_config[
-                            "project_id_prod"
-                        ],  ## TODO now this come from graphql metadata
-                        dataset_id=self.table_config[
-                            "dataset_id"
-                        ],  ## TODO now this come from graphql metadata
-                        table_id=self.table_config[
-                            "table_id"
-                        ],  ## TODO now this come from graphql metadata
+                        project_id=self.table_config["dataset"]["organization"]["slug"],
+                        dataset_id=self.table_config["dataset"]["slug"],
+                        table_id=self.table_config["slug"],
                     )
                 )
 
@@ -142,15 +132,9 @@ class Table(Base):
                     "all your column names between table_config.yaml, publish.sql and "
                     "{project_id}.{dataset_id}.{table_id} are the same?".format(
                         error_columns=not_in_schema,
-                        project_id=self.table_config[
-                            "project_id_prod"
-                        ],  ## TODO now this come from graphql metadata
-                        dataset_id=self.table_config[
-                            "dataset_id"
-                        ],  ## TODO now this come from graphql metadata
-                        table_id=self.table_config[
-                            "table_id"
-                        ],  ## TODO now this come from graphql metadata
+                        project_id=self.table_config["dataset"]["organization"]["slug"],
+                        dataset_id=self.table_config["dataset"]["slug"],
+                        table_id=self.table_config["slug"],
                     )
                 )
 
@@ -161,11 +145,12 @@ class Table(Base):
                         c["type"] = s.field_type
                         c["mode"] = s.mode
                         break
-        ## force utf-8, write schema_{mode}.json
-        json.dump(columns, (json_path).open("w", encoding="utf-8"))
+        ## force utf-8, write JSON to BytesIO
+        json_buffer = BytesIO()
+        json.dump(columns, json_buffer, ensure_ascii=False)
 
         # load new created schema
-        return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
+        return self.client[f"bigquery_{mode}"].schema_from_json(json_buffer)
 
     def _make_publish_sql(self):
         """Create publish.sql with columns and bigquery_type"""

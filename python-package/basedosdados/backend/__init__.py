@@ -131,22 +131,7 @@ class Backend:
             dataset_id (str): The ID for the dataset.
 
         Returns:
-            Dict: Dataset configuration in the following format:
-                {
-                    "name": "dataset-name",
-                    "title": "Dataset Title",
-                    "organization": [
-                        "organization-name",
-                    ],
-                    "notes": "Dataset description",
-                    "groups": [
-                        "group-name",
-                    ],
-                    "tags": [
-                        "tag-name",
-                    ],
-                    "metadata_modified": "2020-01-01T00:00:00.000000",
-                }
+            Dict: Dataset configuration.
         """
         query = """
             query ($dataset_id: ID!){
@@ -159,21 +144,21 @@ class Backend:
                             createdAt
                             updatedAt
                             themes {
-                            edges {
-                                node {
-                                namePt
+                                edges {
+                                    node {
+                                        namePt
+                                    }
                                 }
-                            }
                             }
                             tags {
-                            edges {
-                                node {
-                                namePt
+                                edges {
+                                    node {
+                                        namePt
+                                    }
                                 }
                             }
-                            }
                             organization {
-                            namePt
+                                namePt
                             }
                         }
                     }
@@ -194,84 +179,7 @@ class Backend:
             table_id (str): The ID for the table.
 
         Returns:
-            Dict: Table configuration in the following format:
-                {
-                    "dataset_id": "dataset-name",
-                    "table_id": "table-name",
-                    "title": "Table Title",
-                    "description": "Table description",
-                    "spatial_coverage": [
-                        "sa.br",
-                    ],
-                    "temporal_coverage": [
-                        "2010(1)2019
-                    ],
-                    "update_frequency": "1 year",
-                    "observation_level": [
-                        {
-                            "country": "br",
-                            "entity": "municipality",
-                            "column": [
-                                "column-name",
-                            ]
-                        }
-                    ],
-                    "last_updated": {
-                        "metadata": "2020-01-01",
-                        "data": "2020-01-01 00:00:00",
-                        "release": "",
-                    },
-                    "version": "v2.0",
-                    "published_by": {
-                        "name": "Name",
-                        "email": "mail@example.com",
-                        "github_user": "github-user",
-                        "website": "https://example.com",
-                    },
-                    "data_cleaned_by": {
-                        "name": "Name",
-                        "email": "mail@example.com",
-                        "github_user": "github-user",
-                        "website": "https://example.com",
-                    },
-                    "data_cleaning_description": "Data cleaning description",
-                    "data_cleaning_code_url": "https://example.com",
-                    "partner_organization": {
-                        "name": "Name",
-                        "organization_id": "organization-id",
-                    },
-                    "raw_files_url": "https://example.com",
-                    "auxiliary_files_url": "https://example.com",
-                    "architecture_url": "https://example.com",
-                    "source_bucket_name": "bucket-name",
-                    "project_id_prod": "project-id",
-                    "project_id_staging": "project-id",
-                    "partitions": [
-                        "column-name",
-                    ],
-                    "columns": [
-                        {
-                            "name": "column-name",
-                            "bigquery_type": "STRING",
-                            "description": "Column description",
-                            "temporal_coverage": [
-                                "2010(1)2019
-                            ],
-                            "covered_by_dictionary": True,
-                            "directory_column": {
-                                "dataset_id": "dataset-name",
-                                "table_id": "table-name",
-                                "column_name": "column-name",
-                            },
-                            "measurement_unit": "unit",
-                            "has_sensitive_data": True,
-                            "observations": "observations",
-                            "is_in_staging": True,
-                            "is_partition": True,
-                        }
-                    ],
-                    "metadata_modified": "2020-01-01T00:00:00.000000",
-                }
+            Dict: Table configuration.
         """
 
         query = """
@@ -282,6 +190,9 @@ class Backend:
                             slug
                             dataset {
                                 slug
+                                organization {
+                                    slug
+                                }
                             }
                             namePt
                             descriptionPt
