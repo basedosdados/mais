@@ -61,7 +61,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
 
         self.base_url = self.config["api"]["url"]
-        self._graphql_url = self.base_url + "/graphql"  # TODO: review this
+        self._graphql_url = self.base_url + "/api/v1/graphql"  # TODO: review this
         self._backend = Backend(self._graphql_url)
 
     @staticmethod

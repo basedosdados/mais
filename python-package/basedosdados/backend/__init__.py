@@ -79,7 +79,51 @@ class Backend:
             )
         return client.execute(gql(query), variable_values=variables)
 
-    def get_dataset_config(dataset_id: str) -> Dict[str, Any]:
+    def _get_dataset_id_from_slug(self, dataset_slug):
+        query = """
+            query ($slug: String!){
+                allDataset(slug: $slug) {
+                    edges {
+                        node {
+                            _id,
+                        }
+                    }
+                }
+            }
+        """
+        variables = {"slug": dataset_slug}
+        response = self._execute_query(query=query, variables=variables)
+        r = self._simplify_graphql_response(response)
+        if r["allDataset"] != []:
+            return r["allDataset"][0]["_id"]
+        msg = f"{dataset_slug} not found."
+        raise BaseDosDadosException(msg)
+
+    def _get_table_id_from_slug(self, dataset_slug, table_slug):
+        query = """
+            query ($dataset_Id: ID!, $table_slug: String!){
+                allTable (dataset_Id:$dataset_Id slug:$table_slug){
+                    edges {
+                        node {
+                            _id
+                        }
+                    }
+                }
+            }
+        """
+
+        variables = {
+            "dataset_Id": self._get_dataset_id_from_slug(dataset_slug),
+            "table_slug": table_slug,
+        }
+        response = self._execute_query(query=query, variables=variables)
+        r = self._simplify_graphql_response(response)
+        if r["allTable"] != []:
+            return r["allTable"][0]["_id"]
+        msg = f"No table {table_slug} found in {dataset_slug}."
+        raise BaseDosDadosException(msg)
+
+    def get_dataset_config(self, dataset_id: str) -> Dict[str, Any]:
         """
         Get dataset configuration.
 
@@ -104,7 +148,42 @@ class Backend:
                     "metadata_modified": "2020-01-01T00:00:00.000000",
                 }
         """
-        raise NotImplementedError()
+        query = """
+            query ($dataset_id: ID!){
+                allDataset(id: $dataset_id) {
+                    edges {
+                        node {
+                            slug
+                            name
+                            descriptionPt
+                            createdAt
+                            updatedAt
+                            themes {
+                            edges {
+                                node {
+                                namePt
+                                }
+                            }
+                            }
+                            tags {
+                            edges {
+                                node {
+                                namePt
+                                }
+                            }
+                            }
+                            organization {
+                            namePt
+                            }
+                        }
+                    }
+                }
+            }
+        
+        """
+        variables = {"dataset_id": self._get_dataset_id_from_slug(dataset_id)}
+        response = self._execute_query(query=query, variables=variables)
+        return self._simplify_graphql_response(response).get("allDataset")[0]
 
     def get_table_config(self, dataset_id: str, table_id: str) -> Dict[str, Any]:
         """
@@ -194,6 +273,38 @@ class Backend:
                     "metadata_modified": "2020-01-01T00:00:00.000000",
                 }
         """
+
+        query = """
+            query{
+                allTable (id:"3b65f9c8-c50c-4e89-9c41-3a42eb357fd0"){
+                    edges {
+                    node {
+                        id
+                        slug
+                        dataset {
+                                    id
+                        slug
+                        }
+                        columns {
+                        edges {
+                            node {
+                            name
+                            isInStaging
+                            isPartition
+                            descriptionPt
+                            observations
+                            bigqueryType {
+                                name
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+            }
+        """
+
         raise NotImplementedError()
 
     def _simplify_graphql_response(self, response: dict) -> dict:
@@ -228,109 +339,3 @@ class Backend:
             except TypeError as e:
                 logger.error(f"Erro({e}): {key} - {response[key]}")
         return output_
-
-    def _get_id_from_slug(self, query, variables):
-        response = self._get_graphql(query, variables)
-        dataset_edges = response["allDataset"]["edges"]
-
-        if not dataset_edges:
-            print("refireciona para formulario do front: dataset")
-            raise BaseDosDadosException(f"Dataset {variables['slug']} not found")
-
-        dataset_node = dataset_edges[0]["node"]
-
-        if not variables.get("table_slug", None):
-            return dataset_node["_id"]
-
-        table_edges = dataset_node["tables"]["edges"]
-
-        if not table_edges:
-            print("refireciona para formulario do front: table")
-            raise BaseDosDadosException(
-                f"Table {variables['table_slug']} not found in dataset {variables['dataset_slug']}"
-            )
-
-        return table_edges[0]["node"]["_id"]
-
-    def _get_dataset_id_from_slug(self, dataset_slug):
-        query = """
-            query ($slug: String!){
-              allDataset(slug: $slug) {
-                edges {
-                  node {
-                    _id,
-                  }
-                }
-              }
-            }
-        """
-        variables = {"slug": dataset_slug}
-        return self._get_id_from_slug(query, variables)
-
-    def _get_table_id_from_slug(self, dataset_slug, table_slug):
-        query = """
-            query ($dataset_slug: String!, $table_slug: String!){
-                allDataset(slug: $dataset_slug) {
-                    edges {
-                        node {
-                            _id,
-                            tables(slug: $table_slug) {
-                                edges {
-                                    node {
-                                        _id,
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        """
-        variables = {"dataset_slug": dataset_slug, "table_slug": table_slug}
-        return self._get_id_from_slug(query, variables)
-
-    def publish_sql(self):
-        query = """
-            query{
-                allTable (id:"3b65f9c8-c50c-4e89-9c41-3a42eb357fd0"){
-                    edges {
-                    node {
-                        id
-                        slug
-                        dataset {
-                                    id
-                        slug
-                        }
-                        columns {
-                        edges {
-                            node {
-                            name
-                            isInStaging
-                            isPartition
-                            descriptionPt
-                            observations
-                            bigqueryType {
-                                name
-                            }
-                            }
-                        }
-                        }
-                    }
-                    }
-                }
-            }
-        """
-        variables = {"table_uuid": self.table_uuid}
-        return self._simplify_graphql_response(self._get_graphql(query, variables))
-
-    def dataset_description(self):
-        return True
-
-    def table_description_bq(self):
-        return True
-
-    def schema_prod_bq(self):
-        return True
-
-    def schema_staging_bq(self):
-        return True

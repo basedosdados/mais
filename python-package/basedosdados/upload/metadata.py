@@ -29,11 +29,11 @@ class Metadata(Base):
         self.table_id = table_id
         self.dataset_id = dataset_id
 
-        self.url_graphql = base_url or f"{self.base_url}/api/v1/graphql"
-        self.dataset_uuid = self._get_dataset_id_from_slug(dataset_slug=dataset_id)
-        if table_id is not None:
-            self.table_uuid = self._get_table_id_from_slug(
-                dataset_slug=dataset_id, table_slug=table_id
-            )
-        else:
-            self.table_uuid = None
+        # self.url_graphql = base_url or f"{self.base_url}/api/v1/graphql"
+        # self.dataset_uuid = self._get_dataset_id_from_slug(dataset_slug=dataset_id)
+        # if table_id is not None:
+        #     self.table_uuid = self._get_table_id_from_slug(
+        #         dataset_slug=dataset_id, table_slug=table_id
+        #     )
+        # else:
+        #     self.table_uuid = None

@@ -77,12 +77,11 @@ class Dataset(Base):
         readme_content = (
             f"Como capturar os dados de {self.dataset_id}?\n\nPara cap"
             f"turar esses dados, basta verificar o link dos dados orig"
-            f"inais indicado em dataset_config.yaml no item website.\n"
+            f"inais no website.\n"
             f"\nCaso tenha sido utilizado algum código de captura ou t"
             f"ratamento, estes estarão contidos em code/. Se o dado pu"
             f"blicado for em sua versão bruta, não existirá a pasta co"
-            f"de/.\n\nOs dados publicados estão disponíveis em: https:"
-            f"//basedosdados.org/dataset/{self.dataset_id.replace('_','-')}"
+            f"de/."
         )
 
         readme_path = Path(self.metadata_path / self.dataset_id / "README.md")

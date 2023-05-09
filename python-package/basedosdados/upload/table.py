@@ -43,13 +43,13 @@ class Table(Base):
         self.table_full_name.update(dict(all=deepcopy(self.table_full_name)))
         self.metadata = Metadata(self.dataset_id, self.table_id, **kwargs)
 
-    # @property
-    # def table_config(self):
-    #     """
-    #     Load table_config.yaml
-    #     """
-    #     # return self._load_yaml(self.table_folder / "table_config.yaml")
-    #     return self._backend.get_table_config(self.dataset_id, self.table_id)
+    @property
+    def table_config(self):
+        """
+        Load table_config.yaml
+        """
+        # return self._load_yaml(self.table_folder / "table_config.yaml")
+        return self._backend.get_table_config(self.dataset_id, self.table_id)
 
     def _get_table_obj(self, mode):
         """
@@ -63,7 +63,6 @@ class Table(Base):
         """
         ## check if the table are partitioned, need the split because of a change in the type of partitions in pydantic
         ## TODO: check if this is still necessary
-        ## TODO now this come from graphql metadata
         partitions = self.table_config["partitions"]
         if partitions is None or len(partitions) == 0:
             return False
@@ -207,16 +206,12 @@ class Table(Base):
 
         if self._is_partitioned():
             columns = sorted(
-                self.table_config[
-                    "columns"
-                ],  ## TODO now this come from graphql metadata
+                self.table_config["columns"],
                 key=lambda k: (k["is_partition"] is not None, k["is_partition"]),
                 reverse=True,
             )
         else:
-            columns = self.table_config[
-                "columns"
-            ]  ## TODO now this come from graphql metadata
+            columns = self.table_config["columns"]
 
         # add columns in publish.sql
         for col in columns:
