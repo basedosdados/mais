@@ -275,37 +275,42 @@ class Backend:
         """
 
         query = """
-            query{
-                allTable (id:"3b65f9c8-c50c-4e89-9c41-3a42eb357fd0"){
+            query ($table_id: ID!){
+                allTable(id: $table_id) {
                     edges {
-                    node {
-                        id
-                        slug
-                        dataset {
-                                    id
-                        slug
-                        }
-                        columns {
-                        edges {
-                            node {
-                            name
-                            isInStaging
-                            isPartition
+                        node {
+                            slug
+                            dataset {
+                                slug
+                            }
+                            namePt
                             descriptionPt
-                            observations
-                            bigqueryType {
-                                name
-                            }
+                            columns {
+                            edges {
+                                node {
+                                    name
+                                    isInStaging
+                                    isPartition
+                                    descriptionPt
+                                    observations
+                                    bigqueryType {
+                                        name
+                                    }
+                                }
                             }
                         }
-                        }
-                    }
                     }
                 }
-            }
+                }
+            }    
         """
-
-        raise NotImplementedError()
+        variables = {
+            "table_id": self._get_table_id_from_slug(
+                dataset_slug=dataset_id, table_slug=table_id
+            )
+        }
+        response = self._execute_query(query=query, variables=variables)
+        return self._simplify_graphql_response(response).get("allTable")[0]
 
     def _simplify_graphql_response(self, response: dict) -> dict:
         """
