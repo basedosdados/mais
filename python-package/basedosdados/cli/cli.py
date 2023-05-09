@@ -13,7 +13,6 @@ from basedosdados.upload.metadata import Metadata
 
 import basedosdados as bd
 from basedosdados.exceptions import BaseDosDadosException
-from ckanapi import CKANAPIError
 
 
 @click.group()
@@ -1002,7 +1001,7 @@ def cli_publish_metadata(
     try:
         m.publish(all=all, if_exists=if_exists, update_locally=update_locally)
         msg, color = "Local metadata has been published.", "green"
-    except (CKANAPIError, BaseDosDadosException, AssertionError) as e:
+    except (BaseDosDadosException, AssertionError) as e:
         msg = (
             f"Local metadata couldn't be published due to an error. Pleas"
             f"e check the traceback below for more information on how to "

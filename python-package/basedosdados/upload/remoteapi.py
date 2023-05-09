@@ -1,6 +1,7 @@
 """
 An interface to make mutations to the remote API.
 """
+# TODO: deprecate this file
 import re
 from pprint import pprint
 from typing import Tuple
@@ -21,7 +22,7 @@ class RemoteAPI:
         self.token = token
         self.header = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.token}"
+            "Authorization": f"Bearer {self.token}",
         }
 
     def call_action(self, action, data_dict):
@@ -84,14 +85,14 @@ class RemoteAPI:
             }}
         }}"""
         res = requests.post(
-            url=self._url,
-            json={"query": query},
-            headers=self.header,
-            timeout=90
+            url=self._url, json={"query": query}, headers=self.header, timeout=90
         ).json()
 
         if "data" in res:
-            if not res.get("data", {}).get(f"{query_class}", {}).get("edges") or "errors" in res:
+            if (
+                not res.get("data", {}).get(f"{query_class}", {}).get("edges")
+                or "errors" in res
+            ):
                 raise BaseDosDadosException(f"{class_} {slug} not found")
 
             id_ = res["data"][f"{query_class}"]["edges"][0]["node"]["_id"]
@@ -99,8 +100,8 @@ class RemoteAPI:
 
     @staticmethod
     def create_update(
-            mutation_class: str,
-            mutation_parameters: dict,
+        mutation_class: str,
+        mutation_parameters: dict,
     ) -> Tuple[str, dict]:
         """
         Creates the query and parameters for a mutation based on data_dict.
@@ -144,10 +145,12 @@ class RemoteAPI:
         Raises:
             Exception: If the mutation fails.
         """
-        print(f"""
+        print(
+            f"""
         Mutation: {query} \n
         Parameters: {mutation_parameters}
-        """)
+        """
+        )
         response = {}
         response["result"] = "not implemented yet"
         response["data"] = "10279a86-53be-4291-986d-9ef1d68c2bda"  # mock a dataset_uuid
