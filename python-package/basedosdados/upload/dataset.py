@@ -22,8 +22,7 @@ class Dataset(Base):
         super().__init__(**kwargs)
 
         self.dataset_id = dataset_id.replace("-", "_")
-        # self.dataset_folder = Path(self.metadata_path / self.dataset_id)
-        # self.metadata = Metadata(self.dataset_id, **kwargs)
+        self.metadata = Metadata(self.dataset_id, **kwargs)
 
     @property
     @lru_cache
