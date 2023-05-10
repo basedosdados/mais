@@ -1,6 +1,9 @@
 """
 Class for manage tables in Storage and Big Query
 """
+
+import contextlib
+
 # pylint: disable=invalid-name, too-many-locals, too-many-branches, too-many-arguments,line-too-long,R0801,consider-using-f-string
 from pathlib import Path
 import json
@@ -60,6 +63,40 @@ class Table(Base):
 
         return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
+    def _is_partitioned(self, data_sample_path=None, source_format=None):
+        if data_sample_path is not None:
+            table_columns = self._get_columns_metadata_from_data(
+                data_sample_path=data_sample_path,
+                source_format=source_format,
+                mode="staging",
+            )
+        else:
+            table_columns = self._get_columns_metadata_from_api()
+
+        return bool(table_columns.get("partition_columns"))
+
+    def _load_schema_from_json(self, columns, mode):
+        json_buffer = BytesIO()
+        json_buffer.write(json.dumps(columns, ensure_ascii=False).encode("utf-8"))
+        json_buffer.seek(0)
+        return self.client[f"bigquery_{mode}"].schema_from_json(json_buffer)
+
+    def _load_staging_schema_from_data(
+        self, data_sample_path=None, source_format="csv", mode="staging"
+    ):
+        table_columns = self._get_columns_metadata_from_data(
+            data_sample_path=data_sample_path,
+            source_format=source_format,
+            mode="staging",
+        )
+
+        if not self.table_exists(mode="staging"):
+            # use metadata from data_sample
+            columns = [
+                {"name": col, "type": "STRING"} for col in table_columns.get("columns")
+            ]
+        return self._load_schema_from_json(columns, mode)
+
     def _load_schema(self, columns=None, mode="staging"):
         """Load schema from table config
 
@@ -67,12 +104,17 @@ class Table(Base):
             mode (bool): Which dataset to create [prod|staging].
         """
         # TODO: review this function
-        if mode == "staging":
+        if mode == "staging" and not self.table_exists(mode):
+            # use metadata from data_sample
             columns = [
                 {"name": col, "type": "STRING"} for col in columns.get("columns")
             ]
+        elif mode == "staging" and self.table_exists(mode):
+            # use metadata from API
+            schema = self._get_table_obj(mode).schema
 
-        elif mode == "prod":
+        elif mode == "prod" and self.table_exists(mode):
+            # use metadata from API
             schema = self._get_table_obj(mode).schema
 
             # get field names for fields at schema and at table config
@@ -117,14 +159,9 @@ class Table(Base):
                         c["mode"] = s.mode
                         break
 
-        ## force utf-8, write JSON to BytesIO
-        json_buffer = BytesIO()
-        json_buffer.write(json.dumps(columns, ensure_ascii=False).encode("utf-8"))
-        json_buffer.seek(0)
-        # load new created schema
-        return self.client[f"bigquery_{mode}"].schema_from_json(json_buffer)
+        return self._load_schema_from_json(columns, mode)
 
-    def _get_columns_from_data(
+    def _get_columns_metadata_from_data(
         self,
         data_sample_path=None,
         source_format="csv",
@@ -167,11 +204,11 @@ class Table(Base):
                     if "=" in k
                 ]
 
-            columns = Datatype(self, source_format).header(data_sample_path)
+            columns = Datatype(source_format).header(data_sample_path)
 
         return {"columns": columns, "partition_columns": partition_columns}
 
-    def _get_columns_from_api(
+    def _get_columns_metadata_from_api(
         self,
     ):
         """
@@ -336,6 +373,27 @@ class Table(Base):
 
         return connection
 
+    def _get_table_description(self, mode="staging"):
+        """Adds table description to BigQuery table.
+
+        Args:
+            table_obj (google.cloud.bigquery.table.Table): Table object.
+            mode (str): Which dataset to check [prod|staging].
+        """
+        table_path = self.table_full_name["prod"]
+        if mode == "staging":
+            description = f"Staging table for `{table_path}`"
+        else:
+            try:
+                description = self.table_config.get("descriptionPt", "")
+            except BaseException:
+                logger.warning(
+                    f"Table {self.table_id} does not have a description in the API."
+                )
+                description = "Description not available in the API."
+
+        return description
+
     def create(  # pylint: disable=too-many-statements
         self,
         path=None,
@@ -460,7 +518,7 @@ class Table(Base):
 
             dataset_obj.create(
                 if_exists="pass",
-                mode="staging",
+                mode="all",
                 location=location,
                 dataset_is_public=dataset_is_public,
             )
@@ -475,38 +533,36 @@ class Table(Base):
 
         table = bigquery.Table(self.table_full_name["staging"])
 
-        if use_data_columns:
-            table_columns = self._get_columns_from_data(
-                data_sample_path=path,
-                source_format=source_format,
-                mode="staging",
-            )
-        else:
-            table_columns = self._get_columns_from_api()
+        table.description = self._get_table_description(mode="staging")
+
         table.external_data_configuration = Datatype(
-            table_obj=table,
-            schema=self._load_schema(columns=table_columns, mode="staging"),
+            dataset_id=self.dataset_id,
+            table_id=self.table_id,
+            schema=self._load_staging_schema_from_data(
+                data_sample_path=path, source_format=source_format, mode="staging"
+            ),
             source_format=source_format,
             mode="staging",
             bucket_name=self.bucket_name,
-            partitioned=bool(table_columns["partition_columns"]),
+            partitioned=self._is_partitioned(
+                data_sample_path=path, source_format=source_format
+            ),
             biglake_connection_id=biglake_connection_id if biglake_table else None,
         ).external_config
 
         # When using BigLake tables, schema must be provided to the `Table` object
         if biglake_table:
-            table.schema = self._load_schema(columns=table_columns, mode="staging")
+            table.schema = self._load_staging_schema_from_data(
+                data_sample_path=path, source_format=source_format, mode="staging"
+            )
             logger.info(f"Using BigLake connection {biglake_connection_id}")
 
         # Lookup if table alreay exists
         table_ref = None
-        try:
+        with contextlib.suppress(google.api_core.exceptions.NotFound):
             table_ref = self.client["bigquery_staging"].get_table(
                 self.table_full_name["staging"]
             )
-
-        except google.api_core.exceptions.NotFound:
-            pass
 
         if isinstance(table_ref, google.cloud.bigquery.table.Table):
             if if_table_exists == "pass":

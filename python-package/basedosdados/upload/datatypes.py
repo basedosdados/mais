@@ -16,7 +16,8 @@ class Datatype:
 
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        table_obj,
+        dataset_id="",
+        table_id="",
         schema=None,
         source_format="csv",
         mode="staging",
@@ -24,11 +25,11 @@ class Datatype:
         partitioned=False,
         biglake_connection_id=None,
     ):
-        self.table_obj = table_obj
+        self.dataset_id = dataset_id.replace("_staging", "")
         self.schema = schema
-        self.bucket_name = bucket_name
         self.source_format = source_format
         self.mode = mode
+        self.uri = f"gs://{bucket_name}/staging/{self.dataset_id}/{table_id}/*"
         self.partitioned = partitioned
         self.biglake_connection_id = biglake_connection_id
 
@@ -55,10 +56,7 @@ class Datatype:
         """
         hive_partitioning = bigquery.external_config.HivePartitioningOptions()
         hive_partitioning.mode = "STRINGS"
-        dataset_id = self.table_obj.dataset_id.replace("_staging", "")
-        hive_partitioning.source_uri_prefix = (
-            f"gs://{self.bucket_name}/staging/{dataset_id}/{self.table_obj.table_id}"
-        )
+        hive_partitioning.source_uri_prefix = self.uri.replace("*", "")
 
         return hive_partitioning
 
@@ -82,10 +80,7 @@ class Datatype:
             raise NotImplementedError(
                 "Base dos Dados just supports csv, avro and parquet files"
             )
-        dataset_id = self.table_obj.dataset_id.replace("_staging", "")
-        _external_config.source_uris = (
-            f"gs://{self.bucket_name}/staging/{dataset_id}/{self.table_obj.table_id}/*"
-        )
+        _external_config.source_uris = self.uri
         if self.partitioned:
             _external_config.hive_partitioning = self.partition()
 
