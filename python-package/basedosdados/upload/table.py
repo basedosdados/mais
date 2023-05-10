@@ -17,6 +17,7 @@ import pandas as pd
 import google.api_core.exceptions
 
 from basedosdados.upload.base import Base
+from basedosdados.upload.connection import Connection
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
@@ -281,7 +282,74 @@ class Table(Base):
 
         return bool(ref)
 
-    def create(
+    def _get_biglake_connection_id(
+        self, set_biglake_connection_permissions=True, location=None, mode="staging"
+    ):
+        biglake_connection_id: str = None
+        connection = Connection(name="biglake", location=location, mode="staging")
+        if not connection.exists:
+            try:
+                logger.info("Creating BigLake connection...")
+                connection.create()
+                logger.success("BigLake connection created!")
+            except google.api_core.exceptions.Forbidden as exc:
+                logger.error(
+                    "You don't have permission to create a BigLake connection. "
+                    "Please contact an admin to create one for you."
+                )
+                raise BaseDosDadosException(
+                    "You don't have permission to create a BigLake connection. "
+                    "Please contact an admin to create one for you."
+                ) from exc
+            except Exception as exc:
+                logger.error(
+                    "Something went wrong while creating the BigLake connection. "
+                    "Please contact an admin to create one for you."
+                )
+                raise BaseDosDadosException(
+                    "Something went wrong while creating the BigLake connection. "
+                    "Please contact an admin to create one for you."
+                ) from exc
+        if set_biglake_connection_permissions:
+            try:
+                logger.info("Setting permissions for BigLake service account...")
+                connection.set_biglake_permissions()
+                logger.success("Permissions set successfully!")
+            except google.api_core.exceptions.Forbidden as exc:
+                logger.error(
+                    "Could not set permissions for BigLake service account. "
+                    "Please make sure you have permissions to grant roles/storage.objectViewer"
+                    f" to the BigLake service account. ({connection.service_account})."
+                    " If you don't, please ask an admin to do it for you or set "
+                    "set_biglake_connection_permissions=False."
+                )
+                raise BaseDosDadosException(
+                    "Could not set permissions for BigLake service account. "
+                    "Please make sure you have permissions to grant roles/storage.objectViewer"
+                    f" to the BigLake service account. ({connection.service_account})."
+                    " If you don't, please ask an admin to do it for you or set "
+                    "set_biglake_connection_permissions=False."
+                ) from exc
+            except Exception as exc:
+                logger.error(
+                    "Something went wrong while setting permissions for BigLake service account. "
+                    "Please make sure you have permissions to grant roles/storage.objectViewer"
+                    f" to the BigLake service account. ({connection.service_account})."
+                    " If you don't, please ask an admin to do it for you or set "
+                    "set_biglake_connection_permissions=False."
+                )
+                raise BaseDosDadosException(
+                    "Something went wrong while setting permissions for BigLake service account. "
+                    "Please make sure you have permissions to grant roles/storage.objectViewer"
+                    f" to the BigLake service account. ({connection.service_account})."
+                    " If you don't, please ask an admin to do it for you or set "
+                    "set_biglake_connection_permissions=False."
+                ) from exc
+        biglake_connection_id = connection.connection_id
+
+        return biglake_connection_id
+
+    def create(  # pylint: disable=too-many-statements
         self,
         path=None,
         force_dataset=True,
@@ -291,6 +359,8 @@ class Table(Base):
         dataset_is_public=True,
         location=None,
         chunk_size=None,
+        biglake_table=False,
+        set_biglake_connection_permissions=True,
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -358,6 +428,14 @@ class Table(Base):
                 The size of a chunk of data whenever iterating (in bytes).
                 This must be a multiple of 256 KB per the API specification.
                 If not specified, the chunk_size of the blob itself is used. If that is not specified, a default value of 40 MB is used.
+
+            biglake_table (bool): Optional
+                Sets this as a BigLake table. BigLake tables allow end users to query from external data (such as GCS) even if
+                they don't have access to the source data. IAM is managed like any other BigQuery native table. See
+                https://cloud.google.com/bigquery/docs/biglake-intro for more on BigLake.
+
+            set_biglake_connection_permissions (bool): Optional
+                If set to `True`, attempts to grant the BigLake connection service account access to the table's data in GCS.
         """
 
         if path is None:
@@ -404,14 +482,30 @@ class Table(Base):
             source_format=source_format,
             mode="staging",
         )
+        if biglake_table:
+            biglake_connection_id = self._get_biglake_connection_id(
+                self,
+                set_biglake_connection_permissions=set_biglake_connection_permissions,
+                location=location,
+                mode="staging",
+            )
+        else:
+            biglake_connection_id = None
 
         table = bigquery.Table(self.table_full_name["staging"])
+
         table.external_data_configuration = Datatype(
             self,
             source_format,
             "staging",
-            partitioned=True if data_columns["partition_columns"] else False,
+            partitioned=bool(data_columns["partition_columns"]),
+            biglake_connection_id=biglake_connection_id,
         ).external_config
+
+        # When using BigLake tables, schema must be provided to the `Table` object
+        if biglake_table:
+            table.schema = self._load_schema("staging")
+            logger.info(f"Using BigLake connection {biglake_connection_id}")
 
         # Lookup if table alreay exists
         table_ref = None
@@ -435,7 +529,24 @@ class Table(Base):
         if if_table_exists == "replace":
             self.delete(mode="staging")
 
-        self.client["bigquery_staging"].create_table(table)
+        try:
+            self.client["bigquery_staging"].create_table(table)
+        except google.api_core.exceptions.Forbidden as exc:
+            if biglake_table:
+                raise BaseDosDadosException(
+                    "Permission denied. The service account used to create the BigLake connection"
+                    " does not have permission to read data from the source bucket. Please grant"
+                    f" the service account {connection.service_account} the Storage Object Viewer"
+                    " (roles/storage.objectViewer) role on the source bucket (or on the project)."
+                    " Or, you can try running this again with set_biglake_connection_permissions=True."
+                ) from exc
+            raise BaseDosDadosException(
+                "Something went wrong when creating the table. Please check the logs for more information."
+            ) from exc
+        except Exception as exc:
+            raise BaseDosDadosException(
+                "Something went wrong when creating the table. Please check the logs for more information."
+            ) from exc
 
         logger.success(
             "{object} {object_id} was {action} in {mode}!",

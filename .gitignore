@@ -3,7 +3,8 @@
 .mais
 bases/pytest/*
 bases/test/
-test/
+test/*
+
 
 .DS_Storage
 */*/.DS_Storage

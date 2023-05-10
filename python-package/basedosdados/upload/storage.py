@@ -235,7 +235,7 @@ class Storage(Base):
         filename="*",
         savepath=".",
         partitions=None,
-        mode="raw",
+        mode="staging",
         if_not_exists="raise",
     ):
         """Download files from Google Storage from path `mode`/`dataset_id`/`table_id`/`partitions`/`filename` and replicate folder hierarchy
@@ -305,11 +305,14 @@ class Storage(Base):
             blob_folder = blob.name.replace(csv_name, "")
 
             # replicate folder hierarchy
-            (Path(savepath) / blob_folder).mkdir(parents=True, exist_ok=True)
+            savepath = Path(savepath)
+            (savepath / blob_folder).mkdir(parents=True, exist_ok=True)
 
             # download blob to savepath
-            savepath = f"{savepath}/{blob.name}"
-            blob.download_to_filename(filename=savepath)
+            save_file_path = savepath / blob.name
+            print(save_file_path)
+
+            blob.download_to_filename(filename=save_file_path)
 
         logger.success(
             " {object} {object_id}_{mode} was {action} at: {path}!",

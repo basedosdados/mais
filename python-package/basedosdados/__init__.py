@@ -14,6 +14,7 @@ sys.path.append(f"{os.getcwd()}/python-package")
 
 from basedosdados.backend import Backend
 from basedosdados.constants import constants, config
+from basedosdados.upload.connection import Connection
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.table import Table

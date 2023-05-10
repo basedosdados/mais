@@ -6,55 +6,73 @@ dataset_id: br_inep_saeb
 table_id: municipio
 
 # Título da tabela.
-title: Sistema de Avaliação da Educação Básica (Saeb)
+title: SAEB Município
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Tabela resumo dos dados do SAEB com a média e percentual de alunos dentro de cada nível de aprendizado segundo o Inep a nível municipal
+description: Tabela resumo dos dados do SAEB com a média e percentual de alunos dentro
+    de cada nível de aprendizado segundo o Inep a nível municipal
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - sa.br
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
 spatial_coverage:
-  - sa.br
+    - sa.br
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
 temporal_coverage:
-  - 2011(2)2021
+    - 2011(2)2021
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: two_years
 
 # Nível de observação da tabela: o que representa cada linha.
-observation_level: 
-  - entity: year
-    columns: 
-      - ano
-  - country: br
-  - entity: municipality
-    columns: 
-      - id_municipio
-  - entity: other
-    columns: 
-      - rede
-  - entity: exam
-    columns: 
-      - disciplina
-      - serie
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+    - entity: year
+      columns:
+          - ano
+    - country: br
+    - entity: municipality
+      columns:
+          - id_municipio
+    - entity: other
+      columns:
+          - rede
+    - entity: exam
+      columns:
+          - disciplina
+          - serie
 
 last_updated:
-    metadata: '2022-10-10'
-    data: '2022-10-10 9:08:10'
-    release: '2022-10-10 9:08:11'
+    metadata: '2023-03-07'
+    data: '2023-03-07 18:00:10'
+    release: '2023-03-07 18:00:10'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
-version: v1.0
+# Exemplos: v1.0, v1.1.3
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -67,17 +85,18 @@ published_by:
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-data_cleaned_by:
-    name: Lucas Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
-    ckan_user: lucasnascm
+published_by:
+    name: Gabriel Pisa Folhes
+    email: Gabriel.folhes@basedosdados.org
+    github_user: folhesgabriel
+    ckan_user: pisa_gab
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Compatibilização dos resultados a partir da tabela proficiencia e enquadramento das variáveis de 2021 segundo o padrão BD
+data_cleaning_description: Compatibilização dos resultados a partir da tabela proficiencia
+    e enquadramento das variáveis de 2021 segundo o padrão BD
 
-# Url do código de limpeza dos dados.
+# Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
@@ -111,15 +130,13 @@ partitions:
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -134,7 +151,7 @@ columns:
       bigquery_type: string
       description: Rede Escolar
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -149,22 +166,23 @@ columns:
       bigquery_type: string
       description: Localização da escola
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary:
       directory_column:
-          dataset_id: 
+          dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Mantiveram-se apenas os totais não havendo distinções entre rural e urbana
+      observations: Mantiveram-se apenas os totais não havendo distinções entre rural
+          e urbana
       is_in_staging: true
       is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -172,14 +190,14 @@ columns:
           column_name: sigla
       measurement_unit:
       has_sensitive_data: no
-      observations: 
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -187,29 +205,31 @@ columns:
           column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
-      observations: 
+      observations:
       is_in_staging: true
       is_partition: false
     - name: disciplina
       bigquery_type: string
       description: Disciplina
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 
+      measurement_unit:
       has_sensitive_data: no
-      observations: Mantiveram-se apenas Língua Portuguesa (LP) e Matemática (MT) a fim de se obter a maior cobertura temporal possível dos dados. As demais disciplinas estão disponíveis em proficiencia e/ou nas tabelas de microdados
+      observations: Mantiveram-se apenas Língua Portuguesa (LP) e Matemática (MT)
+          a fim de se obter a maior cobertura temporal possível dos dados. As demais
+          disciplinas estão disponíveis em proficiencia e/ou nas tabelas de microdados
       is_in_staging: true
       is_partition: false
     - name: serie
       bigquery_type: int64
       description: Série/Ano Escolar
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -224,7 +244,7 @@ columns:
       bigquery_type: float64
       description: Média da proficiência
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -239,7 +259,7 @@ columns:
       bigquery_type: float64
       description: Percentual de alunos que se enquadram no nível zero de aprendizagem
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -254,7 +274,7 @@ columns:
       bigquery_type: float64
       description: Percentual de alunos que se enquadram no nível um de aprendizagem
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -269,7 +289,7 @@ columns:
       bigquery_type: float64
       description: Percentual de alunos que se enquadram no nível dois de aprendizagem
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -284,7 +304,7 @@ columns:
       bigquery_type: float64
       description: Percentual de alunos que se enquadram no nível três de aprendizagem
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -299,7 +319,7 @@ columns:
       bigquery_type: float64
       description: Percentual de alunos que se enquadram no nível quatro de aprendizagem
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -314,7 +334,7 @@ columns:
       bigquery_type: float64
       description: Percentual de alunos que se enquadram no nível cinco de aprendizagem
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -329,7 +349,7 @@ columns:
       bigquery_type: float64
       description: Percentual de alunos que se enquadram no nível seis de aprendizagem
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -344,7 +364,7 @@ columns:
       bigquery_type: float64
       description: Percentual de alunos que se enquadram no nível sete de aprendizagem
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -359,7 +379,7 @@ columns:
       bigquery_type: float64
       description: Percentual de alunos que se enquadram no nível oito de aprendizagem
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -374,7 +394,7 @@ columns:
       bigquery_type: float64
       description: Percentual de alunos que se enquadram no nível nove de aprendizagem
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -389,7 +409,7 @@ columns:
       bigquery_type: float64
       description: Percentual de alunos que se enquadram no nível dez de aprendizagem
       temporal_coverage:
-        - (1)
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -401,6 +421,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 1977750
+number_rows:  2103915
 
-metadata_modified:
+metadata_modified: '2022-10-10T15:46:35.086856'
