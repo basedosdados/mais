@@ -159,7 +159,9 @@ Preencher a coluna `cobertura_temporal` nos metadados de tabela, coluna e chave 
     - `data_inicial` e `data_final` estão na correspondente unidade temporal.
         - Exemplo: tabela com unidade `ano` tem cobertura `2005(1)2018`.
         - Exemplo: tabela com unidade `mes` tem cobertura `2005-08(1)2018-12`.
+        - Exemplo: tabela com unidade `semana` tem cobertura `2005-08-01(7)2018-08-31`.
         - Exemplo: tabela com unidade `dia` tem cobertura `2005-08-01(1)2018-12-31`.
+        
 - Regras para preenchimento
     - Metadados de tabela
         - Preencher no formato geral.
