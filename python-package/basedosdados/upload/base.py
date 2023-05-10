@@ -61,9 +61,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
         self.bucket_name = bucket_name or self.config["bucket_name"]
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
 
-        self.base_url = self.config["api"]["url"]
-        self._graphql_url = self.base_url + "/api/v1/graphql"
-        self._backend = Backend(self._graphql_url)
+        self._backend = Backend(self.config["api"]["url"])
 
     @staticmethod
     def _decode_env(env: str) -> str:
