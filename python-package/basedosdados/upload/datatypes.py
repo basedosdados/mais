@@ -1,6 +1,6 @@
-'''
+"""
 Class for define external and partiton configs for each datatype
-'''
+"""
 # pylint: disable=protected-access,line-too-long
 import csv
 
@@ -10,9 +10,10 @@ import pandavro
 
 
 class Datatype:
-    '''
+    """
     Manage external and partition config
-    '''
+    """
+
     def __init__(
         self,
         table_obj,
@@ -20,16 +21,15 @@ class Datatype:
         mode="staging",
         partitioned=False,
     ):
-
         self.table_obj = table_obj
         self.source_format = source_format
         self.mode = mode
         self.partitioned = partitioned
 
     def header(self, data_sample_path):
-        '''
+        """
         Retrieve the header of the data sample
-        '''
+        """
 
         if self.source_format == "csv":
             return next(csv.reader(open(data_sample_path, "r", encoding="utf-8")))
@@ -44,9 +44,9 @@ class Datatype:
         )
 
     def partition(self):
-        '''
+        """
         Configure the partitioning of the table
-        '''
+        """
         hive_partitioning = bigquery.external_config.HivePartitioningOptions()
         hive_partitioning.mode = "AUTO"
         hive_partitioning.source_uri_prefix = self.table_obj.uri.format(
@@ -57,9 +57,9 @@ class Datatype:
 
     @property
     def external_config(self):
-        '''
+        """
         Configure the external table
-        '''
+        """
         if self.source_format == "csv":
             _external_config = bigquery.ExternalConfig("CSV")
             _external_config.options.skip_leading_rows = 1

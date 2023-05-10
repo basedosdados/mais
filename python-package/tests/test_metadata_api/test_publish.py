@@ -2,6 +2,7 @@
 Test for publishing with new API.
 """
 import os
+
 # pylint: disable=fixme, unused-import, protected-access
 from pathlib import Path
 import random
@@ -100,7 +101,9 @@ def test_publish_existent_table_metadata_replace(api_table_metadata):
     make_login(api_table_metadata)
     if not api_table_metadata.is_updated():
         api_table_metadata.create(if_exists="replace")
-    response = api_table_metadata.publish(if_exists="replace", all=True, update_locally=True)
+    response = api_table_metadata.publish(
+        if_exists="replace", all=True, update_locally=True
+    )
     assert response["result"] == "not implemented yet"
 
 
@@ -118,8 +121,13 @@ def test_api_prepare_fields(api_dataset_metadata):
     Test if api_data_dict returns correct fields.
     """
     make_login(api_dataset_metadata)
-    remote_api = RemoteAPI(api_dataset_metadata.api_graphql, api_dataset_metadata.load_token())
-    fields = remote_api._prepare_fields({"id": api_dataset_metadata.dataset_uuid, "name": "Teste do nome"}, model="dataset")
+    remote_api = RemoteAPI(
+        api_dataset_metadata.api_graphql, api_dataset_metadata.load_token()
+    )
+    fields = remote_api._prepare_fields(
+        {"id": api_dataset_metadata.dataset_uuid, "name": "Teste do nome"},
+        model="dataset",
+    )
     pprint(fields)
     assert "id" in fields
 
@@ -128,8 +136,12 @@ def test_api_update_dataset(api_dataset_metadata):
     """
     Test if api_data_dict is a dict.
     """
-    remote_api = RemoteAPI(api_dataset_metadata.api_graphql, api_dataset_metadata.load_token())
-    response = remote_api.call_action("update_dataset", api_dataset_metadata.api_data_dict)
+    remote_api = RemoteAPI(
+        api_dataset_metadata.api_graphql, api_dataset_metadata.load_token()
+    )
+    response = remote_api.call_action(
+        "update_dataset", api_dataset_metadata.api_data_dict
+    )
     pprint(response)
     assert response["result"] == "not implemented yet"
 
@@ -138,8 +150,12 @@ def test_api_create_dataset(api_new_dataset_metadata):
     """
     Test if api_data_dict is a dict.
     """
-    remote_api = RemoteAPI(api_new_dataset_metadata.api_graphql, api_new_dataset_metadata.load_token())
-    response = remote_api.call_action("create_dataset", api_new_dataset_metadata.api_data_dict)
+    remote_api = RemoteAPI(
+        api_new_dataset_metadata.api_graphql, api_new_dataset_metadata.load_token()
+    )
+    response = remote_api.call_action(
+        "create_dataset", api_new_dataset_metadata.api_data_dict
+    )
     pprint(response)
     assert response["result"] == "not implemented yet"
 

@@ -30,13 +30,10 @@ class Storage(Base):
 
     @staticmethod
     def _resolve_partitions(partitions):
-
         if isinstance(partitions, dict):
-
             return "/".join(f"{k}={v}" for k, v in partitions.items()) + "/"
 
         if isinstance(partitions, str):
-
             if partitions.endswith("/"):
                 partitions = partitions[:-1]
 
@@ -67,7 +64,6 @@ class Storage(Base):
 
         # add partition folder
         if partitions is not None:
-
             blob_name += self._resolve_partitions(partitions)
 
         # add file name
@@ -108,7 +104,6 @@ class Storage(Base):
         self.client["storage_staging"].create_bucket(self.bucket)
 
         for folder in ["staging/", "raw/"]:
-
             self.bucket.blob(folder).upload_from_string("")
 
     def upload(
@@ -205,21 +200,17 @@ class Storage(Base):
             else [mode]
         )
         for m in mode:
-
             for filepath, part in tqdm(list(zip(paths, parts)), desc="Uploading files"):
-
                 blob_name = self._build_blob_name(filepath.name, m, part)
 
                 blob = self.bucket.blob(blob_name, chunk_size=chunk_size)
 
                 if not blob.exists() or if_exists == "replace":
-
                     upload_args["timeout"] = upload_args.get("timeout", None)
 
                     blob.upload_from_filename(str(filepath), **upload_args)
 
                 elif if_exists == "pass":
-
                     pass
 
                 else:
@@ -247,7 +238,6 @@ class Storage(Base):
         mode="raw",
         if_not_exists="raise",
     ):
-
         """Download files from Google Storage from path `mode`/`dataset_id`/`table_id`/`partitions`/`filename` and replicate folder hierarchy
         on save,
 
@@ -308,7 +298,6 @@ class Storage(Base):
 
         # download all blobs matching the search to given savepath
         for blob in tqdm(blob_list, desc="Download Blob"):
-
             # parse blob.name and get the csv file name
             csv_name = blob.name.split("/")[-1]
 
@@ -328,7 +317,7 @@ class Storage(Base):
             mode=mode,
             object="File",
             action="downloaded",
-            path={str(savepath)}
+            path={str(savepath)},
         )
 
     def delete_file(self, filename, mode, partitions=None, not_found_ok=False):
@@ -358,7 +347,6 @@ class Storage(Base):
         )
 
         for m in mode:
-
             blob = self.bucket.blob(self._build_blob_name(filename, m, partitions))
 
             if blob.exists() or not blob.exists() and not not_found_ok:
@@ -393,7 +381,6 @@ class Storage(Base):
         prefix = f"{mode}/{self.dataset_id}/{self.table_id}/"
 
         if bucket_name is not None:
-
             table_blobs = list(
                 self.client["storage_staging"]
                 .bucket(f"{bucket_name}")
@@ -401,7 +388,6 @@ class Storage(Base):
             )
 
         else:
-
             table_blobs = list(self.bucket.list_blobs(prefix=prefix))
 
         if not table_blobs:
@@ -477,11 +463,9 @@ class Storage(Base):
             )
 
         if destination_bucket_name is None:
-
             destination_bucket = self.bucket
 
         else:
-
             destination_bucket = self.client["storage_staging"].bucket(
                 destination_bucket_name
             )

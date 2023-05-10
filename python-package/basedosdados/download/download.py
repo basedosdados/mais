@@ -155,7 +155,6 @@ def read_table(
         FROM `{query_project_id}.{dataset_id}.{table_id}`"""
 
         if limit is not None:
-
             query += f" LIMIT {limit}"
     else:
         raise BaseDosDadosException("Both table_id and dataset_id should be filled.")

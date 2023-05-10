@@ -15,6 +15,7 @@ from basedosdados.exceptions import BaseDosDadosException
 
 METADATA_FILES = {"dataset": "dataset_config.yaml", "table": "table_config.yaml"}
 
+
 def test_create_from_dataset_id(dataset_metadata, dataset_metadata_path):
     """
     Test metadata creation from a dataset id.

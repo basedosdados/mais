@@ -58,24 +58,6 @@ class Table(Base):
         """
         return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
-    def _is_partitioned(self):
-        """
-        Check if table is partitioned
-        """
-        ## check if the table are partitioned, need the split because of a change in the type of partitions in pydantic
-        ## TODO: check if this is still necessary
-        partitions = self.table_config["partitions"]
-        if partitions is None or len(partitions) == 0:
-            return False
-
-        if isinstance(partitions, list):
-            # check if any None inside list.
-            # False if it is the case Ex: [None, 'partition']
-            # True otherwise          Ex: ['partition1', 'partition2']
-            return all(item is not None for item in partitions)
-
-        raise ValueError("Partitions must be a list or None")
-
     def _load_schema(self, mode="staging"):
         """Load schema from table config
 
@@ -152,6 +134,72 @@ class Table(Base):
         # load new created schema
         return self.client[f"bigquery_{mode}"].schema_from_json(json_buffer)
 
+    def _get_columns_from_data(
+        self,
+        data_sample_path=None,
+        source_format="csv",
+        mode="staging",
+    ):  # sourcery skip: low-code-quality
+        """
+        Get the partition columns from the structure of data_sample_path.
+
+        Args:
+            data_sample_path (str, pathlib.PosixPath): Optional.
+                Data sample path to auto complete columns names
+                It supports Comma Delimited CSV, Apache Avro and
+                Apache Parquet.
+            source_format (str): Optional
+                Data source format. Only 'csv', 'avro' and 'parquet'
+                are supported. Defaults to 'csv'.
+        """
+
+        partition_columns = []
+        if isinstance(
+            data_sample_path,
+            (
+                str,
+                Path,
+            ),
+        ):
+            # Check if partitioned and get data sample and partition columns
+            data_sample_path = Path(data_sample_path)
+
+            if data_sample_path.is_dir():
+                data_sample_path = [
+                    f
+                    for f in data_sample_path.glob("**/*")
+                    if f.is_file() and f.suffix == f".{source_format}"
+                ][0]
+
+                partition_columns = [
+                    k.split("=")[0]
+                    for k in data_sample_path.as_posix().split("/")
+                    if "=" in k
+                ]
+
+            columns = Datatype(self, source_format).header(data_sample_path)
+
+        return {"columns": columns, "partition_columns": partition_columns}
+
+    def _get_columns_from_api(
+        self,
+    ):
+        """
+        Get columns and partition columns from API.
+        """
+        partition_columns = [
+            col.get("name")
+            for col in self.table_config.get("columns")
+            if col.get("isPartition") is True
+        ]
+        columns = [
+            col.get("name")
+            for col in self.table_config.get("columns")
+            if col.get("isPartition") is False
+        ]
+
+        return {"columns": columns, "partition_columns": partition_columns}
+
     def _make_publish_sql(self):
         """Create publish.sql with columns and bigquery_type"""
 
@@ -217,24 +265,7 @@ class Table(Base):
             f"FROM {project_id_staging}.{self.dataset_id}_staging.{self.table_id} AS t"
         )
 
-        # save publish.sql in table_folder
-        (self.table_folder / "publish.sql").open("w", encoding="utf-8").write(
-            publish_txt
-        )
-
-    def _make_template(
-        self, columns, partition_columns, if_table_config_exists, force_columns
-    ):
-        # create table config with metadata
-        self.metadata.create(
-            if_exists=if_table_config_exists,
-            columns=partition_columns + columns,
-            partition_columns=partition_columns,
-            force_columns=force_columns,
-            table_only=False,
-        )
-
-        self._make_publish_sql()
+        return publish_txt
 
     def table_exists(self, mode):
         """Check if table exists in BigQuery.
@@ -250,170 +281,13 @@ class Table(Base):
 
         return bool(ref)
 
-    def init(
-        self,
-        data_sample_path=None,
-        if_folder_exists="raise",
-        if_table_config_exists="raise",
-        source_format="csv",
-        force_columns=False,
-        columns_config_url_or_path=None,
-    ):  # sourcery skip: low-code-quality
-        """Initialize table folder at metadata_path at `metadata_path/<dataset_id>/<table_id>`.
-
-        The folder should contain:
-
-        * `table_config.yaml`
-        * `publish.sql`
-
-        You can also point to a sample of the data to auto complete columns names.
-
-        Args:
-            data_sample_path (str, pathlib.PosixPath): Optional.
-                Data sample path to auto complete columns names
-                It supports Comma Delimited CSV, Apache Avro and
-                Apache Parquet.
-            if_folder_exists (str): Optional.
-                What to do if table folder exists
-
-                * 'raise' : Raises FileExistsError
-                * 'replace' : Replace folder
-                * 'pass' : Do nothing
-            if_table_config_exists (str): Optional
-                What to do if table_config.yaml and publish.sql exists
-
-                * 'raise' : Raises FileExistsError
-                * 'replace' : Replace files with blank template
-                * 'pass' : Do nothing
-            source_format (str): Optional
-                Data source format. Only 'csv', 'avro' and 'parquet'
-                are supported. Defaults to 'csv'.
-            force_columns (bool): Optional.
-                If set to `True`, overwrite CKAN's columns with the ones provi
-                ded.
-                If set to `False`, keep CKAN's columns instead of the ones pro
-                vided.
-            columns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.
-                Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
-                Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
-
-        Raises:
-            FileExistsError: If folder exists and replace is False.
-            NotImplementedError: If data sample is not in supported type or format.
-        """
-        # # TODO: review this method
-        ## TODO nao precisamos mais de arquivos de configuração?
-        # if not self.dataset_folder.exists():
-        #     raise FileExistsError(
-        #         f"Dataset folder {self.dataset_folder} folder does not exists. "
-        #         "Create a dataset before adding tables."
-        #     )
-
-        # try:
-        #     self.table_folder.mkdir(exist_ok=(if_folder_exists == "replace"))
-        # except FileExistsError as e:
-        #     if if_folder_exists == "raise":
-        #         raise FileExistsError(
-        #             f"Table folder already exists for {self.table_id}. "
-        #         ) from e
-        #     if if_folder_exists == "pass":
-        #         return self
-
-        # if not data_sample_path and if_table_config_exists != "pass":
-        #     raise BaseDosDadosException(
-        #         "You must provide a path to correctly create config files"
-        #     )
-
-        partition_columns = []
-        if isinstance(
-            data_sample_path,
-            (
-                str,
-                Path,
-            ),
-        ):
-            # Check if partitioned and get data sample and partition columns
-            data_sample_path = Path(data_sample_path)
-
-            if data_sample_path.is_dir():
-                data_sample_path = [
-                    f
-                    for f in data_sample_path.glob("**/*")
-                    if f.is_file() and f.suffix == f".{source_format}"
-                ][0]
-
-                partition_columns = [
-                    k.split("=")[0]
-                    for k in data_sample_path.as_posix().split("/")
-                    if "=" in k
-                ]
-
-            columns = Datatype(self, source_format).header(data_sample_path)
-
-        else:
-            columns = ["column_name"]
-
-        # if if_table_config_exists == "pass":
-        #     # Check if config files exists before passing
-        #     if (
-        #         Path(self.table_folder / "table_config.yaml").is_file()
-        #         and Path(self.table_folder / "publish.sql").is_file()
-        #     ):
-        #         pass
-        #     # Raise if no sample to determine columns
-        #     elif not data_sample_path:
-        #         raise BaseDosDadosException(
-        #             "You must provide a path to correctly create config files"
-        #         )
-        #     else:
-        #         self._make_template(
-        #             columns,
-        #             partition_columns,
-        #             if_table_config_exists,
-        #             force_columns=force_columns,
-        #         )
-
-        # elif if_table_config_exists == "raise":
-        #     # Check if config files already exist
-        #     if (
-        #         Path(self.table_folder / "table_config.yaml").is_file()
-        #         and Path(self.table_folder / "publish.sql").is_file()
-        #     ):
-        #         raise FileExistsError(
-        #             f"table_config.yaml and publish.sql already exists at {self.table_folder}"
-        #         )
-        #     # if config files don't exist, create them
-        #     self._make_template(
-        #         columns,
-        #         partition_columns,
-        #         if_table_config_exists,
-        #         force_columns=force_columns,
-        #     )
-
-        # else:
-        #     # Raise: without a path to data sample, should not replace config files with empty template
-        #     self._make_template(
-        #         columns,
-        #         partition_columns,
-        #         if_table_config_exists,
-        #         force_columns=force_columns,
-        #     )
-
-        # if columns_config_url_or_path is not None:
-        #     self.update_columns(columns_config_url_or_path)
-
-        # return self
-
     def create(
         self,
         path=None,
         force_dataset=True,
         if_table_exists="raise",
         if_storage_data_exists="raise",
-        if_table_config_exists="raise",
         source_format="csv",
-        force_columns=False,
-        columns_config_url_or_path=None,
         dataset_is_public=True,
         location=None,
         chunk_size=None,
@@ -507,32 +381,28 @@ class Table(Base):
             ),
         ):
             Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
-                path,
+                path=path,
                 mode="staging",
                 if_exists=if_storage_data_exists,
                 chunk_size=chunk_size,
             )
 
         # Create Dataset if it doesn't exist
+
         if force_dataset:
             dataset_obj = Dataset(self.dataset_id, **self.main_vars)
 
-            try:
-                dataset_obj.init()
-            except FileExistsError:
-                pass
-
             dataset_obj.create(
-                if_exists="pass", location=location, dataset_is_public=dataset_is_public
+                if_exists="pass",
+                mode="staging",
+                location=location,
+                dataset_is_public=dataset_is_public,
             )
 
-        self.init(
+        data_columns = self._get_columns_from_data(
             data_sample_path=path,
-            if_folder_exists="replace",
-            if_table_config_exists=if_table_config_exists,
-            columns_config_url_or_path=columns_config_url_or_path,
             source_format=source_format,
-            force_columns=force_columns,
+            mode="staging",
         )
 
         table = bigquery.Table(self.table_full_name["staging"])
@@ -540,7 +410,7 @@ class Table(Base):
             self,
             source_format,
             "staging",
-            partitioned=self._is_partitioned(),  ## TODO need to know if is partitioned before metadata is created
+            partitioned=True if data_columns["partition_columns"] else False,
         ).external_config
 
         # Lookup if table alreay exists
@@ -568,12 +438,13 @@ class Table(Base):
         self.client["bigquery_staging"].create_table(table)
 
         logger.success(
-            "{object} {object_id} was {action}!",
+            "{object} {object_id} was {action} in {mode}!",
             object_id=self.table_id,
+            mode="staging",
             object="Table",
             action="created",
         )
-        return None
+        # return None
 
     def update(self, mode="all"):
         """Updates BigQuery schema and description.
@@ -615,12 +486,13 @@ class Table(Base):
             fields = ["description", "schema"] if m == "prod" else ["description"]
             self.client[f"bigquery_{m}"].update_table(table, fields=fields)
 
-        logger.success(
-            " {object} {object_id} was {action}!",
-            object_id=self.table_id,
-            object="Table",
-            action="updated",
-        )
+            logger.success(
+                " {object} {object_id} was {action} in {mode}!",
+                object_id=self.table_id,
+                mode=m["mode"],
+                object="Table",
+                action="updated",
+            )
 
     def publish(self, if_exists="raise"):
         """Creates BigQuery table at production dataset.
@@ -675,13 +547,13 @@ class Table(Base):
         if mode == "all":
             for m, n in self.table_full_name[mode].items():
                 self.client[f"bigquery_{m}"].delete_table(n, not_found_ok=True)
-            logger.info(
-                " {object} {object_id}_{mode} was {action}!",
-                object_id=self.table_id,
-                mode=mode,
-                object="Table",
-                action="deleted",
-            )
+                logger.info(
+                    " {object} {object_id}_{mode} was {action}!",
+                    object_id=self.table_id,
+                    mode=m["mode"],
+                    object="Table",
+                    action="deleted",
+                )
         else:
             self.client[f"bigquery_{mode}"].delete_table(
                 self.table_full_name[mode], not_found_ok=True

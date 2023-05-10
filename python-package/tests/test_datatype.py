@@ -10,6 +10,7 @@ from google.cloud.bigquery.external_config import (
 import basedosdados as bd
 from basedosdados.upload.datatypes import Datatype
 
+
 def test_header_avro(data_avro_path):
     """
     Test if header is returned for avro format

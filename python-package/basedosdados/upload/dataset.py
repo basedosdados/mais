@@ -97,31 +97,31 @@ class Dataset(Base):
     #     with open(readme_path, "w", encoding="utf-8") as readmefile:
     #         readmefile.write(readme_content)
 
-    def init(self, replace: bool = False):
-        """Initialize dataset in the backend.
+    # def init(self, replace: bool = False):
+    #     """Initialize dataset in the backend.
 
-        Args:
-            replace (bool): Optional. Whether to replace existing.
+    #     Args:
+    #         replace (bool): Optional. Whether to replace existing.
 
-        Raises:
-            FileExistsError: If dataset folder already exists and replace is False
-        """
+    #     Raises:
+    #         FileExistsError: If dataset folder already exists and replace is False
+    #     """
 
-        # create dataset config with metadata
-        try:
-            self.metadata.create(if_exists="replace" if replace else "raise")
-        except:
-            raise NotImplementedError(
-                "Metadata.create() is not implemented yet."
-            )  # TODO: implement metadata.create()
+    #     # create dataset config with metadata
+    #     try:
+    #         self.metadata.create(if_exists="replace" if replace else "raise")
+    #     except:
+    #         raise NotImplementedError(
+    #             "Metadata.create() is not implemented yet."
+    #         )  # TODO: implement metadata.create()
 
-        # create README.md file
-        # self._write_readme_file()
+    #     # create README.md file
+    #     # self._write_readme_file()
 
-        # # Add code folder
-        # (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
+    #     # # Add code folder
+    #     # (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
 
-        return self
+    #     return self
 
     def publicize(self, mode="all", dataset_is_public=True):
         """Changes IAM configuration to turn BigQuery dataset public.

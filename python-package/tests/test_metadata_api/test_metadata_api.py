@@ -93,7 +93,9 @@ def test_table_metadata_schema(api_table_metadata):
     Test metadata schema.
     """
     metadata_schema = api_table_metadata.metadata_schema
-    resource_type = metadata_schema.get("properties").get("resource_type").get("enum")[0]
+    resource_type = (
+        metadata_schema.get("properties").get("resource_type").get("enum")[0]
+    )
     assert resource_type == "bdm_table"
 
 
@@ -115,9 +117,7 @@ def test_create_new_table(api_new_table_metadata):
         api_new_table_metadata.filepath.unlink()
 
     res = api_new_table_metadata.create(
-        if_exists="replace",
-        table_only=False,
-        columns=['ano', 'sigla_uf', 'dados']
+        if_exists="replace", table_only=False, columns=["ano", "sigla_uf", "dados"]
     )
 
     assert api_new_table_metadata.filepath.exists() is True
@@ -144,8 +144,8 @@ def test_simplify_graphql_empty_query(api_table_metadata):
     """
     Test if empty query is returned.
     """
-    query = '''
-    '''
+    query = """
+    """
     variables = {}
     cleaned_res = api_table_metadata._get_graphql(query, variables)
     assert cleaned_res == {}
@@ -173,7 +173,7 @@ def test_owner_org_new_table(api_new_table_metadata):
     """
 
     with pytest.raises(BaseDosDadosException):
-        owner_org = api_new_table_metadata.owner_org  #pylint: disable=unused-variable
+        owner_org = api_new_table_metadata.owner_org  # pylint: disable=unused-variable
 
 
 def test_simplify_graphql_response(api_table_metadata):
@@ -191,12 +191,7 @@ def test_simplify_graphql_response(api_table_metadata):
                         "description": "Produto Interno Bruto",
                         "themes": {
                             "edges": [
-                                {
-                                    "node": {
-                                        "slug": "economia",
-                                        "name": "Economia"
-                                    }
-                                }
+                                {"node": {"slug": "economia", "name": "Economia"}}
                             ]
                         },
                     }
