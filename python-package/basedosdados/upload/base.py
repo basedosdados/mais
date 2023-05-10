@@ -459,9 +459,13 @@ class Base:  # pylint: disable=too-many-instance-attributes
         )
         project_id = self._get_project_id(mode)
         # pylint: disable=no-member
-        return crm_service.projects().get(projectId=project_id).execute()["projectNumber"]
+        return (
+            crm_service.projects().get(projectId=project_id).execute()["projectNumber"]
+        )
 
-    def _get_project_iam_policy(self, mode: str) -> Dict[str, Union[str, int, List[Dict[str, Union[str, List[str]]]]]]:
+    def _get_project_iam_policy(
+        self, mode: str
+    ) -> Dict[str, Union[str, int, List[Dict[str, Union[str, List[str]]]]]]:
         """
         Get the project IAM policy.
         """
@@ -470,7 +474,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
             "cloudresourcemanager", "v1", credentials=credentials
         )
         policy = (
-            service.projects() # pylint: disable=no-member
+            service.projects()  # pylint: disable=no-member
             .getIamPolicy(
                 resource=self._get_project_id(mode),
                 body={"options": {"requestedPolicyVersion": 1}},
@@ -479,7 +483,11 @@ class Base:  # pylint: disable=too-many-instance-attributes
         )
         return policy
 
-    def _set_project_iam_policy(self, policy: Dict[str, Union[str, int, List[Dict[str, Union[str, List[str]]]]]], mode: str):
+    def _set_project_iam_policy(
+        self,
+        policy: Dict[str, Union[str, int, List[Dict[str, Union[str, List[str]]]]]],
+        mode: str,
+    ):
         """
         Set the project IAM policy.
         """
@@ -487,7 +495,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
         service = googleapiclient.discovery.build(
             "cloudresourcemanager", "v1", credentials=credentials
         )
-        service.projects().setIamPolicy( # pylint: disable=no-member
+        service.projects().setIamPolicy(  # pylint: disable=no-member
             resource=self._get_project_id(mode), body={"policy": policy}
         ).execute()
 

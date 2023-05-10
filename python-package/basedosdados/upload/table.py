@@ -48,7 +48,7 @@ class Table(Base):
     @lru_cache(256)
     def table_config(self):
         """
-        Load table_config.yaml
+        Load table config
         """
         # return self._load_yaml(self.table_folder / "table_config.yaml")
         return self._backend.get_table_config(self.dataset_id, self.table_id)
@@ -57,32 +57,20 @@ class Table(Base):
         """
         Get table object from BigQuery
         """
+
         return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
-    def _load_schema(self, mode="staging"):
+    def _load_schema(self, columns=None, mode="staging"):
         """Load schema from table config
 
         Args:
             mode (bool): Which dataset to create [prod|staging].
         """
         # TODO: review this function
-
-        self._check_mode(mode)
-
-        columns = self.table_config["columns"]
-
         if mode == "staging":
-            new_columns = []
-            for c in columns:
-                # case is_in_staging are None then must be True
-                is_in_staging = c["isInStaging"]
-                # append columns declared in table config to schema only if is_in_staging: True
-                if is_in_staging and not c["isPartition"]:
-                    c["type"] = "STRING"
-                    new_columns.append(c)
-
-            del columns
-            columns = new_columns
+            columns = [
+                {"name": col, "type": "STRING"} for col in columns.get("columns")
+            ]
 
         elif mode == "prod":
             schema = self._get_table_obj(mode).schema
@@ -128,10 +116,11 @@ class Table(Base):
                         c["type"] = s.field_type
                         c["mode"] = s.mode
                         break
+
         ## force utf-8, write JSON to BytesIO
         json_buffer = BytesIO()
-        json.dump(columns, json_buffer, ensure_ascii=False)
-
+        json_buffer.write(json.dumps(columns, ensure_ascii=False).encode("utf-8"))
+        json_buffer.seek(0)
         # load new created schema
         return self.client[f"bigquery_{mode}"].schema_from_json(json_buffer)
 
@@ -282,10 +271,9 @@ class Table(Base):
 
         return bool(ref)
 
-    def _get_biglake_connection_id(
+    def _get_biglake_connection(
         self, set_biglake_connection_permissions=True, location=None, mode="staging"
     ):
-        biglake_connection_id: str = None
         connection = Connection(name="biglake", location=location, mode="staging")
         if not connection.exists:
             try:
@@ -345,9 +333,8 @@ class Table(Base):
                     " If you don't, please ask an admin to do it for you or set "
                     "set_biglake_connection_permissions=False."
                 ) from exc
-        biglake_connection_id = connection.connection_id
 
-        return biglake_connection_id
+        return connection
 
     def create(  # pylint: disable=too-many-statements
         self,
@@ -356,6 +343,7 @@ class Table(Base):
         if_table_exists="raise",
         if_storage_data_exists="raise",
         source_format="csv",
+        use_data_columns=True,
         dataset_is_public=True,
         location=None,
         chunk_size=None,
@@ -477,34 +465,37 @@ class Table(Base):
                 dataset_is_public=dataset_is_public,
             )
 
-        data_columns = self._get_columns_from_data(
-            data_sample_path=path,
-            source_format=source_format,
-            mode="staging",
-        )
         if biglake_table:
-            biglake_connection_id = self._get_biglake_connection_id(
-                self,
+            biglake_connection = self._get_biglake_connection(
                 set_biglake_connection_permissions=set_biglake_connection_permissions,
                 location=location,
                 mode="staging",
             )
-        else:
-            biglake_connection_id = None
+            biglake_connection_id = biglake_connection.connection_id
 
         table = bigquery.Table(self.table_full_name["staging"])
 
+        if use_data_columns:
+            table_columns = self._get_columns_from_data(
+                data_sample_path=path,
+                source_format=source_format,
+                mode="staging",
+            )
+        else:
+            table_columns = self._get_columns_from_api()
         table.external_data_configuration = Datatype(
-            self,
-            source_format,
-            "staging",
-            partitioned=bool(data_columns["partition_columns"]),
-            biglake_connection_id=biglake_connection_id,
+            table_obj=table,
+            schema=self._load_schema(columns=table_columns, mode="staging"),
+            source_format=source_format,
+            mode="staging",
+            bucket_name=self.bucket_name,
+            partitioned=bool(table_columns["partition_columns"]),
+            biglake_connection_id=biglake_connection_id if biglake_table else None,
         ).external_config
 
         # When using BigLake tables, schema must be provided to the `Table` object
         if biglake_table:
-            table.schema = self._load_schema("staging")
+            table.schema = self._load_schema(columns=table_columns, mode="staging")
             logger.info(f"Using BigLake connection {biglake_connection_id}")
 
         # Lookup if table alreay exists
@@ -536,7 +527,7 @@ class Table(Base):
                 raise BaseDosDadosException(
                     "Permission denied. The service account used to create the BigLake connection"
                     " does not have permission to read data from the source bucket. Please grant"
-                    f" the service account {connection.service_account} the Storage Object Viewer"
+                    f" the service account {biglake_connection.service_account} the Storage Object Viewer"
                     " (roles/storage.objectViewer) role on the source bucket (or on the project)."
                     " Or, you can try running this again with set_biglake_connection_permissions=True."
                 ) from exc

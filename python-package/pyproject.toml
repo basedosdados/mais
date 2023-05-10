@@ -40,6 +40,7 @@ shapely = "^1.6.0"
 toml = "^0.10.2"
 tomlkit = "0.7.0"
 tqdm = "4.50.2"
+black = "^23.3.0"
 
 [tool.black]
 # Use the more relaxed max line length permitted in PEP8.
