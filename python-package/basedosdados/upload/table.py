@@ -414,80 +414,55 @@ class Table(Base):
         biglake_table=False,
         set_biglake_connection_permissions=True,
     ):
-        """Creates BigQuery table at staging dataset.
+        """Creates a BigQuery table in the staging dataset.
 
-        If you add a path, it automatically saves the data in the storage,
-        creates a datasets folder and BigQuery location, besides creating the
-        table and its configuration files.
+        If a path is provided, data is automatically saved in storage,
+        and a datasets folder and BigQuery location are created, in addition to creating
+        the table and its configuration files.
 
-        The new table should be located at `<dataset_id>_staging.<table_id>` in BigQuery.
+        The new table is located at `<dataset_id>_staging.<table_id>` in BigQuery.
 
-        It looks for data saved in Storage at `<bucket_name>/staging/<dataset_id>/<table_id>/*`
-        and builds the table.
+        Data can be found in Storage at `<bucket_name>/staging/<dataset_id>/<table_id>/*`
+        and is used to build the table.
 
-        It currently supports the types:
+        The following data types are supported:
 
-        - Comma Delimited CSV
+        - Comma-Delimited CSV
         - Apache Avro
         - Apache Parquet
 
-        Data can also be partitioned following the hive partitioning scheme
-        `<key1>=<value1>/<key2>=<value2>` - for instance,
-        `year=2012/country=BR`. The partition is automatcally detected
-        by searching for `partitions` on the `table_config.yaml`.
+        Data can also be partitioned following the Hive partitioning scheme
+        `<key1>=<value1>/<key2>=<value2>`; for example,
+        `year=2012/country=BR`. The partition is automatically detected by searching for `partitions`
+        in the `table_config.yaml` file.
 
         Args:
-            path (str or pathlib.PosixPath): Where to find the file that you want to upload to create a table with
-            job_config_params (dict): Optional.
-                Job configuration params from bigquery
-            if_table_exists (str): Optional
-                What to do if table exists
-
-                * 'raise' : Raises Conflict exception
-                * 'replace' : Replace table
-                * 'pass' : Do nothing
-            force_dataset (bool): Creates `<dataset_id>` folder and BigQuery Dataset if it doesn't exists.
-            if_table_config_exists (str): Optional.
-                What to do if config files already exist
-
-                 * 'raise': Raises FileExistError
-                 * 'replace': Replace with blank template
-                 * 'pass'; Do nothing
-            if_storage_data_exists (str): Optional.
-                What to do if data already exists on your bucket:
-
-                * 'raise' : Raises Conflict exception
-                * 'replace' : Replace table
-                * 'pass' : Do nothing
-            source_format (str): Optional
-                Data source format. Only 'csv', 'avro' and 'parquet'
+            path (str or pathlib.PosixPath): The path to the file to be uploaded to create the table.
+            source_format (str): Optional. The format of the data source. Only 'csv', 'avro', and 'parquet'
                 are supported. Defaults to 'csv'.
-            force_columns (bool): Optional.
-                If set to `True`, overwrite CKAN's columns with the ones provi
-                ded.
-                If set to `False`, keep CKAN's columns instead of the ones pro
-                vided.
-            columns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.
-                Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
-                Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
+            if_table_exists (str): Optional. Determines what to do if the table already exists:
 
-            dataset_is_public (bool): Control if prod dataset is public or not. By default staging datasets like `dataset_id_staging` are not public.
+                * 'raise' : Raises a Conflict exception
+                * 'replace' : Replaces the table
+                * 'pass' : Does nothing
+            if_storage_data_exists (str): Optional. Determines what to do if the data already exists on your bucket:
 
-            location (str): Optional. Location of dataset data.
-                List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
+                * 'raise' : Raises a Conflict exception
+                * 'replace' : Replaces the table
+                * 'pass' : Does nothing
+            if_dataset_exists (str): Optional. Determines what to do if the dataset already exists:
 
-            chunk_size (int): Optional
-                The size of a chunk of data whenever iterating (in bytes).
-                This must be a multiple of 256 KB per the API specification.
+                * 'raise' : Raises a Conflict exception
+                * 'replace' : Replaces the dataset
+                * 'pass' : Does nothing
+            dataset_is_public (bool): Optional. Controls if the prod dataset is public or not. By default, staging datasets like `dataset_id_staging` are not public.
+            location (str): Optional. The location of the dataset data. List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
+            chunk_size (int): Optional. The size of a chunk of data whenever iterating (in bytes). This must be a multiple of 256 KB per the API specification.
                 If not specified, the chunk_size of the blob itself is used. If that is not specified, a default value of 40 MB is used.
+            biglake_table (bool): Optional. Sets this as a BigLake table. BigLake tables allow end-users to query from external data (such as GCS) even if
+                they don't have access to the source data. IAM is managed like any other BigQuery native table. See https://cloud.google.com/bigquery/docs/biglake-intro for more on BigLake.
+            set_biglake_connection_permissions (bool): Optional. If set to `True`, attempts to grant the BigLake connection service account access to the table's data in GCS.
 
-            biglake_table (bool): Optional
-                Sets this as a BigLake table. BigLake tables allow end users to query from external data (such as GCS) even if
-                they don't have access to the source data. IAM is managed like any other BigQuery native table. See
-                https://cloud.google.com/bigquery/docs/biglake-intro for more on BigLake.
-
-            set_biglake_connection_permissions (bool): Optional
-                If set to `True`, attempts to grant the BigLake connection service account access to the table's data in GCS.
         """
 
         if path is None:
