@@ -401,7 +401,6 @@ class Table(Base):
         if_table_exists="raise",
         if_storage_data_exists="raise",
         source_format="csv",
-        use_data_columns=True,
         dataset_is_public=True,
         location=None,
         chunk_size=None,
