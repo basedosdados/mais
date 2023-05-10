@@ -56,7 +56,7 @@ class Dataset(Base):
         dataset = bigquery.Dataset(dataset_id)
         if mode == "staging":
             dataset_path = dataset_id.replace("_staging", "")
-            description = f"Staging dataset for `{dataset_path}`"
+            description = f"staging dataset for `{dataset_path}`"
             labels = {"staging": True}
         else:
             try:
@@ -66,9 +66,9 @@ class Dataset(Base):
                 }
             except BaseException:
                 logger.warning(
-                    f"Dataset {dataset_id} does not have a description in the API."
+                    f"dataset {dataset_id} does not have a description in the API."
                 )
-                description = "Description not available in the API."
+                description = "description not available in the API."
                 labels = {}
 
         dataset.description = description

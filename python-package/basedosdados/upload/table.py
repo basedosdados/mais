@@ -382,15 +382,15 @@ class Table(Base):
         """
         table_path = self.table_full_name["prod"]
         if mode == "staging":
-            description = f"Staging table for `{table_path}`"
+            description = f"staging table for `{table_path}`"
         else:
             try:
                 description = self.table_config.get("descriptionPt", "")
             except BaseException:
                 logger.warning(
-                    f"Table {self.table_id} does not have a description in the API."
+                    f"table {self.table_id} does not have a description in the API."
                 )
-                description = "Description not available in the API."
+                description = "description not available in the API."
 
         return description
 
