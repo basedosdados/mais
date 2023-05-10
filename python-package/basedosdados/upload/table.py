@@ -84,17 +84,24 @@ class Table(Base):
     def _load_staging_schema_from_data(
         self, data_sample_path=None, source_format="csv", mode="staging"
     ):
+        """
+        Generate schema from columns metadata in data sample
+        """
         table_columns = self._get_columns_metadata_from_data(
             data_sample_path=data_sample_path,
             source_format=source_format,
             mode="staging",
         )
+        columns = [
+            {"name": col, "type": "STRING"} for col in table_columns.get("columns")
+        ]
+        if self.table_exists(mode="staging"):
+            logger.warning(
+                " {object} {object_id} allready exists, replacing schema",
+                object_id=self.table_id,
+                object="Table",
+            )
 
-        if not self.table_exists(mode="staging"):
-            # use metadata from data_sample
-            columns = [
-                {"name": col, "type": "STRING"} for col in table_columns.get("columns")
-            ]
         return self._load_schema_from_json(columns, mode)
 
     def _load_schema(self, columns=None, mode="staging"):
@@ -397,10 +404,10 @@ class Table(Base):
     def create(  # pylint: disable=too-many-statements
         self,
         path=None,
-        force_dataset=True,
+        source_format="csv",
         if_table_exists="raise",
         if_storage_data_exists="raise",
-        source_format="csv",
+        if_dataset_exists="pass",
         dataset_is_public=True,
         location=None,
         chunk_size=None,
@@ -512,15 +519,14 @@ class Table(Base):
 
         # Create Dataset if it doesn't exist
 
-        if force_dataset:
-            dataset_obj = Dataset(self.dataset_id, **self.main_vars)
+        dataset_obj = Dataset(self.dataset_id, **self.main_vars)
 
-            dataset_obj.create(
-                if_exists="pass",
-                mode="all",
-                location=location,
-                dataset_is_public=dataset_is_public,
-            )
+        dataset_obj.create(
+            if_exists=if_dataset_exists,
+            mode="all",
+            location=location,
+            dataset_is_public=dataset_is_public,
+        )
 
         if biglake_table:
             biglake_connection = self._get_biglake_connection(
