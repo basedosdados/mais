@@ -41,11 +41,11 @@ last_updated:
 version: v1.0
 
 # Quem está preenchendo esses metadados?
-published_by:
-    name: Lucas Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
-    ckan_user: lucasnascm
+data_cleaned_by:
+    name: Gabriel Pisa Folhes
+    email: pisagabriel09@gmail.com
+    github_user: folhesgabriel
+    ckan_user:
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
@@ -165,6 +165,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 259
+number_rows: 285
 
 metadata_modified:

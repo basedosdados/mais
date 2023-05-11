@@ -331,9 +331,9 @@ columns:
           - (1)
       covered_by_dictionary: yes
       directory_column:
-          dataset_id: br_bcb_sicor
-          table_id: empreendimento
-          column_name: id_empreendimento
+          dataset_id:
+          table_id:
+          column_name: 
       measurement_unit:
       has_sensitive_data: no
       observations:
