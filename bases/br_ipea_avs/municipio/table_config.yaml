@@ -457,7 +457,7 @@ columns:
       is_partition: false
     - name: proporcao_sem_agua_esgoto
       bigquery_type: float64
-      description: Pessoas com abastecimento de água e esgoto inadequado
+      description: Proporção de pessoas com abastecimento de água e esgoto inadequado
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -472,7 +472,7 @@ columns:
       is_partition: false
     - name: proporcao_sem_coleta
       bigquery_type: float64
-      description: Pessoas sem o serviço de coleta de lixo
+      description: Proporção de pessoas sem o serviço de coleta de lixo
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -495,15 +495,14 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       observations: Valores em reais de agosto de 2010
       is_in_staging: true
       is_partition: false
     - name: renda_media_18_mais
       bigquery_type: float64
-      description: Proporção dos ocupados com ensino superior completo - 18 anos ou
-          mais
+      description: Rendimento médio dos ocupados - 18 anos ou mais
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -511,7 +510,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       observations: Valores em reais de agosto de 2010
       is_in_staging: true
@@ -665,7 +664,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
+      measurement_unit: percent
       has_sensitive_data: no
       observations: Percentual da população de 65 anos ou mais de idade em relação
           à população total
@@ -718,7 +717,7 @@ columns:
       is_partition: false
     - name: proporcao_escola_5_6
       bigquery_type: float64
-      description: Proporção de 5 a 6 anos na escola
+      description: Proporção de crianças de 5 a 6 anos na escola
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -871,7 +870,7 @@ columns:
       is_partition: false
     - name: proporcao_fundamental_completo_15_17
       bigquery_type: float64
-      description: Proporção de 15 a 17 anos com fundamental completo
+      description: Proporção de alunos de 15 a 17 anos com fundamental completo
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -886,7 +885,7 @@ columns:
       is_partition: false
     - name: proporcao_fundamental_completo_18_mais
       bigquery_type: float64
-      description: Proporção de alunos de 15 a 17 anos com fundamental completo
+      description: Proporção de alunos de 18 anos ou mais com fundamental completo
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -963,7 +962,7 @@ columns:
       is_partition: false
     - name: proporcao_ocupado_superior_18_mais
       bigquery_type: float64
-      description: Proporção dos ocupados com ensino médio completo - 18 anos ou mais
+      description: Proporção dos ocupados com ensino superior - 18 anos ou mais
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1198,7 +1197,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: years
+      measurement_unit: year
       has_sensitive_data: no
       observations: Número médio de anos que as pessoas deverão viver a partir do
           nascimento, se permanecerem constantes ao longo da vida o nível e o padrão
