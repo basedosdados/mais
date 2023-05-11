@@ -122,16 +122,8 @@ class Table(Base):
 
         table_columns = self._get_columns_metadata_from_api()
         columns = table_columns.get("partition_columns") + table_columns.get("columns")
-        schema = [
-            {
-                "name": col.get("name"),
-                "type": col.get("bigqueryType").get("name"),
-                "description": col.get("descriptionPt"),
-            }
-            for col in columns
-        ]
 
-        return self._load_schema_from_json(columns=schema, mode=mode)
+        return self._load_schema_from_json(columns=columns, mode=mode)
 
     def _get_columns_metadata_from_data(
         self,
@@ -192,20 +184,53 @@ class Table(Base):
         Get columns and partition columns from API.
         """
 
+        columns = [
+            col
+            for col in self.table_config.get("columns")
+            if col.get("isPartition") is False
+        ]
+
+        partition_columns = [
+            col
+            for col in self.table_config.get("columns")
+            if col.get("isPartition") is True
+        ]
+
         return {
             "columns": [
-                col
-                for col in self.table_config.get("columns")
-                if col.get("isPartition") is False
+                {
+                    "name": col.get("name"),
+                    "type": col.get("bigqueryType").get("name"),
+                    "description": col.get("descriptionPt"),
+                }
+                for col in columns
             ],
             "partition_columns": [
-                col
-                for col in self.table_config.get("columns")
-                if col.get("isPartition") is True
+                {
+                    "name": col.get("name"),
+                    "type": col.get("bigqueryType").get("name"),
+                    "description": col.get("descriptionPt"),
+                }
+                for col in partition_columns
             ],
         }
 
-    def _make_publish_sql(self):
+    def _get_columns_metadata_from_bq(self, mode="staging"):
+        if mode == "staging" and self.table_exists(mode="staging"):
+            schema = self._get_table_obj(mode="staging").schema
+        if mode == "prod" and self.table_exists(mode="prod"):
+            schema = self._get_table_obj(mode="prod").schema
+
+        return [
+            {
+                "name": col.name,
+                "type": col.field_type,
+                "description": col.description,
+            }
+            for col in schema
+        ]
+
+    def _make_publish_sql(self, mode="staging"):
         """Create publish.sql with columns and bigquery_type"""
 
         ### publish.sql header and instructions
@@ -240,16 +265,19 @@ class Table(Base):
 
         # sort columns by is_partition, partitions_columns come first
 
-        table_columns = self._get_columns_metadata_from_api()
-        columns = table_columns.get("partition_columns") + table_columns.get("columns")
+        if mode == "staging":
+            columns = self._get_columns_metadata_from_bq(mode="staging")
+        elif mode == "prod":
+            table_columns = self._get_columns_metadata_from_api()
+            columns = table_columns.get("partition_columns") + table_columns.get(
+                "columns"
+            )
 
         # add columns in publish.sql
         for col in columns:
             name = col.get("name")
             bigquery_type = (
-                "STRING"
-                if col.get("bigqueryType").get("name") is None
-                else col.get("bigqueryType").get("name").upper()
+                "STRING" if col.get("type") is None else col.get("type").upper()
             )
 
             publish_txt += f"SAFE_CAST({name} AS {bigquery_type}) {name},\n"
