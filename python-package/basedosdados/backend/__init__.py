@@ -96,7 +96,7 @@ class Backend:
         r = self._simplify_graphql_response(response)
         if r["allDataset"] != []:
             return r["allDataset"][0]["_id"]
-        msg = f"{dataset_slug} not found."
+        msg = f"{dataset_slug} not found. Please create the metadata first in {self.graphql_url}"
         raise BaseDosDadosException(msg)
 
     def _get_table_id_from_slug(self, dataset_slug, table_slug):

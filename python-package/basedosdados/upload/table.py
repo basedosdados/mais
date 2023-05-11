@@ -76,6 +76,7 @@ class Table(Base):
         return bool(table_columns.get("partition_columns", []))
 
     def _load_schema_from_json(self, columns=None, mode="staging"):
+        # print(json.dumps(columns, indent=4))
         json_buffer = BytesIO()
         json_buffer.write(json.dumps(columns, ensure_ascii=False).encode("utf-8"))
         json_buffer.seek(0)
@@ -105,6 +106,17 @@ class Table(Base):
         return self._load_schema_from_json(
             columns=table_columns.get("columns"), mode="staging"
         )
+
+    def _load_schema_from_bq(self, mode="staging"):
+        """Load schema from table config
+
+        Args:
+            mode (bool): Which dataset to create [prod|staging].
+
+        """
+        table_columns = self._get_columns_from_bq()
+        columns = table_columns.get("partition_columns") + table_columns.get("columns")
+        return self._load_schema_from_json(columns=columns, mode=mode)
 
     def _load_schema_from_api(self, mode="staging"):
         """Load schema from table config
@@ -299,14 +311,14 @@ class Table(Base):
 
         # add create table statement
         project_id_prod = self.client["bigquery_prod"].project
-        publish_txt += f"\n\nCREATE VIEW {project_id_prod}.{self.dataset_id}.{self.table_id} AS\nSELECT \n"
+        publish_txt += f"\n\nCREATE OR REPLACE VIEW {project_id_prod}.{self.dataset_id}.{self.table_id} AS\nSELECT \n"
 
         # sort columns by is_partition, partitions_columns come first
 
-        if mode == "staging":
+        if mode == "prod":
             table_columns = self._get_columns_from_bq(mode="staging")
-        elif mode == "prod":
-            table_columns = self._get_columns_metadata_from_api()
+        # elif mode == "prod":
+        #     table_columns = self._get_columns_metadata_from_api()
 
         columns = table_columns.get("partition_columns") + table_columns.get("columns")
 
@@ -612,43 +624,38 @@ class Table(Base):
         )
         # return None
 
-    def update(self, mode="all", custom_schema=None):
+    def update(self, mode="prod", custom_schema=None):
         """Updates BigQuery schema and description.
         Args:
             mode (str): Optional.
-                Table of which table to update [prod|staging|all]
+                Table of which table to update [prod]
             not_found_ok (bool): Optional.
                 What to do if table is not found
         """
 
         self._check_mode(mode)
 
-        mode = ["prod", "staging"] if mode == "all" else [mode]
-        for m in mode:
-            try:
-                table = self._get_table_obj(m)
-            except google.api_core.exceptions.NotFound:
-                continue
+        table = self._get_table_obj(mode)
 
-            # if m == "staging":
+        table.description = self._get_table_description()
 
-            table.description = self._get_table_description()
+        # when mode is staging the table schema already exists
+        if mode == "prod" and custom_schema is None:
+            table.schema = self._load_schema_from_bq()
+        if mode == "prod" and custom_schema is not None:
+            table.schema = self._load_schema_from_json(custom_schema)
 
-            # when mode is staging the table schema already exists
-            if m == "prod" and custom_schema is None:
-                table.schema = self._load_schema_from_api(m)
-            if m == "prod" and custom_schema is not None:
-                table.schema = self._load_schema_from_json(custom_schema)
-            fields = ["description", "schema"] if m == "prod" else ["description"]
-            self.client[f"bigquery_{m}"].update_table(table, fields=fields)
+        fields = ["description", "schema"]
 
-            logger.success(
-                " {object} {object_id} was {action} in {mode}!",
-                object_id=self.table_id,
-                mode=m,
-                object="Table",
-                action="updated",
-            )
+        self.client[f"bigquery_prod"].update_table(table, fields=fields)
+
+        logger.success(
+            " {object} {object_id} was {action} in {mode}!",
+            object_id=self.table_id,
+            mode=mode,
+            object="Table",
+            action="updated",
+        )
 
     def publish(self, if_exists="raise", custon_publish_sql=None, custom_schema=None):
         """Creates BigQuery table at production dataset.
@@ -678,13 +685,17 @@ class Table(Base):
 
         if if_exists == "replace":
             self.delete(mode="prod")
+        publish_sql = self._make_publish_sql(mode="prod")
 
+        ## create view using API metadata
         if custon_publish_sql is None:
-            self.client["bigquery_prod"].query(self._make_publish_sql()).result()
+            self.client["bigquery_prod"].query(publish_sql).result()
             self.update()
 
+        ## create view using custon query
         if custon_publish_sql is not None:
             self.client["bigquery_prod"].query(custon_publish_sql).result()
+            ## update schema using a custom schema
             if custom_schema is not None:
                 self.update(custom_schema=custom_schema)
 
