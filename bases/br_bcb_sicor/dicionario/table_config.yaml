@@ -32,13 +32,13 @@ update_frequency: unique
 observation_level:
 
 last_updated:
-    metadata: '2022-09-20'
-    data: '2022-09-20 18:32:10'
-    release: '2022-09-20 18:33:10'
+    metadata: '2023-05-10'
+    data: '2023-05-10 18:32:10'
+    release: '2023-05-10 18:33:10'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 data_cleaned_by:
