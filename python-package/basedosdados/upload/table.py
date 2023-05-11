@@ -73,16 +73,16 @@ class Table(Base):
         else:
             table_columns = self._get_columns_metadata_from_api()
 
-        return bool(table_columns.get("partition_columns"))
+        return bool(table_columns.get("partition_columns", []))
 
-    def _load_schema_from_json(self, columns, mode):
+    def _load_schema_from_json(self, columns=None, mode="staging"):
         json_buffer = BytesIO()
         json_buffer.write(json.dumps(columns, ensure_ascii=False).encode("utf-8"))
         json_buffer.seek(0)
         return self.client[f"bigquery_{mode}"].schema_from_json(json_buffer)
 
     def _load_staging_schema_from_data(
-        self, data_sample_path=None, source_format="csv", mode="staging"
+        self, data_sample_path=None, source_format="csv"
     ):
         """
         Generate schema from columns metadata in data sample
@@ -92,81 +92,46 @@ class Table(Base):
             source_format=source_format,
             mode="staging",
         )
-        columns = [
-            {"name": col, "type": "STRING"} for col in table_columns.get("columns")
-        ]
         if self.table_exists(mode="staging"):
             logger.warning(
-                " {object} {object_id} allready exists, replacing schema",
+                " {object} {object_id} allready exists, replacing schema!",
                 object_id=self.table_id,
                 object="Table",
             )
+            # table_columns = [
+            #     {"name": c.name, "type": c.field_type}
+            #     for c in self._get_table_obj(mode="staging").schema
+            # ]
+        return self._load_schema_from_json(
+            columns=table_columns.get("columns"), mode="staging"
+        )
 
-        return self._load_schema_from_json(columns, mode)
-
-    def _load_schema(self, columns=None, mode="staging"):
+    def _load_schema_from_api(self, mode="staging"):
         """Load schema from table config
 
         Args:
             mode (bool): Which dataset to create [prod|staging].
+
         """
-        # TODO: review this function
-        if mode == "staging" and not self.table_exists(mode):
-            # use metadata from data_sample
-            columns = [
-                {"name": col, "type": "STRING"} for col in columns.get("columns")
-            ]
-        elif mode == "staging" and self.table_exists(mode):
-            # use metadata from API
-            schema = self._get_table_obj(mode).schema
+        if self.table_exists(mode=mode):
+            logger.warning(
+                " {object} {object_id} allready exists, replacing schema!",
+                object_id=self.table_id,
+                object="Table",
+            )
 
-        elif mode == "prod" and self.table_exists(mode):
-            # use metadata from API
-            schema = self._get_table_obj(mode).schema
+        table_columns = self._get_columns_metadata_from_api()
+        columns = table_columns.get("partition_columns") + table_columns.get("columns")
+        schema = [
+            {
+                "name": col.get("name"),
+                "type": col.get("bigqueryType").get("name"),
+                "description": col.get("descriptionPt"),
+            }
+            for col in columns
+        ]
 
-            # get field names for fields at schema and at table config
-            column_names = [c["name"] for c in columns]
-            schema_names = [s.name for s in schema]
-
-            # check if there are mismatched fields
-            not_in_columns = [name for name in schema_names if name not in column_names]
-            not_in_schema = [name for name in column_names if name not in schema_names]
-
-            # raise if field is not in table_config
-            if not_in_columns:
-                raise BaseDosDadosException(
-                    "Column {error_columns} was not found in table_config.yaml. Are you sure that "
-                    "all your column names between table_config.yaml, publish.sql and "
-                    "{project_id}.{dataset_id}.{table_id} are the same?".format(
-                        error_columns=not_in_columns,
-                        project_id=self.table_config["dataset"]["organization"]["slug"],
-                        dataset_id=self.table_config["dataset"]["slug"],
-                        table_id=self.table_config["slug"],
-                    )
-                )
-
-            # raise if field is not in schema
-            if not_in_schema:
-                raise BaseDosDadosException(
-                    "Column {error_columns} was not found in publish.sql. Are you sure that "
-                    "all your column names between table_config.yaml, publish.sql and "
-                    "{project_id}.{dataset_id}.{table_id} are the same?".format(
-                        error_columns=not_in_schema,
-                        project_id=self.table_config["dataset"]["organization"]["slug"],
-                        dataset_id=self.table_config["dataset"]["slug"],
-                        table_id=self.table_config["slug"],
-                    )
-                )
-
-            # if field is in schema, get field_type and field_mode
-            for c in columns:
-                for s in schema:
-                    if c["name"] == s.name:
-                        c["type"] = s.field_type
-                        c["mode"] = s.mode
-                        break
-
-        return self._load_schema_from_json(columns, mode)
+        return self._load_schema_from_json(columns=schema, mode=mode)
 
     def _get_columns_metadata_from_data(
         self,
@@ -213,7 +178,12 @@ class Table(Base):
 
             columns = Datatype(source_format).header(data_sample_path)
 
-        return {"columns": columns, "partition_columns": partition_columns}
+        return {
+            "columns": [{"name": col, "type": "STRING"} for col in columns],
+            "partition_columns": [
+                {"name": col, "type": "STRING"} for col in partition_columns
+            ],
+        }
 
     def _get_columns_metadata_from_api(
         self,
@@ -221,18 +191,19 @@ class Table(Base):
         """
         Get columns and partition columns from API.
         """
-        partition_columns = [
-            col.get("name")
-            for col in self.table_config.get("columns")
-            if col.get("isPartition") is True
-        ]
-        columns = [
-            col.get("name")
-            for col in self.table_config.get("columns")
-            if col.get("isPartition") is False
-        ]
 
-        return {"columns": columns, "partition_columns": partition_columns}
+        return {
+            "columns": [
+                col
+                for col in self.table_config.get("columns")
+                if col.get("isPartition") is False
+            ],
+            "partition_columns": [
+                col
+                for col in self.table_config.get("columns")
+                if col.get("isPartition") is True
+            ],
+        }
 
     def _make_publish_sql(self):
         """Create publish.sql with columns and bigquery_type"""
@@ -259,8 +230,6 @@ class Table(Base):
         */
         """
 
-        # TODO: review this method
-
         # remove triple quotes extra space
         publish_txt = inspect.cleandoc(publish_txt)
         publish_txt = textwrap.dedent(publish_txt)
@@ -271,22 +240,16 @@ class Table(Base):
 
         # sort columns by is_partition, partitions_columns come first
 
-        if self._is_partitioned():
-            columns = sorted(
-                self.table_config["columns"],
-                key=lambda k: (k["is_partition"] is not None, k["is_partition"]),
-                reverse=True,
-            )
-        else:
-            columns = self.table_config["columns"]
+        table_columns = self._get_columns_metadata_from_api()
+        columns = table_columns.get("partition_columns") + table_columns.get("columns")
 
         # add columns in publish.sql
         for col in columns:
-            name = col["name"]
+            name = col.get("name")
             bigquery_type = (
                 "STRING"
-                if col["bigquery_type"] is None
-                else col["bigquery_type"].upper()
+                if col.get("bigqueryType").get("name") is None
+                else col.get("bigqueryType").get("name").upper()
             )
 
             publish_txt += f"SAFE_CAST({name} AS {bigquery_type}) {name},\n"
@@ -519,7 +482,7 @@ class Table(Base):
             dataset_id=self.dataset_id,
             table_id=self.table_id,
             schema=self._load_staging_schema_from_data(
-                data_sample_path=path, source_format=source_format, mode="staging"
+                data_sample_path=path, source_format=source_format
             ),
             source_format=source_format,
             mode="staging",
@@ -533,7 +496,7 @@ class Table(Base):
         # When using BigLake tables, schema must be provided to the `Table` object
         if biglake_table:
             table.schema = self._load_staging_schema_from_data(
-                data_sample_path=path, source_format=source_format, mode="staging"
+                data_sample_path=path, source_format=source_format
             )
             logger.info(f"Using BigLake connection {biglake_connection_id}")
 
@@ -584,7 +547,7 @@ class Table(Base):
         )
         # return None
 
-    def update(self, mode="all"):
+    def update(self, mode="all", custom_schema=None):
         """Updates BigQuery schema and description.
         Args:
             mode (str): Optional.
@@ -604,35 +567,25 @@ class Table(Base):
 
             # if m == "staging":
 
-            table.description = self._render_template(
-                Path("table/table_description.txt"), self.table_config
-            )
-
-            # save table description
-            with open(
-                self.metadata_path
-                / self.dataset_id
-                / self.table_id
-                / "table_description.txt",
-                "w",
-                encoding="utf-8",
-            ) as f:
-                f.write(table.description)
+            table.description = self._get_table_description()
 
             # when mode is staging the table schema already exists
-            table.schema = self._load_schema(m)
+            if m == "prod" and custom_schema is None:
+                table.schema = self._load_schema_from_api(m)
+            if m == "prod" and custom_schema is not None:
+                table.schema = self._load_schema_from_json(custom_schema)
             fields = ["description", "schema"] if m == "prod" else ["description"]
             self.client[f"bigquery_{m}"].update_table(table, fields=fields)
 
             logger.success(
                 " {object} {object_id} was {action} in {mode}!",
                 object_id=self.table_id,
-                mode=m["mode"],
+                mode=m,
                 object="Table",
                 action="updated",
             )
 
-    def publish(self, if_exists="raise"):
+    def publish(self, if_exists="raise", custon_publish_sql=None, custom_schema=None):
         """Creates BigQuery table at production dataset.
 
         Table should be located at `<dataset_id>.<table_id>`.
@@ -661,11 +614,15 @@ class Table(Base):
         if if_exists == "replace":
             self.delete(mode="prod")
 
-        self.client["bigquery_prod"].query(
-            (self.table_folder / "publish.sql").open("r", encoding="utf-8").read()
-        ).result()
+        if custon_publish_sql is None:
+            self.client["bigquery_prod"].query(self._make_publish_sql()).result()
+            self.update()
 
-        self.update()
+        if custon_publish_sql is not None:
+            self.client["bigquery_prod"].query(custon_publish_sql).result()
+            if custom_schema is not None:
+                self.update(custom_schema=custom_schema)
+
         logger.success(
             " {object} {object_id} was {action}!",
             object_id=self.table_id,
