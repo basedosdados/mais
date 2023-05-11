@@ -215,20 +215,58 @@ class Table(Base):
             ],
         }
 
+    def _parser_blobs_to_partition_dict(self) -> dict:
+        """
+        Extracts the partition information from the blobs.
+        """
+
+        if not self.table_exists(mode="staging"):
+            return
+        blobs = (
+            self.client["storage_staging"]
+            .bucket(self.bucket_name)
+            .list_blobs(prefix=f"staging/{self.dataset_id}/{self.table_id}/")
+        )
+        partitions_dict = {}
+        for blob in blobs:
+            for folder in blob.name.split("/"):
+                if "=" in folder:
+                    key = folder.split("=")[0]
+                    value = folder.split("=")[1]
+                    try:
+                        partitions_dict[key].append(value)
+                    except KeyError:
+                        partitions_dict[key] = [value]
+        return partitions_dict
+
     def _get_columns_metadata_from_bq(self, mode="staging"):
         if mode == "staging" and self.table_exists(mode="staging"):
             schema = self._get_table_obj(mode="staging").schema
         if mode == "prod" and self.table_exists(mode="prod"):
             schema = self._get_table_obj(mode="prod").schema
 
-        return [
-            {
-                "name": col.name,
-                "type": col.field_type,
-                "description": col.description,
-            }
-            for col in schema
-        ]
+        partition_columns = list(self._parser_blobs_to_partition_dict().keys())
+
+        return {
+            "columns": [
+                {
+                    "name": col.name,
+                    "type": col.field_type,
+                    "description": col.description,
+                }
+                for col in schema
+                if col.name not in partition_columns
+            ],
+            "partition_columns": [
+                {
+                    "name": col.name,
+                    "type": col.field_type,
+                    "description": col.description,
+                }
+                for col in schema
+                if col.name in partition_columns
+            ],
+        }
 
     def _make_publish_sql(self, mode="staging"):
         """Create publish.sql with columns and bigquery_type"""
@@ -266,12 +304,11 @@ class Table(Base):
         # sort columns by is_partition, partitions_columns come first
 
         if mode == "staging":
-            columns = self._get_columns_metadata_from_bq(mode="staging")
+            table_columns = self._get_columns_metadata_from_bq(mode="staging")
         elif mode == "prod":
             table_columns = self._get_columns_metadata_from_api()
-            columns = table_columns.get("partition_columns") + table_columns.get(
-                "columns"
-            )
+
+        columns = table_columns.get("partition_columns") + table_columns.get("columns")
 
         # add columns in publish.sql
         for col in columns:
