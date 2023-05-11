@@ -65,7 +65,7 @@ class Table(Base):
 
     def _is_partitioned(self, data_sample_path=None, source_format=None):
         if data_sample_path is not None:
-            table_columns = self._get_columns_metadata_from_data(
+            table_columns = self._get_columns_from_data(
                 data_sample_path=data_sample_path,
                 source_format=source_format,
                 mode="staging",
@@ -87,7 +87,7 @@ class Table(Base):
         """
         Generate schema from columns metadata in data sample
         """
-        table_columns = self._get_columns_metadata_from_data(
+        table_columns = self._get_columns_from_data(
             data_sample_path=data_sample_path,
             source_format=source_format,
             mode="staging",
@@ -125,7 +125,7 @@ class Table(Base):
 
         return self._load_schema_from_json(columns=columns, mode=mode)
 
-    def _get_columns_metadata_from_data(
+    def _get_columns_from_data(
         self,
         data_sample_path=None,
         source_format="csv",
@@ -239,7 +239,7 @@ class Table(Base):
                         partitions_dict[key] = [value]
         return partitions_dict
 
-    def _get_columns_metadata_from_bq(self, mode="staging"):
+    def _get_columns_from_bq(self, mode="staging"):
         if mode == "staging" and self.table_exists(mode="staging"):
             schema = self._get_table_obj(mode="staging").schema
         if mode == "prod" and self.table_exists(mode="prod"):
@@ -304,7 +304,7 @@ class Table(Base):
         # sort columns by is_partition, partitions_columns come first
 
         if mode == "staging":
-            table_columns = self._get_columns_metadata_from_bq(mode="staging")
+            table_columns = self._get_columns_from_bq(mode="staging")
         elif mode == "prod":
             table_columns = self._get_columns_metadata_from_api()
 
