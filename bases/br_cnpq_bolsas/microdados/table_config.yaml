@@ -59,13 +59,13 @@ observation_level:
           - chamada
 
 last_updated:
-    metadata: '2022-07-13'
-    data: '2022-07-13 08:00:01'
-    release: '2022-07-13 08:00:01'
+    metadata: '2023-05-11'
+    data: '2023-05-11 19:00:01'
+    release: '2023-05-11 19:00:01'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version: v1.0
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -86,7 +86,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Renomeação de colunas
+data_cleaning_description: Renomeação de Colunas e Ordenamento de Variáveis.
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_cnpq_bolsas/code
@@ -591,6 +591,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 2774218
+number_rows: 2839708
 
-metadata_modified:
+metadata_modified: "2023-03-28T21:36:24.353883"
