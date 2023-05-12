@@ -10,7 +10,6 @@ from google.cloud import bigquery
 from google.api_core.exceptions import Conflict
 
 from basedosdados.upload.base import Base
-from basedosdados.upload.metadata import Metadata
 
 
 class Dataset(Base):
@@ -20,9 +19,7 @@ class Dataset(Base):
 
     def __init__(self, dataset_id, **kwargs):
         super().__init__(**kwargs)
-
         self.dataset_id = dataset_id.replace("-", "_")
-        self.metadata = Metadata(self.dataset_id, **kwargs)
 
     @property
     @lru_cache
@@ -75,53 +72,6 @@ class Dataset(Base):
         dataset.labels = labels
         dataset.location = location
         return dataset
-
-    # def _write_readme_file(self):
-    #     """
-    #     Write README.md file.
-    #     """
-
-    #     # TODO: review README content
-    #     readme_content = (
-    #         f"Como capturar os dados de {self.dataset_id}?\n\nPara cap"
-    #         f"turar esses dados, basta verificar o link dos dados orig"
-    #         f"inais no website.\n"
-    #         f"\nCaso tenha sido utilizado algum código de captura ou t"
-    #         f"ratamento, estes estarão contidos em code/. Se o dado pu"
-    #         f"blicado for em sua versão bruta, não existirá a pasta co"
-    #         f"de/."
-    #     )
-
-    #     readme_path = Path(self.metadata_path / self.dataset_id / "README.md")
-
-    #     with open(readme_path, "w", encoding="utf-8") as readmefile:
-    #         readmefile.write(readme_content)
-
-    # def init(self, replace: bool = False):
-    #     """Initialize dataset in the backend.
-
-    #     Args:
-    #         replace (bool): Optional. Whether to replace existing.
-
-    #     Raises:
-    #         FileExistsError: If dataset folder already exists and replace is False
-    #     """
-
-    #     # create dataset config with metadata
-    #     try:
-    #         self.metadata.create(if_exists="replace" if replace else "raise")
-    #     except:
-    #         raise NotImplementedError(
-    #             "Metadata.create() is not implemented yet."
-    #         )  # TODO: implement metadata.create()
-
-    #     # create README.md file
-    #     # self._write_readme_file()
-
-    #     # # Add code folder
-    #     # (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
-
-    #     return self
 
     def publicize(self, mode="all", dataset_is_public=True):
         """Changes IAM configuration to turn BigQuery dataset public.

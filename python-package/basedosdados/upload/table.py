@@ -6,18 +6,14 @@ import contextlib
 
 # pylint: disable=invalid-name, too-many-locals, too-many-branches, too-many-arguments,line-too-long,R0801,consider-using-f-string
 from pathlib import Path
-import json
 from copy import deepcopy
 import textwrap
 import inspect
-from io import BytesIO
 from functools import lru_cache
 
 from loguru import logger
 from google.cloud import bigquery
 from google.cloud.bigquery import SchemaField
-import requests
-import pandas as pd
 import google.api_core.exceptions
 
 from basedosdados.upload.base import Base
@@ -25,7 +21,6 @@ from basedosdados.upload.connection import Connection
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
-from basedosdados.upload.metadata import Metadata
 from basedosdados.exceptions import BaseDosDadosException
 
 

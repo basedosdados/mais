@@ -6,7 +6,7 @@ Importing the module will automatically import the submodules.
 import sys
 import os
 
-__version__ = "1.7.0"
+__version__ = "2.0.0-beta.1"
 
 sys.path.append(f"{os.getcwd()}/python-package")
 
@@ -18,7 +18,6 @@ from basedosdados.upload.connection import Connection
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.table import Table
-from basedosdados.upload.metadata import Metadata
 from basedosdados.download.base import reauth
 from basedosdados.download.download import (
     read_sql,

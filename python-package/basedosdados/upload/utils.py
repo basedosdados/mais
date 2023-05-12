@@ -6,9 +6,6 @@ import os
 
 import pandas as pd
 
-import basedosdados as bd
-from basedosdados.exceptions import BaseDosDadosException
-
 
 def to_partitions(data: pd.DataFrame, partition_columns: List[str], savepath: str):
     """Save data in to hive patitions schema, given a dataframe and a list of partition columns.

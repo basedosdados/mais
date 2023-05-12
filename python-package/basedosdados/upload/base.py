@@ -18,9 +18,7 @@ from google.cloud import bigquery, bigquery_connection_v1, storage
 from google.oauth2 import service_account
 import googleapiclient.discovery
 from loguru import logger
-from jinja2 import Template
 import tomlkit
-import requests
 
 from basedosdados.backend import Backend
 from basedosdados.constants import config, constants
