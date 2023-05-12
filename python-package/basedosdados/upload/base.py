@@ -55,12 +55,8 @@ class Base:  # pylint: disable=too-many-instance-attributes
         self._init_config(force=overwrite_cli_config)
         self.config = self._load_config()
         self._config_log(config.verbose)
-
-        self.templates = Path(templates or self.config["templates_path"])
-        self.metadata_path = Path(metadata_path or self.config["metadata_path"])
         self.bucket_name = bucket_name or self.config["bucket_name"]
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
-
         self._backend = Backend(self.config["api"]["url"])
 
     @staticmethod
@@ -116,17 +112,6 @@ class Base:  # pylint: disable=too-many-instance-attributes
                 credentials=self._load_credentials("staging"),
                 project=self.config["gcloud-projects"]["staging"]["name"],
             ),
-        )
-
-    @property
-    def main_vars(self):
-        """
-        Variables for main templates
-        """
-        return dict(
-            templates=self.templates,
-            metadata_path=self.metadata_path,
-            bucket_name=self.bucket_name,
         )
 
     @staticmethod

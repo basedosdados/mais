@@ -15,6 +15,7 @@ from functools import lru_cache
 
 from loguru import logger
 from google.cloud import bigquery
+from google.cloud.bigquery import SchemaField
 import requests
 import pandas as pd
 import google.api_core.exceptions
@@ -75,12 +76,19 @@ class Table(Base):
 
         return bool(table_columns.get("partition_columns", []))
 
-    def _load_schema_from_json(self, columns=None, mode="staging"):
-        # print(json.dumps(columns, indent=4))
-        json_buffer = BytesIO()
-        json_buffer.write(json.dumps(columns, ensure_ascii=False).encode("utf-8"))
-        json_buffer.seek(0)
-        return self.client[f"bigquery_{mode}"].schema_from_json(json_buffer)
+    def _load_schema_from_json(
+        self,
+        columns=None,
+    ):
+        return [
+            ## ref: https://cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.schema.SchemaField
+            SchemaField(
+                name=col.get("name"),
+                field_type=col.get("type"),
+                description=col.get("description", None),
+            )
+            for col in columns
+        ]
 
     def _load_staging_schema_from_data(
         self, data_sample_path=None, source_format="csv"
@@ -88,11 +96,7 @@ class Table(Base):
         """
         Generate schema from columns metadata in data sample
         """
-        table_columns = self._get_columns_from_data(
-            data_sample_path=data_sample_path,
-            source_format=source_format,
-            mode="staging",
-        )
+
         if self.table_exists(mode="staging"):
             logger.warning(
                 " {object} {object_id} allready exists, replacing schema!",
@@ -103,9 +107,15 @@ class Table(Base):
             #     {"name": c.name, "type": c.field_type}
             #     for c in self._get_table_obj(mode="staging").schema
             # ]
-        return self._load_schema_from_json(
-            columns=table_columns.get("columns"), mode="staging"
+        table_columns = self._get_columns_from_data(
+            data_sample_path=data_sample_path,
+            source_format=source_format,
+            mode="staging",
         )
+        # table_columns = table_columns.get("partition_columns") + table_columns.get(
+        #     "columns"
+        # )
+        return self._load_schema_from_json(columns=table_columns.get("columns"))
 
     def _load_schema_from_bq(self, mode="staging"):
         """Load schema from table config
@@ -116,7 +126,7 @@ class Table(Base):
         """
         table_columns = self._get_columns_from_bq()
         columns = table_columns.get("partition_columns") + table_columns.get("columns")
-        return self._load_schema_from_json(columns=columns, mode=mode)
+        return self._load_schema_from_json(columns=columns)
 
     def _load_schema_from_api(self, mode="staging"):
         """Load schema from table config
@@ -135,7 +145,7 @@ class Table(Base):
         table_columns = self._get_columns_metadata_from_api()
         columns = table_columns.get("partition_columns") + table_columns.get("columns")
 
-        return self._load_schema_from_json(columns=columns, mode=mode)
+        return self._load_schema_from_json(columns=columns)
 
     def _get_columns_from_data(
         self,
@@ -525,7 +535,7 @@ class Table(Base):
                 Path,
             ),
         ):
-            Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
+            Storage(self.dataset_id, self.table_id).upload(
                 path=path,
                 mode="staging",
                 if_exists=if_storage_data_exists,
@@ -534,7 +544,9 @@ class Table(Base):
 
         # Create Dataset if it doesn't exist
 
-        dataset_obj = Dataset(self.dataset_id, **self.main_vars)
+        dataset_obj = Dataset(
+            self.dataset_id,
+        )
 
         dataset_obj.create(
             if_exists=if_dataset_exists,
@@ -593,7 +605,7 @@ class Table(Base):
                     "Table already exists, choose replace if you want to overwrite it"
                 )
 
-        if if_table_exists == "replace":
+        if if_table_exists == "replace" and self.table_exists(mode="staging"):
             self.delete(mode="staging")
 
         try:
@@ -706,7 +718,7 @@ class Table(Base):
             action="published",
         )
 
-    def delete(self, mode):
+    def delete(self, mode="all"):
         """Deletes table in BigQuery.
 
         Args:
@@ -729,7 +741,6 @@ class Table(Base):
             self.client[f"bigquery_{mode}"].delete_table(
                 self.table_full_name[mode], not_found_ok=True
             )
-
             logger.info(
                 " {object} {object_id}_{mode} was {action}!",
                 object_id=self.table_id,
@@ -773,7 +784,10 @@ class Table(Base):
             raise BaseDosDadosException(
                 "You cannot append to a table that does not exist"
             )
-        Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
+        Storage(
+            self.dataset_id,
+            self.table_id,
+        ).upload(
             filepath,
             mode="staging",
             partitions=partitions,
