@@ -36,9 +36,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
     def __init__(
         self,
         config_path=".basedosdados",
-        templates=None,
         bucket_name=None,
-        metadata_path=None,
         overwrite_cli_config=False,
     ):
         """
@@ -199,9 +197,6 @@ class Base:  # pylint: disable=too-many-instance-attributes
         credentials_folder = self.config_path / "credentials"
         credentials_folder.mkdir(exist_ok=True, parents=True)
 
-        # Create template folder
-        self._refresh_templates()
-
         # If environments are set but no files exist
         if (
             (not config_file.exists())
@@ -236,30 +231,13 @@ class Base:  # pylint: disable=too-many-instance-attributes
                 "[press enter to continue]"
             )
 
-            ############# STEP 1 - METADATA PATH #######################
-
-            metadata_path = self._selection_yn(
-                first_question=(
-                    "\n********* STEP 1 **********\n"
-                    "Where are you going to save the metadata files of "
-                    "datasets and tables?\n"
-                    f"Is it at the current path ({Path.cwd()})? [Y/n]\n"
-                ),
-                default_yn="y",
-                default_return=Path.cwd(),
-                no_question=("\nWhere would you like to save it?\n" "metadata path: "),
-                with_lower=False,
-            )
-
-            c_file["metadata_path"] = str(Path(metadata_path) / "bases")
-
-            ############# STEP 2 - CREDENTIALS PATH ######################
+            ############# STEP 1 - CREDENTIALS PATH ######################
 
             credentials_path = self.config_path / "credentials"
             credentials_path = Path(
                 self._selection_yn(
                     first_question=(
-                        "\n********* STEP 2 **********\n"
+                        "\n********* STEP 1 **********\n"
                         "Where do you want to save your Google Cloud credentials?\n"
                         f"Is it at the {credentials_path}? [Y/n]\n"
                     ),
@@ -272,9 +250,9 @@ class Base:  # pylint: disable=too-many-instance-attributes
                 )
             )
 
-            ############# STEP 3 - STAGING CREDS. #######################
+            ############# STEP 2 - STAGING CREDS. #######################
             project_staging = self._input_validator(
-                "\n********* STEP 3 **********\n"
+                "\n********* STEP 2 **********\n"
                 "What is the Google Cloud Project that you are going to use "
                 "to upload and treat data?\nIt might be something with 'staging'"
                 "in the name. If you just have one project, put its name.\n"
@@ -289,11 +267,11 @@ class Base:  # pylint: disable=too-many-instance-attributes
             )
             c_file["gcloud-projects"]["staging"]["name"] = project_staging
 
-            ############# STEP 4 - PROD CREDS. #######################
+            ############# STEP 3 - PROD CREDS. #######################
 
             project_prod = self._selection_yn(
                 first_question=(
-                    "\n********* STEP 4 **********\n"
+                    "\n********* STEP 3 **********\n"
                     "Is your production project the same as the staging? [y/N]\n"
                 ),
                 default_yn="n",
@@ -318,10 +296,10 @@ class Base:  # pylint: disable=too-many-instance-attributes
             )
             c_file["gcloud-projects"]["prod"]["name"] = project_prod
 
-            ############# STEP 5 - BUCKET NAME #######################
+            ############# STEP 4 - BUCKET NAME #######################
 
             bucket_name = self._input_validator(
-                "\n********* STEP 5 **********\n"
+                "\n********* STEP 4 **********\n"
                 "What is the Storage Bucket that you are going to be using to save the data?\n"
                 "Bucket name [basedosdados]: ",
                 "basedosdados",
@@ -329,34 +307,16 @@ class Base:  # pylint: disable=too-many-instance-attributes
 
             c_file["bucket_name"] = bucket_name
 
-            ############# STEP 6 - CONFIGURE API #######################
+            ############# STEP 5 - CONFIGURE API #######################
 
             api_base_url = self._input_validator(
-                "\n********* STEP 6 **********\n"
-                "What is the URL of the API that you are going to use?"
-                "[https://staging.api.basedosdados.org]",
-                "https://staging.api.basedosdados.org",
+                "\n********* STEP 5 **********\n"
+                "What is the URL of the API that you are going to use?\n"
+                "API url [https://staging.api.basedosdados.org/api/v1/graphql]: ",
+                "https://staging.api.basedosdados.org/api/v1/graphql",
             )
 
             c_file["api"]["url"] = api_base_url
-
-            # username = self._input_validator(
-            #     "What is your e-mail for authentication?\n", None
-            # )
-
-            # if username:
-            #     c_file["api"]["username"] = username
-
-            #     password = self._input_validator(
-            #         "What is your password for authentication?\n", None
-            #     )
-
-            #     # TODO (future): encrypt password and store it?
-            #     c_file["api"]["password"] = password
-
-            ############# STEP 7 - SET TEMPLATES #######################
-
-            c_file["templates_path"] = str(self.config_path / "templates")
 
             config_file.open("w", encoding="utf-8").write(tomlkit.dumps(c_file))
 
@@ -384,15 +344,6 @@ class Base:  # pylint: disable=too-many-instance-attributes
             (self.config_path / "config.toml").open("r", encoding="utf-8").read()
         )
 
-    def _render_template(self, template_file, kargs):
-        """
-        Render a template file
-        """
-
-        return Template(
-            (self.templates / template_file).open("r", encoding="utf-8").read()
-        ).render(**kargs)
-
     @staticmethod
     def _check_mode(mode):
         """
@@ -414,16 +365,6 @@ class Base:  # pylint: disable=too-many-instance-attributes
             f"Argument {mode} not supported. "
             f"Enter one of the following: "
             f'{",".join(ACCEPTED_MODES)}'
-        )
-
-    def _refresh_templates(self):
-        """
-        Refreshes the templates
-        """
-        shutil.rmtree((self.config_path / "templates"), ignore_errors=True)
-        shutil.copytree(
-            (Path(__file__).resolve().parents[1] / "configs" / "templates"),
-            (self.config_path / "templates"),
         )
 
     def _get_project_id(self, mode: str) -> str:

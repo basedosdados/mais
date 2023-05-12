@@ -290,7 +290,7 @@ class Table(Base):
             ],
         }
 
-    def _make_publish_sql(self, mode="staging"):
+    def _make_publish_sql(self):
         """Create publish.sql with columns and bigquery_type"""
 
         ### publish.sql header and instructions
@@ -315,6 +315,9 @@ class Table(Base):
         */
         """
 
+        table_columns = self._get_columns_from_bq(mode="staging")
+        columns = table_columns.get("partition_columns") + table_columns.get("columns")
+
         # remove triple quotes extra space
         publish_txt = inspect.cleandoc(publish_txt)
         publish_txt = textwrap.dedent(publish_txt)
@@ -324,13 +327,6 @@ class Table(Base):
         publish_txt += f"\n\nCREATE OR REPLACE VIEW {project_id_prod}.{self.dataset_id}.{self.table_id} AS\nSELECT \n"
 
         # sort columns by is_partition, partitions_columns come first
-
-        if mode == "prod":
-            table_columns = self._get_columns_from_bq(mode="staging")
-        # elif mode == "prod":
-        #     table_columns = self._get_columns_metadata_from_api()
-
-        columns = table_columns.get("partition_columns") + table_columns.get("columns")
 
         # add columns in publish.sql
         for col in columns:
@@ -695,9 +691,9 @@ class Table(Base):
         """
         # TODO: review this method
 
-        if if_exists == "replace":
+        if if_exists == "replace" and self.table_exists(mode="prod"):
             self.delete(mode="prod")
-        publish_sql = self._make_publish_sql(mode="prod")
+        publish_sql = self._make_publish_sql()
 
         ## create view using API metadata
         if custon_publish_sql is None:
