@@ -6,13 +6,8 @@ CLI package for the application.
 
 import click
 from basedosdados.upload.base import Base
-from basedosdados.upload.dataset import Dataset
-from basedosdados.upload.table import Table
-from basedosdados.upload.storage import Storage
-from basedosdados.upload.metadata import Metadata
 
 import basedosdados as bd
-from basedosdados.exceptions import BaseDosDadosException
 
 
 @click.group()
