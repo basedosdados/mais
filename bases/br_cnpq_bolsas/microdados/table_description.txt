@@ -43,7 +43,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Renomeação de Colunas e Ordenamento de Variáveis.
+Renomeação de Colunas e Ordenamento de Variáveis. 
 
 
 

@@ -60,7 +60,7 @@ observation_level:
 
 last_updated:
     metadata: '2023-05-11'
-    data: '2023-05-11 19:00:01'
+    data: '2023-05-11 19:00:01' 
     release: '2023-05-11 19:00:01'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -593,4 +593,4 @@ columns:
 
 number_rows: 2839708
 
-metadata_modified: "2023-03-28T21:36:24.353883"
+metadata_modified: "2023-03-28T21:36:24.353883" 

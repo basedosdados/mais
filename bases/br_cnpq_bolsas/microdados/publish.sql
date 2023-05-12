@@ -19,10 +19,10 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_cnpq_bolsas.microdados AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(processo AS STRING) processo,
-SAFE_CAST(data_inicio_processo AS STRING) data_inicio_processo,
-SAFE_CAST(data_fim_processo AS STRING) data_fim_processo,
+SAFE_CAST(data_inicio_processo AS DATE) data_inicio_processo,
+SAFE_CAST(data_fim_processo AS DATE) data_fim_processo,
 SAFE_CAST(beneficiario AS STRING) beneficiario,
 SAFE_CAST(titulo_projeto AS STRING) titulo_projeto,
 SAFE_CAST(palavra_chave AS STRING) palavra_chave,
