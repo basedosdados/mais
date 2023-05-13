@@ -34,14 +34,11 @@ class Table(Base):
 
         self.table_id = table_id.replace("-", "_")
         self.dataset_id = dataset_id.replace("-", "_")
-        # self.dataset_folder = Path(self.metadata_path / self.dataset_id)
-        # self.table_folder = self.dataset_folder / table_id
         self.table_full_name = dict(
             prod=f"{self.client['bigquery_prod'].project}.{self.dataset_id}.{self.table_id}",
             staging=f"{self.client['bigquery_staging'].project}.{self.dataset_id}_staging.{self.table_id}",
         )
         self.table_full_name.update(dict(all=deepcopy(self.table_full_name)))
-        # self.metadata = Metadata(self.dataset_id, self.table_id, **kwargs)
 
     @property
     @lru_cache(256)
@@ -75,15 +72,20 @@ class Table(Base):
         self,
         columns=None,
     ):
-        return [
+        schema = []
+        for col in columns:
             ## ref: https://cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.schema.SchemaField
-            SchemaField(
-                name=col.get("name"),
-                field_type=col.get("type"),
-                description=col.get("description", None),
+            if col.get("name") is None:
+                msg = "Columns must have a name! Check your data files for columns without name"
+                raise BaseDosDadosException(msg)
+
+            schema.append(
+                SchemaField(
+                    name=col.get("name"),
+                    field_type=col.get("type"),
+                    description=col.get("description", None),
+                )
             )
-            for col in columns
-        ]
 
     def _load_staging_schema_from_data(
         self, data_sample_path=None, source_format="csv"
