@@ -183,8 +183,9 @@ class Table(Base):
                     for k in data_sample_path.as_posix().split("/")
                     if "=" in k
                 ]
-
-            columns = Datatype(source_format).header(data_sample_path)
+            columns = Datatype(source_format=source_format).header(
+                data_sample_path=data_sample_path
+            )
 
         return {
             "columns": [{"name": col, "type": "STRING"} for col in columns],
@@ -573,11 +574,7 @@ class Table(Base):
         table = bigquery.Table(self.table_full_name["staging"])
 
         table.description = self._get_table_description(mode="staging")
-        print(
-            self._load_staging_schema_from_data(
-                data_sample_path=path, source_format=source_format
-            )
-        )
+
         table.external_data_configuration = Datatype(
             dataset_id=self.dataset_id,
             table_id=self.table_id,

@@ -124,7 +124,7 @@ class Backend:
             r = self._simplify_graphql_response(response)
             if r["allTable"] != []:
                 return r["allTable"][0]["_id"]
-        msg = f"No table {table_slug} found in {dataset_slug}."
+        msg = f"No table {table_slug} found in {dataset_slug}. Please create in {self.graphql_url}"
         logger.info(msg)
         return None
 
