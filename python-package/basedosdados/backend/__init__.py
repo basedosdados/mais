@@ -77,7 +77,12 @@ class Backend:
             client = self._get_client(
                 headers=headers, fetch_schema_from_transport=fetch_schema_from_transport
             )
-        return client.execute(gql(query), variable_values=variables)
+        try:
+            return client.execute(gql(query), variable_values=variables)
+        except Exception as e:
+            msg = f"Error executing query: {e}"
+            logger.error(msg)
+            return None
 
     def _get_dataset_id_from_slug(self, dataset_slug):
         query = """
@@ -93,9 +98,9 @@ class Backend:
         """
         variables = {"slug": dataset_slug}
         response = self._execute_query(query=query, variables=variables)
-        r = self._simplify_graphql_response(response)
-        if r["allDataset"] != []:
-            return r["allDataset"][0]["_id"]
+        r = {} if response is None else self._simplify_graphql_response(response)
+        if r.get("allDataset", []) != []:
+            return r.get("allDataset")[0]["_id"]
         msg = f"{dataset_slug} not found. Please create the metadata first in {self.graphql_url}"
         logger.info(msg)
         return None
@@ -121,8 +126,8 @@ class Backend:
             }
 
             response = self._execute_query(query=query, variables=variables)
-            r = self._simplify_graphql_response(response)
-            if r["allTable"] != []:
+            r = {} if response is None else self._simplify_graphql_response(response)
+            if r.get("allTable", []) != []:
                 return r["allTable"][0]["_id"]
         msg = f"No table {table_slug} found in {dataset_slug}. Please create in {self.graphql_url}"
         logger.info(msg)
