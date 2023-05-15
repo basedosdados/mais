@@ -97,7 +97,8 @@ class Backend:
         if r["allDataset"] != []:
             return r["allDataset"][0]["_id"]
         msg = f"{dataset_slug} not found. Please create the metadata first in {self.graphql_url}"
-        raise BaseDosDadosException(msg)
+        logger.info(msg)
+        return None
 
     def _get_table_id_from_slug(self, dataset_slug, table_slug):
         query = """
@@ -111,17 +112,21 @@ class Backend:
                 }
             }
         """
+        dataset_id = self._get_dataset_id_from_slug(dataset_slug)
 
-        variables = {
-            "dataset_Id": self._get_dataset_id_from_slug(dataset_slug),
-            "table_slug": table_slug,
-        }
-        response = self._execute_query(query=query, variables=variables)
-        r = self._simplify_graphql_response(response)
-        if r["allTable"] != []:
-            return r["allTable"][0]["_id"]
+        if dataset_id:
+            variables = {
+                "dataset_Id": dataset_id,
+                "table_slug": table_slug,
+            }
+
+            response = self._execute_query(query=query, variables=variables)
+            r = self._simplify_graphql_response(response)
+            if r["allTable"] != []:
+                return r["allTable"][0]["_id"]
         msg = f"No table {table_slug} found in {dataset_slug}."
-        raise BaseDosDadosException(msg)
+        logger.info(msg)
+        return None
 
     def get_dataset_config(self, dataset_id: str) -> Dict[str, Any]:
         """
@@ -166,9 +171,13 @@ class Backend:
             }
         
         """
-        variables = {"dataset_id": self._get_dataset_id_from_slug(dataset_id)}
-        response = self._execute_query(query=query, variables=variables)
-        return self._simplify_graphql_response(response).get("allDataset")[0]
+        dataset_id = self._get_dataset_id_from_slug(dataset_id)
+        if dataset_id:
+            variables = {"dataset_id": dataset_id}
+            response = self._execute_query(query=query, variables=variables)
+            return self._simplify_graphql_response(response).get("allDataset")[0]
+        else:
+            return {}
 
     def get_table_config(self, dataset_id: str, table_id: str) -> Dict[str, Any]:
         """
@@ -215,13 +224,16 @@ class Backend:
                 }
             }    
         """
-        variables = {
-            "table_id": self._get_table_id_from_slug(
-                dataset_slug=dataset_id, table_slug=table_id
-            )
-        }
-        response = self._execute_query(query=query, variables=variables)
-        return self._simplify_graphql_response(response).get("allTable")[0]
+        table_id = self._get_table_id_from_slug(
+            dataset_slug=dataset_id, table_slug=table_id
+        )
+
+        if table_id:
+            variables = {"table_id": table_id}
+            response = self._execute_query(query=query, variables=variables)
+            return self._simplify_graphql_response(response).get("allTable")[0]
+        else:
+            return {}
 
     def _simplify_graphql_response(self, response: dict) -> dict:
         """

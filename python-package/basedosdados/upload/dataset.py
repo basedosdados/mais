@@ -119,7 +119,6 @@ class Dataset(Base):
                     )
                 dataset.access_entries = entries
             m["client"].update_dataset(dataset, ["access_entries"])
-
             logger.success(
                 " {object} {object_id}_{mode} was {action}!",
                 object_id=self.dataset_id,
@@ -127,6 +126,19 @@ class Dataset(Base):
                 object="Dataset",
                 action="publicized",
             )
+
+    def exists(self, mode="staging"):
+        """
+        Check if dataset exists.
+        """
+        ref_dataset_id = (
+            self.dataset_id if mode == "prod" else self.dataset_id + "_staging"
+        )
+        try:
+            ref = self.client[f"bigquery_{mode}"].get_dataset(ref_dataset_id)
+        except Exception:
+            ref = None
+        return bool(ref)
 
     def create(
         self, mode="all", if_exists="raise", dataset_is_public=True, location=None
@@ -159,39 +171,37 @@ class Dataset(Base):
             Warning: Dataset already exists and if_exists is set to `raise`
         """
 
-        if if_exists == "replace":
-            self.delete(mode)
-        elif if_exists == "update":
-            self.update()
-            return
-
         # Set dataset_id to the ID of the dataset to create.
         for m in self._loop_modes(mode):
-            # Construct a full Dataset object to send to the API.
-            dataset_obj = self._setup_dataset_object(
-                dataset_id=m["id"], location=location, mode=m["mode"]
-            )
+            if if_exists == "replace":
+                self.delete(mode=m["mode"])
+            elif if_exists == "update":
+                self.update(mode=m["mode"])
+                continue
 
             # Send the dataset to the API for creation, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             try:
-                m["client"].create_dataset(dataset_obj)  # Make an API request.
-                logger.success(
-                    " {object} {object_id}_{mode} was {action}!",
-                    object_id=self.dataset_id,
-                    mode=m["mode"],
-                    object="Dataset",
-                    action="created",
-                )
-
+                if not self.exists(mode=m["mode"]):
+                    # Construct a full Dataset object to send to the API.
+                    dataset_obj = self._setup_dataset_object(
+                        dataset_id=m["id"], location=location, mode=m["mode"]
+                    )
+                    m["client"].create_dataset(dataset_obj)  # Make an API request.
+                    logger.success(
+                        " {object} {object_id}_{mode} was {action}!",
+                        object_id=self.dataset_id,
+                        mode=m["mode"],
+                        object="Dataset",
+                        action="created",
+                    )
+                    # Make prod dataset public
+                    self.publicize(dataset_is_public=dataset_is_public, mode=m["mode"])
             except Conflict as e:
                 if if_exists == "pass":
-                    return
+                    continue
                 raise Conflict(f"Dataset {self.dataset_id} already exists") from e
-
-        # Make prod dataset public
-        self.publicize(dataset_is_public=dataset_is_public)
 
     def delete(self, mode="all"):
         """Deletes dataset in BigQuery. Toogle mode to choose which dataset to delete.

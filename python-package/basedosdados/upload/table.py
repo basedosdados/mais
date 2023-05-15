@@ -73,6 +73,7 @@ class Table(Base):
         columns=None,
     ):
         schema = []
+
         for col in columns:
             ## ref: https://cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.schema.SchemaField
             if col.get("name") is None:
@@ -86,6 +87,7 @@ class Table(Base):
                     description=col.get("description", None),
                 )
             )
+        return schema
 
     def _load_staging_schema_from_data(
         self, data_sample_path=None, source_format="csv"
@@ -100,18 +102,13 @@ class Table(Base):
                 object_id=self.table_id,
                 object="Table",
             )
-            # table_columns = [
-            #     {"name": c.name, "type": c.field_type}
-            #     for c in self._get_table_obj(mode="staging").schema
-            # ]
+
         table_columns = self._get_columns_from_data(
             data_sample_path=data_sample_path,
             source_format=source_format,
             mode="staging",
         )
-        # table_columns = table_columns.get("partition_columns") + table_columns.get(
-        #     "columns"
-        # )
+
         return self._load_schema_from_json(columns=table_columns.get("columns"))
 
     def _load_schema_from_bq(self, mode="staging"):
@@ -202,17 +199,11 @@ class Table(Base):
         """
         Get columns and partition columns from API.
         """
-
-        columns = [
-            col
-            for col in self.table_config.get("columns")
-            if col.get("isPartition") is False
-        ]
+        table_columns = self.table_config.get("columns", {})
+        columns = [col for col in table_columns if col.get("isPartition", {}) is False]
 
         partition_columns = [
-            col
-            for col in self.table_config.get("columns")
-            if col.get("isPartition") is True
+            col for col in table_columns if col.get("isPartition", {}) is True
         ]
 
         return {
@@ -247,24 +238,31 @@ class Table(Base):
             .list_blobs(prefix=f"staging/{self.dataset_id}/{self.table_id}/")
         )
         partitions_dict = {}
+        ## only needs the first bloob
         for blob in blobs:
             for folder in blob.name.split("/"):
                 if "=" in folder:
                     key = folder.split("=")[0]
-                    value = folder.split("=")[1]
+                    value = folder.split("=")
                     try:
                         partitions_dict[key].append(value)
                     except KeyError:
                         partitions_dict[key] = [value]
-        return partitions_dict
+            return partitions_dict
 
     def _get_columns_from_bq(self, mode="staging"):
-        if mode == "staging" and self.table_exists(mode="staging"):
-            schema = self._get_table_obj(mode="staging").schema
-        if mode == "prod" and self.table_exists(mode="prod"):
-            schema = self._get_table_obj(mode="prod").schema
+        if not self.table_exists(mode=mode):
+            msg = f"Table {self.dataset_id}.{self.table_id} does not exist in {mode}, please create first!"
+            raise logger.error(msg)
+        else:
+            schema = self._get_table_obj(mode=mode).schema
 
-        partition_columns = list(self._parser_blobs_to_partition_dict().keys())
+        partition_dict = self._parser_blobs_to_partition_dict()
+
+        if partition_dict:
+            partition_columns = list(partition_dict.keys())
+        else:
+            partition_columns = []
 
         return {
             "columns": [
@@ -286,6 +284,21 @@ class Table(Base):
                 if col.name in partition_columns
             ],
         }
+
+    def _get_cross_columns_from_bq_api(self):
+        bq = self._get_columns_from_bq(mode="staging")
+        bq_columns = bq.get("partition_columns") + bq.get("columns")
+
+        api = self._get_columns_metadata_from_api()
+        api_columns = api.get("partition_columns") + api.get("columns")
+        if api_columns != []:
+            for bq_col in bq_columns:
+                for api_col in api_columns:
+                    if bq_col.get("name") == api_col.get("name"):
+                        bq_col["type"] = api_col.get("type")
+                        bq_col["description"] = api_col.get("description")
+
+        return bq_columns
 
     def _make_publish_sql(self):
         """Create publish.sql with columns and bigquery_type"""
@@ -312,8 +325,9 @@ class Table(Base):
         */
         """
 
-        table_columns = self._get_columns_from_bq(mode="staging")
-        columns = table_columns.get("partition_columns") + table_columns.get("columns")
+        # table_columns = self._get_columns_from_api(mode="staging")
+
+        columns = self._get_cross_columns_from_bq_api()
 
         # remove triple quotes extra space
         publish_txt = inspect.cleandoc(publish_txt)
@@ -559,7 +573,11 @@ class Table(Base):
         table = bigquery.Table(self.table_full_name["staging"])
 
         table.description = self._get_table_description(mode="staging")
-
+        print(
+            self._load_staging_schema_from_data(
+                data_sample_path=path, source_format=source_format
+            )
+        )
         table.external_data_configuration = Datatype(
             dataset_id=self.dataset_id,
             table_id=self.table_id,
@@ -646,7 +664,9 @@ class Table(Base):
 
         # when mode is staging the table schema already exists
         if mode == "prod" and custom_schema is None:
-            table.schema = self._load_schema_from_bq()
+            table.schema = self._load_schema_from_json(
+                columns=self._get_cross_columns_from_bq_api()
+            )
         if mode == "prod" and custom_schema is not None:
             table.schema = self._load_schema_from_json(custom_schema)
 
@@ -690,12 +710,13 @@ class Table(Base):
 
         if if_exists == "replace" and self.table_exists(mode="prod"):
             self.delete(mode="prod")
+
         publish_sql = self._make_publish_sql()
 
         ## create view using API metadata
         if custon_publish_sql is None:
             self.client["bigquery_prod"].query(publish_sql).result()
-            self.update()
+            self.update(mode="prod")
 
         ## create view using custon query
         if custon_publish_sql is not None:
