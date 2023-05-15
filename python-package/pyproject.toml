@@ -33,6 +33,7 @@ pydata-google-auth = "^1.8.0"
 python = ">=3.8, <3.11"
 requests-toolbelt = "^1.0.0"
 tqdm = "^4.65.0"
+tomlkit = "^0.11.8"
 
 [tool.black]
 # Use the more relaxed max line length permitted in PEP8.
