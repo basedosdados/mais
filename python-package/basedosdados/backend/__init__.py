@@ -80,7 +80,8 @@ class Backend:
         try:
             return client.execute(gql(query), variable_values=variables)
         except Exception as e:
-            msg = f"Error executing query: {e}"
+            msg = f"The API URL in the config.toml file may be incorrect or the API might be temporarily unavailable!\
+                Error executing query: {e}."
             logger.error(msg)
             return None
 
