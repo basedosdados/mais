@@ -13,7 +13,7 @@ packages = [
 ]
 readme = "README.md"
 repository = "https://github.com/base-dos-dados/bases"
-version = "2.0.0-beta.2"
+version = "2.0.0-beta.4"
 
 [tool.poetry.scripts]
 basedosdados = 'basedosdados.cli.cli:cli'
@@ -32,8 +32,8 @@ pandavro = "^1.7.2"
 pydata-google-auth = "^1.8.0"
 python = ">=3.8, <3.11"
 requests-toolbelt = "^1.0.0"
-tqdm = "^4.65.0"
 tomlkit = "^0.11.8"
+tqdm = "^4.65.0"
 
 [tool.black]
 # Use the more relaxed max line length permitted in PEP8.
