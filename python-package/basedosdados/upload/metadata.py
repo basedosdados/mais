@@ -33,7 +33,7 @@ class Metadata(Base):
         if self.table_id:
             self.dataset_metadata_obj = Metadata(self.dataset_id, **kwargs)
 
-        url = "https://basedosdados.org"
+        url = "https://staging.basedosdados.org"
         self.CKAN_API_KEY = self.config.get("ckan", {}).get("api_key")
         self.CKAN_URL = self.config.get("ckan", {}).get("url", "") or url
 
@@ -449,7 +449,6 @@ class Metadata(Base):
             data_dict = self.ckan_data_dict.copy()
 
             if self.table_id:
-
                 # publish dataset metadata first if user wants to publish both
                 if all:
                     self.dataset_metadata_obj.publish(if_exists=if_exists)
@@ -572,7 +571,6 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
     if "properties" in definitions[d].keys():
         for dk, _ in definitions[d]["properties"].items():
-
             yaml_obj[k][dk] = handle_data(
                 k=dk,
                 data=data.get(k, {}),
