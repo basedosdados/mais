@@ -80,57 +80,62 @@ class Backend:
         try:
             return client.execute(gql(query), variable_values=variables)
         except Exception as e:
-            msg = f"The API URL in the config.toml file may be incorrect or the API might be temporarily unavailable!\
-                Error executing query: {e}."
+            msg = f"The API URL in the config.toml file may be incorrect or the API might be temporarily unavailable!\nError executing query: {e}."
             logger.error(msg)
             return None
 
-    def _get_dataset_id_from_slug(self, dataset_slug):
+    def _get_dataset_id_from_name(self, gcp_dataset_id):
         query = """
-            query ($slug: String!){
-                allDataset(slug: $slug) {
+            query ($gcp_dataset_id: String!){
+                allCloudtable(gcpDatasetId: $gcp_dataset_id) {
                     edges {
                         node {
-                            _id,
+                                table {
+                                    dataset {
+                                        _id
+                                    }
+                            }
                         }
                     }
                 }
             }
         """
-        variables = {"slug": dataset_slug}
+
+        variables = {"gcp_dataset_id": gcp_dataset_id}
         response = self._execute_query(query=query, variables=variables)
         r = {} if response is None else self._simplify_graphql_response(response)
-        if r.get("allDataset", []) != []:
-            return r.get("allDataset")[0]["_id"]
-        msg = f"{dataset_slug} not found. Please create the metadata first in {self.graphql_url}"
+        if r.get("allCloudtable", []) != []:
+            return r.get("allCloudtable")[0].get("table").get("dataset").get("_id")
+        msg = f"{gcp_dataset_id} not found. Please create the metadata first in {self.graphql_url}"
         logger.info(msg)
         return None
 
-    def _get_table_id_from_slug(self, dataset_slug, table_slug):
+    def _get_table_id_from_name(self, gcp_dataset_id, gcp_table_id):
         query = """
-            query ($dataset_Id: ID!, $table_slug: String!){
-                allTable (dataset_Id:$dataset_Id slug:$table_slug){
+            query ($gcp_dataset_id: String!, $gcp_table_id: String!){
+                allCloudtable(gcpDatasetId: $gcp_dataset_id, gcpTableId: $gcp_table_id) {
                     edges {
                         node {
-                            _id
+                                table {
+                                    _id
+                            }
                         }
                     }
                 }
             }
         """
-        dataset_id = self._get_dataset_id_from_slug(dataset_slug)
 
-        if dataset_id:
+        if gcp_dataset_id:
             variables = {
-                "dataset_Id": dataset_id,
-                "table_slug": table_slug,
+                "gcp_dataset_id": gcp_dataset_id,
+                "gcp_table_id": gcp_table_id,
             }
 
             response = self._execute_query(query=query, variables=variables)
             r = {} if response is None else self._simplify_graphql_response(response)
-            if r.get("allTable", []) != []:
-                return r["allTable"][0]["_id"]
-        msg = f"No table {table_slug} found in {dataset_slug}. Please create in {self.graphql_url}"
+            if r.get("allCloudtable", []) != []:
+                return r.get("allCloudtable")[0].get("table").get("_id")
+        msg = f"No table {gcp_table_id} found in {gcp_dataset_id}. Please create in {self.graphql_url}"
         logger.info(msg)
         return None
 
@@ -177,7 +182,7 @@ class Backend:
             }
         
         """
-        dataset_id = self._get_dataset_id_from_slug(dataset_id)
+        dataset_id = self._get_dataset_id_from_name(dataset_id)
         if dataset_id:
             variables = {"dataset_id": dataset_id}
             response = self._execute_query(query=query, variables=variables)
@@ -230,8 +235,8 @@ class Backend:
                 }
             }    
         """
-        table_id = self._get_table_id_from_slug(
-            dataset_slug=dataset_id, table_slug=table_id
+        table_id = self._get_table_id_from_name(
+            gcp_dataset_id=dataset_id, gcp_table_id=table_id
         )
 
         if table_id:
