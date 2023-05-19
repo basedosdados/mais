@@ -310,7 +310,6 @@ class Storage(Base):
 
             # download blob to savepath
             save_file_path = savepath / blob.name
-            print(save_file_path)
 
             blob.download_to_filename(filename=save_file_path)
 
