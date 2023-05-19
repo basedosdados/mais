@@ -292,6 +292,21 @@ class Table(Base):
 
         api = self._get_columns_metadata_from_api()
         api_columns = api.get("partition_columns") + api.get("columns")
+
+        # bq_columns_list = [col.get("name") for col in bq_columns]
+        # api_columns_list = [col.get("name") for col in api_columns]
+
+        # not_in_api_columns = [
+        #     col for col in bq_columns_list if col not in api_columns_list
+        # ]
+        # not_in_bq_columns = [
+        #     col for col in api_columns_list if col not in bq_columns_list
+        # ]
+        # print("bq_columns_list", len(bq_columns_list))
+        # print("api_columns_list", len(api_columns_list))
+        # print("not_in_api_columns", not_in_api_columns)
+        # print("not_in_bq_columns", not_in_bq_columns)
+
         if api_columns != []:
             for bq_col in bq_columns:
                 for api_col in api_columns:
@@ -744,7 +759,7 @@ class Table(Base):
                 logger.info(
                     " {object} {object_id}_{mode} was {action}!",
                     object_id=self.table_id,
-                    mode=m["mode"],
+                    mode=m,
                     object="Table",
                     action="deleted",
                 )
