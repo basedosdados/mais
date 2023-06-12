@@ -23,6 +23,7 @@ from basedosdados.exceptions import (
     BaseDosDadosAuthorizationException,
     BaseDosDadosInvalidProjectIDException,
     BaseDosDadosNoBillingProjectIDException,
+    BaseDosDadosQueryException,
 )
 from basedosdados.constants import config
 
@@ -259,6 +260,9 @@ def download(
         # views may take longer: wait for job to finish.
         _wait_for(job)
 
+        if errors := job._properties["status"].get("errors"):
+            raise BaseDosDadosQueryException.from_job_errors(errors)
+        
         dest_table = job._properties["configuration"]["query"]["destinationTable"]
 
         project_id = dest_table["projectId"]

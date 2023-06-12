@@ -18,6 +18,7 @@ from basedosdados.exceptions import (
     BaseDosDadosException,
     BaseDosDadosNoBillingProjectIDException,
     BaseDosDadosInvalidProjectIDException,
+    BaseDosDadosQueryException,
 )
 
 
@@ -190,6 +191,21 @@ def test_read_sql_syntax_error():
         )
 
     assert "Reason: 400 Syntax error" in str(excinfo.value)
+
+
+def test_download_invalid_sql_field_error():
+    """
+    Test if the `download` function raises an error when the query contains invalid fields.
+    """
+
+    with pytest.raises(BaseDosDadosQueryException) as excinfo:
+        download(
+            savepath=SAVEFILE,
+            query="SELECT __invalid_field__ FROM `basedosdados.br_ibge_pib.municipio` LIMIT 10",
+            billing_project_id=TEST_PROJECT_ID,
+            from_file=True,
+        )
+    assert "Unrecognized name" in str(excinfo.value)
 
 
 def test_read_sql_out_of_bound_date():
