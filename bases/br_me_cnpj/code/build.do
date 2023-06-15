@@ -1,8 +1,8 @@
 
- cd "~/Downloads/br_me_cnpj"
-!cd "~/Downloads/br_me_cnpj"
+cd "~/Downloads/br_me_cnpj"
 
-local datas `" "2021-11-23" "2021-12-24" "2022-01-08" "2022-05-12" "2022-06-30" "2022-07-09" "2022-08-13" "2022-09-11" "2022-10-10" "2022-11-24" "' // "2022-12-26"
+local datas `" "2021-11-23" "2021-12-24" "2022-01-08" "2022-05-12" "2022-06-30" "2022-07-09" "2022-08-13" "2022-09-11" "2022-10-10" "2022-11-24" "2022-12-17" "2023-01-15" "2023-02-15" "2023-03-22" "2023-05-18" "'
+	//  "2023-04-12"
 
 !mkdir -p "output/empresas"
 !mkdir -p "output/estabelecimentos"
@@ -21,7 +21,12 @@ foreach data in `datas' {
 	if "`data'" == "2022-09-11" local subpath "D20910"
 	if "`data'" == "2022-10-10" local subpath "D21008"
 	if "`data'" == "2022-11-24" local subpath "D21119"
-	//if "`data'" == "2022-12-26" local subpath "D21119"
+	if "`data'" == "2022-12-17" local subpath "D21119"
+	if "`data'" == "2023-01-15" local subpath "D30114"
+	if "`data'" == "2023-02-15" local subpath "D30211"
+	if "`data'" == "2023-03-22" local subpath "D30311"
+	//if "`data'" == "2023-04-12" local subpath "D30311"
+	if "`data'" == "2023-05-18" local subpath "D30513"
 	
 	//---------------------------//
 	// empresas
@@ -230,8 +235,8 @@ foreach data in `datas' {
 // versão não-painel (pois todas informações estão a nível de cnpj_basico, sem variação no tempo)
 //---------------------------//
 
-local data		"2022-11-24"	// última disponível
-local subpath	"D21119"
+local data		"2023-05-18"	// última disponível
+local subpath	"D30513"
 
 !mkdir -p "output/simples"
 
