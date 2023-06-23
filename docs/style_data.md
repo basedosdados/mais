@@ -108,8 +108,11 @@ Nomes de variáveis devem respeitar algumas regras:
 
 A ordem de variáveis em tabelas é padronizada para manter uma consistência no repositório. Nossas regras são:
 
-- Chaves primárias à esquerda, em ordem descendente de abrangência. Exemplo de ordem: `ano`, `sigla_uf`, `id_municipio`, `id_escola`, `nota_ideb`.    
-- Agrupar e ordenar variáveis por importância ou temas.
+- Chaves primárias à esquerda, em ordem descendente de abrangência;  
+- No meio devem estar variáveis qualitativas da linha;
+- As últimas variáveis devem ser os valores quantitativos em ordem crescente de relevância;
+- Exemplo de ordem: `ano`, `sigla_uf`, `id_municipio`, `id_escola`, `rede`, `nota_ideb`;
+- Dependendo da tabela, pode ser recomendado agrupar e ordenar variáveis por temas.
 
 ## Tipos de variáveis
 
