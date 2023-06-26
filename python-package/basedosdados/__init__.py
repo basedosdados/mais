@@ -2,11 +2,11 @@
 Importing the module will automatically import the submodules.
 """
 
-
+import importlib.metadata
 import sys
 import os
 
-__version__ = "2.0.0-beta.1"
+__version__ = importlib.metadata.version("basedosdados")
 
 sys.path.append(f"{os.getcwd()}/python-package")
 
