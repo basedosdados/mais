@@ -6,7 +6,7 @@
 clear all
 set more off
 
-cd "/Users/ricardodahis/Dropbox/Academic/Data/Brazil/Municipios/Populacao"
+cd "/Users/rdahis/Dropbox/Academic/Data/Brazil/Municipios/Populacao"
 
 //----------------------------------------------------------------------------//
 // build
@@ -380,7 +380,7 @@ save "tmp/2008.dta", replace
 // 2009
 //-----------------//
 
-import excel "raw/2009/UF_Municipio 2.xls", clear
+import excel "raw/2009/UF_Municipio.xls", clear //  2
 drop in 1/5
 drop in 5566/5571
 gen aux = strlen(C)
@@ -634,6 +634,28 @@ keep  id_municipio_6 id_municipio municipio ano populacao
 order id_municipio_6 id_municipio municipio ano populacao
 save "tmp/2021.dta", replace
 
+//-----------------//
+// 2022
+//-----------------//
+
+import excel "raw/2022/POP2022_Municipios_20230616.xls", clear //sheet()
+drop in 1/2
+drop in 5571/5605
+gen id_municipio = B + C
+gen id_municipio_6 = substr(id_municipio, 1, 6)
+ren D municipio
+ren E populacao
+split populacao, p("(") l(1)
+drop populacao
+ren populacao1 populacao
+replace populacao = subinstr(populacao, ".", "", .)
+destring, replace
+gen ano = 2022
+keep  id_municipio_6 id_municipio municipio ano populacao
+order id_municipio_6 id_municipio municipio ano populacao
+save "tmp/2022.dta", replace
+
+
 //-------------------------------//
 // append
 //-------------------------------//
@@ -644,7 +666,7 @@ tempfile munic
 save `munic'
 
 use "tmp/1991_2010.dta", clear
-foreach ano of numlist 1992(1)1999 2001(1)2009 2011(1)2021 {
+foreach ano of numlist 1992(1)1999 2001(1)2009 2011(1)2022 {
 	append using "tmp/`ano'.dta"
 }
 *
@@ -668,6 +690,11 @@ export delimited "output/municipio.csv", replace
 //--------------//
 // UF
 //--------------//
+
+// 2023-06-16
+//	atenção à inconsistência nos dados de AM de 2022
+//	a soma de municípios dá diferente do que o IBGE reporta como total da UF.
+//	nossa decisão: seguir a planilha de UF, e consertar na mão essa soma abaixo
 
 collapse (sum) populacao, by(ano sigla_uf)
 
