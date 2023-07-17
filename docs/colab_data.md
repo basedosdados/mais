@@ -23,7 +23,7 @@
 ## Passo a passo para subir dados
 
 Quer subir dados na BD+ e nos ajudar a construir esse repositório?
-*Maravilha!* Organizamos tudo o que você precisa no manual abaixo, em 10 passos.
+*Maravilha!* Organizamos tudo o que você precisa no manual abaixo
 
 Para facilitar a explicação, vamos seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
 
@@ -46,9 +46,18 @@ Alguns conhecimentos são necessárias para realizar esse processo:
     Temos um time de dados que pode te ajudar, basta entrar no [nosso
     Discord](https://discord.gg/huKWpsVYx4) e mandar uma mensagem em #quero-contribuir.
 
+### Como funciona o processo?
+
+* Iniciamos entendendo a natureza dos dados, precisamos conhecer o que estamos disponibilizando
+* Montamos uma arquitetura que vai indicar como que a nossa tabela final ficará
+* Realizamos o tratamento nos dados. Ele pode ser feito em python, R, Stata ou SQL 
+* Subimos dados no datalake
+* Realizamos checks de qualidade nos dados
+* Levamos os dados para produção
+
 ### 1. Informar seu interesse para a gente
 
-Mantemos a lista de conjuntos que ainda não estão na BD+ no nosso [Github](https://github.com/basedosdados/mais/issues?q=is%3Aopen+is%3Aissue+label%3Adata+label%3Aenhancement). Para começar a subir uma base do seu interesse, basta abrir uma [nova issue](https://github.com/basedosdados/mais/issues/new?assignees=&labels=data&template=br_novos_dados.md&title=%5Bdados%5D+%3Cdataset_id%3E) de dados e preencher as informações indicadas por lá.
+Mantemos a lista de conjuntos fáceis de começar a trabalhar no nosso [Github](https://github.com/orgs/basedosdados/projects/17/views/10). Para começar a subir uma base do seu interesse, basta abrir uma [nova issue](https://github.com/basedosdados/mais/issues/new?assignees=&labels=data&template=br_novos_dados.md&title=%5Bdados%5D+%3Cdataset_id%3E) de dados e preencher as informações indicadas por lá.
 
 !!! Info "Caso sua base (conjunto) já esteja listada, basta marcar seu usuário do Github como `assignee`."
 
@@ -88,6 +97,29 @@ exemplo, se uma coluna muda de nome de um ano para o outro).
 
 !!! Info "Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que pode ser preenchida no Google Drive ou localmente (Excel, editor de texto)."
 
+Para cada informação que for preencher na tabela de arquitetura consulte nosso [manual de estilo](../style_data) para manter a padronização.
+
+- `name`: nome da coluna padronizada
+
+- `bigquery_type`: tipo de dado do BigQuery (veja quais são no nosso [manual de estilo](../style_data/#tipos-de-variaveis)).
+
+- `description`: descrição mais detalhada da variável.
+
+- `temporal_coverage`: cobertura temporal da variável nessa tabela (veja como preencher no nosso [manual de estilo](https://basedosdados.github.io/mais/style_data/#cobertura-temporal)).
+
+- `covered_by_dictionary`: indicar se a variável é coberta por dicionário. **Opções de respostas são: `yes` e `no`**.
+
+- `directory_column`: se a coluna for coberta por um diretório da BD, usar o formato [DATASET_ID].[TABLE]:[COLUNA] (e.g. `br_bd_diretorios_data_tempo.ano:ano`). Caso contrário, deixe em branco
+
+- `measurement_unit`: qual unidade de medida da coluna (veja as unidades de medida disponíveis para preenchimento no nosso [Github](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py).
+
+- `has_sensitive_data`: indicar se a coluna possui dados sensíveis (e.g. CPF identificado, dados de conta bancária, etc). 
+**Opções de preenchimento são: yes, no**.
+
+- `observations`: observações de tratamento que precisam ser evidenciados. Indicar, por exemplo, porque determinada coluna foi criada ou modificada.
+
+- `original_name`: indicar o nome original de cada coluna para cada ano, no formato `original_name_YYYY`. No exemplo da RAIS, existiam colunas que deixaram de existir em determinados anos. Por isso, criamos colunas à direita  em ordem descendente (e.g. 2020, 2019, 2018, ...).
+
 <!-- 
 TODO: Não vejo relação dessas perguntas com o exemplo dado
 da tabela de arquitetura da RAIS.
@@ -102,39 +134,23 @@ Perguntas que uma arquitetura deve responder:
 
 #### Exemplo: RAIS - Tabelas de arquitetura
 
-As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://docs.google.com/spreadsheets/d/1dPLUCeE4MSjs0ykYUDsFd-e7-9Nk6LVV/edit?usp=sharing&ouid=103008455637924805982&rtpof=true&sd=true). Seguindo nosso [manual de estilo](../style_data), nós renomeamos, definimos os tipos, preenchemos descrições, indicamos se há dicionário ou diretório, preenchemos campos (e.g. cobertura temporal e unidade de medida) e fizemos a compatibilização entre anos para todas as variáveis (colunas).
-
-- `name`: nome da coluna.
-
-- `bigquery_type`: tipo de dado do BigQuery (veja quais são no nosso [manual de estilo](../style_data/#tipos-de-variaveis)).
-
-- `description`: descrição dos dados que estão nesta coluna. 
-
-- `temporal_coverage`: cobertura temporal da variável nessa tabela (veja como preencher no nosso [manual de estilo](https://basedosdados.github.io/mais/style_data/#cobertura-temporal)).
-
-- `covered_by_dictionary`: indicar se a variável é coberta por dicionário. **Opções de respostas são: yes , no**.
-
-- `directory_column`: se a coluna for coberta por um dicionário da BD, usar o formato [DATASET_ID].[TABLE]:[COLUNA] (e.g. `br_bd_diretorios_data_tempo.ano:ano`). Caso contrário, deixe em branco
-
-- `measurement_unit`: qual unidade de medida da coluna (veja as unidades de medida disponíveis para preenchimento no nosso [Github](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py).
-
-- `has_sensitive_data`: indicar se a coluna possui dados sensíveis (e.g. CPF identificado, dados de conta bancária, etc). 
-**Opções de preenchimento são: yes, no**.
-
-- `observations`: observações de tratamento que precisam ser evidenciados. Indicar, por exemplo, porque determinada coluna foi criada ou modificada.
-
-- `original_name`: indicar o nome original de cada coluna para cada ano, no formato `original_name_YYYY`. No exemplo da RAIS, existiam colunas que deixaram de existir em determinados anos. Por isso, criamos colunas à direita  em ordem descendente (e.g. 2020, 2019, 2018, ...).
-
+As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://docs.google.com/spreadsheets/d/1dPLUCeE4MSjs0ykYUDsFd-e7-9Nk6LVV/edit?usp=sharing&ouid=103008455637924805982&rtpof=true&sd=true).
+Nessa tabela nós:
+- renomeamos as colunas
+- definimos os tipos
+- preenchemos descrições 
+- indicamos se há dicionário ou diretório 
+- varificamos a cobertura temporal de cada coluna 
+- incluimos a unidade de medida
+- fizemos a compatibilização entre anos para todas as variáveis (colunas)
 
 Para as que foram excluídas da versão em produção,
-deixamos seu nome como `(deletado)` e não preenchemos nenhum metadado.
-Por exemplo, a coluna `Municipio` da tabela `microdados_vinculos` não
-foi adicionada pois por padrão usamos somente o código IBGE para
-identificar municípios (seu nome fica numa tabela de
-[Diretórios](../style_data/#diretorios)). Logo, ela aparece com o nome
-`(deletado)` na respectiva tabela de arquitetura (penúltima linha).
+deixamos seu nome vazio ou `(deletado)` e não preenchemos nenhum metadado.
+Por exemplo, a coluna `Tipo Estab` da tabela `microdados_vinculos` não
+foi adicionada. Logo, ela aparece com o nome
+`(deletado)` na respectiva tabela de arquitetura (última linha).
 
-!!! Tip "Quando terminar de preencher as tabelas de arquitetura, entre em contato com a equipe da Base dos Dados ou nossa comunidade para validar tudo. É importante ter certeza que está fazendo sentido _antes_ de começar a escrever código."
+!!! Tip "Quando terminar de preencher as tabelas de arquitetura, entre em contato com a equipe da Base dos Dados ou nossa comunidade para validar tudo. É importante ter certeza que está padronizado _antes_ de começar a escrever código."
 
 ### 4. Escrever código de captura e limpeza de dados
 
@@ -145,7 +161,10 @@ Após validadas as tabelas de arquitetura, podemos escrever os códigos de
 
 - **Limpeza**: Código que transforma os dados originais salvos em `/input` em dados limpos, salva na pasta `/output`, para, posteriormente, serem subidos na BD+.
 
-Cada tabela limpa para produção pode ser salva como um arquivo `.csv` único ou, caso seja muito grande (e.g. acima de 100-200 mb), ser particionada no formato [Hive](https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) em vários sub-arquivos `.csv`. Nossa recomendação é particionar tabelas por `ano`, `mes`, `sigla_uf` ou no máximo por `id_municipio`. A tabela `microdados_vinculos` da RAIS, por exemplo, é uma tabela muito grande (+250GB) por isso nós particionamos por `ano` e `sigla_uf`. O particionamento foi feito usando a estrutura de pastas `/microdados_vinculos/ano=YYYY/sigla_uf=XX`.
+Cada tabela limpa para produção pode ser salva como um arquivo único ou, caso seja muito grande (e.g. acima de 100-200 mb), ser particionada no formato [Hive](https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) em vários sub-arquivos. Os formatos aceitos são `.csv` ou `.parquet`. Nossa recomendação é particionar tabelas por `ano`, `mes`, `sigla_uf` ou no máximo por `id_municipio`. 
+
+#### Exemplo: RAIS
+A tabela `microdados_vinculos` da RAIS, por exemplo, é uma tabela muito grande (+250GB) por isso nós particionamos por `ano` e `sigla_uf`. O particionamento foi feito usando a estrutura de pastas `/microdados_vinculos/ano=YYYY/sigla_uf=XX`.
 
 !!! Tip "No pacote `basedosdados` você encontra funções úteis para limpeza dos dados"
     Definimos funções para particionar tabelas de forma automática,
@@ -271,13 +290,7 @@ Para publicar uma **base (conjunto)**:
 
 Para publicar o dataset e a(s) **tabela(s)**:
 
-1. Crie a tabela no *bucket*, indicando o caminho do arquivo no seu local, rodando o seguinte comando no seu terminal:
-
-    ```bash
-    basedosdados table create [DATASET_ID] [TABLE_ID] --path <caminho_para_os_dados> --force_dataset False --if_table_exists raise --if_storage_data_exists raise --if_table_config_exists raise --columns_config_url <url_da_planilha_google>
-    ```
-
-    Se preferir, você pode usar a API do Python, da seguinte forma:
+1. Crie a tabela no *bucket*, usando a API do Python, da seguinte forma:
 
     ```python
     import basedosdados as bd
@@ -285,10 +298,8 @@ Para publicar o dataset e a(s) **tabela(s)**:
     tb = bd.Table(dataset_id=<dataset_id>, table_id=<table_id>)
     tb.create(
         path='caminho_para_os_dados',
-        force_dataset=False,
         if_table_exists='raise',
         if_storage_data_exists='raise',
-        if_table_config_exists='raise',
     )
     ```
 
@@ -322,20 +333,20 @@ Para publicar o dataset e a(s) **tabela(s)**:
     Certifique-se de que a planilha está compartilhada com a opção "qualquer pessoa com o link pode ver"
 
 
-!!! Info "Se o projeto não existir no BigQuery, ele será autmaticamente criado, junto com os arquivos `README.md` e `dataset_config.yaml`, que deverão ser preenchidos, segundo o modelo já criado"
+!!! Info "Se o projeto não existir no BigQuery, ele será automaticamente criado"
 
 2. Preencha os arquivos de configuração da tabela:
 
-- `/[TABLE_ID]/table_config.yaml`: informações específicas da tabela.
 - `/[TABLE_ID]/publish.sql`: aqui você pode indicar tratamentos finais
     na tabela `staging` em SQL para publicação (e.g. modificar a query para
     dar um `JOIN` em outra tabela da BD+ e selecionar variáveis).
 
-3. Publique a tabela em produção:
+3. Publique a tabela em produção :
 
     ```bash
     basedosdados table publish [DATASET_ID] [TABLE_ID]
     ```
+   Se os metadados de colunas já tiverem sido preenchidos no site o pacote já vai montar um arquivo `.sql` com os tipos do BigQuery corretos.
 
 Consulte também nossa [API](../api_reference_cli) para mais detalhes de cada método.
 
