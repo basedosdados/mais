@@ -410,15 +410,41 @@ foreach ano of numlist 2002(2)2022 {
 	}
 	if `ano' == 2012 {
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		//local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local estados brasil	// problema TSE: dados estaduais tem menos observações, e não incluem doações de pessoas físicas
 		
 		foreach estado in `estados' {
 			
+			local estado brasil
 			import delimited "input/prestacao_contas/prestacao_final_2012/receitas_candidatos_2012_`estado'.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
 			
+			drop v1 v2 v3 v7 v18 v19 v20 v21
+			
+			ren v4	sequencial_candidato
+			ren v5	sigla_uf
+			ren v6	id_municipio_tse
+			ren v8	sigla_partido
+			ren v9	numero_candidato
+			ren v10	cargo
+			ren v11	nome_candidato
+			ren v12	cpf_candidato
+			ren v13	numero_recibo_eleitoral
+			ren v14	numero_documento
+			ren v15	cpf_cnpj_doador
+			ren v16	nome_doador
+			ren v17	nome_doador_rf
+			ren v22	descricao_cnae_2_doador
+			ren v23	data_receita
+			ren v24	valor_receita
+			ren v25	origem_receita
+			ren v26	fonte_receita
+			ren v27	natureza_receita
+			ren v28	descricao_receita
+			
+			/* nomeação para arquivos de UF, que tem schema diferente
 			drop v1 v5
 			
 			ren v2	sequencial_candidato
@@ -441,6 +467,7 @@ foreach ano of numlist 2002(2)2022 {
 			ren v20	fonte_receita
 			ren v21	natureza_receita
 			ren v22	descricao_receita
+			*/
 			
 			tempfile f_`estado'
 			save `f_`estado''
@@ -448,13 +475,14 @@ foreach ano of numlist 2002(2)2022 {
 		}
 		*
 		
+		/*
 		use `f_AC', clear
 		foreach estado in `estados' {
 			if "`estado'" != "AC" {
 				qui append using `f_`estado''
 			}
 		}
-		*
+		*/
 		
 		foreach k in sigla_uf {
 			replace `k' = "" if `k' == "BR"
@@ -474,6 +502,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		foreach k in receita {
 			
+			replace data_`k' = substr(data_`k', 1, 10)
 			replace data_`k' = "0" + data_`k' if length(data_`k') == 9
 			replace data_`k' = substr(data_`k', 7, 4) + "-" + substr(data_`k', 4, 2) + "-" + substr(data_`k', 1, 2) if length(data_`k') > 0
 		
@@ -858,6 +887,7 @@ foreach ano of numlist 2002(2)2022 {
 			
 			drop in 1
 			drop v1 v2 v3 v4 v6 v7 v8 v15 v17 v27 v29 v31 v33 v40 v44 v47
+			if `ano' == 2022 drop v58 v59 v60
 			
 			ren v5	tipo_eleicao
 			ren v9	turno
