@@ -2585,7 +2585,7 @@ foreach ano of numlist 2010(2)2022 {
 		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
-			local estado AC
+			
 			import delimited "input/prestacao_contas/prestacao_contas_2016/receitas_partidos_2016_`estado'.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
