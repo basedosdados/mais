@@ -60,7 +60,7 @@ Alguns conhecimentos são necessárias para realizar esse processo:
 
 ### 1. Escolher a base e entender mais dos dados
 
-Mantemos a lista de conjuntos para voluntários no nosso [Github](https://github.com/orgs/basedosdados/projects/17/views/10). Para começar a subir uma base do seu interesse, basta abrir uma [nova issue](https://github.com/basedosdados/mais/issues/new?assignees=&labels=data&template=br_novos_dados.md&title=%5Bdados%5D+%3Cdataset_id%3E) de dados. Caso sua base (conjunto) já esteja listada, basta marcar seu usuário do Github como `assignee`
+Mantemos a lista de conjuntos para voluntários no nosso [Github](https://github.com/orgs/basedosdados/projects/17/views/10). Para começar a subir uma base do seu interesse, basta abrir uma [nova issue](https://github.com/basedosdados/queries-basedosdados/issues/new?assignees=&labels=&projects=&template=issue--novos-dados.md&title=%5Bdados%5D+%3Cdataset_id%3E) de dados. Caso sua base (conjunto) já esteja listada, basta marcar seu usuário do Github como `assignee`
 
 Seu primeiro trabalho é preencher as informações na issue. Essas informações vão te ajudar a entender melhor os dados e serão muito úteis para o tratamento e o preenchimento de metadados.
 
