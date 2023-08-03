@@ -2,7 +2,7 @@
 
 # Suba dados na BD
 
-## Por que minha organização deve subir dados na BD+?
+## Por que minha organização deve subir dados na BD?
 
 - **Capacidade de cruzar suas bases com dados de diferentes
   organizações** de forma simples e fácil. Já são centenas de conjuntos
@@ -22,7 +22,7 @@
 
 ## Passo a passo para subir dados
 
-Quer subir dados na BD+ e nos ajudar a construir esse repositório?
+Quer subir dados na BD e nos ajudar a construir esse repositório?
 *Maravilha!* Organizamos tudo o que você precisa no manual abaixo em 7 passos
 
 Para facilitar a explicação, vamos seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
@@ -129,7 +129,7 @@ Após validadas as tabelas de arquitetura, podemos escrever os códigos de
 
 - **Captura**: Código que baixa automaticamente todos os dados originais e os salva em `/input`. Esses dados podem estar disponíveis em portais ou links FTP, podem ser raspados de sites, entre outros.
 
-- **Limpeza**: Código que transforma os dados originais salvos em `/input` em dados limpos, salva na pasta `/output`, para, posteriormente, serem subidos na BD+.
+- **Limpeza**: Código que transforma os dados originais salvos em `/input` em dados limpos, salva na pasta `/output`, para, posteriormente, serem subidos na BD.
 
 Cada tabela limpa para produção pode ser salva como um arquivo único ou, caso seja muito grande (e.g. acima de 200 mb), ser particionada no formato [Hive](https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) em vários sub-arquivos. Os formatos aceitos são `.csv` ou `.parquet`. Nossa recomendação é particionar tabelas por `ano`, `mes` e `sigla_uf`. O particionamento é feito através da estrutura de pastas, veja o exemplo a baixo para visualizar como.
 
