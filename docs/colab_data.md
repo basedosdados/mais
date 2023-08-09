@@ -182,7 +182,7 @@ revisão. Para isso, vamos usar o cliente `basedosdados` (disponível em Python)
 
 #### Configure suas credenciais localmente
 1. No seu terminal instale nosso cliente: `pip install basedosdados`.
-2. Rode `import basedosdados` no python e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
+2. Rode `import basedosdados as bd` no python e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
 
 #### Configure seu projeto no Google Cloud e um _bucket_ no Google Storage
 
@@ -200,7 +200,7 @@ Cloud. Para criar seu projeto basta:
 2. Clicar em `Create Project/Criar Projeto` - escolha um nome bacana para o seu projeto, ele terá também um `Project ID` que será utilizado para configuração local.
 3. Depois de criado o projeto, vá até a funcionalidade de
    [Storage](https://console.cloud.google.com/storage) e crie uma pasta
-   (_bucket_) para subir os dados (pode ter o mesmo nome do projeto).
+   (também chamado de _bucket_) para subir os dados (pode ter o mesmo nome do projeto).
 4. Garanta que seu projeto é público, isso é necessário para que a gente consiga copiar os dados que estarão no seu projeto para o nosso ambiente de Cloud
 
 
