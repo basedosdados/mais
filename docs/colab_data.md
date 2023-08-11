@@ -23,7 +23,7 @@
 ## Passo a passo para subir dados
 
 Quer subir dados na BD e nos ajudar a construir esse repositório?
-*Maravilha!* Organizamos tudo o que você precisa no manual abaixo em 7 passos
+*Maravilha!* Organizamos tudo o que você precisa no manual abaixo em 8 passos
 
 Para facilitar a explicação, vamos seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
 
@@ -51,11 +51,11 @@ Alguns conhecimentos são necessárias para realizar esse processo:
 [1. Escolher a base e entender mais dos dados](#1-Escolher-a-base-e-entender-mais-dos-dados) - primeiro precisamos conhecer o que estamos tratando.  
 [2. Baixar nossa pasta template](#2-Baixar-nossa-pasta-template) - é hora estruturar o trabalho a ser feito    
 [3. Preencher as tabelas de arquitetura](#3-preencher-as-tabelas-de-arquitetura) - é primordial definir a estrutura dos dados antes de iniciarmos o tratamento   
-[4. Escrever codigo de captura e limpeza de dados](#4-escrever-codigo-de-captura-e-limpeza-de-dados) - hora de botar a mão na massa (ou no teclado)!  
+[4. Escrever codigo de captura e limpeza de dados](#4-escrever-codigo-de-captura-e-limpeza-de-dados) - hora de botar a mão na massa!  
 [5. (Caso necessário) Organizar arquivos auxiliares](#5-caso-necessário-organizar-arquivos-auxiliares) -  porque até dados precisam de guias  
-[6. (Caso necessário) Criar tabela dicionário](#6-caso-necessário-criar-tabela-dicionário) - padronizamos os dicionários pra vida do usuário ficar mais fácil  
+[6. (Caso necessário) Criar tabela dicionário](#6-caso-necessário-criar-tabela-dicionário) - momento de montar os dicionários 
 [7. Subir tudo no Google Cloud](#7-subir-tudo-no-google-cloud) - afinal, é por lá que ficam os dados da BD  
-[8. Enviar tudo para revisão](#8-enviar-tudo-para-revisão) - um olhar da nossa equipe para garantir que tudo está perfeito!
+[8. Enviar tudo para revisão](#8-enviar-tudo-para-revisão) - um olhar da nossa equipe para garantir que tudo está pronto para ir pra produção!
 
 
 ### 1. Escolher a base e entender mais dos dados
