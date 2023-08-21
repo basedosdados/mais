@@ -478,6 +478,8 @@ class Table(Base):
         self,
         path=None,
         source_format="csv",
+        csv_delimiter=",",
+        csv_allow_jagged_rows=False,
         if_table_exists="raise",
         if_storage_data_exists="raise",
         if_dataset_exists="pass",
@@ -513,6 +515,9 @@ class Table(Base):
             path (str or pathlib.PosixPath): The path to the file to be uploaded to create the table.
             source_format (str): Optional. The format of the data source. Only 'csv', 'avro', and 'parquet'
                 are supported. Defaults to 'csv'.
+            csv_delimiter (str):
+                Optional. The separator for fields in a CSV file. The separator can be any ISO-8859-1 single-byte character.
+            csv_allow_jagged_rows (bool): Optional. Indicates if BigQuery should allow extra values that are not represented in the table schema.
             if_table_exists (str): Optional. Determines what to do if the table already exists:
 
                 * 'raise' : Raises a Conflict exception
@@ -597,12 +602,15 @@ class Table(Base):
                 data_sample_path=path, source_format=source_format
             ),
             source_format=source_format,
+            csv_delimiter=csv_delimiter,
+            csv_allow_jagged_rows = csv_allow_jagged_rows
             mode="staging",
             bucket_name=self.bucket_name,
             partitioned=self._is_partitioned(
                 data_sample_path=path, source_format=source_format
             ),
             biglake_connection_id=biglake_connection_id if biglake_table else None,
+            
         ).external_config
 
         # When using BigLake tables, schema must be provided to the `Table` object
