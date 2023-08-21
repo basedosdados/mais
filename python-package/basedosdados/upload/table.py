@@ -603,14 +603,13 @@ class Table(Base):
             ),
             source_format=source_format,
             csv_delimiter=csv_delimiter,
-            csv_allow_jagged_rows = csv_allow_jagged_rows
+            csv_allow_jagged_rows=csv_allow_jagged_rows,
             mode="staging",
             bucket_name=self.bucket_name,
             partitioned=self._is_partitioned(
                 data_sample_path=path, source_format=source_format
             ),
             biglake_connection_id=biglake_connection_id if biglake_table else None,
-            
         ).external_config
 
         # When using BigLake tables, schema must be provided to the `Table` object
