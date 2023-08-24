@@ -1,39 +1,53 @@
 [tool.poetry]
+name = "basedosdados"
+version = "2.0.0-beta.9"
+description = "Organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery."
 authors = ["Joao Carabetta <joao.carabetta@gmail.com>", "Ricardo Dahis", "Diego Oliveira"]
 classifiers = [
-  "Topic :: Software Development :: Build Tools",
-  "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-description = "Organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery."
-homepage = "https://github.com/base-dos-dados/bases"
+homepage = "https://github.com/basedosdados/mais"
+repository = "https://github.com/basedosdados/mais"
 license = "MIT"
-name = "basedosdados"
-packages = [
-  {include = "basedosdados"},
-]
 readme = "README.md"
-repository = "https://github.com/base-dos-dados/bases"
-version = "2.0.0-beta.8"
+packages = [
+    {include = "basedosdados"},
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8.1,<4"
+google-api-python-client = "^2.86"
+google-cloud-bigquery = "^3.10"
+google-cloud-bigquery-connection = "^1.12"
+google-cloud-bigquery-storage = "^2.19"
+google-cloud-storage = "^2.9"
+gql = { version = "^3.4", optional = true }
+loguru = "^0.6"
+pandas = "^2.0"
+pandas-gbq = "^0.19"
+pandavro = { version = "^1.7", optional = true }
+pydata-google-auth = "^1.8"
+requests-toolbelt = { version = "^1", optional = true }
+tomlkit = "^0.11"
+tqdm = "^4"
+click = { version = ">=8.1,<9", optional = true }
+
+[tool.poetry.extras]
+avro = ["pandavro"]
+cli = ["click"]
+upload = ["gql", "requests-toolbelt"]
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+flake8 = "^6.1.0"
+isort = "^5.12.0"
+pre-commit = "^3.3.3"
+semgrep = "^1.36.0"
+taskipy = "^1.12.0"
 
 [tool.poetry.scripts]
 basedosdados = 'basedosdados.cli.cli:cli'
-
-[tool.poetry.dependencies]
-google-api-python-client = "^2.86.0"
-google-cloud-bigquery = "^3.10.0"
-google-cloud-bigquery-connection = "^1.12.0"
-google-cloud-bigquery-storage = "^2.19.1"
-google-cloud-storage = "^2.9.0"
-gql = "^3.4.1"
-loguru = "^0.7.0"
-pandas = "^2.0.1"
-pandas-gbq = "^0.19.2"
-pandavro = "^1.7.2"
-pydata-google-auth = "^1.8.0"
-python = ">=3.8, <3.11"
-requests-toolbelt = "^1.0.0"
-tomlkit = "^0.11.8"
-tqdm = "^4.65.0"
 
 [tool.black]
 # Use the more relaxed max line length permitted in PEP8.
@@ -50,11 +64,17 @@ exclude = '''
 )/
 '''
 line-length = 88
-target-version = ["py36", "py37", "py38", "py39"]
+target-version = ["py38", "py39", "py310"]
+
+[tool.isort]
+profile = "black"
+
+[tool.taskipy.tasks]
+lint = "semgrep scan --error --config auto --exclude-rule yaml.github-actions.security.third-party-action-not-pinned-to-commit-sha.third-party-action-not-pinned-to-commit-sha && black . && isort . && flake8 ."
 
 [build-system]
-build-backend = "poetry.masonry.api"
-requires = ["poetry>=0.12"]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 [pytest]
 addopts = "-p no:warnings"

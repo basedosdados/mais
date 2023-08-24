@@ -15,7 +15,7 @@ import pytest
 import requests
 import ruamel.yaml as ryaml
 
-from basedosdados import Metadata
+from basedosdados import Metadata # TODO: deprecate
 
 from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.remoteapi import RemoteAPI

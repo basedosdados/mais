@@ -10,7 +10,7 @@ import string
 import pytest
 import ruamel.yaml as ryaml
 
-from basedosdados import Metadata
+from basedosdados import Metadata # TODO: deprecate
 from basedosdados.exceptions import BaseDosDadosException
 
 METADATA_FILES = {"dataset": "dataset_config.yaml", "table": "table_config.yaml"}

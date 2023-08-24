@@ -4,11 +4,22 @@ CLI package for the application.
 
 # pylint: disable=locally-disabled, multiple-statements, fixme, line-too-long, too-many-arguments, invalid-name, too-many-lines, protected-access, unused-argument, no-value-for-parameter, redefined-builtin
 
-import click
-from basedosdados.upload.base import Base
+try:
+    import click
+    _cli_dependencies = True
+except ImportError:
+    _cli_dependencies = False
 
 import basedosdados as bd
+from basedosdados.exceptions import BaseDosDadosMissingDependencyException
+from basedosdados.upload.base import Base
 
+if not _cli_dependencies:
+    raise BaseDosDadosMissingDependencyException(
+        "Optional dependencies for the CLI are not installed. "
+        "Please install basedosdados with the \"cli\" extra, such as:"
+        "\n\npip install basedosdados[cli]"
+    )
 
 @click.group()
 @click.option("--bucket_name", default=None, help="Project bucket name")

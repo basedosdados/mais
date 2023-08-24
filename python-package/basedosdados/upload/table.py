@@ -47,7 +47,7 @@ class Table(Base):
         Load table config
         """
         # return self._load_yaml(self.table_folder / "table_config.yaml")
-        return self._backend.get_table_config(self.dataset_id, self.table_id)
+        return self.backend.get_table_config(self.dataset_id, self.table_id)
 
     def _get_table_obj(self, mode):
         """

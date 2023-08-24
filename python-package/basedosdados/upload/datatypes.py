@@ -6,7 +6,13 @@ import csv
 
 from google.cloud import bigquery
 import pandas as pd
-import pandavro
+try:
+    import pandavro
+    _avro_dependencies = True
+except ImportError:
+    _avro_dependencies = False
+
+from basedosdados.exceptions import BaseDosDadosMissingDependencyException
 
 
 class Datatype:
@@ -45,6 +51,12 @@ class Datatype:
         if self.source_format == "csv":
             return next(csv.reader(open(data_sample_path, "r", encoding="utf-8")))
         if self.source_format == "avro":
+            if not _avro_dependencies:
+                raise BaseDosDadosMissingDependencyException(
+                    "Optional dependencies for handling AVRO files are not installed. "
+                    "Please install basedosdados with the \"avro\" extra, such as:"
+                    "\n\npip install basedosdados[avro]"
+                )
             dataframe = pandavro.read_avro(str(data_sample_path))
             return list(dataframe.columns.values)
         if self.source_format == "parquet":

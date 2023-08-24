@@ -9,7 +9,8 @@ from pathlib import Path
 
 import pytest
 import ruamel.yaml as ryaml
-from basedosdados import Metadata, Storage, Dataset, Table
+from basedosdados import Metadata # TODO: deprecate
+from basedosdados import Storage, Dataset, Table
 from basedosdados.upload.base import Base
 
 DATASET_ID = "pytest"

@@ -55,6 +55,13 @@ class Base:  # pylint: disable=too-many-instance-attributes
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
         self._backend = Backend(self.config.get("api", {}).get("url", None))
 
+    @property
+    def backend(self):
+        """
+        Backend class
+        """
+        return self._backend
+
     @staticmethod
     def _decode_env(env: str) -> str:
         """

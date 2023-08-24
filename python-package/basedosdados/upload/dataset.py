@@ -27,7 +27,7 @@ class Dataset(Base):
         """
         Dataset config file.
         """
-        return self._backend.get_dataset_config(self.dataset_id)
+        return self.backend.get_dataset_config(self.dataset_id)
 
     def _loop_modes(self, mode="all"):
         """

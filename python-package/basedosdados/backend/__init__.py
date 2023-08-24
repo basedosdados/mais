@@ -4,10 +4,14 @@ Module for interacting with the backend.
 from typing import Any, Dict
 from loguru import logger
 
-from gql import gql, Client
-from gql.transport.requests import RequestsHTTPTransport
+try:
+    from gql import gql, Client
+    from gql.transport.requests import RequestsHTTPTransport
+    _backend_dependencies = True
+except ImportError:
+    _backend_dependencies = False
 
-from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.exceptions import BaseDosDadosMissingDependencyException
 
 
 class Backend:
@@ -29,7 +33,7 @@ class Backend:
 
     def _get_client(
         self, headers: Dict[str, str] = None, fetch_schema_from_transport: bool = False
-    ) -> Client:
+    ) -> "Client":
         """
         Get a GraphQL client.
 
@@ -42,6 +46,12 @@ class Backend:
         Returns:
             Client: GraphQL client.
         """
+        if not _backend_dependencies:
+            raise BaseDosDadosMissingDependencyException(
+                "Optional dependencies for backend interaction are not installed. "
+                "Please install basedosdados with the \"backend\" extra, such as:"
+                "\n\npip install basedosdados[backend]"
+            )
         transport = RequestsHTTPTransport(
             url=self.graphql_url, headers=headers, use_json=True
         )
@@ -53,7 +63,7 @@ class Backend:
         self,
         query: str,
         variables: Dict[str, str] = None,
-        client: Client = None,
+        client: "Client" = None,
         headers: Dict[str, str] = None,
         fetch_schema_from_transport: bool = False,
     ) -> Dict[str, Any]:
@@ -73,6 +83,12 @@ class Backend:
         Returns:
             Dict: GraphQL response.
         """
+        if not _backend_dependencies:
+            raise BaseDosDadosMissingDependencyException(
+                "Optional dependencies for backend interaction are not installed. "
+                "Please install basedosdados with the \"backend\" extra, such as:"
+                "\n\npip install basedosdados[backend]"
+            )
         if not client:
             client = self._get_client(
                 headers=headers, fetch_schema_from_transport=fetch_schema_from_transport
