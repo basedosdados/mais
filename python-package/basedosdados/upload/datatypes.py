@@ -28,6 +28,7 @@ class Datatype:
         table_id="",
         schema=None,
         source_format="csv",
+        csv_skip_leading_rows=1,
         csv_delimiter=",",
         csv_allow_jagged_rows=False,
         mode="staging",
@@ -39,6 +40,7 @@ class Datatype:
         self.schema = schema
         self.source_format = source_format
         self.csv_delimiter = csv_delimiter
+        self.csv_skip_leading_rows = csv_skip_leading_rows
         self.csv_allow_jagged_rows = csv_allow_jagged_rows
         self.mode = mode
         self.uri = f"gs://{bucket_name}/staging/{self.dataset_id}/{table_id}/*"
@@ -85,7 +87,7 @@ class Datatype:
         """
         if self.source_format == "csv":
             _external_config = bigquery.ExternalConfig("CSV")
-            _external_config.options.skip_leading_rows = 1
+            _external_config.options.skip_leading_rows = self.csv_skip_leading_rows
             _external_config.options.allow_quoted_newlines = True
             _external_config.options.allow_jagged_rows = True
             _external_config.autodetect = False

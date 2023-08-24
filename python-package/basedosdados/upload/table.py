@@ -479,6 +479,7 @@ class Table(Base):
         path=None,
         source_format="csv",
         csv_delimiter=",",
+        csv_skip_leading_rows=1,
         csv_allow_jagged_rows=False,
         if_table_exists="raise",
         if_storage_data_exists="raise",
@@ -515,9 +516,15 @@ class Table(Base):
             path (str or pathlib.PosixPath): The path to the file to be uploaded to create the table.
             source_format (str): Optional. The format of the data source. Only 'csv', 'avro', and 'parquet'
                 are supported. Defaults to 'csv'.
-            csv_delimiter (str):
-                Optional. The separator for fields in a CSV file. The separator can be any ISO-8859-1 single-byte character.
-            csv_allow_jagged_rows (bool): Optional. Indicates if BigQuery should allow extra values that are not represented in the table schema.
+            csv_delimiter (str): Optional.
+                The separator for fields in a CSV file. The separator can be any ISO-8859-1
+                single-byte character. Defaults to ','.
+            csv_skip_leading_rows(int): Optional.
+                The number of rows at the top of a CSV file that BigQuery will skip when loading the data.
+                Defaults to 1.
+            csv_allow_jagged_rows (bool): Optional.
+                Indicates if BigQuery should allow extra values that are not represented in the table schema.
+                Defaults to False.
             if_table_exists (str): Optional. Determines what to do if the table already exists:
 
                 * 'raise' : Raises a Conflict exception
@@ -602,6 +609,7 @@ class Table(Base):
                 data_sample_path=path, source_format=source_format
             ),
             source_format=source_format,
+            csv_skip_leading_rows=csv_skip_leading_rows,
             csv_delimiter=csv_delimiter,
             csv_allow_jagged_rows=csv_allow_jagged_rows,
             mode="staging",
@@ -817,7 +825,10 @@ class Table(Base):
             raise BaseDosDadosException(
                 "You cannot append to a table that does not exist"
             )
-        Storage(self.dataset_id, self.table_id,).upload(
+        Storage(
+            self.dataset_id,
+            self.table_id,
+        ).upload(
             filepath,
             mode="staging",
             partitions=partitions,
