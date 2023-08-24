@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "basedosdados"
-version = "2.0.0-beta.12"
+version = "2.0.0-beta.13"
 description = "Organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery."
 authors = ["Joao Carabetta <joao.carabetta@gmail.com>", "Ricardo Dahis", "Diego Oliveira"]
 classifiers = [
@@ -23,7 +23,7 @@ google-cloud-bigquery-connection = "^1.12"
 google-cloud-bigquery-storage = "^2.19"
 google-cloud-storage = "^2.9"
 gql = { version = "^3.4", optional = true }
-loguru = "^0.6"
+loguru = "0.7.0"
 pandas = "^2.0"
 pandas-gbq = "^0.19"
 pandavro = { version = "^1.7", optional = true }
