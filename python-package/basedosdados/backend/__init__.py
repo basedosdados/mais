@@ -51,7 +51,7 @@ class Backend:
         if not _backend_dependencies:
             raise BaseDosDadosMissingDependencyException(
                 "Optional dependencies for backend interaction are not installed. "
-                'Please install basedosdados with the "backend" extra, such as:'
+                'Please install basedosdados with the "upload" extra, such as:'
                 "\n\npip install basedosdados[upload]"
             )
         transport = RequestsHTTPTransport(
@@ -88,7 +88,7 @@ class Backend:
         if not _backend_dependencies:
             raise BaseDosDadosMissingDependencyException(
                 "Optional dependencies for backend interaction are not installed. "
-                'Please install basedosdados with the "backend" extra, such as:'
+                'Please install basedosdados with the "upload" extra, such as:'
                 "\n\npip install basedosdados[upload]"
             )
         if not client:
