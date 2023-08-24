@@ -35,5 +35,7 @@ repos:
       "--config",
       "auto",
       "--exclude-rule",
+      "python.lang.security.audit.subprocess-shell-true.subprocess-shell-true",
+      "--exclude-rule",
       "yaml.github-actions.security.third-party-action-not-pinned-to-commit-sha.third-party-action-not-pinned-to-commit-sha",
     ]

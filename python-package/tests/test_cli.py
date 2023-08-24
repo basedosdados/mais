@@ -1,15 +1,16 @@
 """
 Tests for the CLI module.
 """
-# pylint: disable=consider-using-with
-from pathlib import Path
 import os
 import subprocess
 
+# pylint: disable=consider-using-with
+from pathlib import Path
+
 import pytest
-import basedosdados as bd
 from google.api_core.exceptions import NotFound
 
+import basedosdados as bd
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"

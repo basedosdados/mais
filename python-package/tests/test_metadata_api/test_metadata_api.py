@@ -2,20 +2,10 @@
 Tests for the Metadata class with new API
 """
 # pylint: disable=fixme, unused-import, protected-access, trailing-whitespace, too-many-branches
-from pathlib import Path
-import random
-import shutil
-import string
-from pprint import pprint
-
 import pytest
-import requests
-import ruamel.yaml as ryaml
 
-from basedosdados import Metadata # TODO: deprecate
-
+from basedosdados import Metadata  # TODO: deprecate
 from basedosdados.exceptions import BaseDosDadosException
-from loguru import logger
 
 METADATA_FILES = {"dataset": "dataset_config.yaml", "table": "table_config.yaml"}
 
@@ -173,7 +163,7 @@ def test_owner_org_new_table(api_new_table_metadata):
     """
 
     with pytest.raises(BaseDosDadosException):
-        owner_org = api_new_table_metadata.owner_org  # pylint: disable=unused-variable
+        _ = api_new_table_metadata.owner_org  # pylint: disable=unused-variable
 
 
 def test_simplify_graphql_response(api_table_metadata):

@@ -1,15 +1,13 @@
 """
 Functions for manage auth and credentials
 """
+import sys
+
 # pylint: disable=redefined-outer-name, protected-access, no-name-in-module, import-error,line-too-long
 from functools import lru_cache
 
-import sys
-
-from google.cloud import bigquery, storage
-
 import pydata_google_auth
-
+from google.cloud import bigquery, storage
 
 from basedosdados.upload.base import Base
 

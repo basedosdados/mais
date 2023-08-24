@@ -2,11 +2,13 @@
 Module for interacting with the backend.
 """
 from typing import Any, Dict
+
 from loguru import logger
 
 try:
-    from gql import gql, Client
+    from gql import Client, gql
     from gql.transport.requests import RequestsHTTPTransport
+
     _backend_dependencies = True
 except ImportError:
     _backend_dependencies = False
@@ -49,7 +51,7 @@ class Backend:
         if not _backend_dependencies:
             raise BaseDosDadosMissingDependencyException(
                 "Optional dependencies for backend interaction are not installed. "
-                "Please install basedosdados with the \"backend\" extra, such as:"
+                'Please install basedosdados with the "backend" extra, such as:'
                 "\n\npip install basedosdados[backend]"
             )
         transport = RequestsHTTPTransport(
@@ -86,7 +88,7 @@ class Backend:
         if not _backend_dependencies:
             raise BaseDosDadosMissingDependencyException(
                 "Optional dependencies for backend interaction are not installed. "
-                "Please install basedosdados with the \"backend\" extra, such as:"
+                'Please install basedosdados with the "backend" extra, such as:'
                 "\n\npip install basedosdados[backend]"
             )
         if not client:
@@ -196,7 +198,7 @@ class Backend:
                     }
                 }
             }
-        
+
         """
         dataset_id = self._get_dataset_id_from_name(dataset_id)
         if dataset_id:
@@ -249,7 +251,7 @@ class Backend:
                     }
                 }
                 }
-            }    
+            }
         """
         table_id = self._get_table_id_from_name(
             gcp_dataset_id=dataset_id, gcp_table_id=table_id
@@ -279,7 +281,7 @@ class Backend:
             try:
                 if (
                     isinstance(response[key], dict)
-                    and response[key].get("edges") is not None
+                    and response[key].get("edges") is not None  # noqa
                 ):
                     output_[key] = [
                         v.get("node")

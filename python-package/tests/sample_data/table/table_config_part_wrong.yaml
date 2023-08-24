@@ -32,7 +32,7 @@ published_by:
     email: rdahis@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
+treatment_description: |
     - Mudamos a unidade de medida para R$1.
 
 # Com qual frequência a base é atualizada?
@@ -51,7 +51,7 @@ observation_level:
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    
+
 
 
 # Qual é a cobertura espacial da tabela?
@@ -102,68 +102,68 @@ partitions: keys # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-  
-    -   
+
+    -
         name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
+
+    -
         name: ano
         description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
+
+    -
         name: PIB
         description: Produto Interno Bruto a preços correntes
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
+
+    -
         name: impostos_liquidos
         description: Impostos, líquidos de subsídios, sobre produtos a preços correntes
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
+
+    -
         name: VA
         description: Valor adicionado bruto a preços correntes total
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
+
+    -
         name: VA_agropecuaria
         description: Valor adicionado bruto a preços correntes da agropecuária
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
+
+    -
         name: VA_industria
         description: Valor adicionado bruto a preços correntes da indústria
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
+
+    -
         name: VA_servicos
         description: Valor adicionado bruto a preços correntes dos serviços, exclusive administração, defesa, educação e saúde públicas e seguridade social
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
+
+    -
         name: VA_ADESPSS
         description: Valor adicionado bruto a preços correntes da administração, defesa, educação e saúde públicas e seguridade social
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
+
+    -
         name: Wrong_column_name
         description: wrong columns description
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
+
+    -
         name: keys
         description: partition key
         is_in_staging: True # Bool [True, False], whether the column is in the staging table

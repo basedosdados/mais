@@ -3,11 +3,10 @@ Module for manage dataset to the server.
 """
 # pylint: disable=line-too-long, fixme, invalid-name,line-too-long
 from functools import lru_cache
-from pathlib import Path
-from loguru import logger
 
-from google.cloud import bigquery
 from google.api_core.exceptions import Conflict
+from google.cloud import bigquery
+from loguru import logger
 
 from basedosdados.upload.base import Base
 
@@ -34,8 +33,10 @@ class Dataset(Base):
         Loop modes.
         """
 
+        def dataset_tag(m):
+            return f"_{m}" if m == "staging" else ""
+
         mode = ["prod", "staging"] if mode == "all" else [mode]
-        dataset_tag = lambda m: f"_{m}" if m == "staging" else ""
         return (
             {
                 "client": self.client[f"bigquery_{m}"],

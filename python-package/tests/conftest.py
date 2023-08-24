@@ -9,8 +9,9 @@ from pathlib import Path
 
 import pytest
 import ruamel.yaml as ryaml
-from basedosdados import Metadata # TODO: deprecate
-from basedosdados import Storage, Dataset, Table
+
+from basedosdados import Metadata  # TODO: deprecate
+from basedosdados import Dataset, Storage, Table
 from basedosdados.upload.base import Base
 
 DATASET_ID = "pytest"
@@ -440,7 +441,7 @@ def fixture_outdated_dataset_metadata(testdir):
     """
     config_path = Path.home() / ".basedosdados_teste"
     return Metadata(
-        dataset_id=API_OUTDATED_DATASET_ID,
+        dataset_id=API_OUTDATED_DATASET_ID,  # noqa
         metadata_path=testdir,
         config_path=config_path,
     )
@@ -453,8 +454,8 @@ def fixture_outdated_table_metadata(testdir):
     """
     config_path = Path.home() / ".basedosdados_teste"
     return Metadata(
-        dataset_id=API_OUTDATED_DATASET_ID,
-        table_id=API_OUTDATED_TABLE_ID,
+        dataset_id=API_OUTDATED_DATASET_ID,  # noqa
+        table_id=API_OUTDATED_TABLE_ID,  # noqa
         metadata_path=testdir,
         config_path=config_path,
     )

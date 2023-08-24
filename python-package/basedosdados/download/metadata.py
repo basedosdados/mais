@@ -1,13 +1,14 @@
 """
 Functions to get metadata from BD's API
 """
-# pylint: disable=invalid-name,use-maxsplit-arg,line-too-long
-from collections import defaultdict
 import math
 
-from google.cloud import bigquery
+# pylint: disable=invalid-name,use-maxsplit-arg,line-too-long
+from collections import defaultdict
+
 import pandas as pd
 import requests
+from google.cloud import bigquery
 
 
 def _safe_fetch(url: str):
@@ -50,7 +51,7 @@ def _dict_from_page(json_response):
 def _fix_size(s, step=80):
     final = ""
 
-    for l in s.split(" "):
+    for l in s.split(" "):  # noqa
         final += (l + " ") if len(final.split("\n")[-1]) < step else "\n"
 
     return final

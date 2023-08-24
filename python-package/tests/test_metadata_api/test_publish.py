@@ -4,22 +4,12 @@ Test for publishing with new API.
 import os
 
 # pylint: disable=fixme, unused-import, protected-access
-from pathlib import Path
-import random
-import shutil
-import string
 from pprint import pprint
-from io import StringIO
 
 import pytest
-import requests
-import ruamel.yaml as ryaml
-
-from basedosdados import Metadata # TODO: deprecate
 
 from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.remoteapi import RemoteAPI
-from loguru import logger
 
 METADATA_FILES = {"dataset": "dataset_config.yaml", "table": "table_config.yaml"}
 

@@ -3,25 +3,25 @@ Class for manage tables in Storage and Big Query
 """
 
 import contextlib
+import inspect
+import textwrap
+from copy import deepcopy
+from functools import lru_cache
 
 # pylint: disable=invalid-name, too-many-locals, too-many-branches, too-many-arguments,line-too-long,R0801,consider-using-f-string
 from pathlib import Path
-from copy import deepcopy
-import textwrap
-import inspect
-from functools import lru_cache
 
-from loguru import logger
+import google.api_core.exceptions
 from google.cloud import bigquery
 from google.cloud.bigquery import SchemaField
-import google.api_core.exceptions
+from loguru import logger
 
+from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.base import Base
 from basedosdados.upload.connection import Connection
-from basedosdados.upload.storage import Storage
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
-from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.upload.storage import Storage
 
 
 class Table(Base):
@@ -75,7 +75,7 @@ class Table(Base):
         schema = []
 
         for col in columns:
-            ## ref: https://cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.schema.SchemaField
+            # ref: https://cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.schema.SchemaField
             if col.get("name") is None:
                 msg = "Columns must have a name! Check your data files for columns without name"
                 raise BaseDosDadosException(msg)
@@ -239,7 +239,7 @@ class Table(Base):
             .list_blobs(prefix=f"staging/{self.dataset_id}/{self.table_id}/")
         )
         partitions_dict = {}
-        ## only needs the first bloob
+        # only needs the first bloob
         for blob in blobs:
             for folder in blob.name.split("/"):
                 if "=" in folder:
@@ -319,7 +319,7 @@ class Table(Base):
     def _make_publish_sql(self):
         """Create publish.sql with columns and bigquery_type"""
 
-        ### publish.sql header and instructions
+        # publish.sql header and instructions
         publish_txt = """
         /*
         Query para publicar a tabela.
@@ -363,7 +363,7 @@ class Table(Base):
             )
 
             publish_txt += f"SAFE_CAST({name} AS {bigquery_type}) {name},\n"
-        ## remove last comma
+        # remove last comma
         publish_txt = publish_txt[:-2] + "\n"
 
         # add from statement
@@ -691,7 +691,7 @@ class Table(Base):
 
         fields = ["description", "schema"]
 
-        self.client[f"bigquery_prod"].update_table(table, fields=fields)
+        self.client["bigquery_prod"].update_table(table, fields=fields)
 
         logger.success(
             " {object} {object_id} was {action} in {mode}!",
@@ -732,15 +732,15 @@ class Table(Base):
 
         publish_sql = self._make_publish_sql()
 
-        ## create view using API metadata
+        # create view using API metadata
         if custon_publish_sql is None:
             self.client["bigquery_prod"].query(publish_sql).result()
             self.update(mode="prod")
 
-        ## create view using custon query
+        # create view using custon query
         if custon_publish_sql is not None:
             self.client["bigquery_prod"].query(custon_publish_sql).result()
-            ## update schema using a custom schema
+            # update schema using a custom schema
             if custom_schema is not None:
                 self.update(custom_schema=custom_schema)
 
@@ -817,10 +817,7 @@ class Table(Base):
             raise BaseDosDadosException(
                 "You cannot append to a table that does not exist"
             )
-        Storage(
-            self.dataset_id,
-            self.table_id,
-        ).upload(
+        Storage(self.dataset_id, self.table_id,).upload(
             filepath,
             mode="staging",
             partitions=partitions,

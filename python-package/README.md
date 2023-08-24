@@ -1,6 +1,6 @@
 # Python Package
 
-## Desenvolvimento Linux e Mac: 
+## Desenvolvimento Linux e Mac:
 
 Clone o repositório principal:
 
@@ -20,7 +20,7 @@ python setup.py develop
 
 1. Abra uma branch com o nome issue-<X>
 2. Faça as modificações necessárias
-3. Suba o Pull Request apontando para a branch `python-next-minor` ou `python-next-patch`. 
+3. Suba o Pull Request apontando para a branch `python-next-minor` ou `python-next-patch`.
     Sendo, minor e patch referentes ao bump da versão: v1.5.7 --> v\<major>.\<minor>.\<patch>.
 4. O nome do PR deve seguir o padrão
     `[infra] <titulo explicativo>`
@@ -28,7 +28,7 @@ python setup.py develop
 
 ### O que uma modificação precisa ter
 
-  
+
 - Resolver o problema
 - Lista de modificações efetuadas
     1. Mudei a função X para fazer Y
@@ -36,7 +36,7 @@ python setup.py develop
 - Referência aos issues atendidos
 - Documentação e Docstrings
 - Testes
-  
+
 
 ## Versionamento
 
@@ -47,7 +47,7 @@ python setup.py develop
     ```bash
     git pull origin [python-version]
     ```
-  
+
     Onde `[python-version]` é a branch da nova versão do pacote.
 
 2. Se necessario adicionar novas dependências:
@@ -55,7 +55,7 @@ python setup.py develop
       poetry add <package-name>
     ```
 
-3. Gerar novo `requirements-dev.txt` 
+3. Gerar novo `requirements-dev.txt`
 
     ```bash
     poetry export -f requirements.txt --output requirements-dev.txt --without-hashes
@@ -77,7 +77,7 @@ python setup.py develop
     repository = "https://github.com/base-dos-dados/bases"
     version = "1.6.1-beta.2"
     ```
-    
+
     O campo `version` deve ser alterado para o número da versão sendo lançada.
 
 5. Push para branch:
@@ -89,7 +89,7 @@ python setup.py develop
 6. Publicação do pacote no PyPI (exige usuário e senha):
 
     Para publicar o pacote no PyPI, use:
-    
+
     ```bash
     poetry version [python-version]
     poetry publish --build

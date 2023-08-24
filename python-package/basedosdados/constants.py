@@ -4,8 +4,8 @@ Constants for the project.
 # pylint: disable=C0103
 __all__ = ["config", "constants"]
 
-from enum import Enum
 from dataclasses import dataclass
+from enum import Enum
 
 
 @dataclass

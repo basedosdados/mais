@@ -85,5 +85,6 @@ class BaseDosDadosAuthorizationException(BaseDosDadosException):
         )
         super().__init__(self.message)
 
+
 class BaseDosDadosMissingDependencyException(BaseDosDadosException):
     """Exception raised if one of the optional dependencies is missing."""

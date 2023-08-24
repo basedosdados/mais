@@ -2,14 +2,13 @@
 Tests for Base class
 """
 import os
-
-# pylint: disable=unused-variable
-
 import re
 import time
 from pathlib import Path
 
-from google.cloud import storage, bigquery
+from google.cloud import bigquery, storage
+
+# pylint: disable=unused-variable
 
 
 def test_bucket_name(base, config_file_exists, capsys):

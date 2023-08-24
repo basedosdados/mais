@@ -1,17 +1,18 @@
 """
 Class for managing the files in cloud storage.
 """
+import sys
+
 # pylint: disable=invalid-name, too-many-arguments, undefined-loop-variable,line-too-long,broad-except,R0801
 import time
-from pathlib import Path
-import sys
 import traceback
+from pathlib import Path
 
-from tqdm import tqdm
 from loguru import logger
+from tqdm import tqdm
 
-from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.upload.base import Base
 
 # google retryble exceptions. References: https://googleapis.dev/python/storage/latest/retry_timeout.html#module-google.cloud.storage.retry
 
@@ -400,7 +401,7 @@ class Storage(Base):
             )
         # Divides table_blobs list for maximum batch request size
         table_blobs_chunks = [
-            table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
+            table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)  # noqa
         ]
 
         for i, source_table in enumerate(
@@ -474,7 +475,8 @@ class Storage(Base):
 
         # Divides source_table_ref list for maximum batch request size
         source_table_ref_chunks = [
-            source_table_ref[i : i + 999] for i in range(0, len(source_table_ref), 999)
+            source_table_ref[i : i + 999]  # noqa
+            for i in range(0, len(source_table_ref), 999)  # noqa
         ]
 
         for i, source_table in enumerate(

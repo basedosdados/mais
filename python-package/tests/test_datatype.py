@@ -7,6 +7,7 @@ from google.cloud.bigquery.external_config import (
     ExternalConfig,
     HivePartitioningOptions,
 )
+
 import basedosdados as bd
 from basedosdados.upload.datatypes import Datatype
 

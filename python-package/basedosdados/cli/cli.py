@@ -6,6 +6,7 @@ CLI package for the application.
 
 try:
     import click
+
     _cli_dependencies = True
 except ImportError:
     _cli_dependencies = False
@@ -17,9 +18,10 @@ from basedosdados.upload.base import Base
 if not _cli_dependencies:
     raise BaseDosDadosMissingDependencyException(
         "Optional dependencies for the CLI are not installed. "
-        "Please install basedosdados with the \"cli\" extra, such as:"
+        'Please install basedosdados with the "cli" extra, such as:'
         "\n\npip install basedosdados[cli]"
     )
+
 
 @click.group()
 @click.option("--bucket_name", default=None, help="Project bucket name")
@@ -206,7 +208,7 @@ def init(ctx, overwrite):
     help=(
         "Downloads data do SAVEPATH. SAVEPATH must point to a .csv file.\n\n"
         "Example: \n\n"
-        'basedosdados download data.csv  --query="select * from basedosdados.br_ibge_pib.municipio limit 10" \ --billing_project_id=basedosdados-dev'
+        'basedosdados download data.csv  --query="select * from basedosdados.br_ibge_pib.municipio limit 10" --billing_project_id=basedosdados-dev'
     ),
 )
 @click.argument(

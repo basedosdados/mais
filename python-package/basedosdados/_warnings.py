@@ -14,7 +14,7 @@ def get_latest_version_number():
     try:
         response = requests.get("https://pypi.python.org/pypi/basedosdados/json")
         return response.json()["info"]["version"]
-    except:
+    except:  # noqa
         logger.warning(
             "Could not check for updates. Please check your internet connection."
         )
@@ -91,7 +91,7 @@ def show_warnings():
                     f"Please upgrade to the latest version ({latest_version}) using "
                     "'pip install --upgrade basedosdados'."
                 )
-    except:
+    except:  # noqa
         logger.warning(
             "Could not check for updates. Please check your internet connection."
         )
@@ -115,7 +115,7 @@ def show_warnings():
             if "warnings" in data["python"]:
                 for warning in data["python"]["warnings"]:
                     logger.warning(warning)
-    except:
+    except:  # noqa
         logger.warning(
             "Could not check for warnings and messages. Please check your internet connection."
         )

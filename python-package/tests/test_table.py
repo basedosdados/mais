@@ -1,16 +1,17 @@
 """
 Tests for the Table class
 """
-# pylint: disable=invalid-name
-from pathlib import Path
 import shutil
 
-import basedosdados as bd
-from basedosdados import Dataset, Table, Storage
-from basedosdados.exceptions import BaseDosDadosException
-from google.api_core.exceptions import NotFound
+# pylint: disable=invalid-name
+from pathlib import Path
 
 import pytest
+from google.api_core.exceptions import NotFound
+
+import basedosdados as bd
+from basedosdados import Dataset, Storage, Table
+from basedosdados.exceptions import BaseDosDadosException
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
@@ -488,10 +489,10 @@ def test_create_if_force_columns_true(testdir):
 
     filepath = (
         testdir
-        / "staging"
-        / "br_cvm_administradores_carteira"
-        / "pessoa_fisica"
-        / "bd_pessoa_fisica.csv"
+        / "staging"  # noqa
+        / "br_cvm_administradores_carteira"  # noqa
+        / "pessoa_fisica"  # noqa
+        / "bd_pessoa_fisica.csv"  # noqa
     )
 
     tb.create(
@@ -519,10 +520,10 @@ def test_create_if_force_columns_false(testdir):
 
     filepath = (
         testdir
-        / "staging"
-        / "br_cvm_administradores_carteira"
-        / "pessoa_fisica"
-        / "bd_pessoa_fisica.csv"
+        / "staging"  # noqa
+        / "br_cvm_administradores_carteira"  # noqa
+        / "pessoa_fisica"  # noqa
+        / "bd_pessoa_fisica.csv"  # noqa
     )
 
     tb.create(
@@ -626,7 +627,7 @@ def test_update(table, data_csv_path):
 
     assert table_exists(table, "staging")
 
-    ### Como dar assert que a descrição foi atualizada?
+    # Como dar assert que a descrição foi atualizada?
 
     table.update(mode="all")
 

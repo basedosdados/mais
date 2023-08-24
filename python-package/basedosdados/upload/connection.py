@@ -9,6 +9,8 @@ import google.auth
 from google.cloud.bigquery_connection_v1.types import CloudResourceProperties
 from google.cloud.bigquery_connection_v1.types.connection import (
     Connection as BQConnection,
+)
+from google.cloud.bigquery_connection_v1.types.connection import (
     CreateConnectionRequest,
     DeleteConnectionRequest,
     GetConnectionRequest,

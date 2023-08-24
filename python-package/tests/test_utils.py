@@ -1,15 +1,15 @@
 """
 Tests for the upload utilities.
 """
+import os
+
 # pylint: disable=invalid-name
 import shutil
-import os
 from glob import glob
 
 import pandas as pd
 
-from basedosdados.upload.utils import update_columns, to_partitions, break_file
-
+from basedosdados.upload.utils import break_file, to_partitions, update_columns
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"

@@ -4,10 +4,12 @@ Class for define external and partiton configs for each datatype
 # pylint: disable=protected-access,line-too-long
 import csv
 
-from google.cloud import bigquery
 import pandas as pd
+from google.cloud import bigquery
+
 try:
     import pandavro
+
     _avro_dependencies = True
 except ImportError:
     _avro_dependencies = False
@@ -54,7 +56,7 @@ class Datatype:
             if not _avro_dependencies:
                 raise BaseDosDadosMissingDependencyException(
                     "Optional dependencies for handling AVRO files are not installed. "
-                    "Please install basedosdados with the \"avro\" extra, such as:"
+                    'Please install basedosdados with the "avro" extra, such as:'
                     "\n\npip install basedosdados[avro]"
                 )
             dataframe = pandavro.read_avro(str(data_sample_path))

@@ -1,22 +1,21 @@
 """
 Tests for metadata download fuunctions
 """
-from pathlib import Path
 import shutil
+from pathlib import Path
 
-import pytest
 import pandas as pd
+import pytest
 
 from basedosdados import (
-    list_datasets,
-    list_dataset_tables,
     get_dataset_description,
-    get_table_description,
     get_table_columns,
+    get_table_description,
     get_table_size,
+    list_dataset_tables,
+    list_datasets,
     search,
 )
-
 from basedosdados.download.metadata import _safe_fetch
 
 TEST_PROJECT_ID = "basedosdados-dev"

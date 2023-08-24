@@ -1,24 +1,23 @@
 """
 Module for manage dataset using local credentials and config files
 """
-from datetime import datetime
+import base64
+import json
+import shutil
+import sys
+import warnings
+from functools import lru_cache
+from os import getenv
 
 # pylint: disable=line-too-long, invalid-name, too-many-arguments, invalid-envvar-value,line-too-long
 from pathlib import Path
-import sys
-from os import getenv
-import shutil
-import warnings
-import base64
-import json
-from functools import lru_cache
 from typing import Dict, List, Union
 
+import googleapiclient.discovery
+import tomlkit
 from google.cloud import bigquery, bigquery_connection_v1, storage
 from google.oauth2 import service_account
-import googleapiclient.discovery
 from loguru import logger
-import tomlkit
 
 from basedosdados.backend import Backend
 from basedosdados.constants import config, constants
@@ -205,9 +204,9 @@ class Base:  # pylint: disable=too-many-instance-attributes
         # If environments are set but no files exist
         if (
             (not config_file.exists())
-            and (getenv(constants.ENV_CONFIG.value))
-            and (getenv(constants.ENV_CREDENTIALS_PROD.value))
-            and (getenv(constants.ENV_CREDENTIALS_STAGING.value))
+            and (getenv(constants.ENV_CONFIG.value))  # noqa
+            and (getenv(constants.ENV_CREDENTIALS_PROD.value))  # noqa
+            and (getenv(constants.ENV_CREDENTIALS_STAGING.value))  # noqa
         ):
             # Create basedosdados files from envs
             with open(config_file, "w", encoding="utf-8") as f:
@@ -236,7 +235,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
                 "[press enter to continue]"
             )
 
-            ############# STEP 1 - CREDENTIALS PATH ######################
+            # STEP 1 - CREDENTIALS PATH #
 
             credentials_path = self.config_path / "credentials"
             credentials_path = Path(
@@ -255,7 +254,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
                 )
             )
 
-            ############# STEP 2 - STAGING CREDS. #######################
+            # STEP 2 - STAGING CREDS. #
             project_staging = self._input_validator(
                 "\n********* STEP 2 **********\n"
                 "What is the Google Cloud Project that you are going to use "
@@ -272,7 +271,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
             )
             c_file["gcloud-projects"]["staging"]["name"] = project_staging
 
-            ############# STEP 3 - PROD CREDS. #######################
+            # STEP 3 - PROD CREDS. #
 
             project_prod = self._selection_yn(
                 first_question=(
@@ -301,7 +300,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
             )
             c_file["gcloud-projects"]["prod"]["name"] = project_prod
 
-            ############# STEP 4 - BUCKET NAME #######################
+            # STEP 4 - BUCKET NAME #
 
             bucket_name = self._input_validator(
                 "\n********* STEP 4 **********\n"
@@ -312,7 +311,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
 
             c_file["bucket_name"] = bucket_name
 
-            ############# STEP 5 - CONFIGURE API #######################
+            # STEP 5 - CONFIGURE API #
 
             api_base_url = self._input_validator(
                 "\n********* STEP 5 **********\n"
