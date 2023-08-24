@@ -4,6 +4,7 @@
 bases/pytest/*
 bases/test/
 test/*
+test.py
 
 
 .DS_Storage

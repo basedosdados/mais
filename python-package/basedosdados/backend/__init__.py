@@ -52,7 +52,7 @@ class Backend:
             raise BaseDosDadosMissingDependencyException(
                 "Optional dependencies for backend interaction are not installed. "
                 'Please install basedosdados with the "backend" extra, such as:'
-                "\n\npip install basedosdados[backend]"
+                "\n\npip install basedosdados[upload]"
             )
         transport = RequestsHTTPTransport(
             url=self.graphql_url, headers=headers, use_json=True
@@ -89,7 +89,7 @@ class Backend:
             raise BaseDosDadosMissingDependencyException(
                 "Optional dependencies for backend interaction are not installed. "
                 'Please install basedosdados with the "backend" extra, such as:'
-                "\n\npip install basedosdados[backend]"
+                "\n\npip install basedosdados[upload]"
             )
         if not client:
             client = self._get_client(
