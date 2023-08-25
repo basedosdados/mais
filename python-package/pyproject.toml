@@ -34,6 +34,7 @@ tqdm = "^4"
 click = { version = ">=8.1,<9", optional = true }
 
 [tool.poetry.extras]
+all = ["click", "gql", "pandavro", "requests-toolbelt"]
 avro = ["pandavro"]
 cli = ["click"]
 upload = ["gql", "requests-toolbelt"]
