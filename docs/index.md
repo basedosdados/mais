@@ -22,7 +22,7 @@ outras informações. Você pode consultar os dados das tabelas via:
 ### Download
 
 Você pode baixar o arquivo CSV completo da tabela direto no site. Este
-tipo de Consulta não está disponível para arquivos grandes.
+tipo de Consulta não está disponível para arquivos que ultrapassem 200 mil linhas.
 
 ### BigQuery (SQL)
 
