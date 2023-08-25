@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 this is a test-dataset
-=======
-None
->>>>>>> fee7177eb7c1b2efc60334b30538bfea04eb2af9
 
 Para saber mais acesse:
 Website: 
