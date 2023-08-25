@@ -81,13 +81,13 @@ python setup.py develop
     O campo `version` deve ser alterado para o número da versão sendo lançada.
 
 5. Editar `basedosdados/__init__.py`:
-    
+
     O arquivo `basedosdados/__init__.py` contém a versão do pacote em python da **BD**. Exemplo:
-    
+
     ```python
     __version__ = "1.6.1-beta.2"
     ```
-    
+
    O atributo `__version__` também deve ser alterado para o número da versão sendo lançada.
 
 6. Push para branch:

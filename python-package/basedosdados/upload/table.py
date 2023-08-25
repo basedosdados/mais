@@ -825,10 +825,7 @@ class Table(Base):
             raise BaseDosDadosException(
                 "You cannot append to a table that does not exist"
             )
-        Storage(
-            self.dataset_id,
-            self.table_id,
-        ).upload(
+        Storage(self.dataset_id, self.table_id,).upload(
             filepath,
             mode="staging",
             partitions=partitions,
