@@ -59,7 +59,8 @@ drop dup
 local vars id_candidato_bd ano tipo_eleicao
 duplicates drop `vars', force
 
-save "output/norm_candidatos.dta", replace
+save             "output/norm_candidatos.dta", replace
+export delimited "output/norm_candidatos.csv", replace
 
 //----------------------//
 // 3. limpa erros na 
