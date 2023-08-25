@@ -1,0 +1,53 @@
+A base conta com o total de matrículas por município para todas as etapas e subetapas de ensino, além da discriminação dos anos para Anos Iniciais e Finais do Ensino Fundamental, bem como as série do Ensino Médio
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+
+
+
+Cobertura Temporal
+------------------
+- 2007(1)2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Junção das diferentes planilhas originais, reshape pro formato long, partição por UF
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year

@@ -32,7 +32,7 @@ keep id_municipio id_municipio_tse
 tempfile municipio
 save `municipio'
 
-foreach ano of numlist 2022 { // 1994(2)2020 {
+foreach ano of numlist 2022 { // 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		
@@ -63,7 +63,7 @@ foreach ano of numlist 2022 { // 1994(2)2020 {
 			ren v23 votos_legenda
 			
 		}
-		else if `ano' >= 2014 {
+		else if `ano' >= 2014 & `ano' <= 2020 {
 			
 			drop in 1
 			
@@ -89,6 +89,36 @@ foreach ano of numlist 2022 { // 1994(2)2020 {
 			ren v30 votos_legenda
 			
 		}
+		else if `ano' >= 2022 {
+			
+			drop in 1
+			
+			keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v24 v26 v30 v41 v42 v32
+			
+			ren v3 ano
+			ren v6 turno
+			ren v8 tipo_eleicao
+			ren v11 sigla_uf
+			ren v14 id_municipio_tse
+			ren v16 zona
+			ren v18 cargo
+			ren v19 aptos
+			ren v20 secoes
+			ren v21 secoes_agregadas
+			//ren v22 aptos_totalizadas
+			//ren v23 secoes_totalizadas
+			ren v24 comparecimento
+			ren v26 abstencoes
+			ren v30 votos_validos
+			ren v41 votos_brancos
+			ren v42 votos_nulos
+			ren v32 votos_legenda
+			
+			gen aptos_totalizadas = .
+			gen secoes_totalizadas = .
+			
+		}
+		*
 		*
 		
 		destring ano turno id_municipio_tse zona aptos* secoes* comparecimento abstencoes votos_*, replace force

@@ -1,75 +1,103 @@
-
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_inep_indicador_nivel_socioeconomico
 
 table_id: escola
+
+# Título da tabela.
+title: Escola
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: O  Indicador de Nível Socioeconômico (INSE)  trata-se de uma medida cujo objetivo é situar o conjunto dos alunos atendidos por cada escola em um estrato, definido pela posse de bens domésticos, renda e contratação de serviços pela família dos alunos e pelo nível de escolaridade de seus pais.
+description: O  Indicador de Nível Socioeconômico (INSE)  trata-se de uma medida cujo
+    objetivo é situar o conjunto dos alunos atendidos por cada escola em um estrato,
+    definido pela posse de bens domésticos, renda e contratação de serviços pela família
+    dos alunos e pelo nível de escolaridade de seus pais.
 
-# A máxima unidade espacial que a tabela cobre.
-spatial_coverage: bra
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
+    - sa.br
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
 temporal_coverage:
     - 2013
     - 2015
     - 2019
+    - 2021
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: uncertain
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity: school
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit: year
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
-    - ano
-    - id_escola
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+    - entity: school
+      columns:
+          - id_escola
+    - entity: year
+      columns:
+          - ano
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: '2023-04-12'
+    data: '2023-04-12 17:55:00'
+    release: '2023-04-12 17:55:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
-version: v1.2
+# Exemplos: v1.0, v1.1.3
+version: v1.3
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Lucas Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
+    name: Luiza Vilela
+    email: luiza.vilela@basedosdados.org
+    github_user: vilelaluiza
+    ckan_user: vileluiza
     website:
-    ckan_user: lucasnascm
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Lucas Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
-    ckan_user: lucasnascm
+    name: Luiza Vilela
+    email: luiza.vilela@basedosdados.org
+    github_user: vilelaluiza
+    ckan_user: vileluiza
     website:
-    code_url:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Renomeei as colunas, compatibilizei a escala do INSE e agrupei todos os anos
+data_cleaning_description: 1 - Desprezar colunas com informações repetidas; 2 - Renomear as colunas seguindo o padrão da BD; 3 - Compatibilizar a escala do INSE; 4 - Append com os dados publicados na BD
+
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicador_nivel_socioeconomico/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -79,10 +107,6 @@ auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary: yes
 
 source_bucket_name: basedosdados-dev
 
@@ -96,250 +120,285 @@ project_id_staging: basedosdados-dev
 # Se não houver partições, não modifique abaixo.
 partitions:
 
-bdm_file_size:
-
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-      covered_by_dictionary: yes
+          - 2013, 2015, 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
       measurement_unit: year
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
-      temporal_coverage: 
-      covered_by_dictionary: yes
+      temporal_coverage:
+          - 2013, 2015, 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: uf
           column_name: sigla
       measurement_unit:
-      has_sensitive_data: 
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio
       bigquery_type: string
-      description: ID Município - IBGE 7 Dígitos
+      description: ID do Município - IBGE 7 Dígitos
       temporal_coverage:
-      covered_by_dictionary: yes
+          - 2013, 2015, 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
           column_name: id_municipio
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: area
       bigquery_type: string
-      description: Área de localização do município
+      description: Área da escola (relacionada ao município)
       temporal_coverage:
-      covered_by_dictionary:
+          - 2013, 2015, 2019, 2021
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: rede
       bigquery_type: string
       description: Rede Escolar
       temporal_coverage:
-      covered_by_dictionary:
+          - 2013, 2015, 2019, 2021
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_escola
       bigquery_type: string
       description: ID Escola - INEP
       temporal_coverage:
-      covered_by_dictionary:
+          - 2013, 2015, 2019, 2021
+      covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: escola
+          column_name: id_escola
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: tipo_localizacao
       bigquery_type: string
-      description: Localização da escola
+      description: Tipo de Localização
       temporal_coverage:
-      covered_by_dictionary:
+          - 2013, 2015, 2019, 2021
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: quantidade_alunos_inse
       bigquery_type: int64
-      description: Quantidade de Alunos com INSE calculado utilizado para o cálculo das médias por escola
+      description: Quantidade de Alunos com INSE calculado utilizado para o cálculo
+          das médias por escola
       temporal_coverage:
-      covered_by_dictionary:
+          - 2013, 2015, 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging:
-      is_partition:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: inse
       bigquery_type: float64
       description: Média do Indicador de Nível Socioeconômico dos alunos da escola
       temporal_coverage:
-      covered_by_dictionary:
+          - 2013, 2015, 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: percentual_nivel_1
       bigquery_type: float64
       description: Percentual de alunos da Escola classificados no Nível I
       temporal_coverage:
-      covered_by_dictionary:
+          - 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: percentual_nivel_2
       bigquery_type: float64
       description: Percentual de alunos da Escola classificados no Nível II
       temporal_coverage:
-      covered_by_dictionary:
+          - 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging:
-      is_partition:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: percentual_nivel_3
       bigquery_type: float64
       description: Percentual de alunos da Escola classificados no Nível III
       temporal_coverage:
-      covered_by_dictionary:
+          - 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: percentual_nivel_4
       bigquery_type: float64
       description: Percentual de alunos da Escola classificados no Nível IV
       temporal_coverage:
-      covered_by_dictionary:
+          - 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: percentual_nivel_5
       bigquery_type: float64
       description: Percentual de alunos da Escola classificados no Nível V
       temporal_coverage:
-      covered_by_dictionary:
+          - 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: percentual_nivel_6
       bigquery_type: float64
       description: Percentual de alunos da Escola classificados no Nível VI
       temporal_coverage:
-      covered_by_dictionary:
+          - 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: percentual_nivel_7
       bigquery_type: float64
       description: Percentual de alunos da Escola classificados no Nível VII
       temporal_coverage:
-      covered_by_dictionary:
+          - 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: percentual_nivel_8
       bigquery_type: float64
       description: Percentual de alunos da Escola classificados no Nível VIII
       temporal_coverage:
-      covered_by_dictionary:
+          - 2019, 2021
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: classificacao
       bigquery_type: string
       description: Classificação do Indicador de Nível Socioeconômico
       temporal_coverage:
-      covered_by_dictionary:
+          - 2013, 2015, 2019, 2021
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
+
+number_rows: 285832
 
 metadata_modified:

@@ -1,0 +1,467 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: world_oecd_pisa
+
+table_id: student_summary
+
+# Título da tabela.
+title: Summary of Student Data
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: A subset of variables from PISA data for the years 2000 - 2018 at the student level, collected
+    from the R package 'learning-tower'. This is an excellent dataset for exploring
+    and visualizing data about student results.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
+    - world
+# Anos cobertos pela tabela.
+# Exemplos:
+#     - 1995(3)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+    - 2000(3)2018
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: three_years
+
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+    - entity: year
+      columns:
+          - year
+    - entity: person
+      columns:
+          - student_id
+          - country_id_iso_3
+
+last_updated:
+    metadata: '2022-08-08'
+    data: '2022-08-08 08:30:07'
+    release: '2020-10-01 08:30:07'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Laura Amaral
+    email: laura.amaral@basedosdados.org
+    github_user: https://github.com/laura-l-amaral
+    ckan_user: laura-amaral
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Laura Amaral
+    email: laura.amaral@basedosdados.org
+    github_user: https://github.com/laura-l-amaral
+    ckan_user: laura-amaral
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Rename columns
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_oecd_pisa/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+    - year
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: year
+      bigquery_type: int64
+      description: Year
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: country_id_iso_3
+      bigquery_type: string
+      description: Country 3 character code
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_mundo
+          table_id: pais
+          column_name: sigla_pais_iso3
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Note that some regions/territories are coded as country for ease
+          of input
+      is_in_staging: true
+      is_partition: false
+    - name: school_id
+      bigquery_type: string
+      description: The school identification number, unique for each country and year
+          combination.
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: student_id
+      bigquery_type: string
+      description: The student identification number, unique for each school, country
+          and year combination.
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gender
+      bigquery_type: string
+      description: Gender of the student
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Note that we call this variable gender and not sex as this term
+          was used in the OECD PISA database.
+      is_in_staging: true
+      is_partition: false
+    - name: mother_education
+      bigquery_type: string
+      description: Highest level of mother's education
+      temporal_coverage:
+          - 2003(3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Ranges from "less than ISCED1" to "ISCED 3A"
+      is_in_staging: true
+      is_partition: false
+    - name: father_education
+      bigquery_type: string
+      description: Highest level of father's education
+      temporal_coverage:
+          - 2003(3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Ranges from "less than ISCED1" to "ISCED 3A"
+      is_in_staging: true
+      is_partition: false
+    - name: computer_possession
+      bigquery_type: string
+      description: Possession of computer
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Only "yes" and "no" are recorded
+      is_in_staging: true
+      is_partition: false
+    - name: internet_access
+      bigquery_type: string
+      description: Access to internet
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Only "yes" and "no" are recorded
+      is_in_staging: true
+      is_partition: false
+    - name: desk_possession
+      bigquery_type: string
+      description: Possession of desk to study at
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Only "yes" and "no" are recorded
+      is_in_staging: true
+      is_partition: false
+    - name: room_possession
+      bigquery_type: string
+      description: Possession of a room of your own
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Only "yes" and "no" are recorded
+      is_in_staging: true
+      is_partition: false
+    - name: dishwasher_possession
+      bigquery_type: string
+      description: Possession of a dishwasher
+      temporal_coverage:
+          - (3)2012
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Only "yes" and "no" are recorded
+      is_in_staging: true
+      is_partition: false
+    - name: television
+      bigquery_type: string
+      description: Number of televisions
+      temporal_coverage:
+          - 2005(3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: '"0", "1", "2" are code for no, one and two TVs in the house.
+          "3+" codes for three or more TVs'
+      is_in_staging: true
+      is_partition: false
+    - name: computer
+      bigquery_type: string
+      description: Number of computers
+      temporal_coverage:
+          - 2005(3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: '"0", "1", "2" are code for no, one and two computers in the house.
+          "3+" codes for three or more computers'
+      is_in_staging: true
+      is_partition: false
+    - name: car
+      bigquery_type: string
+      description: Number of cars
+      temporal_coverage:
+          - 2005(3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: '"0", "1", "2" are code for no, one and two cars in the house.
+          "3+" codes for three or more cars'
+      is_in_staging: true
+      is_partition: false
+    - name: book
+      bigquery_type: string
+      description: Number of books
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Note that encoding is different in the years 2000 and 2003 compared
+          to all other years.
+      is_in_staging: true
+      is_partition: false
+    - name: wealth_index
+      bigquery_type: float64
+      description: Family wealth index
+      temporal_coverage:
+          - 2005(3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: economic_social_cultural_status
+      bigquery_type: float64
+      description: Index of economic, social and cultural status
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: score_mathematics
+      bigquery_type: float64
+      description: Simulated score in mathematics
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: score_reading
+      bigquery_type: float64
+      description: Simulated score in reading
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: score_science
+      bigquery_type: float64
+      description: Simulated score in science
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: student_weight
+      bigquery_type: float64
+      description: The final survey weight score for the student score
+      temporal_coverage:
+          - (3)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 2929621
+
+metadata_modified:

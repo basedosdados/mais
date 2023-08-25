@@ -1,4 +1,4 @@
-Total de acessos e densidade por domicílio da Banda Larga Fixa nos municípios brasileiros por mês e ano desde março de 2007
+Total de acessos e densidade por domicílio da Banda Larga Fixa nos municípios brasileiros por mês e ano desde março de 2007.
 
 Para saber mais acesse:
 Website: 
@@ -9,14 +9,14 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Moreira
+Nome: Patrick Teixeira
 Código: 
-Email: lucas.moreira@basedosdados.org
+Email: patrick.teixeira@basedosdados.org
 Tratado por
 -----------
-Nome: Lucas Moreira
+Nome: Patrick Teixeira
 Código: 
-Email: lucas.moreira@basedosdados.org
+Email: patrick.teixeira@basedosdados.org
 
 
 
@@ -25,21 +25,21 @@ Email: lucas.moreira@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 2007(1)2021
+- 2007(1)2023
 
 
 
 
 Cobertura Espacial
 ------------------
-- {'continent': 'south_america', 'country': 'br'}
+- sa.br
 
 
 
 
 Tratamento
 ----------
-Agrupamento do total de acessos a nível municipal; Merge com a base de densidade
+Renomear as colunas
 
 
 

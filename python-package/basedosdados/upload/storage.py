@@ -310,9 +310,14 @@ class Storage(Base):
             (savepath / blob_folder).mkdir(parents=True, exist_ok=True)
 
             # download blob to savepath
+<<<<<<< HEAD
             save_file_path = savepath / blob.name
 
             blob.download_to_filename(filename=save_file_path)
+=======
+            savepath = f"{savepath}/{blob.name}"
+            blob.download_to_filename(filename=savepath)
+>>>>>>> master
 
         logger.success(
             " {object} {object_id}_{mode} was {action} at: {path}!",
@@ -320,7 +325,11 @@ class Storage(Base):
             mode=mode,
             object="File",
             action="downloaded",
+<<<<<<< HEAD
             path={str(savepath)},
+=======
+            path={str(savepath)}
+>>>>>>> master
         )
 
     def delete_file(self, filename, mode, partitions=None, not_found_ok=False):
