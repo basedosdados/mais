@@ -56,11 +56,14 @@ class Table(Base):
 
         return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
-    def _is_partitioned(self, data_sample_path=None, source_format=None):
+    def _is_partitioned(
+        self, data_sample_path=None, source_format=None, csv_delimiter=None
+    ):
         if data_sample_path is not None:
             table_columns = self._get_columns_from_data(
                 data_sample_path=data_sample_path,
                 source_format=source_format,
+                csv_delimiter=csv_delimiter,
                 mode="staging",
             )
         else:
@@ -90,7 +93,7 @@ class Table(Base):
         return schema
 
     def _load_staging_schema_from_data(
-        self, data_sample_path=None, source_format="csv"
+        self, data_sample_path=None, source_format="csv", csv_delimiter=","
     ):
         """
         Generate schema from columns metadata in data sample
@@ -106,6 +109,7 @@ class Table(Base):
         table_columns = self._get_columns_from_data(
             data_sample_path=data_sample_path,
             source_format=source_format,
+            csv_delimiter=csv_delimiter,
             mode="staging",
         )
 
@@ -145,6 +149,7 @@ class Table(Base):
         self,
         data_sample_path=None,
         source_format="csv",
+        csv_delimiter=",",
         mode="staging",
     ):  # sourcery skip: low-code-quality
         """
@@ -184,7 +189,7 @@ class Table(Base):
                     if "=" in k
                 ]
             columns = Datatype(source_format=source_format).header(
-                data_sample_path=data_sample_path
+                data_sample_path=data_sample_path, csv_delimiter=csv_delimiter
             )
 
         return {
@@ -514,49 +519,40 @@ class Table(Base):
 
         Args:
             path (str or pathlib.PosixPath): The path to the file to be uploaded to create the table.
-
             source_format (str): Optional. The format of the data source. Only 'csv', 'avro', and 'parquet'
                 are supported. Defaults to 'csv'.
-
             csv_delimiter (str): Optional.
                 The separator for fields in a CSV file. The separator can be any ISO-8859-1
-                single-byte character.
-                Defaults to ','.
-
+                single-byte character. Defaults to ','.
             csv_skip_leading_rows(int): Optional.
                 The number of rows at the top of a CSV file that BigQuery will skip when loading the data.
                 Defaults to 1.
-
             csv_allow_jagged_rows (bool): Optional.
                 Indicates if BigQuery should allow extra values that are not represented in the table schema.
                 Defaults to False.
-
             if_table_exists (str): Optional. Determines what to do if the table already exists:
+
                 * 'raise' : Raises a Conflict exception
                 * 'replace' : Replaces the table
                 * 'pass' : Does nothing
-
             if_storage_data_exists (str): Optional. Determines what to do if the data already exists on your bucket:
+
                 * 'raise' : Raises a Conflict exception
                 * 'replace' : Replaces the table
                 * 'pass' : Does nothing
-
             if_dataset_exists (str): Optional. Determines what to do if the dataset already exists:
+
                 * 'raise' : Raises a Conflict exception
                 * 'replace' : Replaces the dataset
                 * 'pass' : Does nothing
-
             dataset_is_public (bool): Optional. Controls if the prod dataset is public or not. By default, staging datasets like `dataset_id_staging` are not public.
-
             location (str): Optional. The location of the dataset data. List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
-
             chunk_size (int): Optional. The size of a chunk of data whenever iterating (in bytes). This must be a multiple of 256 KB per the API specification.
                 If not specified, the chunk_size of the blob itself is used. If that is not specified, a default value of 40 MB is used.
-
             biglake_table (bool): Optional. Sets this as a BigLake table. BigLake tables allow end-users to query from external data (such as GCS) even if
                 they don't have access to the source data. IAM is managed like any other BigQuery native table. See https://cloud.google.com/bigquery/docs/biglake-intro for more on BigLake.
-
             set_biglake_connection_permissions (bool): Optional. If set to `True`, attempts to grant the BigLake connection service account access to the table's data in GCS.
+
         """
 
         if path is None:
@@ -615,7 +611,9 @@ class Table(Base):
             dataset_id=self.dataset_id,
             table_id=self.table_id,
             schema=self._load_staging_schema_from_data(
-                data_sample_path=path, source_format=source_format
+                data_sample_path=path,
+                source_format=source_format,
+                csv_delimiter=csv_delimiter,
             ),
             source_format=source_format,
             csv_skip_leading_rows=csv_skip_leading_rows,
@@ -624,7 +622,9 @@ class Table(Base):
             mode="staging",
             bucket_name=self.bucket_name,
             partitioned=self._is_partitioned(
-                data_sample_path=path, source_format=source_format
+                data_sample_path=path,
+                source_format=source_format,
+                csv_delimiter=csv_delimiter,
             ),
             biglake_connection_id=biglake_connection_id if biglake_table else None,
         ).external_config
@@ -632,7 +632,9 @@ class Table(Base):
         # When using BigLake tables, schema must be provided to the `Table` object
         if biglake_table:
             table.schema = self._load_staging_schema_from_data(
-                data_sample_path=path, source_format=source_format
+                data_sample_path=path,
+                source_format=source_format,
+                csv_delimiter=csv_delimiter,
             )
             logger.info(f"Using BigLake connection {biglake_connection_id}")
 

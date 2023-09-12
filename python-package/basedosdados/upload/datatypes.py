@@ -47,13 +47,17 @@ class Datatype:
         self.partitioned = partitioned
         self.biglake_connection_id = biglake_connection_id
 
-    def header(self, data_sample_path):
+    def header(self, data_sample_path, csv_delimiter):
         """
         Retrieve the header of the data sample
         """
 
         if self.source_format == "csv":
-            return next(csv.reader(open(data_sample_path, "r", encoding="utf-8")))
+            # Replace 'data_sample_path' with your actual file path
+            with open(data_sample_path, "r", encoding="utf-8") as csv_file:
+                csv_reader = csv.reader(csv_file, delimiter=csv_delimiter)
+                return next(csv_reader)
+
         if self.source_format == "avro":
             if not _avro_dependencies:
                 raise BaseDosDadosMissingDependencyException(
