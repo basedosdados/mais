@@ -293,7 +293,7 @@ Ufa, é isso! Agora só resta enviar tudo para revisão no
   serão incluídas nessa _branch_.
 1. Para cada tabela nova incluir o arquivo com nome `table_id.sql` na pasta `queries-basedosdados/models/dataset_id/` copiando as queries que você desenvolveu no passo 7.
 2. Caso seja um dataset novo, incluir o dataset conforme as instruções do arquivo `queries-basedosdados/dbt_project.yaml` (não se esqueça de seguir a ordem alfabética pra não bagunçar a organização)
-3. Inclua o seu código de tratamento em na pasta `queries-basedosdados/models/dataset_id/code`
+3. Inclua o seu código de captura e limpeza em na pasta `queries-basedosdados/models/dataset_id/code`
 4. Agora é só publicar a branch, abrir o PR com as labels 'table-approve' e 'sync-dbt-schema'e marcar a equipe dados para correção
 
 **E agora?** Nossa equipe irá revisar os dados e metadados submetidos
