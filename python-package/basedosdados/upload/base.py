@@ -80,12 +80,21 @@ class Base:  # pylint: disable=too-many-instance-attributes
                 )
             )
             return service_account.Credentials.from_service_account_info(
-                info, scopes=["https://www.googleapis.com/auth/cloud-platform"]
+                info,
+                scopes=[
+                    "https://www.googleapis.com/auth/cloud-platform",
+                    "https://www.googleapis.com/auth/drive",
+                    "https://www.googleapis.com/auth/bigquery",
+                ],
             )
 
         return service_account.Credentials.from_service_account_file(
             self.config["gcloud-projects"][mode]["credentials_path"],
-            scopes=["https://www.googleapis.com/auth/cloud-platform"],
+            scopes=[
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/drive",
+                "https://www.googleapis.com/auth/bigquery",
+            ],
         )
 
     @property
