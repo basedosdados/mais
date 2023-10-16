@@ -16,4 +16,5 @@ setup(
         [console_scripts]
         basedosdados=basedosdados.cli.cli:cli
     """,
+    python_requires='>=3.7',
 )
