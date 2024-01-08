@@ -92,6 +92,28 @@ save `candidatos_mod2_presid'
 
 !mkdir "output/resultados_candidato"
 
+foreach ano of numlist 1945 1947 1955(5)1965 1950(4)1990 1989 {
+	
+	!mkdir "output/resultados_candidato/ano=`ano'"
+	
+	use "output/resultados_candidato_uf_`ano'.dta", clear
+	
+	replace sigla_uf = "" if cargo == "presidente"
+	gen id_municipio = .
+	gen id_municipio_tse = .
+	
+	cap gen numero_partido = ""
+	cap gen sequencial_candidato = ""
+	cap gen numero_candidato = ""
+	cap gen id_candidato_bd = ""
+	
+	collapse (sum) votos, by(turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado)
+	order                    turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado votos
+	
+	export delimited "output/resultados_candidato/ano=`ano'/resultados_candidato.csv", replace
+	
+}
+
 foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/resultados_candidato/ano=`ano'"
@@ -99,9 +121,9 @@ foreach ano of numlist 1994(2)2022 {
 	use "output/resultados_candidato_municipio_zona_`ano'.dta", clear
 	
 	cap ren sequencial sequencial_candidato
-	cap ren numero numero_candidato
-	cap ren nome nome_candidato
-	cap ren nome_urna nome_urna_candidato
+	cap ren numero     numero_candidato
+	cap ren nome       nome_candidato
+	cap ren nome_urna  nome_urna_candidato
 	
 	ren numero_candidato numero
 	
@@ -151,9 +173,8 @@ foreach ano of numlist 1994(2)2022 {
 	replace id_municipio = .		if mod(ano, 4) == 2
 	replace id_municipio_tse = .	if mod(ano, 4) == 2
 	
-	collapse (sum) votos, by(turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido sequencial_candidato numero_candidato id_candidato_bd resultado)
-	
-	order turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado votos
+	collapse (sum) votos, by(turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado)
+	order                    turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado votos
 	
 	export delimited "output/resultados_candidato/ano=`ano'/resultados_candidato.csv", replace
 	
