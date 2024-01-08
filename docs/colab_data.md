@@ -180,16 +180,17 @@ Ele já possui a estrutura padrão que utilizamos para dicionários.
 Tudo pronto! Agora só falta subir para o Google Cloud e enviar para
 revisão. Para isso, vamos usar o cliente `basedosdados` (disponível em Python) que facilita as configurações e etapas do processo.
 
-#### Configure suas credenciais localmente
+#### 7.1 Configure suas credenciais localmente
 1. No seu terminal instale nosso cliente: `pip install basedosdados`.
-2. Rode `import basedosdados as bd` no python e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
+2. Rode `import basedosdados as bd` no python
+3. Siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
 
-#### Configure seu projeto no Google Cloud e um _bucket_ no Google Storage
+#### 7.2 Configure seu projeto no Google Cloud e um _bucket_ no Google Storage
 
 Os dados vão passar ao todo por 3 lugares no Google Cloud:
 
-1. **Storage**: local onde serão armazenados o arquivos "frios" (arquiteturas, dados, arquivos auxiliares).
-2. **BigQuery**: super banco de dados do Google, dividido em 2 projetos/tipos de tabela:
+* **Storage**: local onde serão armazenados o arquivos "frios" (arquiteturas, dados, arquivos auxiliares).
+* **BigQuery**: super banco de dados do Google, dividido em 2 projetos/tipos de tabela:
     - *Staging*: banco para teste e tratamento final do conjunto de dados.
     - *Produção*: banco oficial de publicação dos dados (nosso projeto `basedosdados` ou o seu mesmo caso queira reproduzir o ambiente)
 
@@ -198,13 +199,14 @@ Cloud. Para criar seu projeto basta:
 
 1. Acessar o [link](https://console.cloud.google.com/projectselector2/home/dashboard) e aceitar o Termo de Serviços do Google Cloud.
 2. Clicar em `Create Project/Criar Projeto` - escolha um nome bacana para o seu projeto, ele terá também um `Project ID` que será utilizado para configuração local.
-3. Depois de criado o projeto, vá até a funcionalidade de
-   [Storage](https://console.cloud.google.com/storage) e crie uma pasta
+4. Depois de criado o projeto, vá até a funcionalidade de
+   [Storage](https://console.cloud.google.com/storage) clique para criar uma pasta
    (também chamado de _bucket_) para subir os dados (pode ter o mesmo nome do projeto).
-4. Garanta que seu projeto é público, isso é necessário para que a gente consiga copiar os dados que estarão no seu projeto para o nosso ambiente de Cloud
+    *Caso você nunca tenha feito isso, nessa etapa será necessário passar informações de cobrança para o google. Ainda assim o google disponibiliza [5GB de storage gratuitos](https://cloud.google.com/free/docs/free-cloud-features?hl=pt-br#storage)
+6. Garanta que seu projeto é público, isso é necessário para que a gente consiga copiar os dados que estarão no seu projeto para o nosso ambiente de Cloud
 
 
-#### Suba os arquivos na Cloud
+#### 7.3 Suba os arquivos na Cloud
 
 
 1. Crie a tabela no *bucket do GCS* e *BigQuey*, usando a API do Python, da seguinte forma:
