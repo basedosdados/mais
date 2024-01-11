@@ -100,25 +100,25 @@ exemplo, se uma variável muda de nome de um ano para o outro).
 !!! Info "Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que deve ser preenchida no **Google Drive** para permitir a correção pela nossa equipe de dados."
 
 
-Para cada tabela do seu conjunto siga esse passo a passo:
-
-1. Listar todas as variáveis dos dados na coluna `original_name`
-2. Caso a base tenha arquivos diferentes e mude o nome das variáveis ao longo dos anos, fazer a compatibilização entre anos para todas as variáveis preenchendo a coluna de `original_name_YYYY` para cada ano ou mês disponível
-3. Renomear as variáveis conforme nosso manual na coluna `name`  
-4. Entender o tipo da variável e preencher a coluna `bigquery_type`
-5. Preencher a descrição em `description` conforme o manual
-6. A partir da compatibilização entre anos e/ou consultas aos dados brutos, preencher a cobertura temporal em `temporal_coverage` de cada variável 
-7. Indicar se há dicionário para as variáveis categóricas em `covered_by_dictionary`
-8. Verificar se as variáveis representam alguma entidade presente nos [diretórios](https://basedosdados.org/dataset?q=diret%C3%B3rio&datasets_with=open_tables&organization=bd&page=1) para preencher o `directory_column`
-9. Para as variáveis do tipo `int64` ou `float64` verificar se é necessário incluir uma [unidade de medida](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py)
-10. Reordernar as variáveis conforme o manual
-
-!!! Tip "A cada início e final de etapa consulte nosso [manual de estilo](../style_data) para garantir que você está seguindo a padronização da BD"
-
 #### Exemplo: RAIS - Tabelas de arquitetura
 
 As tabelas de arquitetura da RAIS [podem ser consultadas aqui](https://docs.google.com/spreadsheets/d/1dPLUCeE4MSjs0ykYUDsFd-e7-9Nk6LVV/edit?usp=sharing&ouid=103008455637924805982&rtpof=true&sd=true). Elas são uma ótima referência para você começar seu trabalho já que tem muitas variáveis e exemplos de diversas situações que você pode acabar encontrando.
 
+#### Para o preenchimento de cada tabela do seu conjunto siga esse passo a passo:
+
+!!! Tip "A cada início e final de etapa consulte nosso [manual de estilo](../style_data) para garantir que você está seguindo a padronização da BD"
+
+1. Listar todas as variáveis dos dados na coluna `original_name`
+   - Obs: Caso a base mude o nome das variáveis ao longo dos anos (como a RAIS), é necessário fazer a compatibilização entre anos para todas as variáveis preenchendo a coluna de `original_name_YYYY` para cada ano ou mês disponível
+2. Renomear as variáveis conforme nosso [manual](../style_data) na coluna `name`
+3. Entender o tipo da variável e preencher a coluna `bigquery_type`
+4. Preencher a descrição em `description` conforme o [manual](../style_data)
+5. A partir da compatibilização entre anos e/ou consultas aos dados brutos, preencher a cobertura temporal em `temporal_coverage` de cada variável
+   - Obs: Caso a as variáveis tenham a mesma cobertura temporal da tabela preencher apenas com '(1)'
+6. Indicar com 'yes' ou 'no' se há dicionário para as variáveis em `covered_by_dictionary`
+7. Verificar se as variáveis representam alguma entidade presente nos [diretórios](https://basedosdados.org/dataset?q=diret%C3%B3rio&datasets_with=open_tables&organization=bd&page=1) para preencher o `directory_column`
+8 Para as variáveis do tipo `int64` ou `float64` verificar se é necessário incluir uma [unidade de medida](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py)
+9. Reordernar as variáveis conforme o [manual](../style_data)
 
 !!! Tip "Quando terminar de preencher as tabelas de arquitetura, entre em contato com a equipe da Base dos Dados para validar tudo. É necessário que esteja claro o formato final que os dados devem ficar _antes_ de começar a escrever o código. Assim a gente evita o retrabalho."
 
@@ -180,34 +180,26 @@ Ele já possui a estrutura padrão que utilizamos para dicionários.
 Tudo pronto! Agora só falta subir para o Google Cloud e enviar para
 revisão. Para isso, vamos usar o cliente `basedosdados` (disponível em Python) que facilita as configurações e etapas do processo.
 
+!!! Info "Como existe um custo para o armazenamento no storage, para finalizar essa etapa vamos precisar te disponibilizar uma api_key especifica para voluntários para subir os dados em nosso ambiente de desenvolvimento. Assim, entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) e nos chame em 'quero-contribuir'"
+
 #### Configure suas credenciais localmente
-1. No seu terminal instale nosso cliente: `pip install basedosdados`.
-2. Rode `import basedosdados as bd` no python e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
-
-#### Configure seu projeto no Google Cloud e um _bucket_ no Google Storage
-
-Os dados vão passar ao todo por 3 lugares no Google Cloud:
-
-1. **Storage**: local onde serão armazenados o arquivos "frios" (arquiteturas, dados, arquivos auxiliares).
-2. **BigQuery**: super banco de dados do Google, dividido em 2 projetos/tipos de tabela:
-    - *Staging*: banco para teste e tratamento final do conjunto de dados.
-    - *Produção*: banco oficial de publicação dos dados (nosso projeto `basedosdados` ou o seu mesmo caso queira reproduzir o ambiente)
-
-É necessário ter uma conta Google e um projeto (gratuito) no Google
-Cloud. Para criar seu projeto basta:
-
-1. Acessar o [link](https://console.cloud.google.com/projectselector2/home/dashboard) e aceitar o Termo de Serviços do Google Cloud.
-2. Clicar em `Create Project/Criar Projeto` - escolha um nome bacana para o seu projeto, ele terá também um `Project ID` que será utilizado para configuração local.
-3. Depois de criado o projeto, vá até a funcionalidade de
-   [Storage](https://console.cloud.google.com/storage) e crie uma pasta
-   (também chamado de _bucket_) para subir os dados (pode ter o mesmo nome do projeto).
-4. Garanta que seu projeto é público, isso é necessário para que a gente consiga copiar os dados que estarão no seu projeto para o nosso ambiente de Cloud
-
-
+  **7.1** No seu terminal instale nosso cliente: `pip install basedosdados`.  
+  **7.2** Rode `import basedosdados as bd` no python e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud. Preencha as informações conforme a seguir:  
+```
+    * STEP 1: y  
+    * STEP 2: basedosdados-dev  (colocar o .json passado pela equipe da bd na pasta credentials)
+    * STEP 3: y  
+    * STEP 4: basedosdados-dev   
+    * STEP 5: https://api.basedosdados.org/api/v1/graphql  
+```
 #### Suba os arquivos na Cloud
+Os dados vão passar por 3 lugares no Google Cloud:
 
+  * **Storage**: também chamado de GCS é o local onde serão armazenados o arquivos "frios" (arquiteturas, dados, arquivos auxiliares).
+  * **BigQuery-DEV-Staging**: tabela que conecta os dados do storage ao projeto basedosdados-dev no bigquery
+  * **BigQuery-DEV-Produção**: tabela utilizada paras teste e tratamento via SQL do conjunto de dados
 
-1. Crie a tabela no *bucket do GCS* e *BigQuey*, usando a API do Python, da seguinte forma:
+**7.3** Crie a tabela no *bucket do GCS* e *BigQuey-DEV-staging*, usando a API do Python, da seguinte forma:
 
     ```python
     import basedosdados as bd
@@ -245,27 +237,18 @@ Cloud. Para criar seu projeto basta:
         - _pass_: não faz nada.
 
     !!! Info "Se o projeto não existir no BigQuery, ele será automaticamente criado"
+    
+  Consulte também nossa [API](../api_reference_cli) para mais detalhes de cada método.
 
-2. Suba os metadadaos da tabela no site:
+**7.4** Crie os arquivos .sql e schema.yml a partir da tabela de arquitetura seguindo essa [documentação](https://github.com/basedosdados/pipelines/wiki/Fun%C3%A7%C3%A3o-%60create_yaml_file()%60)  
+!!! Tip "Caso você precise, nesse momento você pode alterar a consulta em SQL para realizar tratamentos finais a partir da tabela `staging`, pode incluir coluna, remover coluna, fazer operações algébricas, substituir strings, etc. O SQL é o limite!"
 
-    - Os dados do conjunto já foram disponibilizados no  primeiro passo desse tutorial, agora é o momento de incluir os dados das tabelas.
-    - Primeiro verifique que todas as informações da issue e da arquitetura estão de acordo com seus dados no BigQuery, as vezes, no tratamento, você modificou algumas coisas e esqueceu de atualizar nesses arquivos. 
-    - Em seguida, peça para alguém da equipe dados subir os metadados da tabela no site com status `under_review`. Já estamos trabalhando para que, num futuro próximo, os voluntários também possam atualizar dados no site.  
+**7.5** Rode e teste os modelos localmente seguindo essa [documentação](https://github.com/basedosdados/pipelines/wiki/Testar-modelos-dbt-localmente)
 
-3. Faça a query de publicação para ver como a tabela ficará em prod :
+**7.6** Suba os metadados da tabela no site:  
+!!! Info "Por enquanto apenas a equipe dados tem permissões de subir os metadados da tabela no site, por isso será necessário entrar em contato conosco. Já estamos trabalhando para que, num futuro próximo, os voluntários também possam atualizar dados no site."
 
-    ```python
-    tb = bd.Table(
-      dataset_id="<dataset_id>", 
-      table_id="<table_id>")
-
-    tb.publish()
-    ```
-   Se os metadados de colunas já tiverem sido preenchidos no site e o pacote já vai montar um arquivo `.sql` certinho pra gente levar os dados de staging para produção.
-   
-   Caso você precise, nesse momento você pode alterar a consulta em SQL para realizar tratamentos finais na tabela `staging`, pode incluir coluna, remover coluna, fazer operações algébricas, substituir strings, etc. O SQL é o limite!
-
-4. Suba os arquivos auxiliares:
+**7.7** Suba os arquivos auxiliares:  
     ```python
     st = bd.Storage(
       dataset_id = <dataset_id>, 
@@ -276,25 +259,19 @@ Cloud. Para criar seu projeto basta:
       mode = 'auxiliary_files',
       if_exists = 'raise')
     ```
-
-!!! Tip "Abra o console do BigQuery e rode algumas _queries_ para testar se foi tudo publicado corretamente. Estamos desenvolvendo testes automáticos para facilitar esse processo no futuro."
-
-Quando os dados estiverem certos e organizados conforme a tabela de arquitetura vamos para a próxima etapa
-
-Consulte também nossa [API](../api_reference_cli) para mais detalhes de cada método.
-
+    
 ### 8. Enviar tudo para revisão
 
 Ufa, é isso! Agora só resta enviar tudo para revisão no
 [repositório](https://github.com/basedosdados/queries-basedosdados) da Base dos Dados.
 
-1. Clone um _fork_ do nosso [repositório](https://github.com/basedosdados/queries-basedosdados) localmente.
-2. Dê um `cd` para a pasta local do repositório e abra uma nova branch com `git checkout -b [dataset_id]`. Todas as adições e modificações
-  serão incluídas nessa _branch_.
-1. Para cada tabela nova incluir o arquivo com nome `table_id.sql` na pasta `queries-basedosdados/models/dataset_id/` copiando as queries que você desenvolveu no passo 7.
-2. Caso seja um dataset novo, incluir o dataset conforme as instruções do arquivo `queries-basedosdados/dbt_project.yaml` (não se esqueça de seguir a ordem alfabética pra não bagunçar a organização)
-3. Inclua o seu código de captura e limpeza em na pasta `queries-basedosdados/models/dataset_id/code`
-4. Agora é só publicar a branch, abrir o PR com as labels 'table-approve' e 'sync-dbt-schema'e marcar a equipe dados para correção
+1. Clone o nosso [repositório](https://github.com/basedosdados/queries-basedosdados) localmente.  
+2. Dê um `cd` para a pasta local do repositório e abra uma nova branch com `git checkout -b [dataset_id]`. Todas as adições e modificações serão incluídas nessa _branch_.  
+3. Para cada tabela nova incluir o arquivo com nome `table_id.sql` na pasta `queries-basedosdados/models/dataset_id/` copiando as queries que você desenvolveu no passo 7.  
+4. Incluir o arquivo schema.yaml desenvolvido no passo 7  
+5. Caso seja um dataset novo, incluir o dataset conforme as instruções do arquivo `queries-basedosdados/dbt_project.yaml` (não se esqueça de seguir a ordem alfabética pra não bagunçar a organização)  
+6. Inclua o seu código de captura e limpeza em na pasta `queries-basedosdados/models/dataset_id/code`  
+7. Agora é só publicar a branch, abrir o PR com as labels 'table-approve' e marcar a equipe dados para correção  
 
 **E agora?** Nossa equipe irá revisar os dados e metadados submetidos
 via Github. Podemos entrar em contato para tirar dúvidas ou solicitar
