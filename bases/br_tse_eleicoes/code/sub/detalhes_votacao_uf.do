@@ -9,7 +9,7 @@
 
 local estados_1933	               BR
 local estados_1934	               BR
-local estados_1945	   AL AM    BA    CE DF ES    GO    MA MG    MT PA PB PE PI PR RB RJ RN       RS SC SE SP "Fernando de Noronha" "Iguacu" "Ponta Pora"
+local estados_1945	   AL AM    BA    CE DF ES    GO    MA MG    MT PA PB PE PI PR    RJ RN       RS SC SE SP
 local estados_1947	   AL AM AP BA    CE DF ES    GO GP MA MG    MT PA PB PE PI PR RB RJ RN       RS SC SE SP
 local estados_1950	AC AL AM AP BA    CE DF ES    GO GP MA MG    MT PA PB PE PI PR RB RJ RN       RS SC SE SP
 local estados_1954	AC AL AM AP BA    CE DF ES    GO GP MA MG    MT PA PB PE PI PR RB RJ RN       RS SC SE SP

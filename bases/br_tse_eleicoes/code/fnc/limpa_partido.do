@@ -39,7 +39,9 @@ program limpa_partido
 	
 	replace `var' = "PATRIOTA"			if `var' == "PATRI"
 	replace `var' = "SOLIDARIEDADE"		if `var' == "SD"
+	replace `var' = "PC do B"			if `var' == "PCdoB"
 	replace `var' = "PC do B"			if `var' == "PC DO B"
+	replace `var' = "PT do B"			if `var' == "PTdoB"
 	replace `var' = "PT do B"			if `var' == "PT DO B"
 	
 end

@@ -27,7 +27,7 @@ local estados_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8")
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") stringcols(_all)
 keep id_municipio id_municipio_tse
 tempfile municipio
 save `municipio'
@@ -902,7 +902,6 @@ foreach ano of numlist 2022 { // 1994(2)2022 {
 		
 		if `ano' >= 2020 drop in 1
 		
-		destring id_municipio_tse, replace force //sequencial
 		merge m:1 id_municipio_tse using `municipio'
 		drop if _merge == 2
 		drop _merge
@@ -912,7 +911,7 @@ foreach ano of numlist 2022 { // 1994(2)2022 {
 		// limpa strings
 		//------------------//
 		
-		destring ano id_municipio_tse turno numero numero_partido, replace force //sequencial
+		destring ano turno, replace force
 		replace sequencial = "" if sequencial == "-1"
 		
 		foreach k of varlist _all {

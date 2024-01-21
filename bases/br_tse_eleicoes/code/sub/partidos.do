@@ -28,7 +28,7 @@ local estados_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) stringcols(_all)
 keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
@@ -112,7 +112,7 @@ foreach ano of numlist 1990 1994(2)2022 {
 		}
 		*
 		
-		destring ano turno id_municipio_tse numero, replace force // sequencial_coligacao
+		destring ano turno, replace force
 		
 		merge m:1 id_municipio_tse using `diretorio'
 		drop if _merge == 2

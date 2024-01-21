@@ -356,28 +356,30 @@ foreach ano of numlist 1994(2)2022 {
 //-------------------------------------------------//
 
 use "output/norm_candidatos.dta", clear
-
 keep if mod(ano, 4) == 0
 keep id_candidato_bd ano tipo_eleicao sigla_uf id_municipio_tse cargo sequencial numero numero_partido sigla_partido
-
+tostring id_municipio_tse numero numero_partido id_candidato_bd, replace
 tempfile candidatos_mod0
 save `candidatos_mod0'
 
 use "output/norm_candidatos.dta", clear
-
 keep if mod(ano, 4) == 2 & cargo != "presidente"
 keep id_candidato_bd ano tipo_eleicao sigla_uf cargo sequencial numero numero_partido sigla_partido
-
+tostring numero numero_partido id_candidato_bd, replace
 tempfile candidatos_mod2_estadual
 save `candidatos_mod2_estadual'
 
 use "output/norm_candidatos.dta", clear
-
 keep if mod(ano, 4) == 2 & cargo == "presidente"
 keep id_candidato_bd ano tipo_eleicao cargo sequencial numero numero_partido sigla_partido
-
+tostring numero numero_partido id_candidato_bd, replace
 tempfile candidatos_mod2_presid
 save `candidatos_mod2_presid'
+
+use "output/norm_partidos.dta", clear
+tostring numero, replace
+tempfile partidos
+save `partidos'
 
 !mkdir "output/resultados_candidato_secao"
 !mkdir "output/resultados_partido_secao"
@@ -462,7 +464,7 @@ foreach ano of numlist 1994(2)2022 {
 		
 		ren numero_partido numero
 		
-		merge m:1 ano numero using "output/norm_partidos.dta"
+		merge m:1 ano numero using `partidos'
 		drop if _merge == 2
 		drop _merge
 		
@@ -606,7 +608,7 @@ foreach ano of numlist 1994(2)2022 {
 
 !mkdir "output/detalhes_votacao_secao"
 
-foreach ano of numlist 1994(2)2022 {
+foreach ano of numlist 2020 { // 1994(2)2022 {
 	
 	!mkdir "output/detalhes_votacao_secao/ano=`ano'"
 	
