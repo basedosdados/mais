@@ -27,12 +27,12 @@ local estados_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) stringcols(_all)
 keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) stringcols(_all)
 keep id_municipio_tse sigla_uf
 tempfile diretorio_ufs
 save `diretorio_ufs'
@@ -41,6 +41,23 @@ foreach ano of numlist 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		
+		
+		
+		
+		/*
+		import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) stringcols(_all)
+keep id_municipio id_municipio_tse
+tempfile diretorio
+save `diretorio'
+
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) stringcols(_all)
+keep id_municipio_tse sigla_uf
+tempfile diretorio_ufs
+save `diretorio_ufs'
+
+		local ano 2020
+		local estado AC
+		*/
 		di "`ano'_`estado'"
 		
 		if `ano' == 2012 {
@@ -103,7 +120,7 @@ foreach ano of numlist 1994(2)2022 {
 		}
 		*
 		
-		destring ano turno id_municipio_tse zona secao numero_votavel votos, replace force
+		destring ano turno votos, replace force // id_municipio_tse zona secao numero_votavel
 		
 		//------------------//
 		// limpa strings
@@ -147,9 +164,9 @@ foreach ano of numlist 1994(2)2022 {
 		
 		use `resultados_secao_`estado'_`ano''
 		
-		drop if inlist(numero_votavel, 95, 96, 97)
+		drop if inlist(numero_votavel, "95", "96", "97")
 		
-		drop if length(string(numero_votavel)) == 2 & ///
+		drop if length(numero_votavel) == 2 & ///
 				inlist(cargo, "vereador", "deputado estadual", "deputado distrital", "deputado federal", "senador")
 		
 		ren numero_votavel numero_candidato
@@ -163,13 +180,13 @@ foreach ano of numlist 1994(2)2022 {
 		
 		use `resultados_secao_`estado'_`ano'', clear
 		
-		drop if inlist(numero_votavel, 95, 96, 97)
+		drop if inlist(numero_votavel, "95", "96", "97")
 		
 		preserve
 			
-			gen numero_partido = real(substr(string(numero_votavel), 1, 2))
+			gen numero_partido = substr(numero_votavel, 1, 2)
 			
-			drop if length(string(numero_votavel)) == 2 & ///
+			drop if length(numero_votavel) == 2 & ///
 					inlist(cargo, "vereador", "deputado estadual", "deputado distrital", "deputado federal", "senador")
 			
 			collapse (sum) votos, by(ano tipo_eleicao turno sigla_uf id_municipio id_municipio_tse zona secao cargo numero_partido)
@@ -182,7 +199,7 @@ foreach ano of numlist 1994(2)2022 {
 		restore
 		preserve
 			
-			keep if length(string(numero_votavel)) == 2 & ///
+			keep if length(numero_votavel) == 2 & ///
 					inlist(cargo, "vereador", "deputado estadual", "deputado distrital", "deputado federal", "senador")
 			
 			ren numero_votavel	numero_partido
@@ -198,7 +215,7 @@ foreach ano of numlist 1994(2)2022 {
 		merge 1:1 ano tipo_eleicao turno sigla_uf id_municipio_tse zona secao cargo numero_partido using `votos_nao_nominais'
 		drop _merge
 		
-		replace votos_nominais = 0		if votos_nominais == .
+		replace votos_nominais     = 0	if votos_nominais     == .
 		replace votos_nao_nominais = 0	if votos_nao_nominais == .
 		
 		tempfile resultados_part_secao_`estado'_`ano'
