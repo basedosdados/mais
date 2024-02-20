@@ -1,6 +1,7 @@
 """
 Share fixtures for tests.
 """
+
 import shutil
 import sys
 

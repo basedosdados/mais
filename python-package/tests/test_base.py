@@ -1,6 +1,7 @@
 """
 Tests for Base class
 """
+
 import os
 import re
 import time
