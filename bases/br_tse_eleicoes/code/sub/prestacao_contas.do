@@ -1,4 +1,4 @@
-
+/*
 //----------------------------------------------------------------------------//
 // build: bens declarados
 //----------------------------------------------------------------------------//
@@ -89,7 +89,7 @@ foreach ano of numlist 2006(2)2022 {
 	save "output/bens_candidato_`ano'.dta", replace
 	
 }
-*
+*/
 
 //----------------------------------------------------------------------------//
 // build: prestacao de contas
@@ -971,8 +971,8 @@ foreach ano of numlist 2002(2)2022 {
 	}
 	if `ano' >= 2020 {
 		
-		if `ano' == 2020 local estados AC AL AM AP BA    CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-		if `ano' == 2022 local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2020 local estados AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2022 local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
@@ -980,7 +980,7 @@ foreach ano of numlist 2002(2)2022 {
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
-			drop v1 v2 v3 v4 v6 v7 v8 v15 v17 v27 v29 v31 v33 v40 v44 v47
+			drop v1 v2 v3 v4 v6 v7 v8 v15 v17 v27 v29 v31 v33 v40 v44 v47 v58 v59 v60
 			
 			ren v5	tipo_eleicao
 			ren v9	turno
@@ -1798,7 +1798,7 @@ foreach ano of numlist 2002(2)2022 {
 	}
 	if `ano' == 2018 {
 		
-		local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
@@ -1901,8 +1901,8 @@ foreach ano of numlist 2002(2)2022 {
 	*
 	if `ano' >= 2020 {
 		
-		if `ano' == 2020 local estados AC AL AM AP BA    CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-		if `ano' == 2022 local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2020 local estados AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2022 local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
