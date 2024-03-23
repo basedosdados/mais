@@ -3,26 +3,20 @@
 // build: microdados - estabelecimentos
 //----------------------------------------------------------------------------//
 
-import delimited "input/municipio.csv", clear varn(1) encoding("utf-8")
-
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") stringcols(_all)
 keep id_municipio id_municipio_6
-tostring id_municipio id_municipio_6, replace force
-
 tempfile dir_munic
 save `dir_munic'
 
-import delimited "input/municipio.csv", clear varn(1) encoding("utf-8")
-
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") stringcols(_all)
 keep id_uf sigla_uf
 duplicates drop
-tostring id_uf, replace
-
 tempfile dir_uf
 save `dir_uf'
 
 !mkdir "output/microdados_estabelecimentos"
 
-foreach ano of numlist 1985(1)2021 {
+foreach ano of numlist 2022 { // 1985(1)2022 {
 	
 	if `ano' >= 1985 & `ano' <= 2001	local arquivo ESTB`ano'
 	if `ano' == 2002					local arquivo consulta21554418
@@ -311,15 +305,13 @@ foreach ano of numlist 1985(1)2021 {
 	// adiciona identificadores
 	//--------------------------//
 	
-	merge m:1 id_municipio_6 using `dir_munic'
-	drop if _merge == 2
-	drop _merge id_municipio_6
+	merge m:1 id_municipio_6 using `dir_munic', keep(1 3) nogenerate
+	drop id_municipio_6
 	
 	cap drop sigla_uf
 	gen id_uf = substr(id_municipio, 1, 2)
-	merge m:1 id_uf using `dir_uf'
-	drop if _merge == 2
-	drop _merge id_uf
+	merge m:1 id_uf using `dir_uf', keep(1 3) nogenerate
+	drop id_uf
 	
 	replace sigla_uf = "IGNORADO" if sigla_uf == ""
 	
@@ -361,13 +353,17 @@ foreach ano of numlist 1985(1)2021 {
 	foreach k of varlist bairros_* distritos_sp regioes_administrativas_df ///
 		cnae_2 cnae_2_subclasse subsetor_ibge subatividade_ibge {
 		replace `k' = "" if inlist(`k', "0000", "00000", "000000", "0000000", "0000-1", "000-1") | ///
-							inlist(`k', "998", "999", "00", "-1")
+							inlist(`k', "998", "999", "9999", "9997", "00", "-1")
 	}
 	*
 	
+	replace natureza_juridica = "" if inlist(natureza_juridica, "9990", "9999")
+	
+	replace cep = "" if cep == "0"
+	
 	replace tipo = "1" if inlist(tipo, "CNPJ", "Cnpj", "01", "1")
 	replace tipo = "2" if inlist(tipo, "CAEPF", "Caepf")
-	replace tipo = "3" if inlist(tipo, "CEI", "Cei", "CEI/CNO", "Cei/Cno", "03", "3")
+	replace tipo = "3" if inlist(tipo, "CEI", "Cei", "CEI/CNO", "Cei/Cno", "CNO", "Cno", "03", "3")
 	
 	destring id_municipio quantidade_* tamanho indicador_*, replace
 	
