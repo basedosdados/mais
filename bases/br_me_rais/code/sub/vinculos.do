@@ -3,28 +3,27 @@
 // build: microdados - vinculos
 //----------------------------------------------------------------------------//
 
-import delimited "input/municipio.csv", clear varn(1) encoding("utf-8")
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") stringcols(_all)
 keep id_municipio id_municipio_6
-tostring id_municipio id_municipio_6, replace force
 tempfile dir_munic
 save `dir_munic'
 
-import delimited "input/municipio.csv", clear varn(1) encoding("utf-8")
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") stringcols(_all)
 keep id_uf sigla_uf
 duplicates drop
-tostring id_uf, replace
 tempfile dir_uf
 save `dir_uf'
 
 !mkdir "output/microdados_vinculos"
 
-foreach ano of numlist 1985(1)2021 {
+foreach ano of numlist 2022 { // 1985(1)2022 {
 	
 	if `ano' == 1985                  	local ufs AC AL AM AP BA CE DF ES GO    MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP
 	if `ano' == 1986                  	local ufs AC AL AM AP BA CE DF ES GO MA MG MS MT    PB PE PI PR RJ RN RO RR RS SC SE SP
 	if `ano' >= 1987 & `ano' <= 1988	local ufs AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP
 	if `ano' >= 1989 & `ano' <= 2017	local ufs AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-	if `ano' >= 2018					local ufs NORTE NORDESTE SUL SP CENTRO_OESTE MG_ES_RJ
+	if `ano' >= 2018 & `ano' <= 2021	local ufs NORTE NORDESTE SUL SP CENTRO_OESTE MG_ES_RJ
+	if `ano' >= 2022					local ufs NORTE NORDESTE SUL SP CENTRO_OESTE MG_ES_RJ NI
 	
 	if `ano' == 1985	local ufs `ufs' IGNORANDOS
 	if `ano' == 1986	local ufs `ufs' IGNORADOS
@@ -762,23 +761,20 @@ foreach ano of numlist 1985(1)2021 {
 			// adiciona identificadores
 			//--------------------------//
 			
-			merge m:1 id_municipio_6 using `dir_munic'
-			drop if _merge == 2
-			drop _merge id_municipio_6
+			merge m:1 id_municipio_6 using `dir_munic', keep(1 3) nogenerate
+			drop id_municipio_6
 			
 			gen id_uf = substr(id_municipio, 1, 2)
-			merge m:1 id_uf using `dir_uf'
-			drop if _merge == 2
-			drop _merge id_uf
+			merge m:1 id_uf using `dir_uf', keep(1 3) nogenerate
+			drop id_uf
 			
-			replace sigla_uf = "IGNORADO" if sigla_uf == ""
+			replace sigla_uf = "IGNORADO" if sigla_uf == "" | sigla_uf == "NI"
 			
 			if `ano' >= 2002 {
 				ren id_municipio aux_id_municipio
 				ren id_municipio_6_trabalho id_municipio_6
-				merge m:1 id_municipio_6 using `dir_munic'
-				drop if _merge == 2
-				drop _merge id_municipio_6
+				merge m:1 id_municipio_6 using `dir_munic', keep(1 3) nogenerate
+				drop id_municipio_6
 				ren id_municipio id_municipio_trabalho
 				ren aux_id_municipio id_municipio
 			}
@@ -815,7 +811,7 @@ foreach ano of numlist 1985(1)2021 {
 			*
 			
 			foreach k of varlist bairros_* distritos_sp regioes_administrativas_df {
-				replace `k' = "" if inlist(`k', "0000", "00000", "000000", "0000000", "0000-1", "000-1", "9999")
+				replace `k' = "" if inlist(`k', "0000", "00000", "000000", "0000000", "0000-1", "000-1", "9999", "9997")
 			}
 			*
 			
@@ -828,15 +824,23 @@ foreach ano of numlist 1985(1)2021 {
 			foreach k of varlist mes_admissao mes_desligamento {
 				replace `k' = "" if `k' == "00"
 			}
+			foreach k of varlist motivo_desligamento {
+				replace `k' = "" if `k' == "0"
+			}
+			foreach k of varlist causa_desligamento_* {
+				replace `k' = "" if `k' == "99"
+			}
 			*
 			foreach k of varlist raca_cor {
 				replace `k' = "9" if `k' == "99"
 			}
 			*
 			
+			replace natureza_juridica = "" if inlist(natureza_juridica, "9990", "9999")
+			
 			replace tipo_estabelecimento = "1" if inlist(tipo_estabelecimento, "CNPJ", "Cnpj", "01", "1")
 			replace tipo_estabelecimento = "2" if inlist(tipo_estabelecimento, "CAEPF")
-			replace tipo_estabelecimento = "3" if inlist(tipo_estabelecimento, "CEI", "Cei", "CEI/CNO", "Cei/Cno", "03", "3")
+			replace tipo_estabelecimento = "3" if inlist(tipo_estabelecimento, "CEI", "Cei", "CEI/CNO", "Cei/Cno", "CNO", "Cno", "03", "3")
 			
 			destring motivo_desligamento vinculo_ativo_3112 mes_admissao mes_desligamento causa_desligamento_* quantidade_dias_afastamento ///
 				faixa_horas_contratadas quantidade_horas_contratadas faixa_remuneracao_dezembro_sm faixa_remuneracao_media_sm faixa_tempo_emprego tipo_vinculo tipo_admissao id_municipio_trabalho indicador_trabalho_parcial indicador_trabalho_intermitente ///
@@ -909,6 +913,3 @@ foreach ano of numlist 1985(1)2021 {
 	}
 }
 *
-
-
-
