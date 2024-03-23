@@ -1,16 +1,17 @@
 """
 Tests for the Table class
 """
-# pylint: disable=invalid-name
-from pathlib import Path
 import shutil
 
-import basedosdados as bd
-from basedosdados import Dataset, Table, Storage
-from basedosdados.exceptions import BaseDosDadosException
-from google.api_core.exceptions import NotFound
+# pylint: disable=invalid-name
+from pathlib import Path
 
 import pytest
+from google.api_core.exceptions import NotFound
+
+import basedosdados as bd
+from basedosdados import Dataset, Storage, Table
+from basedosdados.exceptions import BaseDosDadosException
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
@@ -473,19 +474,26 @@ def test_create_if_storage_data_raise(table, testdir, data_csv_path):
             if_storage_data_exists="raise",
         )
 
+
 def test_create_if_force_columns_true(testdir):
     """
     Test create when if_force_columns is True
     """
-    dataset_id='br_cvm_administradores_carteira'
-    table_id='pessoa_fisica'
+    dataset_id = "br_cvm_administradores_carteira"
+    table_id = "pessoa_fisica"
 
     tb = bd.Table(dataset_id=dataset_id, table_id=table_id, metadata_path=testdir)
 
-    client =Storage(dataset_id=dataset_id, table_id=table_id)
-    client.download('bd_pessoa_fisica.csv', testdir, mode='staging')
+    client = Storage(dataset_id=dataset_id, table_id=table_id)
+    client.download("bd_pessoa_fisica.csv", testdir, mode="staging")
 
-    filepath = testdir / 'staging' / 'br_cvm_administradores_carteira' / 'pessoa_fisica' / 'bd_pessoa_fisica.csv'
+    filepath = (
+        testdir
+        / "staging"  # noqa
+        / "br_cvm_administradores_carteira"  # noqa
+        / "pessoa_fisica"  # noqa
+        / "bd_pessoa_fisica.csv"  # noqa
+    )
 
     tb.create(
         filepath,
@@ -495,22 +503,28 @@ def test_create_if_force_columns_true(testdir):
         force_columns=True,
     )
 
-    assert tb.table_config['columns'][0]['description'] is None
+    assert tb.table_config["columns"][0]["description"] is None
 
 
 def test_create_if_force_columns_false(testdir):
     """
     Test create when if_force_columns is True
     """
-    dataset_id='br_cvm_administradores_carteira'
-    table_id='pessoa_fisica'
+    dataset_id = "br_cvm_administradores_carteira"
+    table_id = "pessoa_fisica"
 
     tb = bd.Table(dataset_id=dataset_id, table_id=table_id, metadata_path=testdir)
 
-    client =Storage(dataset_id=dataset_id, table_id=table_id)
-    client.download('bd_pessoa_fisica.csv', testdir, mode='staging')
+    client = Storage(dataset_id=dataset_id, table_id=table_id)
+    client.download("bd_pessoa_fisica.csv", testdir, mode="staging")
 
-    filepath = testdir / 'staging' / 'br_cvm_administradores_carteira' / 'pessoa_fisica' / 'bd_pessoa_fisica.csv'
+    filepath = (
+        testdir
+        / "staging"  # noqa
+        / "br_cvm_administradores_carteira"  # noqa
+        / "pessoa_fisica"  # noqa
+        / "bd_pessoa_fisica.csv"  # noqa
+    )
 
     tb.create(
         filepath,
@@ -520,7 +534,7 @@ def test_create_if_force_columns_false(testdir):
         force_columns=False,
     )
 
-    assert tb.table_config['columns'][0]['description']=='Nome'
+    assert tb.table_config["columns"][0]["description"] == "Nome"
 
 
 def test_create_auto_partitions(testdir, data_csv_path, sample_data):
@@ -613,7 +627,7 @@ def test_update(table, data_csv_path):
 
     assert table_exists(table, "staging")
 
-    ### Como dar assert que a descrição foi atualizada?
+    # Como dar assert que a descrição foi atualizada?
 
     table.update(mode="all")
 

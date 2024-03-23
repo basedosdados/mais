@@ -1,0 +1,226 @@
+{
+  "help": "https://basedosdados.org/api/3/action/help_show?name=bd_bdm_columns_schema",
+  "success": true,
+  "result": {
+    "title": "BdmColumns",
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Nome",
+        "description": "Nome em produção",
+        "yaml_order": {
+          "id_before": null,
+          "id_after": "bigquery_type"
+        },
+        "type": "string"
+      },
+      "bigquery_type": {
+        "title": "Tipo no BigQuery",
+        "description": "Tipo no BigQuery.\nOpções: string, int64, float64, date, time, geometry.Ver https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types.",
+        "yaml_order": {
+          "id_before": "name",
+          "id_after": "description"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/BigQueryTypeEnum"
+          }
+        ]
+      },
+      "description": {
+        "title": "Descrição",
+        "description": "Descrição",
+        "yaml_order": {
+          "id_before": "bigquery_type",
+          "id_after": "temporal_coverage"
+        },
+        "type": "string"
+      },
+      "temporal_coverage": {
+        "title": "Cobertura Temporal",
+        "description": "Anos cobertos pela tabela.\nPreenchido como lista de intervalos sem repetir os metadados da tabela.Exemplo: 2001(1)2010, ou (1)2020, ou (1).",
+        "yaml_order": {
+          "id_before": "description",
+          "id_after": "covered_by_dictionary"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/TemporalCoverageEnum"
+          }
+        ]
+      },
+      "covered_by_dictionary": {
+        "title": "Coberta por um Dicionário",
+        "description": "A coluna precisa de dicionário?\nOpções: yes, no.",
+        "default": "no",
+        "yaml_order": {
+          "id_before": "temporal_coverage",
+          "id_after": "directory_column"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/YesNoEnum"
+          }
+        ]
+      },
+      "directory_column": {
+        "title": "Coluna Correspondente nos Diretórios",
+        "description": "Chave primária nos diretórios correspondente à coluna.",
+        "yaml_order": {
+          "id_before": "covered_by_dictionary",
+          "id_after": "measurement_unit"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/DirectoryColumn"
+          }
+        ]
+      },
+      "measurement_unit": {
+        "title": "Unidade de Medida",
+        "description": "Qual é a unidade de medida da coluna?\nEscreva a fórmula matemática baseada nas chaves de unidades básicas permitidas em https://basedosdados.org/api/3/action/bd_available_options na seção Measurement Unit.\nExemplos: 'kilometer^2', 'meter^3 / second', '1000 * person', 'gigawatt'.",
+        "yaml_order": {
+          "id_before": "directory_column",
+          "id_after": "has_sensitive_data"
+        },
+        "type": "string"
+      },
+      "has_sensitive_data": {
+        "title": "Contém Dados Sensíveis (LGPD)",
+        "description": "A coluna contém dados sensíveis, como definido pela Lei Geral de Proteção de Dados (LGPD)?\nOpções: yes, no.",
+        "default": "no",
+        "yaml_order": {
+          "id_before": "measurement_unit",
+          "id_after": "observations"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/YesNoEnum"
+          }
+        ]
+      },
+      "observations": {
+        "title": "Observações",
+        "description": "Informações sobre a coluna: arquitetura, decisões de limpeza, etc.",
+        "yaml_order": {
+          "id_before": "has_sensitive_data",
+          "id_after": "is_in_staging"
+        },
+        "type": "string"
+      },
+      "is_in_staging": {
+        "title": "Está em Staging",
+        "description": "A coluna está na tabela staging?\nOpções: True, False",
+        "default": true,
+        "yaml_order": {
+          "id_before": "observations",
+          "id_after": "is_partition"
+        },
+        "type": "boolean"
+      },
+      "is_partition": {
+        "title": "É Partição",
+        "description": "A coluna é uma partição?\nOpções: True, False",
+        "default": false,
+        "yaml_order": {
+          "id_before": "is_in_staging",
+          "id_after": null
+        },
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "name"
+    ],
+    "definitions": {
+      "BigQueryTypeEnum": {
+        "title": "BigQueryTypeEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "array",
+          "boolean",
+          "date",
+          "datetime",
+          "float64",
+          "geography",
+          "int64",
+          "numeric",
+          "string",
+          "struct",
+          "time",
+          "timestamp"
+        ],
+        "type": "string"
+      },
+      "TemporalCoverageEnum": {
+        "title": "TemporalCoverageEnum",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "YesNoEnum": {
+        "title": "YesNoEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "yes",
+          "no"
+        ],
+        "type": "string"
+      },
+      "DirectoryEnum": {
+        "title": "DirectoryEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "br_bd_diretorios_africa_sul",
+          "br_bd_diretorios_alemanha",
+          "br_bd_diretorios_argentina",
+          "br_bd_diretorios_australia",
+          "br_bd_diretorios_bolivia",
+          "br_bd_diretorios_brasil",
+          "br_bd_diretorios_canada",
+          "br_bd_diretorios_chile",
+          "br_bd_diretorios_china",
+          "br_bd_diretorios_colombia",
+          "br_bd_diretorios_data_tempo",
+          "br_bd_diretorios_dinamarca",
+          "br_bd_diretorios_espanha",
+          "br_bd_diretorios_franca",
+          "br_bd_diretorios_india",
+          "br_bd_diretorios_inglaterra",
+          "br_bd_diretorios_eua",
+          "br_bd_diretorios_mexico",
+          "br_bd_diretorios_mundo",
+          "br_bd_diretorios_noruega",
+          "br_bd_diretorios_peru",
+          "br_bd_diretorios_portugal",
+          "br_bd_diretorios_suecia",
+          "br_bd_diretorios_suica"
+        ],
+        "type": "string"
+      },
+      "DirectoryColumn": {
+        "title": "DirectoryColumn",
+        "type": "object",
+        "properties": {
+          "dataset_id": {
+            "title": "ID Conjunto",
+            "allOf": [
+              {
+                "$ref": "#/definitions/DirectoryEnum"
+              }
+            ]
+          },
+          "table_id": {
+            "title": "ID Tabela",
+            "type": "string"
+          },
+          "column_name": {
+            "title": "Nome Coluna",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

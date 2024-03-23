@@ -19,7 +19,7 @@ TIPOS:
 
 */
 CREATE VIEW basedosdados-dev.pytest.pytest AS
-SELECT 
+SELECT
 id_municipio,
 ano,
 PIB,

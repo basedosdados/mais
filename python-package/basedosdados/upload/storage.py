@@ -1,17 +1,18 @@
-'''
+"""
 Class for managing the files in cloud storage.
-'''
+"""
+import sys
+
 # pylint: disable=invalid-name, too-many-arguments, undefined-loop-variable,line-too-long,broad-except,R0801
 import time
-from pathlib import Path
-import sys
 import traceback
+from pathlib import Path
 
-from tqdm import tqdm
 from loguru import logger
+from tqdm import tqdm
 
-from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.upload.base import Base
 
 # google retryble exceptions. References: https://googleapis.dev/python/storage/latest/retry_timeout.html#module-google.cloud.storage.retry
 
@@ -30,13 +31,10 @@ class Storage(Base):
 
     @staticmethod
     def _resolve_partitions(partitions):
-
         if isinstance(partitions, dict):
-
             return "/".join(f"{k}={v}" for k, v in partitions.items()) + "/"
 
         if isinstance(partitions, str):
-
             if partitions.endswith("/"):
                 partitions = partitions[:-1]
 
@@ -49,23 +47,24 @@ class Storage(Base):
                 # check if it fits rule
                 {b.split("=")[0]: b.split("=")[1] for b in partitions.split("/")}
             except IndexError as e:
-                raise Exception(f"The path {partitions} is not a valid partition") from e
+                raise Exception(
+                    f"The path {partitions} is not a valid partition"
+                ) from e
 
             return partitions + "/"
 
         raise Exception(f"Partitions format or type not accepted: {partitions}")
 
     def _build_blob_name(self, filename, mode, partitions=None):
-        '''
+        """
         Builds the blob name.
-        '''
+        """
 
         # table folder
         blob_name = f"{mode}/{self.dataset_id}/{self.table_id}/"
 
         # add partition folder
         if partitions is not None:
-
             blob_name += self._resolve_partitions(partitions)
 
         # add file name
@@ -106,7 +105,6 @@ class Storage(Base):
         self.client["storage_staging"].create_bucket(self.bucket)
 
         for folder in ["staging/", "raw/"]:
-
             self.bucket.blob(folder).upload_from_string("")
 
     def upload(
@@ -203,21 +201,17 @@ class Storage(Base):
             else [mode]
         )
         for m in mode:
-
             for filepath, part in tqdm(list(zip(paths, parts)), desc="Uploading files"):
-
                 blob_name = self._build_blob_name(filepath.name, m, part)
 
                 blob = self.bucket.blob(blob_name, chunk_size=chunk_size)
 
                 if not blob.exists() or if_exists == "replace":
-
                     upload_args["timeout"] = upload_args.get("timeout", None)
 
                     blob.upload_from_filename(str(filepath), **upload_args)
 
                 elif if_exists == "pass":
-
                     pass
 
                 else:
@@ -229,23 +223,22 @@ class Storage(Base):
                         "to 'replace' to overwrite data."
                     )
 
-        logger.success(
-            " {object} {filename}_{mode} was {action}!",
-            filename=filepath.name,
-            mode=mode,
-            object="File",
-            action="uploaded",
-        )
+            logger.success(
+                " {object} {filename}_{mode} was {action}!",
+                filename=filepath.name,
+                mode=m,
+                object="File",
+                action="uploaded",
+            )
 
     def download(
         self,
         filename="*",
         savepath=".",
         partitions=None,
-        mode="raw",
+        mode="staging",
         if_not_exists="raise",
     ):
-
         """Download files from Google Storage from path `mode`/`dataset_id`/`table_id`/`partitions`/`filename` and replicate folder hierarchy
         on save,
 
@@ -306,7 +299,6 @@ class Storage(Base):
 
         # download all blobs matching the search to given savepath
         for blob in tqdm(blob_list, desc="Download Blob"):
-
             # parse blob.name and get the csv file name
             csv_name = blob.name.split("/")[-1]
 
@@ -314,11 +306,13 @@ class Storage(Base):
             blob_folder = blob.name.replace(csv_name, "")
 
             # replicate folder hierarchy
-            (Path(savepath) / blob_folder).mkdir(parents=True, exist_ok=True)
+            savepath = Path(savepath)
+            (savepath / blob_folder).mkdir(parents=True, exist_ok=True)
 
             # download blob to savepath
-            savepath = f"{savepath}/{blob.name}"
-            blob.download_to_filename(filename=savepath)
+            save_file_path = savepath / blob.name
+
+            blob.download_to_filename(filename=save_file_path)
 
         logger.success(
             " {object} {object_id}_{mode} was {action} at: {path}!",
@@ -326,7 +320,7 @@ class Storage(Base):
             mode=mode,
             object="File",
             action="downloaded",
-            path={str(savepath)}
+            path={str(savepath)},
         )
 
     def delete_file(self, filename, mode, partitions=None, not_found_ok=False):
@@ -356,7 +350,6 @@ class Storage(Base):
         )
 
         for m in mode:
-
             blob = self.bucket.blob(self._build_blob_name(filename, m, partitions))
 
             if blob.exists() or not blob.exists() and not not_found_ok:
@@ -391,7 +384,6 @@ class Storage(Base):
         prefix = f"{mode}/{self.dataset_id}/{self.table_id}/"
 
         if bucket_name is not None:
-
             table_blobs = list(
                 self.client["storage_staging"]
                 .bucket(f"{bucket_name}")
@@ -399,7 +391,6 @@ class Storage(Base):
             )
 
         else:
-
             table_blobs = list(self.bucket.list_blobs(prefix=prefix))
 
         if not table_blobs:
@@ -410,7 +401,7 @@ class Storage(Base):
             )
         # Divides table_blobs list for maximum batch request size
         table_blobs_chunks = [
-            table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
+            table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)  # noqa
         ]
 
         for i, source_table in enumerate(
@@ -443,6 +434,7 @@ class Storage(Base):
         source_bucket_name="basedosdados",
         destination_bucket_name=None,
         mode="staging",
+        new_table_id=None,
     ):
         """Copies table from a source bucket to your bucket, sends request in batches.
 
@@ -458,6 +450,8 @@ class Storage(Base):
 
             mode (str): Folder of which dataset to update [raw|staging|header|auxiliary_files|architecture]
                 Folder of which dataset to update. Defaults to "staging".
+            new_table_id (str): Optional.
+                New table id to be copied to. If None, defaults to the table id initialized when instantiating the Storage object.
         """
 
         source_table_ref = list(
@@ -472,18 +466,17 @@ class Storage(Base):
             )
 
         if destination_bucket_name is None:
-
             destination_bucket = self.bucket
 
         else:
-
             destination_bucket = self.client["storage_staging"].bucket(
                 destination_bucket_name
             )
 
         # Divides source_table_ref list for maximum batch request size
         source_table_ref_chunks = [
-            source_table_ref[i : i + 999] for i in range(0, len(source_table_ref), 999)
+            source_table_ref[i : i + 999]  # noqa
+            for i in range(0, len(source_table_ref), 999)  # noqa
         ]
 
         for i, source_table in enumerate(
@@ -494,9 +487,15 @@ class Storage(Base):
                 try:
                     with self.client["storage_staging"].batch():
                         for blob in source_table:
+                            new_name = None
+                            if new_table_id:
+                                new_name = blob.name.replace(
+                                    self.table_id, new_table_id
+                                )
                             self.bucket.copy_blob(
                                 blob,
                                 destination_bucket=destination_bucket,
+                                new_name=new_name,
                             )
                     break
                 except Exception:
@@ -507,8 +506,9 @@ class Storage(Base):
                     time.sleep(5)
                     traceback.print_exc(file=sys.stderr)
         logger.success(
-            " {object} {object_id}_{mode} was {action}!",
+            " {object} {object_id}_{mode} was {action} to {new_object_id}_{mode}!",
             object_id=self.table_id,
+            new_object_id=new_table_id if new_table_id else self.table_id,
             mode=mode,
             object="Table",
             action="copied",

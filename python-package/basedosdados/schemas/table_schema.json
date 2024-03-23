@@ -1,0 +1,1071 @@
+{
+  "help": "https://basedosdados.org/api/3/action/help_show?name=bd_bdm_table_schema",
+  "success": true,
+  "result": {
+    "title": "BdmTable",
+    "type": "object",
+    "properties": {
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "description": {
+        "title": "Descrição",
+        "description": "Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.\nVocê não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de\ncomo usar os dados.\nSe souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,",
+        "yaml_order": {
+          "id_before": "name",
+          "id_after": "spatial_coverage"
+        },
+        "type": "string"
+      },
+      "position": {
+        "title": "Posição",
+        "type": "integer"
+      },
+      "url": {
+        "title": "Url",
+        "type": "string"
+      },
+      "cache_last_updated": {
+        "title": "Última Atualização do Cache",
+        "type": "string",
+        "format": "date-time"
+      },
+      "cache_url": {
+        "title": "Url Cache",
+        "type": "string"
+      },
+      "created": {
+        "title": "Data de Criação",
+        "type": "string",
+        "format": "date-time"
+      },
+      "datastore_active": {
+        "title": "Datastore Ativa",
+        "type": "boolean"
+      },
+      "format": {
+        "title": "Formato",
+        "type": "string"
+      },
+      "hash": {
+        "title": "Hash",
+        "type": "string"
+      },
+      "last_modified": {
+        "title": "Data da Útima Atualização",
+        "type": "string",
+        "format": "date-time"
+      },
+      "metadata_modified": {
+        "title": "Data da Última Modificação dos Metadados",
+        "yaml_order": {
+          "id_before": "number_rows",
+          "id_after": null
+        },
+        "type": "string",
+        "format": "date-time"
+      },
+      "mimetype": {
+        "title": "Mimetype",
+        "type": "string"
+      },
+      "mimetype_inner": {
+        "title": "Mimetype Inner",
+        "type": "string"
+      },
+      "package_id": {
+        "title": "Package Id",
+        "type": "string"
+      },
+      "size": {
+        "title": "Size",
+        "type": "number"
+      },
+      "state": {
+        "title": "Estado",
+        "type": "string"
+      },
+      "url_type": {
+        "title": "Url Type",
+        "type": "string"
+      },
+      "resource_type": {
+        "title": "Resource Type",
+        "enum": [
+          "bdm_table"
+        ],
+        "type": "string"
+      },
+      "dataset_id": {
+        "title": "ID Conjunto",
+        "description": "UUID do conjunto de dados ao qual a tabela pertence (preenchido automaticamente).",
+        "yaml_order": {
+          "id_before": null,
+          "id_after": "dataset_slug"
+        },
+        "type": "string"
+      },
+      "dataset_slug": {
+        "title": "Dataset Slug",
+        "description": "Slug do conjunto de dados ao qual a tabela pertence.",
+        "type": "string",
+        "yaml_order": {
+          "id_before": "dataset_id",
+          "id_after": "table_id"
+        }
+      },
+      "table_id": {
+        "title": "ID Tabela",
+        "description": "UUID da tabela (será preenchido automaticamente)",
+        "yaml_order": {
+          "id_before": "dataset_slug",
+          "id_after": "table_slug"
+        },
+        "type": "string"
+      },
+      "table_slug": {
+        "title": "Table Slug",
+        "type": "string",
+        "description": "Slug da tabela",
+        "yaml_order": {
+          "id_before": "table_id",
+          "id_after": "name"
+        }
+      },
+      "spatial_coverage": {
+        "title": "Cobertura Espacial",
+        "description": "As máximas unidades espaciais que a tabela cobre.\nExemplo:\n   - sa.br\n \n   - sa.br.sp\n \n   - world",
+        "yaml_order": {
+          "id_before": "description",
+          "id_after": "temporal_coverage"
+        },
+        "minItems": 1,
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/SpatialCoverageArea"
+        }
+      },
+      "temporal_coverage": {
+        "title": "Cobertura Temporal",
+        "description": "Anos cobertos pela tabela.\nExemplos:\n    - 1995(1)2019\nCaso a cobertura não seja contínua:\n    - 2002(2)2010\n    - 2016\n    - 2020",
+        "yaml_order": {
+          "id_before": "spatial_coverage",
+          "id_after": "update_frequency"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/TemporalCoverageEnum"
+          }
+        ]
+      },
+      "update_frequency": {
+        "title": "Frequência de Atualização",
+        "description": "A unidade temporal com qual a tabela é atualizada.\nOpções em 'https://basedosdados.org/api/3/action/bd_available_options'",
+        "yaml_order": {
+          "id_before": "temporal_coverage",
+          "id_after": "observation_level"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/TimeUnitEnum"
+          }
+        ]
+      },
+      "observation_level": {
+        "title": "Nível da observação",
+        "description": "Nível de observação da tabela: o que representa cada linha.\nA combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'\nCaso a entidade seja espacial incluir a informação de 'country' Exemplos:\n    - entity: year\n      columns:\n          - ano\n    - country: br\n      entity: state\n      columns:\n          - sigla_uf",
+        "yaml_order": {
+          "id_before": "update_frequency",
+          "id_after": "last_updated"
+        },
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/ObservationLevel"
+        }
+      },
+      "last_updated": {
+        "title": "Data da Última Atualização",
+        "yaml_order": {
+          "id_before": "observation_level",
+          "id_after": "version"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/LastUpdated"
+          }
+        ]
+      },
+      "version": {
+        "title": "Versão",
+        "description": "Versão da tabela. Seguindo o padrão de semantic versioning.\nExemplos: v1.0, v1.1.3",
+        "yaml_order": {
+          "id_before": "last_updated",
+          "id_after": "published_by"
+        },
+        "type": "string"
+      },
+      "published_by": {
+        "title": "Publicado por",
+        "description": "Quem está preenchendo esses metadados?",
+        "yaml_order": {
+          "id_before": "version",
+          "id_after": "data_cleaned_by"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/PublishedBy"
+          }
+        ]
+      },
+      "data_cleaned_by": {
+        "title": "Dados Limpos por",
+        "description": "Qual organização/departamento/pessoa tratou os dados?\nAs vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.\nSe essa pessoa é você, preencha abaixo com suas informações.",
+        "yaml_order": {
+          "id_before": "published_by",
+          "id_after": "data_cleaning_description"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/DataCleanedBy"
+          }
+        ]
+      },
+      "data_cleaning_description": {
+        "title": "Descrição da Limpeza de Dados",
+        "description": "Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.",
+        "yaml_order": {
+          "id_before": "data_cleaned_by",
+          "id_after": "data_cleaning_code_url"
+        },
+        "type": "string"
+      },
+      "data_cleaning_code_url": {
+        "title": "Url do Código de Limpeza dos Dados",
+        "description": "Url do código de limpeza dos dados do github.",
+        "yaml_order": {
+          "id_before": "data_cleaning_description",
+          "id_after": "partner_organization"
+        },
+        "type": "string"
+      },
+      "partner_organization": {
+        "title": "Organização parceira",
+        "description": "Organização que ajudou institucionalmente na disponibilização dos dados.",
+        "yaml_order": {
+          "id_before": "data_cleaning_code_url",
+          "id_after": "raw_files_url"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/PartnerOrganization"
+          }
+        ]
+      },
+      "raw_files_url": {
+        "title": "Url dos Dados Originais",
+        "description": "Url dos dados originais no GCP Storage.",
+        "yaml_order": {
+          "id_before": "partner_organization",
+          "id_after": "auxiliary_files_url"
+        },
+        "type": "string"
+      },
+      "auxiliary_files_url": {
+        "title": "Url dos Arquivos Auxiliares",
+        "description": "Url dos arquivos auxiliares no GCP Storage.",
+        "yaml_order": {
+          "id_before": "raw_files_url",
+          "id_after": "architecture_url"
+        },
+        "type": "string"
+      },
+      "architecture_url": {
+        "title": "Url da Tabela de Arquitetura",
+        "description": "Url da tabela de arquitetura no GCP Storage.",
+        "yaml_order": {
+          "id_before": "auxiliary_files_url",
+          "id_after": "source_bucket_name"
+        },
+        "type": "string"
+      },
+      "source_bucket_name": {
+        "title": "Nome do Bucket Fonte no GCP",
+        "yaml_order": {
+          "id_before": "architecture_url",
+          "id_after": "project_id_prod"
+        },
+        "type": "string"
+      },
+      "project_id_prod": {
+        "title": "ID do Projeto de Produção no GCP",
+        "yaml_order": {
+          "id_before": "source_bucket_name",
+          "id_after": "project_id_staging"
+        },
+        "type": "string"
+      },
+      "project_id_staging": {
+        "title": "ID do Projeto de Staging no GCP",
+        "yaml_order": {
+          "id_before": "project_id_prod",
+          "id_after": "partitions"
+        },
+        "type": "string"
+      },
+      "partitions": {
+        "title": "Partições",
+        "description": "Liste as colunas da tabela que representam partições.\nNão esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.\nIsso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.\nSe não houver partições, não modifique abaixo.",
+        "yaml_order": {
+          "id_before": "project_id_staging",
+          "id_after": "columns"
+        },
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "uncompressed_file_size": {
+        "title": "Tamanho do Arquivo Não-Comprimido (em bytes)",
+        "type": "integer"
+      },
+      "compressed_file_size": {
+        "title": "Tamanho do Arquivo Comprimido (em bytes)",
+        "type": "integer"
+      },
+      "columns": {
+        "title": "Colunas",
+        "description": "Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar\npara saber sobre o que é a coluna.\nAdicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando\ninicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que\npreencherá automaticamente as colunas.\nAlém disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.",
+        "yaml_order": {
+          "id_before": "partitions",
+          "id_after": "number_rows"
+        },
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/BdmColumns"
+        }
+      },
+      "name": {
+        "title": "Name",
+        "description": "Nome da tabela.",
+        "yaml_order": {
+          "id_before": "table_id",
+          "id_after": "description"
+        },
+        "type": "string"
+      },
+      "number_rows": {
+        "title": "Número de Linhas da Tabela",
+        "yaml_order": {
+          "id_before": "columns",
+          "id_after": "metadata_modified"
+        },
+        "type": "integer"
+      }
+    },
+    "required": [
+      "name",
+      "position",
+      "resource_type",
+      "dataset_id",
+      "table_id"
+    ],
+    "definitions": {
+      "SpatialCoverageArea": {
+        "title": "SpatialCoverageArea",
+        "type": "string"
+      },
+      "TemporalCoverageEnum": {
+        "title": "TemporalCoverageEnum",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "TimeUnitEnum": {
+        "title": "TimeUnitEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "second",
+          "minute",
+          "hour",
+          "day",
+          "week",
+          "month",
+          "quarter",
+          "semester",
+          "one_year",
+          "two_years",
+          "three_years",
+          "four_years",
+          "five_years",
+          "ten_years",
+          "unique",
+          "recurring",
+          "uncertain",
+          "other"
+        ],
+        "type": "string"
+      },
+      "CountryEnum": {
+        "title": "CountryEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "br",
+          "ar",
+          "bo",
+          "cl",
+          "co",
+          "ca",
+          "us",
+          "mx",
+          "de",
+          "es",
+          "fr",
+          "it",
+          "pt",
+          "gb",
+          "ru",
+          "cn",
+          "th",
+          "jp",
+          "my",
+          "id",
+          "za",
+          "au"
+        ],
+        "type": "string"
+      },
+      "EntityDateTimeEnum": {
+        "title": "EntityDateTimeEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "year",
+          "semester",
+          "quarter",
+          "bimester",
+          "month",
+          "week",
+          "day",
+          "hour",
+          "minute",
+          "second",
+          "date",
+          "time"
+        ],
+        "type": "string"
+      },
+      "EntitySpatialEnum": {
+        "title": "EntitySpatialEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "continent",
+          "country",
+          "region",
+          "state",
+          "district",
+          "county",
+          "municipality",
+          "city",
+          "village",
+          "neighborhood",
+          "zip_code",
+          "census_tract"
+        ],
+        "type": "string"
+      },
+      "EntityIndividualEnum": {
+        "title": "EntityIndividualEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "person",
+          "household",
+          "name",
+          "animal",
+          "plant"
+        ],
+        "type": "string"
+      },
+      "EntityEstablishmentEnum": {
+        "title": "EntityEstablishmentEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "agency",
+          "protected_area",
+          "band",
+          "library",
+          "notary_office",
+          "school",
+          "legislature",
+          "police_station",
+          "company",
+          "station",
+          "stadium",
+          "terrorist_group",
+          "hospital",
+          "church",
+          "property",
+          "ministry",
+          "museum",
+          "construction",
+          "ngo",
+          "prison",
+          "team",
+          "court",
+          "store"
+        ],
+        "type": "string"
+      },
+      "EntityPoliticsEnum": {
+        "title": "EntityPoliticsEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "agreement",
+          "speech",
+          "election",
+          "caucus",
+          "law",
+          "party",
+          "poll",
+          "vote"
+        ],
+        "type": "string"
+      },
+      "EntityScienceEnum": {
+        "title": "EntityScienceEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "article",
+          "citation",
+          "domain",
+          "document",
+          "iceberg",
+          "book",
+          "newspaper",
+          "drug",
+          "patent",
+          "journal",
+          "word",
+          "post",
+          "langugage",
+          "crs",
+          "page",
+          "protein",
+          "meteor",
+          "terrain",
+          "typo"
+        ],
+        "type": "string"
+      },
+      "EntityEconomicsEnum": {
+        "title": "EntityEconomicsEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "contract",
+          "donation",
+          "amendment",
+          "expenditure",
+          "item",
+          "grant",
+          "procurement",
+          "product",
+          "transaction",
+          "transfer",
+          "bill",
+          "occupation",
+          "sector"
+        ],
+        "type": "string"
+      },
+      "EntityEducationEnum": {
+        "title": "EntityEducationEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "scholarship",
+          "exam"
+        ],
+        "type": "string"
+      },
+      "EntityEventEnum": {
+        "title": "EntityEventEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "alert",
+          "attack",
+          "audit",
+          "act",
+          "concert",
+          "disinvitation",
+          "disaster",
+          "war",
+          "territorial_change",
+          "birth",
+          "death",
+          "request",
+          "protest",
+          "match",
+          "sanction"
+        ],
+        "type": "string"
+      },
+      "EntityArtEnum": {
+        "title": "EntityArtEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "album",
+          "movie",
+          "photo",
+          "song",
+          "statue",
+          "painting",
+          "poem"
+        ],
+        "type": "string"
+      },
+      "EntityInfrastructureEnum": {
+        "title": "EntityInfrastructureEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "dam",
+          "satellitte",
+          "street_road",
+          "roller_coaster"
+        ],
+        "type": "string"
+      },
+      "EntityTransportationEnum": {
+        "title": "EntityTransportationEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "automobile",
+          "train",
+          "aircraft",
+          "ship"
+        ],
+        "type": "string"
+      },
+      "EntitySecurityEnum": {
+        "title": "EntitySecurityEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "gun"
+        ],
+        "type": "string"
+      },
+      "EntityDemographicEnum": {
+        "title": "EntityDemographicEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "age",
+          "race",
+          "sex"
+        ],
+        "type": "string"
+      },
+      "EntityHistoryEnum": {
+        "title": "EntityHistoryEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "empire"
+        ],
+        "type": "string"
+      },
+      "EntityOtherEnum": {
+        "title": "EntityOtherEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "other"
+        ],
+        "type": "string"
+      },
+      "EntityImageEnum": {
+        "title": "EntityImageEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "pixel",
+          "polygon"
+        ],
+        "type": "string"
+      },
+      "ObservationLevel": {
+        "title": "ObservationLevel",
+        "type": "object",
+        "properties": {
+          "country": {
+            "title": "País",
+            "description": "País da entidade. Deixar nulo se entidade for internacional ou não-espacial.\nOpções em 'https://basedosdados.org/api/3/action/bd_available_options'",
+            "allOf": [
+              {
+                "$ref": "#/definitions/CountryEnum"
+              }
+            ]
+          },
+          "entity": {
+            "title": "Entidade",
+            "description": "Opções em 'https://basedosdados.org/api/3/action/bd_available_options'",
+            "anyOf": [
+              {
+                "$ref": "#/definitions/EntityDateTimeEnum"
+              },
+              {
+                "$ref": "#/definitions/EntitySpatialEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityIndividualEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityEstablishmentEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityPoliticsEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityScienceEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityEconomicsEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityEducationEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityEventEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityArtEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityInfrastructureEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityTransportationEnum"
+              },
+              {
+                "$ref": "#/definitions/EntitySecurityEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityDemographicEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityHistoryEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityOtherEnum"
+              },
+              {
+                "$ref": "#/definitions/EntityImageEnum"
+              }
+            ]
+          },
+          "columns": {
+            "title": "Colunas identificadoras",
+            "description": "Colunas identificadoras da entidade",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "LastUpdated": {
+        "title": "LastUpdated",
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "title": "Metadados",
+            "type": "string"
+          },
+          "data": {
+            "title": "Dados",
+            "type": "string"
+          },
+          "release": {
+            "title": "Dados Originais",
+            "type": "string"
+          }
+        }
+      },
+      "PublishedBy": {
+        "title": "PublishedBy",
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Nome",
+            "type": "string"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "github_user": {
+            "title": "Usuário Github",
+            "type": "string"
+          },
+          "ckan_user": {
+            "title": "Usuário CKAN",
+            "type": "string"
+          },
+          "website": {
+            "title": "Website",
+            "type": "string"
+          }
+        }
+      },
+      "DataCleanedBy": {
+        "title": "DataCleanedBy",
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Nome",
+            "type": "string"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "github_user": {
+            "title": "Usuário Github",
+            "type": "string"
+          },
+          "ckan_user": {
+            "title": "Usuário CKAN",
+            "type": "string"
+          },
+          "website": {
+            "title": "Website",
+            "type": "string"
+          }
+        }
+      },
+      "PartnerOrganization": {
+        "title": "PartnerOrganization",
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Nome",
+            "description": "Nome completo",
+            "type": "string"
+          },
+          "organization_id": {
+            "title": "ID Organização",
+            "description": "ID Organização - CKAN",
+            "type": "string"
+          }
+        }
+      },
+      "BigQueryTypeEnum": {
+        "title": "BigQueryTypeEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "array",
+          "boolean",
+          "date",
+          "datetime",
+          "float64",
+          "geography",
+          "int64",
+          "numeric",
+          "string",
+          "struct",
+          "time",
+          "timestamp"
+        ],
+        "type": "string"
+      },
+      "YesNoEnum": {
+        "title": "YesNoEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "yes",
+          "no"
+        ],
+        "type": "string"
+      },
+      "DirectoryEnum": {
+        "title": "DirectoryEnum",
+        "description": "An enumeration.",
+        "enum": [
+          "br_bd_diretorios_africa_sul",
+          "br_bd_diretorios_alemanha",
+          "br_bd_diretorios_argentina",
+          "br_bd_diretorios_australia",
+          "br_bd_diretorios_bolivia",
+          "br_bd_diretorios_brasil",
+          "br_bd_diretorios_canada",
+          "br_bd_diretorios_chile",
+          "br_bd_diretorios_china",
+          "br_bd_diretorios_colombia",
+          "br_bd_diretorios_data_tempo",
+          "br_bd_diretorios_dinamarca",
+          "br_bd_diretorios_espanha",
+          "br_bd_diretorios_franca",
+          "br_bd_diretorios_india",
+          "br_bd_diretorios_inglaterra",
+          "br_bd_diretorios_eua",
+          "br_bd_diretorios_mexico",
+          "br_bd_diretorios_mundo",
+          "br_bd_diretorios_noruega",
+          "br_bd_diretorios_peru",
+          "br_bd_diretorios_portugal",
+          "br_bd_diretorios_suecia",
+          "br_bd_diretorios_suica"
+        ],
+        "type": "string"
+      },
+      "DirectoryColumn": {
+        "title": "DirectoryColumn",
+        "type": "object",
+        "properties": {
+          "dataset_id": {
+            "title": "ID Conjunto",
+            "allOf": [
+              {
+                "$ref": "#/definitions/DirectoryEnum"
+              }
+            ]
+          },
+          "table_id": {
+            "title": "ID Tabela",
+            "type": "string"
+          },
+          "column_name": {
+            "title": "Nome Coluna",
+            "type": "string"
+          }
+        }
+      },
+      "BdmColumns": {
+        "title": "BdmColumns",
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Nome",
+            "description": "Nome em produção",
+            "yaml_order": {
+              "id_before": null,
+              "id_after": "bigquery_type"
+            },
+            "type": "string"
+          },
+          "bigquery_type": {
+            "title": "Tipo no BigQuery",
+            "description": "Tipo no BigQuery.\nOpções: string, int64, float64, date, time, geometry.Ver https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types.",
+            "yaml_order": {
+              "id_before": "name",
+              "id_after": "description"
+            },
+            "allOf": [
+              {
+                "$ref": "#/definitions/BigQueryTypeEnum"
+              }
+            ]
+          },
+          "description": {
+            "title": "Descrição",
+            "description": "Descrição",
+            "yaml_order": {
+              "id_before": "bigquery_type",
+              "id_after": "temporal_coverage"
+            },
+            "type": "string"
+          },
+          "temporal_coverage": {
+            "title": "Cobertura Temporal",
+            "description": "Anos cobertos pela tabela.\nPreenchido como lista de intervalos sem repetir os metadados da tabela.Exemplo: 2001(1)2010, ou (1)2020, ou (1).",
+            "yaml_order": {
+              "id_before": "description",
+              "id_after": "covered_by_dictionary"
+            },
+            "allOf": [
+              {
+                "$ref": "#/definitions/TemporalCoverageEnum"
+              }
+            ]
+          },
+          "covered_by_dictionary": {
+            "title": "Coberta por um Dicionário",
+            "description": "A coluna precisa de dicionário?\nOpções: yes, no.",
+            "default": "no",
+            "yaml_order": {
+              "id_before": "temporal_coverage",
+              "id_after": "directory_column"
+            },
+            "allOf": [
+              {
+                "$ref": "#/definitions/YesNoEnum"
+              }
+            ]
+          },
+          "directory_column": {
+            "title": "Coluna Correspondente nos Diretórios",
+            "description": "Chave primária nos diretórios correspondente à coluna.",
+            "yaml_order": {
+              "id_before": "covered_by_dictionary",
+              "id_after": "measurement_unit"
+            },
+            "allOf": [
+              {
+                "$ref": "#/definitions/DirectoryColumn"
+              }
+            ]
+          },
+          "measurement_unit": {
+            "title": "Unidade de Medida",
+            "description": "Qual é a unidade de medida da coluna?\nEscreva a fórmula matemática baseada nas chaves de unidades básicas permitidas em https://basedosdados.org/api/3/action/bd_available_options na seção Measurement Unit.\nExemplos: 'kilometer^2', 'meter^3 / second', '1000 * person', 'gigawatt'.",
+            "yaml_order": {
+              "id_before": "directory_column",
+              "id_after": "has_sensitive_data"
+            },
+            "type": "string"
+          },
+          "has_sensitive_data": {
+            "title": "Contém Dados Sensíveis (LGPD)",
+            "description": "A coluna contém dados sensíveis, como definido pela Lei Geral de Proteção de Dados (LGPD)?\nOpções: yes, no.",
+            "default": "no",
+            "yaml_order": {
+              "id_before": "measurement_unit",
+              "id_after": "observations"
+            },
+            "allOf": [
+              {
+                "$ref": "#/definitions/YesNoEnum"
+              }
+            ]
+          },
+          "observations": {
+            "title": "Observações",
+            "description": "Informações sobre a coluna: arquitetura, decisões de limpeza, etc.",
+            "yaml_order": {
+              "id_before": "has_sensitive_data",
+              "id_after": "is_in_staging"
+            },
+            "type": "string"
+          },
+          "is_in_staging": {
+            "title": "Está em Staging",
+            "description": "A coluna está na tabela staging?\nOpções: True, False",
+            "default": true,
+            "yaml_order": {
+              "id_before": "observations",
+              "id_after": "is_partition"
+            },
+            "type": "boolean"
+          },
+          "is_partition": {
+            "title": "É Partição",
+            "description": "A coluna é uma partição?\nOpções: True, False",
+            "default": false,
+            "yaml_order": {
+              "id_before": "is_in_staging",
+              "id_after": null
+            },
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    }
+  }
+}

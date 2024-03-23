@@ -1,13 +1,14 @@
 """
 Tests for the Dataset class
 """
-# pylint: disable=protected-access
-from pathlib import Path
 import shutil
 
+# pylint: disable=protected-access
+from pathlib import Path
+
+import google.api_core.exceptions as google_exceptions
 import pytest
 from google.cloud import bigquery
-import google.api_core.exceptions as google_exceptions
 
 DATASET_ID = "pytest"
 

@@ -20,7 +20,7 @@ TIPOS:
 */
 {% set project = project_id_prod %}
 CREATE VIEW {{ project }}.{{ dataset_id }}.{{ table_id }} AS
-SELECT 
+SELECT
 {% for column in columns|list + partition_columns|list -%}
 {%- if not loop.last -%}
     SAFE_CAST({{ column }} AS STRING) {{ column }},

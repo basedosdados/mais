@@ -1,19 +1,21 @@
 """
 Test for the Metadata class
 """
-# pylint: disable=fixme
-from pathlib import Path
 import random
 import shutil
 import string
 
+# pylint: disable=fixme
+from pathlib import Path
+
 import pytest
 import ruamel.yaml as ryaml
 
-from basedosdados import Metadata
+from basedosdados import Metadata  # TODO: deprecate
 from basedosdados.exceptions import BaseDosDadosException
 
 METADATA_FILES = {"dataset": "dataset_config.yaml", "table": "table_config.yaml"}
+
 
 def test_create_from_dataset_id(dataset_metadata, dataset_metadata_path):
     """

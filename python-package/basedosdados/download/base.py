@@ -1,15 +1,13 @@
-'''
+"""
 Functions for manage auth and credentials
-'''
+"""
+import sys
+
 # pylint: disable=redefined-outer-name, protected-access, no-name-in-module, import-error,line-too-long
 from functools import lru_cache
 
-import sys
-
-from google.cloud import bigquery, storage
-
 import pydata_google_auth
-
+from google.cloud import bigquery, storage
 
 from basedosdados.upload.base import Base
 
@@ -19,9 +17,9 @@ SCOPES = [
 
 
 def reauth():
-    '''
+    """
     Reauth user credentials
-    '''
+    """
 
     pydata_google_auth.get_user_credentials(
         SCOPES, credentials_cache=pydata_google_auth.cache.REAUTH
@@ -29,11 +27,11 @@ def reauth():
 
 
 def credentials(from_file=False, reauth=False):
-    '''
+    """
     Get user credentials
-    '''
+    """
 
-    #check if is running in colab
+    # check if is running in colab
     if "google.colab" in sys.modules:
         from google.colab import auth  # pylint: disable=import-outside-toplevel
 
@@ -49,16 +47,15 @@ def credentials(from_file=False, reauth=False):
         )
 
     return pydata_google_auth.get_user_credentials(
-            SCOPES,
+        SCOPES,
     )
-
 
 
 @lru_cache(256)
 def google_client(billing_project_id, from_file, reauth):
-    '''
+    """
     Get Google Cloud client for bigquery and storage
-    '''
+    """
 
     return dict(
         bigquery=bigquery.Client(

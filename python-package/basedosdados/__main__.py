@@ -1,8 +1,8 @@
-'''
+"""
 Import CLI implementation for the application.
-'''
+"""
 
-#pylint: disable=E1120
+# pylint: disable=E1120
 
 from basedosdados.cli.cli import cli
 

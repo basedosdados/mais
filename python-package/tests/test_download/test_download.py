@@ -2,24 +2,19 @@
 Tests for the `download` class.
 """
 
-from pathlib import Path
 import shutil
+from pathlib import Path
 
-import pytest
 import pandas as pd
+import pytest
 from pandas_gbq.gbq import GenericGBQException
 
-from basedosdados import (
-    download,
-    read_sql,
-    read_table,
-)
+from basedosdados import download, read_sql, read_table
 from basedosdados.exceptions import (
     BaseDosDadosException,
-    BaseDosDadosNoBillingProjectIDException,
     BaseDosDadosInvalidProjectIDException,
+    BaseDosDadosNoBillingProjectIDException,
 )
-
 
 TEST_PROJECT_ID = "basedosdados-dev"
 SAVEFILE = Path(__file__).parent.parent / "tmp_bases" / "test.csv"
