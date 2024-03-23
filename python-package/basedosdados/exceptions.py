@@ -83,3 +83,12 @@ class BaseDosDadosAuthorizationException(BaseDosDadosException):
             "authorization code."
         )
         super().__init__(self.message)
+
+
+class BaseDosDadosQueryException(BaseDosDadosException):
+    """Exception raised if a query contains invalid fields."""
+    @classmethod
+    def from_job_errors(cls, errors):
+        error_list = map(lambda error: error["message"], errors)
+        message = ', '.join(error_list)
+        return cls(message)
