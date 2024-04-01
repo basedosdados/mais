@@ -53,7 +53,7 @@ keep id_municipio_tse sigla_uf
 tempfile diretorio_ufs
 save `diretorio_ufs'
 
-foreach ano of numlist 1994(2)2022 {
+foreach ano of numlist 2018 { // 1994(2)2022 {
 	
 	foreach tipo in candidato partido {
 		
@@ -84,12 +84,10 @@ foreach ano of numlist 1994(2)2022 {
 					ren v22	resultado
 					ren v23 numero_partido
 					ren v24	sigla_partido
-					//ren v27	coligacao
-					//ren v28	composicao
 					ren v29	votos
 					
 				}
-				else if `ano' >= 2014 & `ano' <= 2020 {
+				else if `ano' >= 2014 & `ano' <= 2016 {
 					
 					drop in 1
 					
@@ -109,9 +107,30 @@ foreach ano of numlist 1994(2)2022 {
 					ren v36 resultado
 					ren v29 numero_partido
 					ren v30 sigla_partido
-					//ren v33 coligacao
-					//ren v34 composicao
 					ren v38 votos
+					
+				}
+				else if `ano' >= 2018 & `ano' <= 2020 {
+					
+					drop in 1
+					
+					keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v22 v29 v30 v40 v44
+					
+					ren v3  ano
+					ren v6  turno
+					ren v8  tipo_eleicao
+					ren v11 sigla_uf
+					ren v14 id_municipio_tse
+					ren v16 zona
+					ren v18 cargo
+					ren v19 sequencial_candidato
+					ren v20 numero_candidato
+					ren v21 nome_candidato
+					ren v22 nome_urna_candidato
+					ren v29 numero_partido
+					ren v30 sigla_partido
+					ren v40 votos
+					ren v44 resultado
 					
 				}
 				else if `ano' >= 2022 {
@@ -133,8 +152,6 @@ foreach ano of numlist 1994(2)2022 {
 					ren v22 nome_urna_candidato
 					ren v29 numero_partido
 					ren v30 sigla_partido
-					//ren v37 coligacao
-					//ren v38 composicao
 					ren v40 votos
 					ren v44 resultado
 					
@@ -145,7 +162,7 @@ foreach ano of numlist 1994(2)2022 {
 				// limpa strings
 				//------------------//
 				
-				destring ano turno id_municipio_tse zona numero_candidato numero_partido votos, replace force // sequencial_candidato
+				destring ano turno votos, replace force
 				
 				replace sequencial_candidato = "" if sequencial_candidato == "-1"
 				
@@ -261,8 +278,6 @@ foreach ano of numlist 1994(2)2022 {
 					ren v8	id_municipio_tse
 					ren v10	zona
 					ren v12	cargo
-					//ren v14	coligacao
-					//ren v15	composicao
 					ren v17 numero_partido
 					ren v16	sigla_partido
 					ren v19	votos_nominais
@@ -271,7 +286,7 @@ foreach ano of numlist 1994(2)2022 {
 					order numero_partido, b(sigla_partido)
 					
 				}
-				else if `ano' >= 2014 & `ano' <= 2020 {
+				else if `ano' >= 2014 & `ano' <= 2016 {
 					
 					drop in 1
 					
@@ -284,12 +299,31 @@ foreach ano of numlist 1994(2)2022 {
 					ren v14	id_municipio_tse
 					ren v16	zona
 					ren v18	cargo
-					//ren v24	coligacao
-					//ren v25	composicao
 					ren v20 numero_partido
 					ren v21	sigla_partido
 					ren v27	votos_nominais
 					ren v28	votos_nao_nominais
+					
+				}
+				else if `ano' >= 2018 & `ano' <= 2020 {
+					
+					drop in 1
+					
+					keep v3 v6 v8 v11 v14 v16 v18 v20 v21 v33 v34
+					
+					ren v3	ano
+					ren v6	turno
+					ren v8	tipo_eleicao
+					ren v11	sigla_uf
+					ren v14	id_municipio_tse
+					ren v16	zona
+					ren v18	cargo
+					ren v20 numero_partido
+					ren v21	sigla_partido
+					ren v33	votos_nao_nominais
+					ren v34	votos_nominais
+					
+					order votos_nominais, b(votos_nao_nominais)
 					
 				}
 				else if `ano' >= 2022 {
@@ -307,8 +341,6 @@ foreach ano of numlist 1994(2)2022 {
 					ren v18	cargo
 					ren v20 numero_partido
 					ren v21	sigla_partido
-					//ren v28	coligacao
-					//ren v29	composicao
 					ren v33	votos_nao_nominais
 					ren v34	votos_nominais
 					
@@ -321,7 +353,7 @@ foreach ano of numlist 1994(2)2022 {
 				// limpa strings
 				//------------------//
 				
-				destring ano turno id_municipio_tse zona numero_partido votos_*, replace force
+				destring ano turno votos_*, replace force
 				
 				if "`estado'" == "BR" {
 					ren sigla_uf sigla_uf_orig
