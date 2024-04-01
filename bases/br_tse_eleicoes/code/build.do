@@ -36,3 +36,5 @@ do "code/sub/prestacao_contas.do"
 do "code/sub/cria_id_candidato.do"
 do "code/sub/normalizacao_particao.do"
 do "code/sub/agregacao.do"
+
+do "code/sub/local_votacao.do"
