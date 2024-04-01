@@ -159,6 +159,8 @@ foreach ano of numlist 1994(2)2022 {
 
 keep ano numero sigla
 
+drop if ano == 2020 & numero == "36" & sigla == "PTC"
+
 duplicates drop
 
 compress
@@ -228,7 +230,7 @@ save `candidatos_mod2_presid'
 !mkdir "output/resultados_candidato_municipio_zona"
 !mkdir "output/resultados_partido_municipio_zona"
 
-foreach ano of numlist 1994(2)2022 {
+foreach ano of numlist 2018 { // 1994(2)2022 {
 	
 	//---------------------//
 	// candidato-municipio-zona
@@ -319,7 +321,7 @@ foreach ano of numlist 1994(2)2022 {
 	
 	//drop coligacao composicao
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo numero_partido sigla_partido
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo numero_partido sigla_partido votos_nominais votos_nao_nominais
 	
 	order `vars'
 	sort  `vars'
@@ -386,7 +388,7 @@ save `partidos'
 
 local ufs AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO ZZ
 
-foreach ano of numlist 1994(2)2022 {
+foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 	
 	foreach uf in `ufs' {
 		
@@ -581,7 +583,7 @@ foreach ano of numlist 2016(2)2022 {
 
 !mkdir "output/detalhes_votacao_municipio_zona"
 
-foreach ano of numlist 1994(2)2022 {
+foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 	
 	!mkdir "output/detalhes_votacao_municipio_zona/ano=`ano'"
 	
@@ -608,7 +610,7 @@ foreach ano of numlist 1994(2)2022 {
 
 !mkdir "output/detalhes_votacao_secao"
 
-foreach ano of numlist 2020 { // 1994(2)2022 {
+foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 	
 	!mkdir "output/detalhes_votacao_secao/ano=`ano'"
 	
@@ -686,7 +688,7 @@ save `candidatos'
 
 !mkdir "output/bens_candidato"
 
-foreach ano of numlist 2006(2)2022 {
+foreach ano of numlist 2018(2)2022 { // 2006(2)2022 {
 	
 	!mkdir "output/bens_candidato/ano=`ano'"
 	
@@ -768,7 +770,7 @@ save `candidatos_mod2_presid'
 
 !mkdir "output/receitas_candidato"
 
-foreach ano of numlist 2002(2)2022 {
+foreach ano of numlist 2018(2)2022 { // 2002(2)2022 {
 	
 	!mkdir "output/receitas_candidato/ano=`ano'"
 	
@@ -900,7 +902,7 @@ save `candidatos_mod2_presid'
 
 !mkdir "output/despesas_candidato"
 
-foreach ano of numlist 2002(2)2022 {
+foreach ano of numlist 2018(2)2022 { // 2002(2)2022 {
 	
 	!mkdir "output/despesas_candidato/ano=`ano'"
 	

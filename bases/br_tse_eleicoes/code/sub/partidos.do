@@ -33,7 +33,7 @@ keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
 
-foreach ano of numlist 1990 1994(2)2022 {
+foreach ano of numlist 2018(2)2022 { // 1990 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		

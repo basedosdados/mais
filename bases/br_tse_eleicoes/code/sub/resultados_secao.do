@@ -37,27 +37,10 @@ keep id_municipio_tse sigla_uf
 tempfile diretorio_ufs
 save `diretorio_ufs'
 
-foreach ano of numlist 1994(2)2022 {
+foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		
-		
-		
-		
-		/*
-		import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) stringcols(_all)
-keep id_municipio id_municipio_tse
-tempfile diretorio
-save `diretorio'
-
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) stringcols(_all)
-keep id_municipio_tse sigla_uf
-tempfile diretorio_ufs
-save `diretorio_ufs'
-
-		local ano 2020
-		local estado AC
-		*/
 		di "`ano'_`estado'"
 		
 		if `ano' == 2012 {
@@ -120,7 +103,7 @@ save `diretorio_ufs'
 		}
 		*
 		
-		destring ano turno votos, replace force // id_municipio_tse zona secao numero_votavel
+		destring ano turno votos, replace force
 		
 		//------------------//
 		// limpa strings
