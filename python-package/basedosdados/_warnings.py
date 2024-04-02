@@ -1,6 +1,7 @@
 """
 Checks for warnings and general-purpose messages and displays them to the user.
 """
+
 from typing import List, Tuple
 
 import requests
@@ -12,7 +13,9 @@ from basedosdados._version import __version__
 def get_latest_version_number():
     """Get the latest version number from PyPI."""
     try:
-        response = requests.get("https://pypi.python.org/pypi/basedosdados/json")
+        response = requests.get(
+            "https://pypi.python.org/pypi/basedosdados/json", timeout=5
+        )
         return response.json()["info"]["version"]
     except:  # noqa
         logger.warning(
