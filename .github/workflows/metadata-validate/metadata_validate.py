@@ -8,7 +8,7 @@ import basedosdados as bd
 import yaml
 from basedosdados import Dataset, Storage
 from basedosdados.upload.base import Base
-from basedosdados.upload.metadata import Metadata
+from basedosdados.upload.metadata import Metadata # TODO: deprecate
 
 
 def tprint(title=""):

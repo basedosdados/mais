@@ -1,15 +1,14 @@
 """
 Module for manage dataset to the server.
 """
-# pylint: disable=line-too-long, fixme, invalid-name,line-too-long,unnecessary-lambda-assignment
-from pathlib import Path
+# pylint: disable=line-too-long, fixme, invalid-name,line-too-long
+from functools import lru_cache
+
+from google.api_core.exceptions import Conflict
+from google.cloud import bigquery
 from loguru import logger
 
-from google.cloud import bigquery
-from google.api_core.exceptions import Conflict
-
 from basedosdados.upload.base import Base
-from basedosdados.upload.metadata import Metadata
 
 
 class Dataset(Base):
@@ -19,110 +18,61 @@ class Dataset(Base):
 
     def __init__(self, dataset_id, **kwargs):
         super().__init__(**kwargs)
-
         self.dataset_id = dataset_id.replace("-", "_")
-        self.dataset_folder = Path(self.metadata_path / self.dataset_id)
-        self.metadata = Metadata(self.dataset_id, **kwargs)
 
     @property
+    @lru_cache
     def dataset_config(self):
         """
         Dataset config file.
         """
-
-        return self._load_yaml(
-            self.metadata_path / self.dataset_id / "dataset_config.yaml"
-        )
+        return self.backend.get_dataset_config(self.dataset_id)
 
     def _loop_modes(self, mode="all"):
         """
         Loop modes.
         """
 
-        mode = ["prod", "staging"] if mode == "all" else [mode]
-        dataset_tag = lambda m: f"_{m}" if m == "staging" else ""
+        def dataset_tag(m):
+            return f"_{m}" if m == "staging" else ""
 
+        mode = ["prod", "staging"] if mode == "all" else [mode]
         return (
             {
                 "client": self.client[f"bigquery_{m}"],
                 "id": f"{self.client[f'bigquery_{m}'].project}.{self.dataset_id}{dataset_tag(m)}",
+                "mode": m,
             }
             for m in mode
         )
 
-    @staticmethod
-    def _setup_dataset_object(dataset_id, location=None):
+    def _setup_dataset_object(self, dataset_id, location=None, mode="staging"):
         """
         Setup dataset object.
         """
 
         dataset = bigquery.Dataset(dataset_id)
+        if mode == "staging":
+            dataset_path = dataset_id.replace("_staging", "")
+            description = f"staging dataset for `{dataset_path}`"
+            labels = {"staging": True}
+        else:
+            try:
+                description = self.dataset_config.get("descriptionPt", "")
+                labels = {
+                    tag.get("namePt"): True for tag in self.dataset_config.get("tags")
+                }
+            except BaseException:
+                logger.warning(
+                    f"dataset {dataset_id} does not have a description in the API."
+                )
+                description = "description not available in the API."
+                labels = {}
 
-        ## TODO: not being used since 1.6.0 - need to redo the description tha goes to bigquery
-        dataset.description = "Para saber mais acesse https://basedosdados.org/"
-        # dataset.description = self._render_template(
-        #     Path("dataset/dataset_description.txt"), self.dataset_config
-        # )
-
+        dataset.description = description
+        dataset.labels = labels
         dataset.location = location
-
         return dataset
-
-    def _write_readme_file(self):
-        """
-        Write README.md file.
-        """
-
-        readme_content = (
-            f"Como capturar os dados de {self.dataset_id}?\n\nPara cap"
-            f"turar esses dados, basta verificar o link dos dados orig"
-            f"inais indicado em dataset_config.yaml no item website.\n"
-            f"\nCaso tenha sido utilizado algum código de captura ou t"
-            f"ratamento, estes estarão contidos em code/. Se o dado pu"
-            f"blicado for em sua versão bruta, não existirá a pasta co"
-            f"de/.\n\nOs dados publicados estão disponíveis em: https:"
-            f"//basedosdados.org/dataset/{self.dataset_id.replace('_','-')}"
-        )
-
-        readme_path = Path(self.metadata_path / self.dataset_id / "README.md")
-
-        with open(readme_path, "w", encoding="utf-8") as readmefile:
-            readmefile.write(readme_content)
-
-    def init(self, replace=False):
-        """Initialize dataset folder at metadata_path at `metadata_path/<dataset_id>`.
-
-        The folder should contain:
-
-        * `dataset_config.yaml`
-        * `README.md`
-
-        Args:
-            replace (str): Optional. Whether to replace existing folder.
-
-        Raises:
-            FileExistsError: If dataset folder already exists and replace is False
-        """
-
-        # Create dataset folder
-        try:
-            self.dataset_folder.mkdir(exist_ok=replace, parents=True)
-        except FileExistsError as e:
-            raise FileExistsError(
-                f"Dataset {str(self.dataset_folder.stem)} folder does not exists. "
-                "Set replace=True to replace current files."
-            ) from e
-
-        # create dataset_config.yaml with metadata
-        self.metadata.create(if_exists="replace")
-
-        # create README.md file
-        self._write_readme_file()
-
-        # Add code folder
-        (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
-
-        return self
 
     def publicize(self, mode="all", dataset_is_public=True):
         """Changes IAM configuration to turn BigQuery dataset public.
@@ -133,7 +83,6 @@ class Dataset(Base):
         """
 
         for m in self._loop_modes(mode):
-
             dataset = m["client"].get_dataset(m["id"])
             entries = dataset.access_entries
             # TODO https://github.com/basedosdados/mais/pull/1020
@@ -171,13 +120,26 @@ class Dataset(Base):
                     )
                 dataset.access_entries = entries
             m["client"].update_dataset(dataset, ["access_entries"])
-        logger.success(
-            " {object} {object_id}_{mode} was {action}!",
-            object_id=self.dataset_id,
-            mode=mode,
-            object="Dataset",
-            action="publicized",
+            logger.success(
+                " {object} {object_id}_{mode} was {action}!",
+                object_id=self.dataset_id,
+                mode=m["mode"],
+                object="Dataset",
+                action="publicized",
+            )
+
+    def exists(self, mode="staging"):
+        """
+        Check if dataset exists.
+        """
+        ref_dataset_id = (
+            self.dataset_id if mode == "prod" else self.dataset_id + "_staging"
         )
+        try:
+            ref = self.client[f"bigquery_{mode}"].get_dataset(ref_dataset_id)
+        except Exception:
+            ref = None
+        return bool(ref)
 
     def create(
         self, mode="all", if_exists="raise", dataset_is_public=True, location=None
@@ -210,39 +172,37 @@ class Dataset(Base):
             Warning: Dataset already exists and if_exists is set to `raise`
         """
 
-        if if_exists == "replace":
-            self.delete(mode)
-        elif if_exists == "update":
-
-            self.update()
-            return
-
         # Set dataset_id to the ID of the dataset to create.
         for m in self._loop_modes(mode):
-
-            # Construct a full Dataset object to send to the API.
-            dataset_obj = self._setup_dataset_object(m["id"], location=location)
+            if if_exists == "replace":
+                self.delete(mode=m["mode"])
+            elif if_exists == "update":
+                self.update(mode=m["mode"])
+                continue
 
             # Send the dataset to the API for creation, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             try:
-                m["client"].create_dataset(dataset_obj)  # Make an API request.
-                logger.success(
-                    " {object} {object_id}_{mode} was {action}!",
-                    object_id=self.dataset_id,
-                    mode=mode,
-                    object="Dataset",
-                    action="created",
-                )
-
+                if not self.exists(mode=m["mode"]):
+                    # Construct a full Dataset object to send to the API.
+                    dataset_obj = self._setup_dataset_object(
+                        dataset_id=m["id"], location=location, mode=m["mode"]
+                    )
+                    m["client"].create_dataset(dataset_obj)  # Make an API request.
+                    logger.success(
+                        " {object} {object_id}_{mode} was {action}!",
+                        object_id=self.dataset_id,
+                        mode=m["mode"],
+                        object="Dataset",
+                        action="created",
+                    )
+                    # Make prod dataset public
+                    self.publicize(dataset_is_public=dataset_is_public, mode=m["mode"])
             except Conflict as e:
                 if if_exists == "pass":
-                    return
+                    continue
                 raise Conflict(f"Dataset {self.dataset_id} already exists") from e
-
-        # Make prod dataset public
-        self.publicize(dataset_is_public=dataset_is_public)
 
     def delete(self, mode="all"):
         """Deletes dataset in BigQuery. Toogle mode to choose which dataset to delete.
@@ -252,15 +212,14 @@ class Dataset(Base):
         """
 
         for m in self._loop_modes(mode):
-
             m["client"].delete_dataset(m["id"], delete_contents=True, not_found_ok=True)
-        logger.info(
-            " {object} {object_id}_{mode} was {action}!",
-            object_id=self.dataset_id,
-            mode=mode,
-            object="Dataset",
-            action="deleted",
-        )
+            logger.info(
+                " {object} {object_id}_{mode} was {action}!",
+                object_id=self.dataset_id,
+                mode=m["mode"],
+                object="Dataset",
+                action="deleted",
+            )
 
     def update(self, mode="all", location=None):
         """Update dataset description. Toogle mode to choose which dataset to update.
@@ -273,22 +232,18 @@ class Dataset(Base):
         """
 
         for m in self._loop_modes(mode):
-
             # Send the dataset to the API to update, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             m["client"].update_dataset(
-                self._setup_dataset_object(
-                    m["id"],
-                    location=location,
-                ),
+                self._setup_dataset_object(m["id"], location=location, mode=m["mode"]),
                 fields=["description"],
             )  # Make an API request.
 
-        logger.success(
-            " {object} {object_id}_{mode} was {action}!",
-            object_id=self.dataset_id,
-            mode=mode,
-            object="Dataset",
-            action="updated",
-        )
+            logger.success(
+                " {object} {object_id}_{mode} was {action}!",
+                object_id=self.dataset_id,
+                mode=m["mode"],
+                object="Dataset",
+                action="updated",
+            )

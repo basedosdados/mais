@@ -2,7 +2,8 @@
 Exception classes for the package.
 """
 
-#pylint: disable=C0301
+# pylint: disable=C0301
+
 
 class BaseDosDadosException(Exception):
     """Exclusive Exception from Base dos Dados"""
@@ -83,3 +84,7 @@ class BaseDosDadosAuthorizationException(BaseDosDadosException):
             "authorization code."
         )
         super().__init__(self.message)
+
+
+class BaseDosDadosMissingDependencyException(BaseDosDadosException):
+    """Exception raised if one of the optional dependencies is missing."""

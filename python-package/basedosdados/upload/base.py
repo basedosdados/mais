@@ -1,29 +1,32 @@
 """
 Module for manage dataset using local credentials and config files
 """
-# pylint: disable=line-too-long, invalid-name, too-many-arguments, invalid-envvar-value,line-too-long
-from pathlib import Path
-import sys
-from os import getenv
-import shutil
-import warnings
+
 import base64
 import json
+import shutil
+import sys
+import warnings
 from functools import lru_cache
+from os import getenv
 
-from google.cloud import bigquery, storage
+# pylint: disable=line-too-long, invalid-name, too-many-arguments, invalid-envvar-value,line-too-long
+from pathlib import Path
+from typing import Dict, List, Union
+
+import googleapiclient.discovery
+import tomlkit
+from google.cloud import bigquery, bigquery_connection_v1, storage
 from google.oauth2 import service_account
 from loguru import logger
-import yaml
-from jinja2 import Template
-import tomlkit
 
+from basedosdados.backend import Backend
 from basedosdados.constants import config, constants
 
 warnings.filterwarnings("ignore")
 
 
-class Base:
+class Base:  # pylint: disable=too-many-instance-attributes
     """
     Base class for all datasets
     """
@@ -31,9 +34,7 @@ class Base:
     def __init__(
         self,
         config_path=".basedosdados",
-        templates=None,
         bucket_name=None,
-        metadata_path=None,
         overwrite_cli_config=False,
     ):
         """
@@ -46,15 +47,20 @@ class Base:
             else Path.home() / config_path
         )
 
-        self.config_path =  config_path
+        self.config_path = config_path
         self._init_config(force=overwrite_cli_config)
         self.config = self._load_config()
         self._config_log(config.verbose)
-
-        self.templates = Path(templates or self.config["templates_path"])
-        self.metadata_path = Path(metadata_path or self.config["metadata_path"])
         self.bucket_name = bucket_name or self.config["bucket_name"]
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
+        self._backend = Backend(self.config.get("api", {}).get("url", None))
+
+    @property
+    def backend(self):
+        """
+        Backend class
+        """
+        return self._backend
 
     @staticmethod
     def _decode_env(env: str) -> str:
@@ -75,12 +81,21 @@ class Base:
                 )
             )
             return service_account.Credentials.from_service_account_info(
-                info, scopes=["https://www.googleapis.com/auth/cloud-platform"]
+                info,
+                scopes=[
+                    "https://www.googleapis.com/auth/cloud-platform",
+                    "https://www.googleapis.com/auth/drive",
+                    "https://www.googleapis.com/auth/bigquery",
+                ],
             )
 
         return service_account.Credentials.from_service_account_file(
             self.config["gcloud-projects"][mode]["credentials_path"],
-            scopes=["https://www.googleapis.com/auth/cloud-platform"],
+            scopes=[
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/drive",
+                "https://www.googleapis.com/auth/bigquery",
+            ],
         )
 
     @property
@@ -95,25 +110,20 @@ class Base:
                 credentials=self._load_credentials("prod"),
                 project=self.config["gcloud-projects"]["prod"]["name"],
             ),
+            bigquery_connection_prod=bigquery_connection_v1.ConnectionServiceClient(
+                credentials=self._load_credentials("prod")
+            ),
             bigquery_staging=bigquery.Client(
                 credentials=self._load_credentials("staging"),
                 project=self.config["gcloud-projects"]["staging"]["name"],
+            ),
+            bigquery_connection_staging=bigquery_connection_v1.ConnectionServiceClient(
+                credentials=self._load_credentials("staging")
             ),
             storage_staging=storage.Client(
                 credentials=self._load_credentials("staging"),
                 project=self.config["gcloud-projects"]["staging"]["name"],
             ),
-        )
-
-    @property
-    def main_vars(self):
-        """
-        Variables for main templates
-        """
-        return dict(
-            templates=self.templates,
-            metadata_path=self.metadata_path,
-            bucket_name=self.bucket_name,
         )
 
     @staticmethod
@@ -146,7 +156,6 @@ class Base:
         """
 
         while True:
-
             res = self._input_validator(first_question, default_yn, with_lower)
 
             if res == "y":
@@ -202,15 +211,12 @@ class Base:
         credentials_folder = self.config_path / "credentials"
         credentials_folder.mkdir(exist_ok=True, parents=True)
 
-        # Create template folder
-        self._refresh_templates()
-
         # If environments are set but no files exist
         if (
             (not config_file.exists())
-            and (getenv(constants.ENV_CONFIG.value))
-            and (getenv(constants.ENV_CREDENTIALS_PROD.value))
-            and (getenv(constants.ENV_CREDENTIALS_STAGING.value))
+            and (getenv(constants.ENV_CONFIG.value))  # noqa
+            and (getenv(constants.ENV_CREDENTIALS_PROD.value))  # noqa
+            and (getenv(constants.ENV_CREDENTIALS_STAGING.value))  # noqa
         ):
             # Create basedosdados files from envs
             with open(config_file, "w", encoding="utf-8") as f:
@@ -224,7 +230,6 @@ class Base:
                 f.close()
 
         if (not config_file.exists()) or (force):
-
             # Load config file
             c_file = tomlkit.parse(
                 (Path(__file__).resolve().parents[1] / "configs" / "config.toml")
@@ -240,30 +245,13 @@ class Base:
                 "[press enter to continue]"
             )
 
-            ############# STEP 1 - METADATA PATH #######################
-
-            metadata_path = self._selection_yn(
-                first_question=(
-                    "\n********* STEP 1 **********\n"
-                    "Where are you going to save the metadata files of "
-                    "datasets and tables?\n"
-                    f"Is it at the current path ({Path.cwd()})? [Y/n]\n"
-                ),
-                default_yn="y",
-                default_return=Path.cwd(),
-                no_question=("\nWhere would you like to save it?\n" "metadata path: "),
-                with_lower=False,
-            )
-
-            c_file["metadata_path"] = str(Path(metadata_path) / "bases")
-
-            ############# STEP 2 - CREDENTIALS PATH ######################
+            # STEP 1 - CREDENTIALS PATH #
 
             credentials_path = self.config_path / "credentials"
             credentials_path = Path(
                 self._selection_yn(
                     first_question=(
-                        "\n********* STEP 2 **********\n"
+                        "\n********* STEP 1 **********\n"
                         "Where do you want to save your Google Cloud credentials?\n"
                         f"Is it at the {credentials_path}? [Y/n]\n"
                     ),
@@ -276,9 +264,9 @@ class Base:
                 )
             )
 
-            ############# STEP 3 - STAGING CREDS. #######################
+            # STEP 2 - STAGING CREDS. #
             project_staging = self._input_validator(
-                "\n********* STEP 3 **********\n"
+                "\n********* STEP 2 **********\n"
                 "What is the Google Cloud Project that you are going to use "
                 "to upload and treat data?\nIt might be something with 'staging'"
                 "in the name. If you just have one project, put its name.\n"
@@ -293,11 +281,11 @@ class Base:
             )
             c_file["gcloud-projects"]["staging"]["name"] = project_staging
 
-            ############# STEP 4 - PROD CREDS. #######################
+            # STEP 3 - PROD CREDS. #
 
             project_prod = self._selection_yn(
                 first_question=(
-                    "\n********* STEP 4 **********\n"
+                    "\n********* STEP 3 **********\n"
                     "Is your production project the same as the staging? [y/N]\n"
                 ),
                 default_yn="n",
@@ -322,10 +310,10 @@ class Base:
             )
             c_file["gcloud-projects"]["prod"]["name"] = project_prod
 
-            ############# STEP 5 - BUCKET NAME #######################
+            # STEP 4 - BUCKET NAME #
 
             bucket_name = self._input_validator(
-                "\n********* STEP 5 **********\n"
+                "\n********* STEP 4 **********\n"
                 "What is the Storage Bucket that you are going to be using to save the data?\n"
                 "Bucket name [basedosdados]: ",
                 "basedosdados",
@@ -333,9 +321,16 @@ class Base:
 
             c_file["bucket_name"] = bucket_name
 
-            ############# STEP 6 - SET TEMPLATES #######################
+            # STEP 5 - CONFIGURE API #
 
-            c_file["templates_path"] = str(self.config_path / "templates")
+            api_base_url = self._input_validator(
+                "\n********* STEP 5 **********\n"
+                "What is the URL of the API that you are going to use?\n"
+                "API url [https://staging.api.basedosdados.org/api/v1/graphql]: ",
+                "https://staging.api.basedosdados.org/api/v1/graphql",
+            )
+
+            c_file["api"]["url"] = api_base_url
 
             config_file.open("w", encoding="utf-8").write(tomlkit.dumps(c_file))
 
@@ -360,30 +355,8 @@ class Base:
         if getenv(constants.ENV_CONFIG.value):
             return tomlkit.parse(self._decode_env(constants.ENV_CONFIG.value))
         return tomlkit.parse(
-            (self.config_path / "config.toml")
-            .open("r", encoding="utf-8")
-            .read()
+            (self.config_path / "config.toml").open("r", encoding="utf-8").read()
         )
-
-    @staticmethod
-    def _load_yaml(file):
-        """
-        Loads a yaml file
-        """
-
-        try:
-            return yaml.load(open(file, "r", encoding="utf-8"), Loader=yaml.SafeLoader)
-        except FileNotFoundError:
-            return None
-
-    def _render_template(self, template_file, kargs):
-        """
-        Render a template file
-        """
-
-        return Template(
-            (self.templates / template_file).open("r", encoding="utf-8").read()
-        ).render(**kargs)
 
     @staticmethod
     def _check_mode(mode):
@@ -408,12 +381,86 @@ class Base:
             f'{",".join(ACCEPTED_MODES)}'
         )
 
-    def _refresh_templates(self):
+    def _get_project_id(self, mode: str) -> str:
         """
-        Refreshes the templates
+        Get the project ID.
         """
-        shutil.rmtree((self.config_path / "templates"), ignore_errors=True)
-        shutil.copytree(
-            (Path(__file__).resolve().parents[1] / "configs" / "templates"),
-            (self.config_path / "templates"),
+        return self.config["gcloud-projects"][mode]["name"]
+
+    def _get_project_number(self, mode: str) -> str:
+        """
+        Get the project number from project ID.
+        """
+        credentials = self._load_credentials(mode)
+        crm_service = googleapiclient.discovery.build(
+            "cloudresourcemanager", "v1", credentials=credentials
         )
+        project_id = self._get_project_id(mode)
+        # pylint: disable=no-member
+        return (
+            crm_service.projects().get(projectId=project_id).execute()["projectNumber"]
+        )
+
+    def _get_project_iam_policy(
+        self, mode: str
+    ) -> Dict[str, Union[str, int, List[Dict[str, Union[str, List[str]]]]]]:
+        """
+        Get the project IAM policy.
+        """
+        credentials = self._load_credentials(mode)
+        service = googleapiclient.discovery.build(
+            "cloudresourcemanager", "v1", credentials=credentials
+        )
+        policy = (
+            service.projects()  # pylint: disable=no-member
+            .getIamPolicy(
+                resource=self._get_project_id(mode),
+                body={"options": {"requestedPolicyVersion": 1}},
+            )
+            .execute()
+        )
+        return policy
+
+    def _set_project_iam_policy(
+        self,
+        policy: Dict[str, Union[str, int, List[Dict[str, Union[str, List[str]]]]]],
+        mode: str,
+    ):
+        """
+        Set the project IAM policy.
+        """
+        credentials = self._load_credentials(mode)
+        service = googleapiclient.discovery.build(
+            "cloudresourcemanager", "v1", credentials=credentials
+        )
+        service.projects().setIamPolicy(  # pylint: disable=no-member
+            resource=self._get_project_id(mode), body={"policy": policy}
+        ).execute()
+
+    def _grant_role(self, role: str, member: str, mode: str):
+        """
+        Grant a role to a member.
+        """
+        policy = self._get_project_iam_policy(mode)
+        try:
+            binding = next(b for b in policy["bindings"] if b["role"] == role)
+        except StopIteration:
+            binding = {"role": role, "members": []}
+            policy["bindings"].append(binding)
+        if member not in binding["members"]:
+            binding["members"].append(member)
+        self._set_project_iam_policy(policy, mode)
+
+    def _revoke_role(self, role: str, member: str, mode: str):
+        """
+        Revoke a role from a member.
+        """
+        policy = self._get_project_iam_policy(mode)
+        try:
+            binding = next(b for b in policy["bindings"] if b["role"] == role)
+        except StopIteration:
+            return
+        else:
+            if member in binding["members"]:
+                binding["members"].remove(member)
+        self._set_project_iam_policy(policy, mode)

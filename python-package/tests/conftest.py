@@ -1,14 +1,18 @@
 """
 Share fixtures for tests.
 """
+
 import shutil
 import sys
+
 # pylint: disable=invalid-name, protected-access
 from pathlib import Path
 
 import pytest
 import ruamel.yaml as ryaml
-from basedosdados import Metadata, Storage, Dataset, Table
+
+from basedosdados import Metadata  # TODO: deprecate
+from basedosdados import Dataset, Storage, Table
 from basedosdados.upload.base import Base
 
 DATASET_ID = "pytest"
@@ -22,7 +26,10 @@ def fixture_testdir():
     """
     Fixture that returns a temporary directory for the metadata files.
     """
-    (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=True)
+    try:
+        (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=False)
+    except Exception:
+        pass
     return Path(__file__).parent / "tmp_bases"
 
 
@@ -262,7 +269,8 @@ def fixture_base():
     """
     Fixture for the base class
     """
-    return Base()
+    config_path = Path.home() / ".basedosdados_teste"
+    return Base(config_path=config_path)
 
 
 @pytest.fixture(name="config_file_exists")
@@ -300,9 +308,9 @@ def fixture_data_avro_path(sample_data):
 
 @pytest.fixture(name="table")
 def fixture_table(testdir):
-    '''
+    """
     Fixture for table object.
-    '''
+    """
     t = Table(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=testdir)
     t._refresh_templates()
     return t
@@ -310,17 +318,17 @@ def fixture_table(testdir):
 
 @pytest.fixture(name="folder")
 def fixture_folder(testdir):
-    '''
+    """
     Fixture for folder object.
-    '''
+    """
     return testdir / DATASET_ID / TABLE_ID
 
 
 @pytest.fixture(name="python_path")
 def fixture_python_path():
-    '''
+    """
     Fixture for python_path
-    '''
+    """
     python_path = sys.executable
 
     if "python" not in python_path:
@@ -331,8 +339,142 @@ def fixture_python_path():
 
 @pytest.fixture(name="default_metadata_path")
 def fixture_default_matadata_path():
-    '''
+    """
     Fixture for default_metadata_path
-    '''
+    """
     mt = Metadata(dataset_id=DATASET_ID, table_id=TABLE_ID)
     return mt.metadata_path
+
+
+############################################################
+# Conftest for new api
+############################################################
+
+API_DATASET_ID = "dados_mestres"
+API_TABLE_ID = "bairro"
+API_NEW_DATASET_ID = "new_dataset"
+API_NEW_TABLE_ID = "new_table"
+API_PUBLISH_DATASET_ID = "br_ipea_teste_avs"
+API_PUBLISH_TABLE_ID = "municipios"
+
+
+@pytest.fixture(name="api_dataset")
+def fixture_api_dataset(testdir):
+    """
+    Fixture for the dataset class
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Dataset(
+        dataset_id=API_DATASET_ID, metadata_path=testdir, config_path=config_path
+    )
+
+
+@pytest.fixture(name="api_dataset_metadata_path")
+def fixture_api_dataset_metadata_path(testdir):
+    """
+    Fixture that returns the path to the dataset metadata file.
+    """
+    return Path(testdir) / API_DATASET_ID
+
+
+@pytest.fixture(name="api_table_metadata_path")
+def fixture_api_table_metadata_path(testdir):
+    """
+    Fixture that returns the path to the table metadata file.
+    """
+    return Path(testdir) / API_DATASET_ID / API_TABLE_ID
+
+
+@pytest.fixture(name="api_dataset_metadata")
+def fixture_api_dataset_metadata(testdir):
+    """
+    Fixture that returns a `Metadata` object for the dataset.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(
+        dataset_id=API_DATASET_ID, metadata_path=testdir, config_path=config_path
+    )
+
+
+@pytest.fixture(name="api_new_dataset_metadata")
+def fixture_new_dataset_metadata(testdir):
+    """
+    Fixture that returns a `Metadata` object for a new dataset.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(
+        dataset_id=API_NEW_DATASET_ID, metadata_path=testdir, config_path=config_path
+    )
+
+
+@pytest.fixture(name="api_table_metadata")
+def fixture_api_table_metadata(testdir):
+    """
+    Fixture that returns a `Metadata` object for the table.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(
+        dataset_id=API_DATASET_ID,
+        table_id=API_TABLE_ID,
+        metadata_path=testdir,
+        config_path=config_path,
+    )
+
+
+@pytest.fixture(name="api_new_table_metadata")
+def fixture_new_table_metadata(testdir):
+    """
+    Fixture that returns a `Metadata` object for a new table.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(
+        dataset_id=API_NEW_DATASET_ID,
+        table_id=API_NEW_TABLE_ID,
+        metadata_path=testdir,
+        config_path=config_path,
+    )
+
+
+@pytest.fixture(name="api_outdated_dataset_metadata")
+def fixture_outdated_dataset_metadata(testdir):
+    """
+    Fixture that returns an outdated dataset `Metadata` object for a new dataset.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(
+        dataset_id=API_OUTDATED_DATASET_ID,  # noqa
+        metadata_path=testdir,
+        config_path=config_path,
+    )
+
+
+@pytest.fixture(name="api_outdated_table_metadata")
+def fixture_outdated_table_metadata(testdir):
+    """
+    Fixture that returns an outdated dataset `Metadata` object for a new table.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(
+        dataset_id=API_OUTDATED_DATASET_ID,  # noqa
+        table_id=API_OUTDATED_TABLE_ID,  # noqa
+        metadata_path=testdir,
+        config_path=config_path,
+    )
+
+
+@pytest.fixture(name="api_ipea_table_metadata")
+def fixture_ipea_table_metadata(testdir):
+    """
+    Fixture to test metadata created and filled by the user.
+    Args:
+        testdir (str): Path to the test directory.
+    Returns:
+        Metadata: Metadata object for the table.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(
+        dataset_id=API_PUBLISH_DATASET_ID,
+        table_id=API_PUBLISH_TABLE_ID,
+        metadata_path=testdir,
+        config_path=config_path,
+    )

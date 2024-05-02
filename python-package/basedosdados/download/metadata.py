@@ -1,13 +1,15 @@
-'''
+"""
 Functions to get metadata from BD's API
-'''
-# pylint: disable=invalid-name,use-maxsplit-arg,line-too-long
-from collections import defaultdict
+"""
 import math
 
-from google.cloud import bigquery
+# pylint: disable=invalid-name,use-maxsplit-arg,line-too-long
+from collections import defaultdict
+
 import pandas as pd
 import requests
+from google.cloud import bigquery
+
 
 def _safe_fetch(url: str):
     """
@@ -47,10 +49,9 @@ def _dict_from_page(json_response):
 
 
 def _fix_size(s, step=80):
-
     final = ""
 
-    for l in s.split(" "):
+    for l in s.split(" "):  # noqa
         final += (l + " ") if len(final.split("\n")[-1]) < step else "\n"
 
     return final
@@ -82,7 +83,7 @@ def _handle_output(verbose, output_type, df, col_name=None):
         col_name (str): name of column with id's data
     """
 
-    df_is_dataframe = isinstance(df,pd.DataFrame)
+    df_is_dataframe = isinstance(df, pd.DataFrame)
     df_is_bq_dataset_or_table = isinstance(df, bigquery.Table)
     df_is_bq_dataset_or_table |= isinstance(df, bigquery.Dataset)
 
@@ -102,6 +103,7 @@ def _handle_output(verbose, output_type, df, col_name=None):
         msg = '`output_type` argument must be set to "list", "str" or "records".'
         raise ValueError(msg)
     raise TypeError("`verbose` argument must be of `bool` type.")
+
 
 def list_datasets(with_description=False, verbose=True):
     """
@@ -164,7 +166,9 @@ def list_datasets(with_description=False, verbose=True):
             }
             for k in range(len(dataset_dict["dataset_id"]))
         ]
-    raise ValueError("`verbose` and `with_description` argument must be of `bool` type.")
+    raise ValueError(
+        "`verbose` and `with_description` argument must be of `bool` type."
+    )
 
 
 def list_dataset_tables(
@@ -231,7 +235,9 @@ def list_dataset_tables(
             for k in range(len(table_dict["table_id"]))
         ]
 
-    raise ValueError("`verbose` and `with_description` argument must be of `bool` type.")
+    raise ValueError(
+        "`verbose` and `with_description` argument must be of `bool` type."
+    )
 
 
 def get_dataset_description(
@@ -301,7 +307,6 @@ def get_table_columns(
     table_id,
     verbose=True,
 ):
-
     """
         Fetch the names, types and descriptions for the columns in the specified table. Prints
         information on screen.

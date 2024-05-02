@@ -1,30 +1,30 @@
 """
 Functions for managing downloads
 """
+import gzip
+import os
+import re
+import shutil
+import time
+from functools import partialmethod
+
 # pylint: disable=too-many-arguments, fixme, invalid-name, protected-access,line-too-long
 from pathlib import Path
-from functools import partialmethod
-import re
-import time
-import shutil
-import os
-import gzip
 
-from pydata_google_auth.exceptions import PyDataCredentialsError
-from google.cloud import bigquery_storage_v1
-from google.cloud import bigquery
 import pandas_gbq
+from google.cloud import bigquery, bigquery_storage_v1
 from pandas_gbq.gbq import GenericGBQException
+from pydata_google_auth.exceptions import PyDataCredentialsError
 
-from basedosdados.download.base import google_client, credentials
+from basedosdados.constants import config
+from basedosdados.download.base import credentials, google_client
 from basedosdados.exceptions import (
-    BaseDosDadosException,
     BaseDosDadosAccessDeniedException,
     BaseDosDadosAuthorizationException,
+    BaseDosDadosException,
     BaseDosDadosInvalidProjectIDException,
     BaseDosDadosNoBillingProjectIDException,
 )
-from basedosdados.constants import config
 
 
 def _set_config_variables(billing_project_id, from_file):
@@ -151,11 +151,10 @@ def read_table(
 
     if (dataset_id is not None) and (table_id is not None):
         query = f"""
-        SELECT * 
+        SELECT *
         FROM `{query_project_id}.{dataset_id}.{table_id}`"""
 
         if limit is not None:
-
             query += f" LIMIT {limit}"
     else:
         raise BaseDosDadosException("Both table_id and dataset_id should be filled.")
@@ -244,7 +243,7 @@ def download(
         not _is_table(client, dataset_id, table_id, query_project_id) or limit
     ):
         query = f"""
-        SELECT * 
+        SELECT *
           FROM {query_project_id}.{dataset_id}.{table_id}
         """
 

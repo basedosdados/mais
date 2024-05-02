@@ -3,6 +3,13 @@
 .mais
 bases/pytest/*
 bases/test/
+test/*
+test.py
+
+
+.DS_Storage
+*/*/.DS_Storage
+
 
 # NEW repo name
 .mais
@@ -143,6 +150,12 @@ venv.bak/
 # Spyder project settings
 .spyderproject
 .spyproject
+
+# VS Code project settings
+.vscode/
+
+# Pycharm project settings
+.idea/
 
 # Rope project settings
 .ropeproject
