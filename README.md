@@ -68,7 +68,7 @@ missão de universalizar o acesso a dados de qualidade para todes.
 
 ## Como citar o projeto
 
-O projeto (software) está sob licenca MIT - logo, pode ser utilizado e modificado sem restrições desde que sejam remetidos os direitos autorais originais - veja o texto de referência [aqui](LICENSE). 
+O projeto (software) está sob licenca MIT - logo, pode ser utilizado e modificado sem restrições desde que sejam remetidos os direitos autorais originais - veja o texto de referência [aqui](LICENSE).
 
 Caso queira citar o projeto numa publicação, artigo ou na web, utilize o
 modelo no menu ao lado conforme a imagem.
@@ -95,8 +95,8 @@ df = bd.read_table('br_ibge_pib', 'municipio', billing_project_id="<YOUR-PROJECT
 
 > Caso esteja acessando da primeira vez, vão aparecer alguns passos na tela para autenticar seu projeto - basta segui-los!
 >
-> É necessário criar um projeto para que você possa fazer as queries no nosso repositório. Ter um projeto é de graça e basta ter uma conta Google (seu gmail por exemplo). [Veja aqui como criar um projeto no Google Cloud](https://basedosdados.github.io/mais/access_data_local/#criando-um-projeto-no-google-cloud).
-> 
+> É necessário criar um projeto para que você possa fazer as queries no nosso repositório. Ter um projeto é de graça e basta ter uma conta Google (seu gmail por exemplo). [Veja aqui como criar um projeto no Google Cloud](https://basedosdados.github.io/mais/access_data_bq/#primeiros-passos).
+>
 > Se possível, armazene suas credenciais em um arquivo `dotenv`: `"billing_project_id=<suas_credenciais_do_projeto>" >> .env`
 
 
@@ -108,7 +108,7 @@ import basedosdados as bd
 # Bens dos candidatos de Tocantins em 2020
 query = """
 SELECT *
-FROM `basedosdados.br_tse_eleicoes.bens_candidato` 
+FROM `basedosdados.br_tse_eleicoes.bens_candidato`
 WHERE ano = 2020
 AND sigla_uf = 'TO'
 """
@@ -121,7 +121,7 @@ df = bd.read_sql(query, billing_project_id="<YOUR-PROJECT>")
 ### Veja todos os datasets disponíveis
 
 ```python
-import basedosdados as bd 
+import basedosdados as bd
 
 bd.list_datasets()
 ```
@@ -135,8 +135,8 @@ import basedosdados as bd
 bd.config.billing_project_id =  '<billing-project-id>'
 
 query = """
-SELECT 
-    * 
+SELECT
+    *
 FROM `basedosdados.br_bd_diretorios_brasil.municipio`
 """
 
@@ -156,7 +156,7 @@ Para isso, siga os seguintes passos:
     mv ~/.basedosdados ~/.basedosdados_default
    ```
 2. Neste momento, o pacote não terá a configuração padrão. Assim, ao rodar o comando
-    ```bash 
+    ```bash
       basedosdados config init
     ```
     ele irá criar uma nova configuração padrão, que será salva na pasta `~/.basedosdados` (que será recriada). Lembre-se de, no passo em que é oferecido um link do Google Cloud Platform (GCP) para criar a nova `service account`, observar que seu navegador esteja logado com a conta que você deseja utilizar.
@@ -196,10 +196,10 @@ library(basedosdados)
 
 set_billing_id("id do seu projeto aqui") # autenticação para acesso aos dados
 
-pib_per_capita <- " 
-SELECT 
+pib_per_capita <- "
+SELECT
     pib.id_municipio ,
-    pop.ano, 
+    pop.ano,
     pib.PIB / pop.populacao as pib_per_capita
 FROM `basedosdados.br_ibge_pib.municipio` as pib
   INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop
@@ -209,21 +209,21 @@ FROM `basedosdados.br_ibge_pib.municipio` as pib
 download(pib_per_capita, "pib_per_capita.csv") # salve os dados em disco
 ```
 
-Ou use o nosso backend para o `dplyr` e faça queries com código, sem SQL. 
+Ou use o nosso backend para o `dplyr` e faça queries com código, sem SQL.
 
 ```r
-  query <- basedosdados::bdplyr("br_inep_ideb.municipio") %>% 
-    dplyr::select(ano, id_municipio, sigla_uf, ideb) %>% 
-    dplyr::filter(sigla_uf == "AC", ano < 2021) %>% 
-    dplyr::group_by(ano) %>% 
-    dplyr::summarise(ideb_medio = mean(ideb, na.rm = TRUE)) 
+  query <- basedosdados::bdplyr("br_inep_ideb.municipio") %>%
+    dplyr::select(ano, id_municipio, sigla_uf, ideb) %>%
+    dplyr::filter(sigla_uf == "AC", ano < 2021) %>%
+    dplyr::group_by(ano) %>%
+    dplyr::summarise(ideb_medio = mean(ideb, na.rm = TRUE))
 
   basedosdados::bd_collect(query) # retorne como um tibble
-  basedosdados::bd_write_csv(query, "ideb_medio.csv") 
-  basedosdados::bd_write_rds(query, "ideb_medio.rds") 
+  basedosdados::bd_write_csv(query, "ideb_medio.csv")
+  basedosdados::bd_write_rds(query, "ideb_medio.rds")
 ```
 
-`bd_write` é uma extensão para formatos customizados. 
+`bd_write` é uma extensão para formatos customizados.
 
 ```r
   basedosdados::bd_write(query, .write_fn = writexl::write_xlsx, "ideb_medio.xlsx")
@@ -231,9 +231,9 @@ Ou use o nosso backend para o `dplyr` e faça queries com código, sem SQL.
   basedosdados::bd_write(query, .write_fn = haven::write_dta, "ideb_medio.dta")
 ```
 
-O argumento `.write_fn` espera uma função que receba como argumento um tibble e um endereço de escrita, compatível com a interface convencional da língua para escrever arquivos em disco. A princípio, _toda_ função `write_*` disponível no CRAN deve funcionar. 
+O argumento `.write_fn` espera uma função que receba como argumento um tibble e um endereço de escrita, compatível com a interface convencional da língua para escrever arquivos em disco. A princípio, _toda_ função `write_*` disponível no CRAN deve funcionar.
 
-Caso encontre algum problema no pacote e queira ajudar, basta documentar o problema em um [exemplo mínimo reprodutível](https://pt.stackoverflow.com/questions/264168/quais-as-principais-fun%C3%A7%C3%B5es-para-se-criar-um-exemplo-m%C3%ADnimo-reproduz%C3%ADvel-em-r) e abrir uma issue. 
+Caso encontre algum problema no pacote e queira ajudar, basta documentar o problema em um [exemplo mínimo reprodutível](https://pt.stackoverflow.com/questions/264168/quais-as-principais-fun%C3%A7%C3%B5es-para-se-criar-um-exemplo-m%C3%ADnimo-reproduz%C3%ADvel-em-r) e abrir uma issue.
 
 ## Metadados e buscas
 
@@ -248,14 +248,10 @@ get_table_description("br_sp_alesp", "deputado")
 ## Atenção
 
 > Caso esteja acessando da primeira vez, vão aparecer alguns passos na tela para autenticar seu projeto com sua conta google e possivelmente na [Tidyverse API](https://www.tidyverse.org/google_privacy_policy/) - basta segui-los! As credenciais ficam armazenadas no computador então usuários com mais de uma máquina talvez precisem autenticar mais de uma vez.
-> É necessário criar um projeto para que você possa fazer as queries no nosso repositório. Ter um projeto é de graça e basta ter uma conta Google (seu gmail por exemplo). [Veja aqui como criar um projeto no Google Cloud](https://basedosdados.github.io/mais/access_data_local/#criando-um-projeto-no-google-cloud).
+> É necessário criar um projeto para que você possa fazer as queries no nosso repositório. Ter um projeto é de graça e basta ter uma conta Google (seu gmail por exemplo). [Veja aqui como criar um projeto no Google Cloud](https://basedosdados.github.io/mais/access_data_bq/#primeiros-passos).
 > Se possível, armazene suas credenciais em um arquivo `dotenv`, em bash o comando é `"billing_project_id=<suas_credenciais_do_projeto>" >> .env`. [Veja aqui como criar um arquivo dotenv](https://towardsdatascience.com/using-dotenv-to-hide-sensitive-information-in-r-8b878fa72020).
 
 ## Desenvolvimento
-
-### Roadmap
-
-- [Primeiro semestre 2022](https://github.com/basedosdados/mais/milestone/2)
 
 ### Documentação
 
