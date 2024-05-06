@@ -31,12 +31,10 @@ pydata-google-auth = "^1.8"
 requests-toolbelt = { version = "^1", optional = true }
 tomlkit = "^0.11"
 tqdm = "^4"
-click = { version = ">=8.1,<9", optional = true }
 
 [tool.poetry.extras]
-all = ["click", "gql", "pandavro", "requests-toolbelt"]
+all = ["gql", "pandavro", "requests-toolbelt"]
 avro = ["pandavro"]
-cli = ["click"]
 upload = ["gql", "requests-toolbelt"]
 
 [tool.poetry.group.dev.dependencies]
@@ -46,9 +44,6 @@ isort = "^5.12.0"
 pre-commit = "^3.3.3"
 semgrep = "^1.36.0"
 taskipy = "^1.12.0"
-
-[tool.poetry.scripts]
-basedosdados = 'basedosdados.cli.cli:cli'
 
 [tool.black]
 # Use the more relaxed max line length permitted in PEP8.
