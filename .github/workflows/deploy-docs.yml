@@ -2,23 +2,25 @@ name: deploy-docs
 on:
   push:
     branches:
+      - main
       - master
+    paths:
+      - docs
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up poetry
+        run: pipx install poetry
+      - name: Set up python
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.7
-      - run: |
-          cd ${{ github.workspace }}/python-package/
-          pip install -r requirements-dev.txt 
-          python setup.py develop
-      - run: |
-          pip install poetry
-          poetry export -f requirements.txt --output requirements.txt --without-hashes
-          pip install -r ${{ github.workspace }}/requirements.txt
-      - env:
+          cache: poetry
+          python-version: '3.7'
+      - name: Install requirements
+        run: poetry install --only=docs
+      - run: mkdocs gh-deploy --force
+        env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
-        run: mkdocs gh-deploy --force

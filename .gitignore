@@ -1,4 +1,4 @@
-# OLD repo name 
+# OLD repo name
 .bases
 .mais
 bases/pytest/*
@@ -192,3 +192,6 @@ r-package/README.Rmd
 
 # VSCode
 /.vscode/
+
+# Ruff
+.ruff_cache
