@@ -8,7 +8,7 @@ from google.api_core.exceptions import Conflict
 from google.cloud import bigquery
 from loguru import logger
 
-from basedosdados.upload.base import Base
+from basedosdados.core.base import Base
 
 
 class Dataset(Base):

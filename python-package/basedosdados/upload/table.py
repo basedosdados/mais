@@ -17,7 +17,7 @@ from google.cloud.bigquery import SchemaField
 from loguru import logger
 
 from basedosdados.exceptions import BaseDosDadosException
-from basedosdados.upload.base import Base
+from basedosdados.core.base import Base
 from basedosdados.upload.connection import Connection
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
@@ -297,20 +297,6 @@ class Table(Base):
 
         api = self._get_columns_metadata_from_api()
         api_columns = api.get("partition_columns") + api.get("columns")
-
-        # bq_columns_list = [col.get("name") for col in bq_columns]
-        # api_columns_list = [col.get("name") for col in api_columns]
-
-        # not_in_api_columns = [
-        #     col for col in bq_columns_list if col not in api_columns_list
-        # ]
-        # not_in_bq_columns = [
-        #     col for col in api_columns_list if col not in bq_columns_list
-        # ]
-        # print("bq_columns_list", len(bq_columns_list))
-        # print("api_columns_list", len(api_columns_list))
-        # print("not_in_api_columns", not_in_api_columns)
-        # print("not_in_bq_columns", not_in_bq_columns)
 
         if api_columns != []:
             for bq_col in bq_columns:

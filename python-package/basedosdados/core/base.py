@@ -20,7 +20,7 @@ from google.cloud import bigquery, bigquery_connection_v1, storage
 from google.oauth2 import service_account
 from loguru import logger
 
-from basedosdados.backend import Backend
+from basedosdados import Backend
 from basedosdados.constants import config, constants
 
 warnings.filterwarnings("ignore")

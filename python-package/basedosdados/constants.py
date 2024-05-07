@@ -13,9 +13,10 @@ class config:
     Configuration for the project.
     """
 
-    verbose: bool = True
     billing_project_id: str = None
     project_config_path: str = None
+
+    verbose: bool = True
     from_file: bool = False
 
 
@@ -33,3 +34,5 @@ class constants(Enum):
     REFRESH_TOKEN_URL: str = "/api/token/refresh/"
     VERIFY_TOKEN_URL: str = "/api/token/verify/"
     TEST_ENDPOINT: str = "/api/v1/private/bigquerytypes/"
+    BACKEND_SEARCH_URL: str = "https://backend.basedosdados.org/search"
+    BACKEND_GRAPHQL_URL: str = "https://backend.basedosdados.org/graphql"
