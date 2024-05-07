@@ -1,7 +1,7 @@
 """
 Tests for DataType class
 """
-# pylint: disable=too-many-arguments, invalid-name
+
 
 from google.cloud.bigquery.external_config import (
     ExternalConfig,

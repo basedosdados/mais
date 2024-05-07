@@ -1,7 +1,7 @@
 """
 Tests for the Metadata class with new API
 """
-# pylint: disable=fixme, unused-import, protected-access, trailing-whitespace, too-many-branches
+
 import pytest
 
 from basedosdados import Metadata  # TODO: deprecate
@@ -163,7 +163,7 @@ def test_owner_org_new_table(api_new_table_metadata):
     """
 
     with pytest.raises(BaseDosDadosException):
-        _ = api_new_table_metadata.owner_org  # pylint: disable=unused-variable
+        _ = api_new_table_metadata.owner_org
 
 
 def test_simplify_graphql_response(api_table_metadata):

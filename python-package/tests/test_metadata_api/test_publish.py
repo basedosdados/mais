@@ -3,7 +3,7 @@ Test for publishing with new API.
 """
 import os
 
-# pylint: disable=fixme, unused-import, protected-access
+
 from pprint import pprint
 
 import pytest

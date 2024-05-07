@@ -9,8 +9,6 @@ from pathlib import Path
 
 from google.cloud import bigquery, storage
 
-# pylint: disable=unused-variable
-
 
 def test_bucket_name(base, config_file_exists, capsys):
     """

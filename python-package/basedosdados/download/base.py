@@ -3,7 +3,6 @@ Functions for manage auth and credentials
 """
 import sys
 
-# pylint: disable=redefined-outer-name, protected-access, no-name-in-module, import-error,line-too-long
 from functools import lru_cache
 
 import pydata_google_auth
@@ -33,7 +32,7 @@ def credentials(from_file=False, reauth=False):
 
     # check if is running in colab
     if "google.colab" in sys.modules:
-        from google.colab import auth  # pylint: disable=import-outside-toplevel
+        from google.colab import auth
 
         auth.authenticate_user()
         return None

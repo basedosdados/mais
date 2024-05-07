@@ -3,7 +3,7 @@ Class for managing the files in cloud storage.
 """
 import sys
 
-# pylint: disable=invalid-name, too-many-arguments, undefined-loop-variable,line-too-long,broad-except,R0801
+
 import time
 import traceback
 from pathlib import Path
@@ -401,7 +401,8 @@ class Storage(Base):
             )
         # Divides table_blobs list for maximum batch request size
         table_blobs_chunks = [
-            table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)  # noqa
+            table_blobs[i : i + 999]
+            for i in range(0, len(table_blobs), 999)  # noqa
         ]
 
         for i, source_table in enumerate(

@@ -3,7 +3,7 @@ Tests for the Dataset class
 """
 import shutil
 
-# pylint: disable=protected-access
+
 from pathlib import Path
 
 import google.api_core.exceptions as google_exceptions

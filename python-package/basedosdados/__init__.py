@@ -12,8 +12,6 @@ show_warnings()
 
 sys.path.append(f"{os.getcwd()}/python-package")
 
-# pylint: disable=C0413
-
 from basedosdados.backend import Backend
 from basedosdados.constants import config, constants
 from basedosdados.download.base import reauth

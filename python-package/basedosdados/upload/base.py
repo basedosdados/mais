@@ -10,7 +10,7 @@ import warnings
 from functools import lru_cache
 from os import getenv
 
-# pylint: disable=line-too-long, invalid-name, too-many-arguments, invalid-envvar-value,line-too-long
+
 from pathlib import Path
 from typing import Dict, List, Union
 
@@ -26,7 +26,7 @@ from basedosdados.constants import config, constants
 warnings.filterwarnings("ignore")
 
 
-class Base:  # pylint: disable=too-many-instance-attributes
+class Base:
     """
     Base class for all datasets
     """
@@ -396,7 +396,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
             "cloudresourcemanager", "v1", credentials=credentials
         )
         project_id = self._get_project_id(mode)
-        # pylint: disable=no-member
+
         return (
             crm_service.projects().get(projectId=project_id).execute()["projectNumber"]
         )
@@ -412,7 +412,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
             "cloudresourcemanager", "v1", credentials=credentials
         )
         policy = (
-            service.projects()  # pylint: disable=no-member
+            service.projects()
             .getIamPolicy(
                 resource=self._get_project_id(mode),
                 body={"options": {"requestedPolicyVersion": 1}},
@@ -433,7 +433,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
         service = googleapiclient.discovery.build(
             "cloudresourcemanager", "v1", credentials=credentials
         )
-        service.projects().setIamPolicy(  # pylint: disable=no-member
+        service.projects().setIamPolicy(
             resource=self._get_project_id(mode), body={"policy": policy}
         ).execute()
 

@@ -8,7 +8,7 @@ import textwrap
 from copy import deepcopy
 from functools import lru_cache
 
-# pylint: disable=invalid-name, too-many-locals, too-many-branches, too-many-arguments,line-too-long,R0801,consider-using-f-string
+
 from pathlib import Path
 
 import google.api_core.exceptions
@@ -479,7 +479,7 @@ class Table(Base):
 
         return description
 
-    def create(  # pylint: disable=too-many-statements
+    def create(
         self,
         path=None,
         source_format="csv",

@@ -3,7 +3,7 @@ Tests for the upload utilities.
 """
 import os
 
-# pylint: disable=invalid-name
+
 import shutil
 from glob import glob
 
