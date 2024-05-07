@@ -2,8 +2,6 @@
 Exception classes for the package.
 """
 
-# pylint: disable=C0301
-
 
 class BaseDosDadosException(Exception):
     """Exclusive Exception from Base dos Dados"""

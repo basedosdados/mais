@@ -1,7 +1,7 @@
 """
 Class for define external and partiton configs for each datatype
 """
-# pylint: disable=protected-access,line-too-long
+
 import csv
 
 import pandas as pd
@@ -22,7 +22,7 @@ class Datatype:
     Manage external and partition config
     """
 
-    def __init__(  # pylint: disable=too-many-arguments
+    def __init__(
         self,
         dataset_id="",
         table_id="",

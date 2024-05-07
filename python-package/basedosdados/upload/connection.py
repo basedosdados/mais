@@ -1,7 +1,7 @@
 """
 Module for managing BigQuery Connections.
 """
-# pylint: disable=line-too-long, fixme, invalid-name,line-too-long,unnecessary-lambda-assignment
+
 
 from typing import Union
 
@@ -24,7 +24,7 @@ class Connection(Base):
     Manages BigQuery Connections.
     """
 
-    def __init__(  # pylint: disable=too-many-arguments
+    def __init__(
         self,
         name: str,
         location: str = None,
@@ -81,7 +81,7 @@ class Connection(Base):
         """
         conn = self.connection
         if conn:
-            return conn.cloud_resource.service_account_id  # pylint: disable=no-member
+            return conn.cloud_resource.service_account_id
         raise ValueError("Connection does not exist.")
 
     def create(self):

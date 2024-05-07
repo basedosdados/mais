@@ -8,7 +8,6 @@ import shutil
 import time
 from functools import partialmethod
 
-# pylint: disable=too-many-arguments, fixme, invalid-name, protected-access,line-too-long
 from pathlib import Path
 
 import pandas_gbq

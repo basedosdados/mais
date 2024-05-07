@@ -5,7 +5,7 @@ Share fixtures for tests.
 import shutil
 import sys
 
-# pylint: disable=invalid-name, protected-access
+
 from pathlib import Path
 
 import pytest

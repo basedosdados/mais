@@ -3,7 +3,6 @@ Functions to get metadata from BD's API
 """
 import math
 
-# pylint: disable=invalid-name,use-maxsplit-arg,line-too-long
 from collections import defaultdict
 
 import pandas as pd
@@ -120,8 +119,8 @@ def list_datasets(with_description=False, verbose=True):
         list | stdout
     """
     # first request is made separately since we need to now the number of pages before the iteration
-    page_size = 100  # this function will only made more than one requisition if there are more than 100 datasets in the API response #pylint: disable=C0301
-    url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q=&resource_type=bdm_table&page=1&page_size={page_size}"  # pylint: disable=C0301
+    page_size = 100  # this function will only made more than one requisition if there are more than 100 datasets in the API response
+    url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q=&resource_type=bdm_table&page=1&page_size={page_size}"
     response = _safe_fetch(url)
     json_response = response.json()
     n_datasets = json_response["result"]["count"]
@@ -130,7 +129,7 @@ def list_datasets(with_description=False, verbose=True):
 
     temp_dicts = [temp_dict]
     for page in range(2, n_pages + 1):
-        url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q=&resource_type=bdm_table&page={page}&page_size={page_size}"  # pylint: disable=C0301
+        url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q=&resource_type=bdm_table&page={page}&page_size={page_size}"
         response = _safe_fetch(url)
         json_response = response.json()
         temp_dict = _dict_from_page(json_response)
@@ -138,17 +137,17 @@ def list_datasets(with_description=False, verbose=True):
 
     dataset_dict = defaultdict(list)
 
-    for d in temp_dicts:  # pylint: disable=C0103
+    for d in temp_dicts:
         for key, value in d.items():
             dataset_dict[key].append(value)
 
     # flat inner lists
     dataset_dict["dataset_id"] = [
         item for sublist in dataset_dict["dataset_id"] for item in sublist
-    ]  # pylint: disable=C0301
+    ]
     dataset_dict["description"] = [
         item for sublist in dataset_dict["description"] for item in sublist
-    ]  # pylint: disable=C0301
+    ]
     # select desired output using dataset_id info. Note that the output is either a standardized string or a list #pylint: disable=C0301
     if verbose & (with_description is False):
         return _print_output(pd.DataFrame.from_dict(dataset_dict)[["dataset_id"]])
