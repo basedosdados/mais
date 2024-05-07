@@ -1,5 +1,5 @@
-# What is the bucket that you are saving all the data? It should be
-# an unique name.
+# What is the bucket that you are saving all the data?
+# It should be an unique name.
 bucket_name = ""
 
 [gcloud-projects]

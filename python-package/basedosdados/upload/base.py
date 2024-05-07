@@ -232,7 +232,7 @@ class Base:
         if (not config_file.exists()) or (force):
             # Load config file
             c_file = tomlkit.parse(
-                (Path(__file__).resolve().parents[1] / "configs" / "config.toml")
+                (Path(__file__).resolve().parents[1] / "templates" / "config.toml")
                 .open("r", encoding="utf-8")
                 .read()
             )
