@@ -9,7 +9,7 @@ nomeação de colunas, tabelas e conjuntos.
     Alguma frase sobre ....
     Para saber mais, leia a documentação sobre tratamento e arquitetura
     de dados.
-    
+
 Informações de diferentes tabelas podem ser agregadas por meiode
 **chaves identificadora**. Uma chave identificadora é uma coluna cujo nome
 é único em todas as tabelas do *datalake* e é utilizada para
@@ -80,7 +80,7 @@ podem ser cruzadas comparando o conjunto de chaves identificadoras de
 cada uma.
 
 Abaixo vamos fazer um exemplo de como cruzar as tabelas de população e PIB do
-IBGE para obter o PIB per capita de todos os municípios brasileiros. 
+IBGE para obter o PIB per capita de todos os municípios brasileiros.
 
 Nas tabelas de população e PIB, a coluna `ano` e `municipio ` são chaves
 identificadoras. Logo usaremos essas colunas na nossa função `JOIN` para
@@ -112,9 +112,9 @@ determinar como cruzar as tabelas.
     ```python
     import basedosdados as bd
 
-    pib_per_capita = """SELECT 
+    pib_per_capita = """SELECT
         pib.id_municipio ,
-        pop.ano, 
+        pop.ano,
         pib.PIB / pop.populacao as pib_per_capita
     FROM `basedosdados.br_ibge_pib.municipio` as pib
         INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop
@@ -122,27 +122,12 @@ determinar como cruzar as tabelas.
     """
 
     # Você pode fazer o download no seu computador
-    bd.download(query=pib_per_capita, 
-                savepath="where/to/save/file", 
+    bd.download(query=pib_per_capita,
+                savepath="where/to/save/file",
                 billing_project_id=<YOUR_PROJECT_ID>)
 
     # Ou carregar o resultado da query no pandas
     df = bd.read_sql(pib_per_capita, billing_project_id=<YOUR_PROJECT_ID>)
-    ```
-
-=== "CLI"
-    ```bash
-    basedosdados download "where/to/save/file" \
-    --billing_project_id <YOUR_PROJECT_ID> \
-    --query '
-    SELECT 
-        pib.id_municipio, 
-        pop.ano,  
-        pib.PIB / pop.populacao as pib_per_capita 
-    FROM `basedosdados.br_ibge_pib.municipio` as pib 
-        INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop 
-        ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
-    LIMIT 100;'
     ```
 
 <!-- TODO: EXEMPLO DE CRUZAMENTO -->

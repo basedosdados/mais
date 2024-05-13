@@ -31,7 +31,7 @@ Nomeamos conjuntos no formato `<organization_id\>_<descrição\>`, onde
 `organization_id` segue por padrão a **abrangência geográfica da
 organização** que publica o conjunto:
 
-|           | organization_id                         | 
+|           | organization_id                         |
 |-----------|----------------------------------------------|
 | Mundial   | mundo_<organizacao\>                         |
 | Federal   | <sigla_pais\>\_<organizacao\>                         |
@@ -89,17 +89,17 @@ Nomes de variáveis devem respeitar algumas regras:
     - Exemplos que tem: numa tabela com entidade `pessoa`, uma coluna sobre PIB municipal se chamaria `pib_municipio`.
     - Exemplos que não tem: numa tabela com entidade `pessoa`, características da pessoa se chamariam `nome`, `idade`, `sexo`, etc.
 - Lista de **prefixos permitidos**
-    - `nome_`, 
-    - `data_`, 
-    - `numero_`, 
-    - `quantidade_`, 
-    - `proporcao_` (variáveis de porcentagem 0-100%), 
-    - `taxa_`, 
-    - `razao_`,  
-    - `indice_`, 
-    - `indicador_` (variáveis do tipo booleano), 
-    - `tipo_`, 
-    - `sigla_`, 
+    - `nome_`,
+    - `data_`,
+    - `numero_`,
+    - `quantidade_`,
+    - `proporcao_` (variáveis de porcentagem 0-100%),
+    - `taxa_`,
+    - `razao_`,
+    - `indice_`,
+    - `indicador_` (variáveis do tipo booleano),
+    - `tipo_`,
+    - `sigla_`,
     - `sequencial_`.
 - Lista de **sufixos comuns**
     - `_pc` (per capita)
@@ -108,7 +108,7 @@ Nomes de variáveis devem respeitar algumas regras:
 
 A ordem de variáveis em tabelas é padronizada para manter uma consistência no repositório. Nossas regras são:
 
-- Chaves primárias à esquerda, em ordem descendente de abrangência;  
+- Chaves primárias à esquerda, em ordem descendente de abrangência;
 - No meio devem estar variáveis qualitativas da linha;
 - As últimas variáveis devem ser os valores quantitativos em ordem crescente de relevância;
 - Exemplo de ordem: `ano`, `sigla_uf`, `id_municipio`, `id_escola`, `rede`, `nota_ideb`;
@@ -124,8 +124,8 @@ Quando escolher:
     - Variáveis de texto
     - Chaves de variáveis categóricas com dicionário ou diretório
 - `int64`:
-    - Variáveis de números inteiros com as quais é possível fazer contas (adição, subtração) 
-    - Variáveis do tipo booleanas que preenchemos com 0 ou 1 
+    - Variáveis de números inteiros com as quais é possível fazer contas (adição, subtração)
+    - Variáveis do tipo booleanas que preenchemos com 0 ou 1
 - `float64`:
     - Variáveis de números com casas decimais com as quais é possível fazer contas (adição, subtração)
 - `date`:
@@ -164,7 +164,7 @@ Preencher a coluna `cobertura_temporal` nos metadados de tabela, coluna e chave 
         - Exemplo: tabela com unidade `mes` tem cobertura `2005-08(1)2018-12`.
         - Exemplo: tabela com unidade `semana` tem cobertura `2005-08-01(7)2018-08-31`.
         - Exemplo: tabela com unidade `dia` tem cobertura `2005-08-01(1)2018-12-31`.
-        
+
 - Regras para preenchimento
     - Metadados de tabela
         - Preencher no formato geral.
@@ -195,21 +195,21 @@ Preencher a coluna `cobertura_temporal` nos metadados de tabela, coluna e chave 
 
 ### **O que é particionamento e qual seu objetivo ?**
 
-De forma resumida, particionar uma tabela é dividi-la em vários blocos/partes. O objetivo central é diminuir os custos financeiros e aumentar a perfomance, visto que, quanto maior o volume de dados, consequentemente será maior o custo de armazenamento e consulta. 
+De forma resumida, particionar uma tabela é dividi-la em vários blocos/partes. O objetivo central é diminuir os custos financeiros e aumentar a perfomance, visto que, quanto maior o volume de dados, consequentemente será maior o custo de armazenamento e consulta.
 
-A redução de custos e o aumento de perfomance acontece, principalmente, porque a partição permite a reorganização do conjunto de dados em pequenos **blocos agrupados**. Na prática, realizando o particionamento, é possível evitar que uma consulta percorra toda a tabela só para trazer um pequeno recorte de dados.   
+A redução de custos e o aumento de perfomance acontece, principalmente, porque a partição permite a reorganização do conjunto de dados em pequenos **blocos agrupados**. Na prática, realizando o particionamento, é possível evitar que uma consulta percorra toda a tabela só para trazer um pequeno recorte de dados.
 
 Um exemplo prático da nossa querida RAIS:
 
 - Sem utilizar filtro de partição:
 
-Para esse caso o Bigquery varreu todas (*) as colunas e linhas do conjunto. Vale salientar que esse custo ainda não é tão grande, visto que a base já foi particionada. Caso esse conjunto não tivesse passado pelo processo de particionamento, essa consulta custaria muito mais dinheiro e tempo, já que se trata de um volume considerável de dados. 
+Para esse caso o Bigquery varreu todas (*) as colunas e linhas do conjunto. Vale salientar que esse custo ainda não é tão grande, visto que a base já foi particionada. Caso esse conjunto não tivesse passado pelo processo de particionamento, essa consulta custaria muito mais dinheiro e tempo, já que se trata de um volume considerável de dados.
 
 ![image](https://user-images.githubusercontent.com/58278652/185815101-68ed5797-fff8-4968-84e2-e6a47bba58d0.png)
 
-- Com filtro de partição: 
+- Com filtro de partição:
 
-Aqui, filtramos pelas colunas particionadas `ano` e `sigla_uf`. Dessa forma, o Bigquery só **consulta** e **retorna** os valores da pasta **ano** e da subpasta **sigla_uf**. 
+Aqui, filtramos pelas colunas particionadas `ano` e `sigla_uf`. Dessa forma, o Bigquery só **consulta** e **retorna** os valores da pasta **ano** e da subpasta **sigla_uf**.
 
 ![image](https://user-images.githubusercontent.com/58278652/185815135-fb012a2c-535b-457e-af2a-7984961168b3.png)
 
@@ -239,7 +239,7 @@ for ano in [*range(2005, 2020)]:
   for mes in [*range(1, 13)]:
     df_particao = df[df['ano'] == ano].copy() # O .copy não é necessário é apenas uma boa prática
     df_particao = df_particao[df_particao['mes'] == mes]
-    df_particao.drop(['ano', 'mes'], axis=1, inplace=True) # É preciso excluir as colunas utilizadas para partição 
+    df_particao.drop(['ano', 'mes'], axis=1, inplace=True) # É preciso excluir as colunas utilizadas para partição
     particao = output + f'table_id/ano={ano}/mes={mes}/tabela.csv'
     df_particao.to_csv(particao, index=False, encoding='utf-8', na_rep='')
 ```
@@ -256,10 +256,10 @@ CREATE TABLE `dataset_id.table_id` as (
     ano  INT64,
     mes  INT64,
     col1 STRING,
-    col1 STRING 
+    col1 STRING
 ) PARTITION BY ano, mes
-OPTIONS (Description='Descrição da tabela') 
-``` 
+OPTIONS (Description='Descrição da tabela')
+```
 
 ### **Regras importantes de particionamento.**
 
@@ -312,12 +312,12 @@ Veja todas as [tabelas já disponíveis aqui.](https://basedosdados.org/dataset?
 ### **Como preencher os metadados das tabelas de diretório?**
 - Preencher o *`spatial_coverage`* (`cobertura_espacial`), que é a máxima unidade espacial que a tabela cobre. Exemplo: sa.br, que significa que o nível de agregação espacial da tabela é o Brasil.
 - Não preencher o *`temporal_coverage`* (`cobertura_temporal`), ou seja, deixar o campo vazio.
-- Preencher o *`observation_level`* (`nivel_observacao`), que consiste no nível de observação da tabela, ou seja, o que representa cada linha. 
+- Preencher o *`observation_level`* (`nivel_observacao`), que consiste no nível de observação da tabela, ou seja, o que representa cada linha.
 - Não preencher o *`temporal_coverage`* (`cobertura_temporal`) das colunas da tabela, ou seja, deixar o campo vazio.
 
 ## Fontes Originais
 
-O campo se refere aos dados na fonte original, que ainda não passaram pela metodologia de tratamento da Base dos Dados, ou seja, nosso `_input_`. Ao clicar nele, a ideia é redirecionar o usuário para a página da fonte original dos dados. As regras para gerenciar as Fontes Originais são: 
+O campo se refere aos dados na fonte original, que ainda não passaram pela metodologia de tratamento da Base dos Dados, ou seja, nosso `_input_`. Ao clicar nele, a ideia é redirecionar o usuário para a página da fonte original dos dados. As regras para gerenciar as Fontes Originais são:
 
 - Incluir o nome do link externo que leva à fonte original. Como padrão, esse nome deve ser da organização ou do portal que armazenena os dados. Exemplos: `Sinopses Estatísticas da Educação Básica: Dados Abertos do Inep`, `Penn World Tables: Groningen Growth and Development Centre`.
 - Preencher os metadados de Fontes Originais: Descrição, URL, Língua, Tem Dados Estruturados, Tem uma API, É de Graça, Requer Registro, Disponibilidade, Requer IP de Algum País, Tipo de Licença, Cobertura Temporal, Cobertura Espacial e Nível da Observação.

@@ -1,7 +1,6 @@
 site_name: Documentação
 
 theme:
-  custom_dir: docs/overrides
   name: material
   icon:
     repo: fontawesome/brands/github
@@ -62,8 +61,7 @@ nav:
       - Python: api_reference_python.md
       - R: api_reference_r.md
       - Stata: api_reference_stata.md
-      - CLI: api_reference_cli.md
-    - Contribua: 
+    - Contribua:
       - Dados: colab_data.md
       - Infraestrutura: colab_infrastructure.md
       - Manual de estilo: style_data.md

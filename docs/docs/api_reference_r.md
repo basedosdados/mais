@@ -31,7 +31,7 @@ A maioria dos erros do nosso pacote estão relacionados a problemas de autentica
 
 ![Capturar](https://user-images.githubusercontent.com/26544494/190700064-1326a74c-8de0-4254-a562-32f9aa10ae07.PNG)
 
-**Note que é preciso marcar inclusive as duas últimas "caixinhas", que aparecem como opcionais**. Caso você tenha esquecido de marcá-las, todas as outras funções do pacote não irão funcionar posteriormente. 
+**Note que é preciso marcar inclusive as duas últimas "caixinhas", que aparecem como opcionais**. Caso você tenha esquecido de marcá-las, todas as outras funções do pacote não irão funcionar posteriormente.
 
 Caso você já tenha autenticado com autorização incompleta, é preciso repetir o processo de autenticação. Você pode fazer isso rodando `gargle::gargle_oauth_sitrep()`. Você deverá checar a pasta em que estão salvas as autenticações do seu R, entrar nesta pasta e deletar aquela referente ao Google Cloud/Bigquery. Feito isso, ao rodar `basedosdados::set_billing_id` você poderá autenticar novamente.
 
@@ -39,12 +39,12 @@ Veja como é simples:
 
 ![gif_gargle](https://user-images.githubusercontent.com/62671380/194094167-99dadbd7-f7de-46f9-ac88-fb464e646e6c.gif)
 
-Realizados todos esses procedimentos, é bem provável que os erros anteriores não ocorram mais. 
+Realizados todos esses procedimentos, é bem provável que os erros anteriores não ocorram mais.
 
 ### Versão do pacote `dbplyr`
-Outro erro comum está relacionado ao uso da função `basedosdados::bdplyr`. Nosso pacote em R foi construído utilizando outros pacotes disponíveis na comunidade. Isso significa que atualizações destes pacotes podem alterar o funcionamento destes e gerar efeitos em cascata a outros pacotes desenvolvidos em cima deles. Neste contexto, o nosso pacote funciona apenas com a versão 2.1.1 do pacote `dbplyr`, e **não** funciona com versões posteriores. 
+Outro erro comum está relacionado ao uso da função `basedosdados::bdplyr`. Nosso pacote em R foi construído utilizando outros pacotes disponíveis na comunidade. Isso significa que atualizações destes pacotes podem alterar o funcionamento destes e gerar efeitos em cascata a outros pacotes desenvolvidos em cima deles. Neste contexto, o nosso pacote funciona apenas com a versão 2.1.1 do pacote `dbplyr`, e **não** funciona com versões posteriores.
 
 Você pode checar a sua versão do `dbplyr` rodando `utils::packageVersion("dbplyr")` no seu R. Caso ela seja superior à versão 2.1.1, você precisa dar um _downgrade_ para a versão correta. Para isso, você pode rodar `devtools::install_version("dbplyr", version = "2.1.1", repos = "http://cran.us.r-project.org")`.
 
 ### Outros erros
-Caso os erros persistam, você pode abrir uma _issue_ no nosso Github clicando [aqui](https://github.com/basedosdados/mais/issues). Você também visitar as _issues_ que já foram resolvidas e estão atribuídas com o a etiqueta `R` em nosso Github [aqui](https://github.com/basedosdados/mais/issues?q=is%3Aissue+is%3Aclosed). 
+Caso os erros persistam, você pode abrir uma _issue_ no nosso Github clicando [aqui](https://github.com/basedosdados/mais/issues). Você também visitar as _issues_ que já foram resolvidas e estão atribuídas com o a etiqueta `R` em nosso Github [aqui](https://github.com/basedosdados/mais/issues?q=is%3Aissue+is%3Aclosed).

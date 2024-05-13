@@ -142,7 +142,7 @@ para você começar a usá-los.
 
     - [Introdução ao pacote Python](https://dev.to/basedosdados/base-dos-dados-python-101-44lc)
     - [Introdução ao pacote Python (cont.)](https://dev.to/basedosdados/base-dos-dados-python-102-50k0)
-    
+
     Vídeos:
 
     - [Workshop: Aplicações em Python](https://www.youtube.com/watch?v=wI2xEioDPgM)
