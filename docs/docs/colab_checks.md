@@ -1,13 +1,13 @@
 # Colaborando com testes na BD+
 
 Para manter a qualidade dos bases de dados presentes na BD+, nós contamos com um
-conjunto de checagens automáticas que são realizadas durante a inserção e 
+conjunto de checagens automáticas que são realizadas durante a inserção e
 atualização de cada base. Essas checagens são necessárias, mas não suficientes
 para garantir a qualidade dos dados. Elas realizam consultas basicas, como se a
 tabela existe ou se tem colunas totalmente nulas.
 
 Você pode colaborar com a BD aumentando a cobertura dos testes, diminuindo assim
-o trabalho de revisão dos dados. Para isso basta criar consultas que testem a 
+o trabalho de revisão dos dados. Para isso basta criar consultas que testem a
 qualidade dos dados em SQL, como as seguintes:
 
 - Verificar se colunas com proporção possuem valores entre 0 e 100
@@ -39,7 +39,7 @@ que ainda não foi escrita.
 
 ## 2. Escreva sua consulta
 
-Faça um fork do repositório da [Base dos Dados+](https://github.com/basedosdados/mais/tree/master). 
+Faça um fork do repositório da [Base dos Dados+](https://github.com/basedosdados/mais/tree/master).
 Em seguida adicione novas consultas e suas respectivas funções de execução nos arquivos
 [checks.yaml](https://github.com/basedosdados/mais/blob/master/.github/workflows/data-check/checks.yaml)
 e [test_data.py](https://github.com/basedosdados/mais/blob/master/.github/workflows/data-check/test_data.py).
@@ -51,7 +51,7 @@ test_select_all_works:
   name: Check if select query in {{ table_id }} works
   query: |
     SELECT NOT EXISTS (
-            SELECT * 
+            SELECT *
         FROM `{{ project_id_staging }}.{{ dataset_id }}.{{ table_id }}`
     ) AS failure
 ```

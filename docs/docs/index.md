@@ -6,7 +6,7 @@ recursos importantes de diversos conjuntos de dados públicos**, como:
 
 - **Tabelas tratadas BD+**: Tabelas completas, já tratadas e prontas
   para análise, disponíveis no nosso datalake público.
-  
+
 - **Dados originais**: Links com informações úteis para explorar mais
   sobre o conjunto de dados, como a fonte original e outros.
 
@@ -56,7 +56,6 @@ Os pacotes atualmente disponíveis são:
 - **:material-language-python: Python**
 - **:material-language-r: R**
 - **Stata**
-- **:octicons-terminal-16: CLI (Terminal)**
 
 <a
 href="access_data_packages"

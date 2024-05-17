@@ -6,15 +6,15 @@ para gerir todo o código e mantê-lo organizado, onde você pode encontrar
 issues de novas features, bugs e melhorias que estamos trabalhando.
 ## Como funciona nossa infraestrutura
 
-Nossa infraestrutura é composta de 3 frentes principais: 
+Nossa infraestrutura é composta de 3 frentes principais:
 
 - [**Sistema de ingestão de dados**](#sistema-de-ingestao-de-dados): desde o upload até a
   disponibilização em produção;
 - [**Pacotes de acesso**](#pacotes-de-acesso)
 - [**Website**](#website): Front-end, Back-end e APIs.
 
-Atualmente é possível colaborar em todas as frentes, com destaque ao 
-desenvolvimento dos pesos e contrapesos e atualização do site. 
+Atualmente é possível colaborar em todas as frentes, com destaque ao
+desenvolvimento dos pesos e contrapesos e atualização do site.
 
 !!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 

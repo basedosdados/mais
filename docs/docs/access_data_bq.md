@@ -37,7 +37,7 @@ fazer queries em nosso *datalake* público.
     Pense no projeto como a "conta" na qual a Google vai contabilizar o
     quanto de processamento você já utilizou. **Não é necessário adicionar
     nenhum cartão ou forma de pagamento - O BigQuery inicia automaticamente no modo Sandbox, que permite você utilizar seus recursos sem adicionar um modo de pagamento. [Leia mais aqui](https://cloud.google.com/bigquery/docs/sandbox/?hl=pt).**
-    
+
 ### Acessando o datalake da `basedosdados`
 
 O botão abaixo via te direcionar ao nosso projeto no Google BigQuery:
@@ -64,7 +64,7 @@ Dentro do projeto existem dois níveis de organização dos dados,
   nível municipal)
 - **Cada tabela pertence a um único conjunto de dados** (ex: a tabela
   `municipio` em `br_ibge_populacao` é diferente de `municipio` em `br_bd_diretorios`)
-  
+
 !!! Tip "[Veja aqui o guia do Google de como funciona a interface do BigQuery](https://cloud.google.com/bigquery/docs/bigquery-web-ui)."
 
 ![](images/bq_dataset_tables_structure.png){ width=100% }

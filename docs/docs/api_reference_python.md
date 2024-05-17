@@ -68,16 +68,3 @@ Esta API é composta por funções com 2 tipos de funcionalidade:
       docstring_style: google  # this is the default
       docstring_options:
         replace_admonitions: no
-
----
-::: basedosdados.upload.metadata
-    handler: python
-    rendering:
-            show_root_heading: no
-            heading_level: 3
-    selection:
-      docstring_style: google  # this is the default
-      docstring_options:
-        replace_admonitions: no
-
----

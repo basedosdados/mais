@@ -10,7 +10,6 @@ classifiers = [
 homepage = "https://github.com/basedosdados/mais"
 repository = "https://github.com/basedosdados/mais"
 license = "MIT"
-readme = "README.md"
 packages = [
     {include = "basedosdados"},
 ]
@@ -39,8 +38,10 @@ semgrep = "^1.36.0"
 taskipy = "^1.12.0"
 
 [tool.poetry.group.docs.dependencies]
-mkdocstrings = "^0.18.1"
+mkdocs = "^1.2.3"
+mkdocs-click = "^0.5.0"
 mkdocs-material = "^8.2.7"
+mkdocstrings = "^0.18.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.2.1"
@@ -57,5 +58,5 @@ lint = "semgrep scan --error --config auto --exclude-rule yaml.github-actions.se
 addopts = "-p no:warnings"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"

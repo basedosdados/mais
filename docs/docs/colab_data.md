@@ -48,13 +48,13 @@ Alguns conhecimentos são necessárias para realizar esse processo:
 
 ### Como funciona o processo?
 
-[1. Escolher a base e entender mais dos dados](#1-Escolher-a-base-e-entender-mais-dos-dados) - primeiro precisamos conhecer o que estamos tratando.  
-[2. Baixar nossa pasta template](#2-Baixar-nossa-pasta-template) - é hora estruturar o trabalho a ser feito    
-[3. Preencher as tabelas de arquitetura](#3-preencher-as-tabelas-de-arquitetura) - é primordial definir a estrutura dos dados antes de iniciarmos o tratamento   
-[4. Escrever codigo de captura e limpeza de dados](#4-escrever-codigo-de-captura-e-limpeza-de-dados) - hora de botar a mão na massa!  
-[5. (Caso necessário) Organizar arquivos auxiliares](#5-caso-necessário-organizar-arquivos-auxiliares) -  porque até dados precisam de guias  
-[6. (Caso necessário) Criar tabela dicionário](#6-caso-necessário-criar-tabela-dicionário) - momento de montar os dicionários  
-[7. Subir tudo no Google Cloud](#7-subir-tudo-no-google-cloud) - afinal, é por lá que ficam os dados da BD  
+[1. Escolher a base e entender mais dos dados](#1-Escolher-a-base-e-entender-mais-dos-dados) - primeiro precisamos conhecer o que estamos tratando.
+[2. Baixar nossa pasta template](#2-Baixar-nossa-pasta-template) - é hora estruturar o trabalho a ser feito
+[3. Preencher as tabelas de arquitetura](#3-preencher-as-tabelas-de-arquitetura) - é primordial definir a estrutura dos dados antes de iniciarmos o tratamento
+[4. Escrever codigo de captura e limpeza de dados](#4-escrever-codigo-de-captura-e-limpeza-de-dados) - hora de botar a mão na massa!
+[5. (Caso necessário) Organizar arquivos auxiliares](#5-caso-necessário-organizar-arquivos-auxiliares) -  porque até dados precisam de guias
+[6. (Caso necessário) Criar tabela dicionário](#6-caso-necessário-criar-tabela-dicionário) - momento de montar os dicionários
+[7. Subir tudo no Google Cloud](#7-subir-tudo-no-google-cloud) - afinal, é por lá que ficam os dados da BD
 [8. Enviar tudo para revisão](#8-enviar-tudo-para-revisão) - um olhar da nossa equipe para garantir que tudo está pronto para ir pra produção!
 
 
@@ -183,14 +183,14 @@ revisão. Para isso, vamos usar o cliente `basedosdados` (disponível em Python)
 !!! Info "Como existe um custo para o armazenamento no storage, para finalizar essa etapa vamos precisar te disponibilizar uma api_key especifica para voluntários para subir os dados em nosso ambiente de desenvolvimento. Assim, entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) e nos chame em 'quero-contribuir'"
 
 #### Configure suas credenciais localmente
-  **7.1** No seu terminal instale nosso cliente: `pip install basedosdados`.  
-  **7.2** Rode `import basedosdados as bd` no python e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud. Preencha as informações conforme a seguir:  
+  **7.1** No seu terminal instale nosso cliente: `pip install basedosdados`.
+  **7.2** Rode `import basedosdados as bd` no python e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud. Preencha as informações conforme a seguir:
 ```
-    * STEP 1: y  
+    * STEP 1: y
     * STEP 2: basedosdados-dev  (colocar o .json passado pela equipe da bd na pasta credentials)
-    * STEP 3: y  
-    * STEP 4: basedosdados-dev   
-    * STEP 5: https://api.basedosdados.org/api/v1/graphql  
+    * STEP 3: y
+    * STEP 4: basedosdados-dev
+    * STEP 5: https://api.basedosdados.org/api/v1/graphql
 ```
 #### Suba os arquivos na Cloud
 Os dados vão passar por 3 lugares no Google Cloud:
@@ -203,9 +203,9 @@ Os dados vão passar por 3 lugares no Google Cloud:
 
     ```python
     import basedosdados as bd
-    
+
     tb = bd.Table(
-      dataset_id='<dataset_id>', 
+      dataset_id='<dataset_id>',
       table_id='<table_id>')
 
     tb.create(
@@ -217,18 +217,18 @@ Os dados vão passar por 3 lugares no Google Cloud:
 
     Os seguintes parâmetros podem ser usados:
 
-    
-    - `path` (obrigatório): o caminho completo do arquivo no seu computador, como: `/Users/<seu_usuario>/projetos/basedosdados/mais/bases/[DATASET_ID]/output/microdados.csv`. 
-    
-    
+
+    - `path` (obrigatório): o caminho completo do arquivo no seu computador, como: `/Users/<seu_usuario>/projetos/basedosdados/mais/bases/[DATASET_ID]/output/microdados.csv`.
+
+
     !!! Tip "Caso seus dados sejam particionados, o caminho deve apontar para a pasta onde estão as partições. No contrário, deve apontar para um arquivo `.csv` (por exemplo, microdados.csv)."
-  
+
     - `force_dataset`: comando que cria os arquivos de configuração do dataset no BigQuery.
         - _True_: os arquivos de configuração do dataset serão criados no seu projeto e, caso ele não exista no BigQuery, será criado automaticamente. **Se você já tiver criado e configurado o dataset, não use esta opção, pois irá sobrescrever arquivos**.
-        - _False_: o dataset não será recriado e, se não existir, será criado automaticamente.   
-    - `if_table_exists` : comando utilizado caso a **tabela já exista no BQ**:    
+        - _False_: o dataset não será recriado e, se não existir, será criado automaticamente.
+    - `if_table_exists` : comando utilizado caso a **tabela já exista no BQ**:
         - _raise_: retorna mensagem de erro.
-        - _replace_: substitui a tabela. 
+        - _replace_: substitui a tabela.
         - _pass_: não faz nada.
 
     - `if_storage_data_exists`: comando utilizado caso os **dados já existam no Google Cloud Storage**:
@@ -237,21 +237,21 @@ Os dados vão passar por 3 lugares no Google Cloud:
         - _pass_: não faz nada.
 
     !!! Info "Se o projeto não existir no BigQuery, ele será automaticamente criado"
-    
+
   Consulte também nossa [API](../api_reference_cli) para mais detalhes de cada método.
 
-**7.4** Crie os arquivos .sql e schema.yml a partir da tabela de arquitetura seguindo essa [documentação](https://github.com/basedosdados/pipelines/wiki/Fun%C3%A7%C3%A3o-%60create_yaml_file()%60)  
+**7.4** Crie os arquivos .sql e schema.yml a partir da tabela de arquitetura seguindo essa [documentação](https://github.com/basedosdados/pipelines/wiki/Fun%C3%A7%C3%A3o-%60create_yaml_file()%60)
 !!! Tip "Caso você precise, nesse momento você pode alterar a consulta em SQL para realizar tratamentos finais a partir da tabela `staging`, pode incluir coluna, remover coluna, fazer operações algébricas, substituir strings, etc. O SQL é o limite!"
 
 **7.5** Rode e teste os modelos localmente seguindo essa [documentação](https://github.com/basedosdados/pipelines/wiki/Testar-modelos-dbt-localmente)
 
-**7.6** Suba os metadados da tabela no site:  
+**7.6** Suba os metadados da tabela no site:
 !!! Info "Por enquanto apenas a equipe dados tem permissões de subir os metadados da tabela no site, por isso será necessário entrar em contato conosco. Já estamos trabalhando para que, num futuro próximo, os voluntários também possam atualizar dados no site."
 
-**7.7** Suba os arquivos auxiliares:  
+**7.7** Suba os arquivos auxiliares:
     ```python
     st = bd.Storage(
-      dataset_id = <dataset_id>, 
+      dataset_id = <dataset_id>,
       table_id = <table_id>)
 
     st.upload(
@@ -259,19 +259,19 @@ Os dados vão passar por 3 lugares no Google Cloud:
       mode = 'auxiliary_files',
       if_exists = 'raise')
     ```
-    
+
 ### 8. Enviar tudo para revisão
 
 Ufa, é isso! Agora só resta enviar tudo para revisão no
 [repositório](https://github.com/basedosdados/queries-basedosdados) da Base dos Dados.
 
-1. Clone o nosso [repositório](https://github.com/basedosdados/queries-basedosdados) localmente.  
-2. Dê um `cd` para a pasta local do repositório e abra uma nova branch com `git checkout -b [dataset_id]`. Todas as adições e modificações serão incluídas nessa _branch_.  
-3. Para cada tabela nova incluir o arquivo com nome `table_id.sql` na pasta `queries-basedosdados/models/dataset_id/` copiando as queries que você desenvolveu no passo 7.  
-4. Incluir o arquivo schema.yaml desenvolvido no passo 7  
-5. Caso seja um dataset novo, incluir o dataset conforme as instruções do arquivo `queries-basedosdados/dbt_project.yaml` (não se esqueça de seguir a ordem alfabética pra não bagunçar a organização)  
-6. Inclua o seu código de captura e limpeza em na pasta `queries-basedosdados/models/dataset_id/code`  
-7. Agora é só publicar a branch, abrir o PR com as labels 'table-approve' e marcar a equipe dados para correção  
+1. Clone o nosso [repositório](https://github.com/basedosdados/queries-basedosdados) localmente.
+2. Dê um `cd` para a pasta local do repositório e abra uma nova branch com `git checkout -b [dataset_id]`. Todas as adições e modificações serão incluídas nessa _branch_.
+3. Para cada tabela nova incluir o arquivo com nome `table_id.sql` na pasta `queries-basedosdados/models/dataset_id/` copiando as queries que você desenvolveu no passo 7.
+4. Incluir o arquivo schema.yaml desenvolvido no passo 7
+5. Caso seja um dataset novo, incluir o dataset conforme as instruções do arquivo `queries-basedosdados/dbt_project.yaml` (não se esqueça de seguir a ordem alfabética pra não bagunçar a organização)
+6. Inclua o seu código de captura e limpeza em na pasta `queries-basedosdados/models/dataset_id/code`
+7. Agora é só publicar a branch, abrir o PR com as labels 'table-approve' e marcar a equipe dados para correção
 
 **E agora?** Nossa equipe irá revisar os dados e metadados submetidos
 via Github. Podemos entrar em contato para tirar dúvidas ou solicitar

@@ -9,9 +9,9 @@ Esta API é composta por módulos para **requisição de dados**: para aquele(as
 
 ## Módulos (Requisição de dados)
 
-Se é a sua primeira vez utilizando o pacote, digite ```db basedosdados``` e confirme novamente se as etapas acima foram concluídas com sucesso. 
+Se é a sua primeira vez utilizando o pacote, digite ```db basedosdados``` e confirme novamente se as etapas acima foram concluídas com sucesso.
 
-O pacote contém 7 comandos, conforme suas funcionalidades descritas abaixo: 
+O pacote contém 7 comandos, conforme suas funcionalidades descritas abaixo:
 
 | __Comando__               | __Descrição__                                                                  |
 |---------------------------|--------------------------------------------------------------------------------|
