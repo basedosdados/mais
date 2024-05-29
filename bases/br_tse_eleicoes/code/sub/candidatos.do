@@ -27,12 +27,12 @@ local estados_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") stringcols(_all)
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") //stringcols(_all)
 keep id_municipio id_municipio_tse
 tempfile municipio
 save `municipio'
 
-foreach ano of numlist 2022 { // 1994(2)2022 {
+foreach ano of numlist 2000 { // 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		
@@ -902,17 +902,17 @@ foreach ano of numlist 2022 { // 1994(2)2022 {
 		
 		if `ano' >= 2020 drop in 1
 		
-		merge m:1 id_municipio_tse using `municipio'
-		drop if _merge == 2
-		drop _merge
-		order id_municipio, b(id_municipio_tse)
-		
 		//------------------//
 		// limpa strings
 		//------------------//
 		
-		destring ano turno, replace force
+		destring ano turno id_municipio_tse, replace force
 		replace sequencial = "" if sequencial == "-1"
+		
+		merge m:1 id_municipio_tse using `municipio'
+		drop if _merge == 2
+		drop _merge
+		order id_municipio, b(id_municipio_tse)
 		
 		foreach k of varlist _all {
 			cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "##VERIFICAR BASE 1994##", "NÃO DIVULGÁVEL")

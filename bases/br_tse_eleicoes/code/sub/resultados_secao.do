@@ -9,13 +9,13 @@
 
 local estados_1994	AC AL AM AP BA BR          GO MA                   PI          RO    RS SC SE SP TO
 local estados_1996	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
-local estados_1998	AC AL AM AP BA    CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
+local estados_1998	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO //   ZZ
 local estados_2000	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP   
-local estados_2002	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
+local estados_2002	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO //   ZZ
 local estados_2004	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2006	AC AL AM AP BA    CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
+local estados_2006	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO //   ZZ
 local estados_2008	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2010	AC AL AM AP BA    CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO VT ZZ
+local estados_2010	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO //VT ZZ
 local estados_2012	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2014	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2016	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -27,22 +27,64 @@ local estados_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) stringcols(_all)
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) //stringcols(_all)
 keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) stringcols(_all)
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) //stringcols(_all)
 keep id_municipio_tse sigla_uf
 tempfile diretorio_ufs
 save `diretorio_ufs'
 
-foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		
 		di "`ano'_`estado'"
 		
+		//local ano 2008
+		//local estado TO
+		cap import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'/votacao_secao_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
+		cap import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'/votacao_secao_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear
+		
+		if (`ano' == 1998 & "`estado'" == "BR") | (`ano' == 2008 & "`estado'" == "TO") { // schema antigo, nao foi atualizado no site do TSE
+			
+			keep v3 v4 v5 v6 v8 v10 v11 v13 v14 v15
+			
+			ren v3	ano
+			ren v4	turno
+			ren v5	tipo_eleicao
+			ren v6	sigla_uf
+			ren v8	id_municipio_tse
+			ren v10	zona
+			ren v11	secao
+			ren v13	cargo
+			ren v14	numero_votavel
+			ren v15	votos
+			
+		}
+		else {
+			
+			drop in 1
+			
+			keep v3 v6 v8 v11 v14 v16 v17 v19 v20 v22
+			
+			ren v3	ano
+			ren v6	turno
+			ren v8	tipo_eleicao
+			ren v11	sigla_uf
+			ren v14	id_municipio_tse
+			ren v16	zona
+			ren v17	secao
+			ren v19	cargo
+			ren v20	numero_votavel
+			ren v22	votos
+			
+		}
+		
+		
+		/*
 		if `ano' == 2012 {
 			
 			import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'_1t/votacao_secao_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
@@ -65,9 +107,10 @@ foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
 			cap import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'/votacao_secao_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear
 			
 		}
-		*
+		*/
 		
-		if `ano' <= 2016 {
+		/*
+		if `ano' <= 2012 {
 			
 			keep v3 v4 v5 v6 v8 v10 v11 v13 v14 v15
 			
@@ -83,7 +126,7 @@ foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
 			ren v15	votos
 			
 		}
-		else if `ano' >= 2018 {
+		else if `ano' >= 2014 {
 			
 			drop in 1
 			
@@ -101,22 +144,19 @@ foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
 			ren v22	votos
 			
 		}
-		*
+		*/
 		
-		destring ano turno votos, replace force
+		destring ano turno id_municipio_tse votos, replace force // remover zeros a esquerda
 		
 		//------------------//
 		// limpa strings
 		//------------------//
 		
-		if "`estado'" == "BR" {
+		if inlist(`ano', 1994, 1998) & "`estado'" == "BR" {
 			drop sigla_uf
-			merge m:1 id_municipio_tse using `diretorio_ufs'
-			drop if _merge == 2
-			drop _merge
+			merge m:1 id_municipio_tse using `diretorio_ufs', keep(1 3) nogenerate
 			replace sigla_uf = "ZZ" if sigla_uf == ""
 		}
-		*
 		
 		foreach k in tipo_eleicao cargo {
 			clean_string `k'
@@ -127,9 +167,8 @@ foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
 		
 		cap limpa_candidato
 		
-		merge m:1 id_municipio_tse using `diretorio'
-		drop if _merge == 2
-		drop _merge
+		merge m:1 id_municipio_tse using `diretorio', keep(1 3) nogenerate
+
 		order id_municipio, b(id_municipio_tse)
 		
 		tempfile resultados_secao_`estado'_`ano'
@@ -186,20 +225,19 @@ foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
 					inlist(cargo, "vereador", "deputado estadual", "deputado distrital", "deputado federal", "senador")
 			
 			ren numero_votavel	numero_partido
-			ren votos			votos_nao_nominais
+			ren votos			votos_legenda
 			
-			tempfile votos_nao_nominais
-			save `votos_nao_nominais'
+			tempfile votos_legenda
+			save `votos_legenda'
 			
 		restore
 		
 		use `votos_nominais', clear
 		
-		merge 1:1 ano tipo_eleicao turno sigla_uf id_municipio_tse zona secao cargo numero_partido using `votos_nao_nominais'
-		drop _merge
+		merge 1:1 ano tipo_eleicao turno sigla_uf id_municipio_tse zona secao cargo numero_partido using `votos_legenda', nogenerate
 		
-		replace votos_nominais     = 0	if votos_nominais     == .
-		replace votos_nao_nominais = 0	if votos_nao_nominais == .
+		replace votos_nominais  = 0	if votos_nominais == .
+		replace votos_legenda 	= 0	if votos_legenda  == .
 		
 		tempfile resultados_part_secao_`estado'_`ano'
 		save `resultados_part_secao_`estado'_`ano''
@@ -218,6 +256,8 @@ foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
 		}
 	}
 	*
+	
+	duplicates drop ano turno tipo_eleicao id_municipio_tse zona secao cargo numero_candidato, force // poucos casos finais com duplicadas
 	
 	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo numero_candidato
 	

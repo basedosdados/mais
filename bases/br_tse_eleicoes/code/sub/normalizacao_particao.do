@@ -109,13 +109,15 @@ duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0 & N_defer
 // consequencia: perder alguma informação sobre exatamente qual foi a candidatura "observada"
 duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0 & N_deferido > 1  & N_numero > 1  & N_cargo > 1  & N_nome == 1, force
 
-// último passo!
-// não há mais o que fazer senão checar manualmente o que está sobrando de erros
-drop dup
-duplicates tag ano tipo_eleicao id_candidato_bd if id_candidato_bd != ., gen(dup)
-duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0, force
-
 drop N_* dup
+
+// últimos passos!
+// não há mais o que fazer senão checar manualmente o que está sobrando de erros
+duplicates tag  ano tipo_eleicao id_candidato_bd if id_candidato_bd != ., gen(dup)
+duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0, force
+drop dup
+
+duplicates drop ano sigla_uf id_municipio_tse sequencial numero cpf, force // algumas dezenas de observações. preferimos não tomar decisões sobre a bagunça do TSE.
 
 order ano tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
 	id_candidato_bd cpf titulo_eleitoral sequencial numero nome nome_urna numero_partido sigla_partido cargo
@@ -204,33 +206,30 @@ foreach ano of numlist 1990 1994(2)2022 {
 //-------------------------------------------------//
 
 use "output/norm_candidatos.dta", clear
-
 keep if mod(ano, 4) == 0
 keep id_candidato_bd ano tipo_eleicao sigla_uf id_municipio_tse cargo numero
-
+tostring numero id_candidato_bd, replace
 tempfile candidatos_mod0
 save `candidatos_mod0'
 
 use "output/norm_candidatos.dta", clear
-
 keep if mod(ano, 4) == 2 & cargo != "presidente"
 keep id_candidato_bd ano tipo_eleicao sigla_uf cargo numero
-
+tostring numero id_candidato_bd, replace
 tempfile candidatos_mod2_estadual
 save `candidatos_mod2_estadual'
 
 use "output/norm_candidatos.dta", clear
-
 keep if mod(ano, 4) == 2 & cargo == "presidente"
 keep id_candidato_bd ano tipo_eleicao cargo numero
-
+tostring numero id_candidato_bd, replace
 tempfile candidatos_mod2_presid
 save `candidatos_mod2_presid'
 
 !mkdir "output/resultados_candidato_municipio_zona"
 !mkdir "output/resultados_partido_municipio_zona"
 
-foreach ano of numlist 2018 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
 	//---------------------//
 	// candidato-municipio-zona
@@ -321,7 +320,7 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 	
 	//drop coligacao composicao
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo numero_partido sigla_partido votos_nominais votos_nao_nominais
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo numero_partido sigla_partido votos_nominais votos_legenda
 	
 	order `vars'
 	sort  `vars'
@@ -360,7 +359,7 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 use "output/norm_candidatos.dta", clear
 keep if mod(ano, 4) == 0
 keep id_candidato_bd ano tipo_eleicao sigla_uf id_municipio_tse cargo sequencial numero numero_partido sigla_partido
-tostring id_municipio_tse numero numero_partido id_candidato_bd, replace
+tostring numero numero_partido id_candidato_bd, replace
 tempfile candidatos_mod0
 save `candidatos_mod0'
 
@@ -386,9 +385,11 @@ save `partidos'
 !mkdir "output/resultados_candidato_secao"
 !mkdir "output/resultados_partido_secao"
 
-local ufs AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO ZZ
+local ufs AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO VT ZZ
 
-foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
+	
+	!mkdir "output/resultados_candidato_secao/ano=`ano'"
 	
 	foreach uf in `ufs' {
 		
@@ -402,9 +403,7 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 		
 		if mod(`ano', 4) == 0 {
 			
-			merge m:1 ano tipo_eleicao sigla_uf id_municipio_tse cargo numero using `candidatos_mod0'
-			drop if _merge == 2
-			drop _merge
+			merge m:1 ano tipo_eleicao sigla_uf id_municipio_tse cargo numero using `candidatos_mod0', keep(1 3) nogenerate
 			
 		}
 		else {
@@ -413,9 +412,7 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 				
 				keep if cargo != "presidente"
 				
-				merge m:1 ano tipo_eleicao sigla_uf cargo numero using `candidatos_mod2_estadual'
-				drop if _merge == 2
-				drop _merge
+				merge m:1 ano tipo_eleicao sigla_uf cargo numero using `candidatos_mod2_estadual', keep(1 3) nogenerate
 				
 				tempfile resultados_mod2_estadual
 				save `resultados_mod2_estadual'
@@ -425,9 +422,7 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 				
 				keep if cargo == "presidente"
 				
-				merge m:1 ano tipo_eleicao cargo numero using `candidatos_mod2_presid'
-				drop if _merge == 2
-				drop _merge
+				merge m:1 ano tipo_eleicao cargo numero using `candidatos_mod2_presid', keep(1 3) nogenerate
 				
 				tempfile resultados_mod2_presid
 				save `resultados_mod2_presid'
@@ -452,7 +447,6 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 		// particiona
 		//------------//
 		
-		!mkdir "output/resultados_candidato_secao/ano=`ano'"
 		!mkdir "output/resultados_candidato_secao/ano=`ano'/sigla_uf=`uf'"
 		
 		drop ano sigla_uf
@@ -493,12 +487,12 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 *
 
 //-------------------------------------------------//
-// perfil eleitorado
+// perfil eleitorado municipio-zona
 //-------------------------------------------------//
 
 !mkdir "output/perfil_eleitorado_municipio_zona"
 
-foreach ano of numlist 2022 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/perfil_eleitorado_municipio_zona/ano=`ano'"
 	
@@ -555,7 +549,7 @@ foreach ano of numlist 2008(2)2022 {
 
 !mkdir "output/perfil_eleitorado_local_votacao"
 
-foreach ano of numlist 2016(2)2022 {
+foreach ano of numlist 2010(2)2022 {
 	
 	!mkdir "output/perfil_eleitorado_local_votacao/ano=`ano'"
 	
@@ -583,7 +577,7 @@ foreach ano of numlist 2016(2)2022 {
 
 !mkdir "output/detalhes_votacao_municipio_zona"
 
-foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/detalhes_votacao_municipio_zona/ano=`ano'"
 	
@@ -610,7 +604,7 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 
 !mkdir "output/detalhes_votacao_secao"
 
-foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/detalhes_votacao_secao/ano=`ano'"
 	

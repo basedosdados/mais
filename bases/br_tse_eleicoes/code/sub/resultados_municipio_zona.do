@@ -7,65 +7,136 @@
 // listas de estados
 //------------------------//
 
-local estados_1994_candidato	AC AL AM AP BA BR          GO MA    MS             PI             RR RS SC SE SP TO
-local estados_1996_candidato	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
-local estados_1998_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ dados faltando no original do TSE. está afetando o somatório de votos para presidente
-local estados_2000_candidato	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2002_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
-local estados_2004_candidato	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2006_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
-local estados_2008_candidato	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2010_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO VT ZZ
-local estados_2012_candidato	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2014_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2016_candidato	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2018_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2020_candidato	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO	
-local estados_2022_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_1994_candidato	AC AL AM AP BA BR              GO MA    MS       PB PE PI          RO RR RS SC SE SP TO
+local estados_1996_candidato	AC AL AM AP BA        CE    ES GO MA MG MS    PA PB PE PI       RN RO RR RS    SE SP TO
+local estados_1998_candidato	AC AL AM AP BA BRASIL CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ dados faltando no original do TSE. está afetando o somatório de votos para presidente
+local estados_2000_candidato	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2002_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO //   ZZ
+local estados_2004_candidato	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2006_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO //   ZZ
+local estados_2008_candidato	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2010_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO //VT ZZ
+local estados_2012_candidato	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2014_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2016_candidato	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2018_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2020_candidato	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO	
+local estados_2022_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 
-local estados_1994_partido		AC AL AM AP BA             GO MA    MS             PI             RR RS SC SE SP TO
-local estados_1996_partido		AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
-local estados_1998_partido		AC AL AM AP BA    CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
-local estados_2000_partido		AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2002_partido		AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
-local estados_2004_partido		AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2006_partido		AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
-local estados_2008_partido		AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2010_partido		AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
-local estados_2012_partido		AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2014_partido		AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2016_partido		AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2018_partido		AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO	
-local estados_2020_partido		AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2022_partido		AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_1994_partido		AC AL AM AP BA BR              GO MA    MS       PB PE PI          RO RR RS SC SE SP TO
+local estados_1996_partido		AC AL AM AP BA        CE    ES GO MA MG MS    PA PB PE PI       RN RO RR RS    SE SP TO
+local estados_1998_partido		AC AL AM AP BA BRASIL CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ
+local estados_2000_partido		AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2002_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ
+local estados_2004_partido		AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2006_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ
+local estados_2008_partido		AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2010_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ
+local estados_2012_partido		AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2014_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2016_partido		AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2018_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO	
+local estados_2020_partido		AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2022_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 
 //------------------------//
 // loops
 //------------------------//
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) //stringcols(_all)
 keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) //stringcols(_all)
 keep id_municipio_tse sigla_uf
 tempfile diretorio_ufs
 save `diretorio_ufs'
 
-foreach ano of numlist 2018 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
-	foreach tipo in candidato partido {
+	foreach tipo in partido { // candidato
 		
 		if "`tipo'" == "candidato" {
 			
 			foreach estado in `estados_`ano'_candidato' {
 				
 				cap import delimited "input/votacao_candidato_munzona/votacao_candidato_munzona_`ano'/votacao_candidato_munzona_`ano'_`estado'.txt", ///
-					delim(";") varn(nonames) stringcols(_all) clear //rowr(1:10000)
+					delim(";") varn(nonames) stringcols(_all) clear //rowr(1:100000)
 				cap import delimited "input/votacao_candidato_munzona/votacao_candidato_munzona_`ano'/votacao_candidato_munzona_`ano'_`estado'.csv", ///
-					delim(";") varn(nonames) stringcols(_all) clear //rowr(1:10000)
+					delim(";") varn(nonames) stringcols(_all) clear //rowr(1:100000)
 				
+				if `ano' == 1994 {
+					
+					drop in 1
+					
+					keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v22 v29 v30 v40 v44
+					
+					ren v3  ano
+					ren v6  turno
+					ren v8  tipo_eleicao
+					ren v11 sigla_uf
+					ren v14 id_municipio_tse
+					ren v16 zona
+					ren v18 cargo
+					ren v19 sequencial_candidato
+					ren v20 numero_candidato
+					ren v21 nome_candidato
+					ren v22 nome_urna_candidato
+					ren v29 numero_partido
+					ren v30 sigla_partido
+					ren v40 votos
+					ren v44 resultado
+					
+				}
+				else if `ano' == 1996 | (`ano' >= 2002 & `ano' <= 2016) {
+					
+					drop in 1
+					
+					keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v22 v29 v30 v36 v38
+					
+					ren v3  ano
+					ren v6  turno
+					ren v8  tipo_eleicao
+					ren v11 sigla_uf
+					ren v14 id_municipio_tse
+					ren v16 zona
+					ren v19 sequencial_candidato
+					ren v20 numero_candidato
+					ren v21 nome_candidato
+					ren v22 nome_urna_candidato
+					ren v18 cargo
+					ren v29 numero_partido
+					ren v30 sigla_partido
+					ren v36 resultado
+					ren v38 votos
+					
+				}
+				else if (`ano' >= 1998 & `ano' <= 2000) | (`ano' >= 2018 & `ano' <= 2022) {
+					
+					drop in 1
+					
+					keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v22 v29 v30 v42 v44
+					
+					ren v3  ano
+					ren v6  turno
+					ren v8  tipo_eleicao
+					ren v11 sigla_uf
+					ren v14 id_municipio_tse
+					ren v16 zona
+					ren v18 cargo
+					ren v19 sequencial_candidato
+					ren v20 numero_candidato
+					ren v21 nome_candidato
+					ren v22 nome_urna_candidato
+					ren v29 numero_partido
+					ren v30 sigla_partido
+					ren v42 votos
+					ren v44 resultado
+					
+				}
+				
+				/*
 				if `ano' <= 2012 {
 					
 					keep v3 v4 v5 v6 v8 v10 v12 v13 v14 v15 v16 v22 v23 v24 v29
@@ -156,30 +227,30 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 					ren v44 resultado
 					
 				}
-				*
+				*/
 				
 				//------------------//
 				// limpa strings
 				//------------------//
 				
-				destring ano turno votos, replace force
+				destring ano turno id_municipio_tse votos, replace force // remover zeros a esquerda
 				
 				replace sequencial_candidato = "" if sequencial_candidato == "-1"
 				
-				drop if turno == 2 & cargo == "PRESIDENTE" & "`estado'" != "BR" & `ano' == 2002
-					// consertando problema que dados para presidente no 2o turno vem dobrados entre arquivos de UFs e BR em 2002.
-				drop if cargo == "PRESIDENTE" & "`estado'" != "BR" & (`ano' == 2006 | `ano' == 2010)
+				replace resultado = "2º turno" if resultado == "2O. TURNO"
 				
-				if "`estado'" == "BR" {
+				/*
+				if "`estado'" == "BR" | "`estado'" == "BRASIL" {
 					ren sigla_uf sigla_uf_orig
 					merge m:1 id_municipio_tse using `diretorio_ufs'
 					drop if _merge == 2
 					drop _merge
 					replace sigla_uf_orig = sigla_uf if sigla_uf_orig == "BR"
+					replace sigla_uf_orig = "ZZ"     if sigla_uf_orig == ""
 					drop sigla_uf
 					ren sigla_uf_orig sigla_uf
 				}
-				*
+				*/
 				
 				foreach k of varlist _all {
 					cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "##VERIFICAR BASE 1994##")
@@ -200,10 +271,19 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 				
 				cap limpa_candidato
 				
-				merge m:1 id_municipio_tse using `diretorio'
-				drop if _merge == 2
-				drop _merge
-				order id_municipio, b(id_municipio_tse)
+				drop if turno == 2 & cargo == "presidente" & "`estado'" != "BR" & `ano' == 2002
+					// consertando problema que dados para presidente no 2o turno vem dobrados entre arquivos de UFs e BR em 2002.
+				drop if cargo == "presidente" & "`estado'" != "BR" & (`ano' == 2006 | `ano' == 2010)
+				
+				if `ano' == 1998 {
+					if "`estado'" == "BRASIL" {
+						keep if cargo == "presidente"
+					}
+					else {
+						drop if cargo == "presidente"
+					}
+				}
+				
 				
 				tempfile resultados_cand_`estado'_`ano'
 				save `resultados_cand_`estado'_`ano''
@@ -222,6 +302,13 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 			}
 			*
 			
+			collapse (sum) votos, by(ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo *_candidato *_partido resultado) // soma potenciais votos em transito e nao
+			
+			merge m:1 id_municipio_tse using `diretorio', keep(1 3) nogenerate
+
+			order id_municipio, b(id_municipio_tse)
+			
+			/*
 			//-------------------------//
 			// conserta problema de
 			// resultado nulo para UFs=VT,ZZ
@@ -240,6 +327,7 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 			
 			drop if cargo == "presidente"
 			append using `presid'
+			*/
 			
 			//-------------------------//
 			// salva
@@ -262,11 +350,98 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 				
 				di "`ano'_`estado'_partido"
 				
+				//local ano 2020
+				//local estado BA
 				cap import delimited "input/votacao_partido_munzona/votacao_partido_munzona_`ano'/votacao_partido_munzona_`ano'_`estado'.txt", ///
 					delim(";") varn(nonames) stringcols(_all) clear //rowr(1:10000)
 				cap import delimited "input/votacao_partido_munzona/votacao_partido_munzona_`ano'/votacao_partido_munzona_`ano'_`estado'.csv", ///
 					delim(";") varn(nonames) stringcols(_all) clear //rowr(1:10000)
 				
+				if `ano' == 1994 | `ano' == 1998 {
+					
+					drop in 1
+					
+					keep v3 v6 v8 v11 v14 v16 v18 v20 v21 v33 v34
+					
+					ren v3	ano
+					ren v6	turno
+					ren v8	tipo_eleicao
+					ren v11	sigla_uf
+					ren v14	id_municipio_tse
+					ren v16	zona
+					ren v18	cargo
+					ren v20 numero_partido
+					ren v21	sigla_partido
+					ren v33	votos_legenda
+					ren v34	votos_nominais
+					
+					order votos_nominais, b(votos_legenda)
+					
+				}
+				else if `ano' == 1996 | (`ano' >= 2000 & `ano' <= 2016) {
+					
+					drop in 1
+					
+					keep v3 v6 v8 v11 v14 v16 v18 v20 v21 v27 v28
+					
+					ren v3	ano
+					ren v6	turno
+					ren v8	tipo_eleicao
+					ren v11	sigla_uf
+					ren v14	id_municipio_tse
+					ren v16	zona
+					ren v18	cargo
+					ren v20 numero_partido
+					ren v21	sigla_partido
+					ren v27	votos_nominais
+					ren v28	votos_legenda
+					
+				}
+				else if (`ano' >= 2018 & `ano' <= 2020) {
+					
+					drop in 1
+					
+					keep v3 v6 v8 v11 v14 v16 v18 v20 v21 v33 v34
+					
+					ren v3	ano
+					ren v6	turno
+					ren v8	tipo_eleicao
+					ren v11	sigla_uf
+					ren v14	id_municipio_tse
+					ren v16	zona
+					ren v18	cargo
+					ren v20 numero_partido
+					ren v21	sigla_partido
+					ren v33	votos_legenda
+					ren v34	votos_nominais
+					
+					order votos_nominais, b(votos_legenda)
+					
+				}
+				else if `ano' >= 2022 {
+					
+					drop in 1
+					
+					keep v3 v5 v6 v11 v14 v16 v18 v20 v21 v33 v34
+					
+					ren v3	ano
+					ren v5	tipo_eleicao
+					ren v6	turno
+					ren v11	sigla_uf
+					ren v14	id_municipio_tse
+					ren v16	zona
+					ren v18	cargo
+					ren v20 numero_partido
+					ren v21	sigla_partido
+					ren v33	votos_legenda
+					ren v34	votos_nominais
+					
+					order votos_nominais, b(votos_legenda)
+					
+				}
+				*
+				
+				/*
 				if `ano' <= 2012 {
 					
 					keep v3 v4 v5 v6 v8 v10 v12 v16 v17 v19 v20
@@ -281,7 +456,7 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 					ren v17 numero_partido
 					ren v16	sigla_partido
 					ren v19	votos_nominais
-					ren v20	votos_nao_nominais
+					ren v20	votos_legenda
 					
 					order numero_partido, b(sigla_partido)
 					
@@ -302,10 +477,10 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 					ren v20 numero_partido
 					ren v21	sigla_partido
 					ren v27	votos_nominais
-					ren v28	votos_nao_nominais
+					ren v28	votos_legenda
 					
 				}
-				else if `ano' >= 2018 & `ano' <= 2020 {
+				else if `ano' == 1994 | (`ano' >= 2018 & `ano' <= 2020) {
 					
 					drop in 1
 					
@@ -320,7 +495,7 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 					ren v18	cargo
 					ren v20 numero_partido
 					ren v21	sigla_partido
-					ren v33	votos_nao_nominais
+					ren v33	votos_legenda
 					ren v34	votos_nominais
 					
 					order votos_nominais, b(votos_nao_nominais)
@@ -347,15 +522,16 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 					order votos_nominais, b(votos_nao_nominais)
 					
 				}
-				*
+				*/
 				
 				//------------------//
 				// limpa strings
 				//------------------//
 				
-				destring ano turno votos_*, replace force
+				destring ano turno id_municipio_tse votos_*, replace force // remover zeros a esquerda
 				
-				if "`estado'" == "BR" {
+				/*
+				if "`estado'" == "BR" | "`estado'" == "BRASIL" {
 					ren sigla_uf sigla_uf_orig
 					merge m:1 id_municipio_tse using `diretorio_ufs'
 					drop if _merge == 2
@@ -365,7 +541,7 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 					drop sigla_uf
 					ren sigla_uf_orig sigla_uf
 				}
-				*
+				*/
 				
 				foreach k of varlist _all {
 					cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "##VERIFICAR BASE 1994##")
@@ -379,9 +555,10 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 				limpa_tipo_eleicao	`ano'
 				limpa_partido		`ano' sigla_partido
 				
-				merge m:1 id_municipio_tse using `diretorio'
-				drop if _merge == 2
-				drop _merge
+				collapse (sum) votos*, by(ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo numero_partido sigla_partido) // soma votos em transito e nao
+				
+				merge m:1 id_municipio_tse using `diretorio', keep(1 3) nogenerate
+				
 				order id_municipio, b(id_municipio_tse)
 				
 				// para 2006 e cargo=presidente, dados originais tem problemas: sigla_uf=BR duplica números, sigla_uf=DF tem votos x4
@@ -389,6 +566,10 @@ foreach ano of numlist 2018 { // 1994(2)2022 {
 				// solução: usar *só* o arquivo sigla_uf=BR, que vem correto
 				if `ano' == 2006 & "`estado'" != "BR" {
 					drop if cargo == "presidente"
+				}
+				
+				if `ano' == 1998 & "`estado'" != "BRASIL" {
+					keep if cargo == "presidente"
 				}
 				
 				cap duplicates drop

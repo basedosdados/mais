@@ -7,21 +7,21 @@
 // listas de estados
 //------------------------//
 
-local estados_1994	AC AL AM AP BA             GO MA    MS             PI             RR RS SC SE SP TO BR_AC BR_AL BR_AM BR_AP BR_BA BR_GO BR_MA BR_MS BR_PI BR_RR BR_RS BR_SC BR_SE BR_SP BR_TO
-local estados_1996	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB    PI       RN    RR       SE SP TO
-local estados_1998	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2000	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2002	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2004	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2006	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2008	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2010	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2012	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2014	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2016	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2018	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_1994	AC AL AM AP BA BRASIL          GO MA    MS             PI             RR RS SC SE SP TO
+local estados_1996	AC AL AM AP BA        CE    ES GO MA MG MS    PA PB    PI       RN    RR       SE SP TO
+local estados_1998	AC AL AM AP BA BRASIL CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2000	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2002	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2004	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2006	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2008	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2010	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2012	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2014	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2016	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2018	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2020	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2022	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 
 //------------------------//
 // loops
@@ -32,38 +32,52 @@ keep id_municipio id_municipio_tse
 tempfile municipio
 save `municipio'
 
-foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		
 		cap import delimited using "input/detalhe_votacao_munzona/detalhe_votacao_munzona_`ano'/detalhe_votacao_munzona_`ano'_`estado'.txt", delimiter(";") varn(nonames) stringcols(_all) clear
 		cap import delimited using "input/detalhe_votacao_munzona/detalhe_votacao_munzona_`ano'/detalhe_votacao_munzona_`ano'_`estado'.csv", delimiter(";") varn(nonames) stringcols(_all) clear
 		
-		if `ano' <= 2012 {
+		//br if v14 == "01120" & v18 == "PRESIDENTE"
+		
+		if `ano' == 1994 | `ano' == 1998 {
 			
-			keep v3 v4 v5 v6 v8 v10 v12 v13 v14 v15 v16 v17 v18 v19 v20 v21 v22 v23
+			drop in 1
+			
+			keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v24 v26 ///
+				v31 v32 ///
+				v41 ///
+				v43 v44 v45
 			
 			ren v3 ano
-			ren v4 turno
-			ren v5 tipo_eleicao
-			ren v6 sigla_uf
-			ren v8 id_municipio_tse
-			ren v10 zona
-			ren v12 cargo
-			ren v13 aptos
-			ren v14 secoes
-			ren v15 secoes_agregadas
-			ren v16 aptos_totalizadas
-			ren v17 secoes_totalizadas
-			ren v18 comparecimento
-			ren v19 abstencoes
-			ren v20 votos_validos
-			ren v21 votos_brancos
-			ren v22 votos_nulos
-			ren v23 votos_legenda
+			ren v6 turno
+			ren v8 tipo_eleicao
+			ren v11 sigla_uf
+			ren v14 id_municipio_tse
+			ren v16 zona
+			ren v18 cargo
+			ren v19 aptos
+			ren v20 secoes
+			ren v21 secoes_agregadas
+			ren v24 comparecimento
+			ren v26 abstencoes
+			ren v31 votos_nominais // validos
+			ren v32 votos_legenda // validos
+			ren v41 votos_brancos
 			
+			destring votos_nominais votos_legenda v43 v44 v45, replace
+			
+			gen votos_validos = votos_nominais + votos_legenda
+			gen votos_nulos = v43 + v44 + v45
+			
+			drop v43 v44 v45
+			
+			gen aptos_totalizadas = .
+			gen secoes_totalizadas = .
+		
 		}
-		else if `ano' >= 2014 & `ano' <= 2020 {
+		else if `ano' == 1996 {
 			
 			drop in 1
 			
@@ -83,17 +97,51 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 			ren v23 secoes_totalizadas
 			ren v24 comparecimento
 			ren v25 abstencoes
-			ren v27 votos_validos
+			ren v27 votos_nominais
 			ren v28 votos_brancos
 			ren v29 votos_nulos
 			ren v30 votos_legenda
 			
+			destring votos_nominais votos_legenda, replace
+			
+			gen votos_validos = votos_nominais + votos_legenda
+			
 		}
-		else if `ano' >= 2022 {
+		else if `ano' >= 2000 & `ano' <= 2016  {
 			
 			drop in 1
 			
-			keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v24 v26 v30 v41 v42 v32
+			keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v22 v23 v24 v25 v27 v28 v29 v30
+			
+			ren v3 ano
+			ren v6 turno
+			ren v8 tipo_eleicao
+			ren v11 sigla_uf
+			ren v14 id_municipio_tse
+			ren v16 zona
+			ren v18 cargo
+			ren v19 aptos
+			ren v20 secoes
+			ren v21 secoes_agregadas
+			ren v22 aptos_totalizadas
+			ren v23 secoes_totalizadas
+			ren v24 comparecimento
+			ren v25 abstencoes
+			ren v27 votos_nominais
+			ren v28 votos_brancos
+			ren v29 votos_nulos
+			ren v30 votos_legenda
+			
+			destring votos_nominais votos_legenda, replace
+			
+			gen votos_validos = votos_nominais + votos_legenda
+			
+		}
+		else if `ano' >= 2018 {
+			
+			drop in 1
+			
+			keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v24 v26 v30 v31 v41 v42 v32
 			
 			ren v3 ano
 			ren v6 turno
@@ -110,6 +158,7 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 			ren v24 comparecimento
 			ren v26 abstencoes
 			ren v30 votos_validos
+			ren v31 votos_nominais
 			ren v41 votos_brancos
 			ren v42 votos_nulos
 			ren v32 votos_legenda
@@ -118,7 +167,6 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 			gen secoes_totalizadas = .
 			
 		}
-		*
 		*
 		
 		destring ano turno id_municipio_tse zona aptos* secoes* comparecimento abstencoes votos_*, replace force
@@ -129,6 +177,10 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 			
 		}
 		*
+		
+		if "`estado'" == "BRASIL" {
+			keep if cargo == "PRESIDENTE" | sigla_uf == "DF"
+		}
 		
 		//------------------//
 		// limpa strings
@@ -144,6 +196,11 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 		//------------------//
 		// variaveis
 		//------------------//
+		
+		// erro dados TSE vindo com valores diferentes para identificadores duplicados
+		//duplicates tag ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo, gen(d)
+		//sort d ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo
+		collapse (sum) aptos* secoes* comparecimento abstencoes votos*, by(ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo)
 		
 		merge m:1 id_municipio_tse using `municipio'
 		drop if _merge == 2
@@ -163,8 +220,6 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 		la var proporcao_votos_nulos "% Votos Nulos"
 		
 		drop if mod(ano, 2) > 0
-		
-		duplicates drop
 		
 		compress
 		
@@ -187,8 +242,15 @@ foreach ano of numlist 2014(2)2022 { // 1994(2)2022 {
 	*
 	
 	order	ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo aptos secoes secoes_agregadas aptos_totalizadas secoes_totalizadas ///
-			comparecimento abstencoes votos_validos votos_brancos votos_nulos votos_legenda ///
+			comparecimento abstencoes votos_validos votos_brancos votos_nulos votos_nominais votos_legenda ///
 			proporcao_*
+	
+	duplicates drop
+	
+	duplicates tag ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo, gen(dup)
+	sort dup       ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo
+	//drop if dup > 0 & comparecimento == 0
+	drop dup
 	
 	compress
 	
