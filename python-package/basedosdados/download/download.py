@@ -5,18 +5,13 @@ import gzip
 import os
 import re
 import shutil
+import sys
 import time
-from functools import partialmethod
-
+from functools import lru_cache, partialmethod
 from pathlib import Path
 
-import pandas_gbq
-from google.cloud import bigquery, bigquery_storage_v1
-from pandas_gbq.gbq import GenericGBQException
-from pydata_google_auth.exceptions import PyDataCredentialsError
-
 from basedosdados.constants import config
-from basedosdados.download.base import credentials, google_client
+from basedosdados.core.base import Base
 from basedosdados.exceptions import (
     BaseDosDadosAccessDeniedException,
     BaseDosDadosAuthorizationException,
@@ -24,19 +19,11 @@ from basedosdados.exceptions import (
     BaseDosDadosInvalidProjectIDException,
     BaseDosDadosNoBillingProjectIDException,
 )
-
-
-def _set_config_variables(billing_project_id, from_file):
-    """
-    Set billing_project_id and from_file variables
-    """
-
-    # standard billing_project_id configuration
-    billing_project_id = billing_project_id or config.billing_project_id
-    # standard from_file configuration
-    from_file = from_file or config.from_file
-
-    return billing_project_id, from_file
+from google.cloud import bigquery, bigquery_storage_v1, storage
+from pandas_gbq import read_gbq
+from pandas_gbq.gbq import GenericGBQException
+from pydata_google_auth import cache, get_user_credentials
+from pydata_google_auth.exceptions import PyDataCredentialsError
 
 
 def read_sql(
@@ -78,13 +65,12 @@ def read_sql(
             timeout=3600 * 2,
         )
 
-        return pandas_gbq.read_gbq(
+        return read_gbq(
             query,
-            credentials=credentials(from_file=from_file, reauth=reauth),
-            project_id=billing_project_id,
+            project_id=config.billing_project_id,
             use_bqstorage_api=use_bqstorage_api,
+            credentials=_credentials(from_file=config.from_file, reauth=reauth),
         )
-
     except GenericGBQException as e:
         if "Reason: 403" in str(e):
             raise BaseDosDadosAccessDeniedException from e
@@ -230,7 +216,7 @@ def download(
             "Either table_id, dataset_id or query should be filled."
         )
 
-    client = google_client(billing_project_id, from_file, reauth)
+    client = _google_client(billing_project_id, from_file, reauth)
 
     # makes sure that savepath is a filepath and not a folder
     savepath = _sets_savepath(savepath)
@@ -521,3 +507,45 @@ def _sets_savepath(savepath):
         )
 
     return savepath
+
+
+def _credentials(
+    from_file: bool = False,
+    reauth: bool = False,
+    scopes: list[str] = ["https://www.googleapis.com/auth/cloud-platform"],
+):
+    """
+    Get user credentials
+    """
+
+    if "google.colab" in sys.modules:
+        from google.colab import auth
+
+        auth.authenticate_user()
+        return None
+
+    if from_file:
+        return Base()._load_credentials(mode="prod")
+
+    if reauth:
+        return get_user_credentials(scopes, credentials_cache=cache.REAUTH)
+
+    return get_user_credentials(scopes)
+
+
+@lru_cache(256)
+def _google_client(billing_project_id: str, from_file: bool, reauth: bool):
+    """
+    Get Google Cloud client for bigquery and storage
+    """
+
+    return dict(
+        bigquery=bigquery.Client(
+            credentials=_credentials(from_file=from_file, reauth=reauth),
+            project=billing_project_id,
+        ),
+        storage=storage.Client(
+            credentials=_credentials(from_file=from_file, reauth=reauth),
+            project=billing_project_id,
+        ),
+    )

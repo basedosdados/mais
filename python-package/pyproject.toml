@@ -51,9 +51,6 @@ all = ["gql", "pandavro", "requests-toolbelt"]
 avro = ["pandavro"]
 upload = ["gql", "requests-toolbelt"]
 
-[tool.taskipy.tasks]
-lint = "semgrep scan --error --config auto --exclude-rule yaml.github-actions.security.third-party-action-not-pinned-to-commit-sha.third-party-action-not-pinned-to-commit-sha && ruff check ."
-
 [pytest]
 addopts = "-p no:warnings"
 

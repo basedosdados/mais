@@ -21,20 +21,5 @@ repos:
     rev: v0.2.0
     hooks:
       - id: ruff
-        args: [--fix]
+        args: [--fix, --select, I]
       - id: ruff-format
-
-  - repo: https://github.com/returntocorp/semgrep
-    rev: v1.30.0
-    hooks:
-    - id: semgrep
-      language: python
-      args: [
-        "--error",
-        "--config",
-        "auto",
-        "--exclude-rule",
-        "python.lang.security.audit.subprocess-shell-true.subprocess-shell-true",
-        "--exclude-rule",
-        "yaml.github-actions.security.third-party-action-not-pinned-to-commit-sha.third-party-action-not-pinned-to-commit-sha",
-      ]

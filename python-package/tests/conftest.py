@@ -13,7 +13,7 @@ import ruamel.yaml as ryaml
 
 from basedosdados import Metadata  # TODO: deprecate
 from basedosdados import Dataset, Storage, Table
-from basedosdados.upload.base import Base
+from basedosdados.core.base import Base
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"

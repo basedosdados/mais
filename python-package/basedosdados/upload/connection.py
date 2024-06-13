@@ -16,7 +16,7 @@ from google.cloud.bigquery_connection_v1.types.connection import (
     GetConnectionRequest,
 )
 
-from basedosdados.upload.base import Base
+from basedosdados.core.base import Base
 
 
 class Connection(Base):

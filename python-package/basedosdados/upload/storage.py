@@ -12,7 +12,7 @@ from loguru import logger
 from tqdm import tqdm
 
 from basedosdados.exceptions import BaseDosDadosException
-from basedosdados.upload.base import Base
+from basedosdados.core.base import Base
 
 # google retryble exceptions. References: https://googleapis.dev/python/storage/latest/retry_timeout.html#module-google.cloud.storage.retry
 
