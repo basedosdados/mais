@@ -17,6 +17,8 @@ program limpa_tipo_eleicao
 	replace tipo_eleicao = "eleicao ordinaria"	if tipo_eleicao == "eleicoes municipais de `ano' - 2. turno"
 	replace tipo_eleicao = "eleicao ordinaria"	if tipo_eleicao == "eleicoes municipais de `ano' - 1 turno"
 	replace tipo_eleicao = "eleicao ordinaria"	if tipo_eleicao == "eleicoes municipais de `ano' - 2 turno"
+	replace tipo_eleicao = "eleicao ordinaria"	if tipo_eleicao == "eleicoes municipais de `ano' - 1º turno"
+	replace tipo_eleicao = "eleicao ordinaria"	if tipo_eleicao == "eleicoes municipais de `ano' - 2º turno"
 	replace tipo_eleicao = "eleicao ordinaria"	if tipo_eleicao == "eleicoes municipais `ano'"
 	replace tipo_eleicao = "eleicao ordinaria"	if tipo_eleicao == "eleicoes gerais estaduais `ano'"
 	replace tipo_eleicao = "eleicao ordinaria"	if tipo_eleicao == "eleicao geral federal `ano'"

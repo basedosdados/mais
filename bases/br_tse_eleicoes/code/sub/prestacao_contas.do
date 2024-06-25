@@ -61,7 +61,7 @@ foreach ano of numlist 2006(2)2022 {
 			replace descricao_item = "" if descricao_item == "#NULO#"
 			
 			replace valor_item = subinstr(valor_item, ",", ".", .)
-			destring ano id_tipo_item valor_item, replace force // sequencial_candidato
+			destring ano valor_item, replace force
 			
 		}
 		*
@@ -151,8 +151,6 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
-		destring numero_candidato, replace force
-		
 		gen tipo_eleicao = "eleicao ordinaria"
 		
 	}
@@ -209,7 +207,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
-		destring numero_candidato id_municipio_tse*, replace force
+		destring id_municipio_tse*, replace force
 		
 		gen tipo_eleicao = "eleicao ordinaria"
 		
@@ -263,8 +261,6 @@ foreach ano of numlist 2002(2)2022 {
 		*
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
-		
-		destring numero_candidato, replace force
 		
 		gen tipo_eleicao = "eleicao ordinaria"
 		
@@ -325,7 +321,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
-		destring numero_candidato id_municipio_tse*, replace force
+		destring id_municipio_tse*, replace force
 		
 		gen tipo_eleicao = "eleicao ordinaria"
 		
@@ -402,8 +398,6 @@ foreach ano of numlist 2002(2)2022 {
 		*
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
-		
-		destring numero_candidato, replace force
 		
 		gen tipo_eleicao = "eleicao ordinaria"
 		
@@ -482,7 +476,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
-		destring numero_candidato id_municipio_tse*, replace force
+		destring id_municipio_tse*, replace force
 		
 		gen tipo_eleicao = "eleicao ordinaria"
 		
@@ -634,8 +628,6 @@ foreach ano of numlist 2002(2)2022 {
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
 		limpa_tipo_eleicao `ano'
-		
-		destring numero_candidato* numero_partido*, replace force
 		
 	}
 	if `ano' == 2016 {
@@ -858,7 +850,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring numero_candidato* numero_partido* id_municipio_tse*, replace force
+		destring id_municipio_tse*, replace force
 		
 	}
 	if `ano' == 2018 {
@@ -875,7 +867,7 @@ foreach ano of numlist 2002(2)2022 {
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
-			drop v1 v2 v3 v4 v6 v7 v8 v14 v15 v17 v27 v29 v31 v33 v40 v44 v47
+			drop v1 v2 v3 v4 v6 v7 v8 v14 v15 v17 v27 v29 v31 v33 v40 v44 v47 v58 v59 v60
 			
 			ren v5	tipo_eleicao
 			ren v9	turno
@@ -966,7 +958,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring numero_candidato* numero_partido* id_municipio_tse*, replace force
+		destring id_municipio_tse*, replace force // numero_candidato* numero_partido* 
 		
 	}
 	if `ano' >= 2020 {
@@ -1072,18 +1064,16 @@ foreach ano of numlist 2002(2)2022 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring numero_candidato* numero_partido* id_municipio_tse*, replace force // sequencial_candidato
+		destring id_municipio_tse*, replace force
 		
 	}
 	*
 	
-	cap confirm variable id_municipio_tse
-	if !_rc {
-		merge m:1 id_municipio_tse using `diretorio'
-		drop if _merge == 2
-		drop _merge
-		order id_municipio, b(id_municipio_tse)
-	}
+	cap gen id_municipio_tse = .
+	merge m:1 id_municipio_tse using `diretorio'
+	drop if _merge == 2
+	drop _merge
+	order id_municipio, b(id_municipio_tse)
 	
 	gen ano = `ano'
 	
@@ -1147,8 +1137,6 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_despesa = subinstr(valor_despesa, ",", ".", .)
 		
-		destring numero_candidato* numero_partido, replace force
-		
 	}
 	if `ano' == 2004 {
 		
@@ -1195,7 +1183,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_despesa = subinstr(valor_despesa, ",", ".", .)
 		
-		destring numero_candidato* numero_partido id_municipio_tse, replace force
+		destring id_municipio_tse, replace force
 		
 	}
 	if `ano' == 2006 {
@@ -1243,8 +1231,6 @@ foreach ano of numlist 2002(2)2022 {
 		*
 		
 		replace valor_despesa = subinstr(valor_despesa, ",", ".", .)
-		
-		destring numero_candidato* numero_partido, replace force
 		
 	}
 	if `ano' == 2008 {
@@ -1294,7 +1280,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_despesa = subinstr(valor_despesa, ",", ".", .)
 		
-		destring numero_candidato* numero_partido id_municipio_tse, replace force
+		destring id_municipio_tse, replace force
 		
 	}
 	if `ano' == 2010 {
@@ -1363,8 +1349,6 @@ foreach ano of numlist 2002(2)2022 {
 		*
 		
 		replace valor_despesa = subinstr(valor_despesa, ",", ".", .)
-		
-		destring numero_candidato* numero_partido, replace force
 		
 	}
 	if `ano' == 2012 {
@@ -1483,7 +1467,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_despesa = subinstr(valor_despesa, ",", ".", .)
 		
-		destring numero_candidato* numero_partido id_municipio_tse*, replace force
+		destring id_municipio_tse*, replace force
 		
 	}
 	if `ano' == 2014 {
@@ -1611,8 +1595,6 @@ foreach ano of numlist 2002(2)2022 {
 		replace valor_despesa = subinstr(valor_despesa, ",", ".", .)
 		
 		limpa_tipo_eleicao `ano'
-		
-		destring numero_candidato* numero_partido, replace force
 		
 	}
 	if `ano' == 2016 {
@@ -1793,7 +1775,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring numero_candidato* numero_partido id_municipio_tse*, replace force
+		destring id_municipio_tse*, replace force
 		
 	}
 	if `ano' == 2018 {
@@ -1895,7 +1877,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring turno numero_candidato* numero_partido* id_municipio_tse*, replace force
+		destring turno id_municipio_tse*, replace force
 		
 	}
 	*
@@ -1999,7 +1981,7 @@ foreach ano of numlist 2002(2)2022 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring turno numero_candidato* numero_partido* id_municipio_tse*, replace force
+		destring turno id_municipio_tse*, replace force
 		
 	}
 	*

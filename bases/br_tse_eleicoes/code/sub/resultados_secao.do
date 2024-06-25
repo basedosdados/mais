@@ -43,8 +43,6 @@ foreach ano of numlist 1994(2)2022 {
 		
 		di "`ano'_`estado'"
 		
-		//local ano 2008
-		//local estado TO
 		cap import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'/votacao_secao_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
 		cap import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'/votacao_secao_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear
 		

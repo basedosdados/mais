@@ -72,7 +72,7 @@ use `candidatos'
 merge 1:1 aux_id using "output/norm_candidatos.dta"
 drop _merge aux_id
 
-drop coligacao composicao
+//drop coligacao composicao
 
 egen aux = tag(ano tipo_eleicao id_candidato_bd cargo)
 bys ano tipo_eleicao id_candidato_bd: egen N_cargo = sum(aux)
@@ -281,7 +281,7 @@ foreach ano of numlist 1994(2)2022 {
 	
 	ren numero numero_candidato
 	
-	drop nome_candidato nome_urna_candidato //coligacao composicao
+	drop nome_candidato nome_urna_candidato
 	
 	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado votos
 	
@@ -397,6 +397,8 @@ foreach ano of numlist 1994(2)2022 {
 		// candidato
 		//---------------------//
 		
+		//local ano 2022
+		//local uf RJ
 		use "output/resultados_candidato_secao_`ano'.dta" if sigla_uf == "`uf'", clear
 		
 		ren numero_candidato numero
@@ -682,7 +684,7 @@ save `candidatos'
 
 !mkdir "output/bens_candidato"
 
-foreach ano of numlist 2018(2)2022 { // 2006(2)2022 {
+foreach ano of numlist 2006(2)2022 {
 	
 	!mkdir "output/bens_candidato/ano=`ano'"
 	
@@ -764,7 +766,7 @@ save `candidatos_mod2_presid'
 
 !mkdir "output/receitas_candidato"
 
-foreach ano of numlist 2018(2)2022 { // 2002(2)2022 {
+foreach ano of numlist 2002(2)2022 {
 	
 	!mkdir "output/receitas_candidato/ano=`ano'"
 	
@@ -831,6 +833,7 @@ foreach ano of numlist 2018(2)2022 { // 2002(2)2022 {
 	//--------------//
 	
 	drop ano
+	
 	export delimited "output/receitas_candidato/ano=`ano'/receitas_candidato.csv", replace
 	
 }
@@ -896,7 +899,7 @@ save `candidatos_mod2_presid'
 
 !mkdir "output/despesas_candidato"
 
-foreach ano of numlist 2018(2)2022 { // 2002(2)2022 {
+foreach ano of numlist 2002(2)2022 {
 	
 	!mkdir "output/despesas_candidato/ano=`ano'"
 	
