@@ -229,7 +229,7 @@ save `candidatos_mod2_presid'
 !mkdir "output/resultados_candidato_municipio_zona"
 !mkdir "output/resultados_partido_municipio_zona"
 
-foreach ano of numlist 1994(2)2022 {
+foreach ano of numlist 2004 { // 1994(2)2022 {
 	
 	//---------------------//
 	// candidato-municipio-zona

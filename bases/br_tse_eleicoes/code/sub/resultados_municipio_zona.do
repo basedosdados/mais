@@ -9,13 +9,13 @@
 
 local estados_1994_candidato	AC AL AM AP BA BR              GO MA    MS       PB PE PI          RO RR RS SC SE SP TO
 local estados_1996_candidato	AC AL AM AP BA        CE    ES GO MA MG MS    PA PB PE PI       RN RO RR RS    SE SP TO
-local estados_1998_candidato	AC AL AM AP BA BRASIL CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ dados faltando no original do TSE. está afetando o somatório de votos para presidente
+local estados_1998_candidato	AC AL AM AP BA BRASIL CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2000_candidato	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2002_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO //   ZZ
+local estados_2002_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2004_candidato	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2006_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO //   ZZ
+local estados_2006_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2008_candidato	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2010_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO //VT ZZ
+local estados_2010_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2012_candidato	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2014_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2016_candidato	AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -25,13 +25,13 @@ local estados_2022_candidato	AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB
 
 local estados_1994_partido		AC AL AM AP BA BR              GO MA    MS       PB PE PI          RO RR RS SC SE SP TO
 local estados_1996_partido		AC AL AM AP BA        CE    ES GO MA MG MS    PA PB PE PI       RN RO RR RS    SE SP TO
-local estados_1998_partido		AC AL AM AP BA BRASIL CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ
+local estados_1998_partido		AC AL AM AP BA BRASIL CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2000_partido		AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2002_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ
+local estados_2002_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2004_partido		AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2006_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ
+local estados_2006_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2008_partido		AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2010_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ
+local estados_2010_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2012_partido		AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2014_partido		AC AL AM AP BA BR     CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2016_partido		AC AL AM AP BA        CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -55,7 +55,7 @@ save `diretorio_ufs'
 
 foreach ano of numlist 1994(2)2022 {
 	
-	foreach tipo in partido { // candidato
+	foreach tipo in candidato partido { // 
 		
 		if "`tipo'" == "candidato" {
 			
@@ -135,99 +135,6 @@ foreach ano of numlist 1994(2)2022 {
 					ren v44 resultado
 					
 				}
-				
-				/*
-				if `ano' <= 2012 {
-					
-					keep v3 v4 v5 v6 v8 v10 v12 v13 v14 v15 v16 v22 v23 v24 v29
-					
-					ren v3	ano
-					ren v4	turno
-					ren v5	tipo_eleicao
-					ren v6	sigla_uf
-					ren v8	id_municipio_tse
-					ren v10	zona
-					ren v12	numero_candidato
-					ren v13	sequencial_candidato
-					ren v14	nome_candidato
-					ren v15	nome_urna_candidato
-					ren v16	cargo
-					ren v22	resultado
-					ren v23 numero_partido
-					ren v24	sigla_partido
-					ren v29	votos
-					
-				}
-				else if `ano' >= 2014 & `ano' <= 2016 {
-					
-					drop in 1
-					
-					keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v22 v29 v30 v36 v38
-					
-					ren v3  ano
-					ren v6  turno
-					ren v8  tipo_eleicao
-					ren v11 sigla_uf
-					ren v14 id_municipio_tse
-					ren v16 zona
-					ren v19 sequencial_candidato
-					ren v20 numero_candidato
-					ren v21 nome_candidato
-					ren v22 nome_urna_candidato
-					ren v18 cargo
-					ren v36 resultado
-					ren v29 numero_partido
-					ren v30 sigla_partido
-					ren v38 votos
-					
-				}
-				else if `ano' >= 2018 & `ano' <= 2020 {
-					
-					drop in 1
-					
-					keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v22 v29 v30 v40 v44
-					
-					ren v3  ano
-					ren v6  turno
-					ren v8  tipo_eleicao
-					ren v11 sigla_uf
-					ren v14 id_municipio_tse
-					ren v16 zona
-					ren v18 cargo
-					ren v19 sequencial_candidato
-					ren v20 numero_candidato
-					ren v21 nome_candidato
-					ren v22 nome_urna_candidato
-					ren v29 numero_partido
-					ren v30 sigla_partido
-					ren v40 votos
-					ren v44 resultado
-					
-				}
-				else if `ano' >= 2022 {
-					
-					drop in 1
-					
-					keep v3 v5 v6 v11 v14 v16 v18 v19 v20 v21 v22 v29 v30 v40 v44
-					
-					ren v3  ano
-					ren v5  tipo_eleicao
-					ren v6  turno
-					ren v11 sigla_uf
-					ren v14 id_municipio_tse
-					ren v16 zona
-					ren v18 cargo
-					ren v19 sequencial_candidato
-					ren v20 numero_candidato
-					ren v21 nome_candidato
-					ren v22 nome_urna_candidato
-					ren v29 numero_partido
-					ren v30 sigla_partido
-					ren v40 votos
-					ren v44 resultado
-					
-				}
-				*/
 				
 				//------------------//
 				// limpa strings
@@ -440,89 +347,6 @@ foreach ano of numlist 1994(2)2022 {
 					
 				}
 				*
-				
-				/*
-				if `ano' <= 2012 {
-					
-					keep v3 v4 v5 v6 v8 v10 v12 v16 v17 v19 v20
-					
-					ren v3	ano
-					ren v4	turno
-					ren v5	tipo_eleicao
-					ren v6	sigla_uf
-					ren v8	id_municipio_tse
-					ren v10	zona
-					ren v12	cargo
-					ren v17 numero_partido
-					ren v16	sigla_partido
-					ren v19	votos_nominais
-					ren v20	votos_legenda
-					
-					order numero_partido, b(sigla_partido)
-					
-				}
-				else if `ano' >= 2014 & `ano' <= 2016 {
-					
-					drop in 1
-					
-					keep v3 v6 v8 v11 v14 v16 v18 v20 v21 v27 v28
-					
-					ren v3	ano
-					ren v6	turno
-					ren v8	tipo_eleicao
-					ren v11	sigla_uf
-					ren v14	id_municipio_tse
-					ren v16	zona
-					ren v18	cargo
-					ren v20 numero_partido
-					ren v21	sigla_partido
-					ren v27	votos_nominais
-					ren v28	votos_legenda
-					
-				}
-				else if `ano' == 1994 | (`ano' >= 2018 & `ano' <= 2020) {
-					
-					drop in 1
-					
-					keep v3 v6 v8 v11 v14 v16 v18 v20 v21 v33 v34
-					
-					ren v3	ano
-					ren v6	turno
-					ren v8	tipo_eleicao
-					ren v11	sigla_uf
-					ren v14	id_municipio_tse
-					ren v16	zona
-					ren v18	cargo
-					ren v20 numero_partido
-					ren v21	sigla_partido
-					ren v33	votos_legenda
-					ren v34	votos_nominais
-					
-					order votos_nominais, b(votos_nao_nominais)
-					
-				}
-				else if `ano' >= 2022 {
-					
-					drop in 1
-					
-					keep v3 v5 v6 v11 v14 v16 v18 v20 v21 v33 v34
-					
-					ren v3	ano
-					ren v5	tipo_eleicao
-					ren v6	turno
-					ren v11	sigla_uf
-					ren v14	id_municipio_tse
-					ren v16	zona
-					ren v18	cargo
-					ren v20 numero_partido
-					ren v21	sigla_partido
-					ren v33	votos_nao_nominais
-					ren v34	votos_nominais
-					
-					order votos_nominais, b(votos_nao_nominais)
-					
-				}
-				*/
 				
 				//------------------//
 				// limpa strings
