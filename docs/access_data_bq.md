@@ -14,7 +14,7 @@ Google. Você faz consultas ao banco em SQL direto do navegador com:
 Pronto(a) para começar? Nesta página você encontra:
 
 - [Primeiros passos](#primeiros-passos)
-- [Entenda o uso gratuito do Big Query (BQ)](#Entenda-o-uso-gratuito-do-Big-Query-(BQ))
+- [Entenda o uso gratuito do Big Query BQ](#entenda-o-uso-gratuito-do-big-query-bq)
 - [Tutoriais](#tutoriais)
 - [Manuais e Cursos de SQL](#manuais-e-cursos-de-sql)
 
@@ -92,75 +92,96 @@ Só clicar em **Executar** e pronto!
     de consultas` - basta você completar com os campos e filtros que
     achar necessários.
 
-## Entenda o uso gratuito do Big Query (BQ)
+## Entenda o uso gratuito do Big Query BQ
 
-### Introdução
-
-Para usuários que acessam os dados em projetos públicos como o da Base dos Dados o único tipo de custo associado se refere ao custo de **processamento das consultas**. A notícia boa é que todo usuário possui *1 TB gratuito por mês para consultar livremente os dados do maior data lake público do Brasil*.
-
-Pontos de destaque:
-- Nenhuma cobrança automática é feita ao usuário caso o limite de 1 TB/mês seja excedido. 
-- Se você ainda não possui um projeto no BQ consulte nosso [guia](https://basedosdados.github.io/mais/access_data_bq/#primeiros-passos) para criá-lo.
-- Conhecer o básico da interface do BQ facilitará o entendimento do artigo. Sugerimos 3 trilhas:
-  - [Nosso guia utilizando as tabelas da RAIS](https://dev.to/basedosdados/bigquery-101-45pk) 
-  - [A documentação oficial](- Guia da interface do [Big Query](https://cloud.google.com/bigquery/docs/bigquery-web-ui?hl=pt-br#open-ui))
-  - Nosso acervo de [vídeos no youtube](https://www.youtube.com/@BasedosDados)
+Para usuários que acessam os dados em projetos públicos como o da Base dos Dados o único tipo de custo associado se refere ao custo de **processamento das consultas**. A notícia boa, como mencionado acima, é que todo usuário possui *1 TB gratuito por mês para consultar livremente os dados do maior data lake público do Brasil*. Se você ainda não possui um projeto no BQ consulte nosso [guia](https://basedosdados.github.io/mais/access_data_bq/#primeiros-passos) para criá-lo.
 
 
-### Como usufruir ao máximo das consultas gratuitas
-
-Nesta seção, apresentamos algumas dicas simples para reduzir os custos das consulta e aproveitar ao máximo os dados da BD!
-Antes de partir para os exemplos, apresentaremos o mecanismo básico de previsão de custos de processamento de consultas no Big Query (BQ). 
-	- No canto superior direito da interface do BQ é informado um aviso com estimativa do custo de processamento que será cobrado do seu projeto apos a execução da consulta.
-![Image](https://github.com/basedosdados/mais/assets/61624649/9b8a44e8-dd0c-4b98-8ab4-e858d99ade30)
 
 
-- Este é o mecanismo básico e prontamente acessível de previsibilidade dos custos de processamento.
-- Por motivos de limitação interna do próprio Big Query consultas à tabelas específicas não exibem estimativas de custos. É o caso das tabelas que possuem **Row Access Policy**. Isto é, tabelas onde o número de linhas acessíveis é limitada a depender do usuário. Este é o caso das tabelas que fazem parte do serviço [BDpro](https://info.basedosdados.org/bd-pro)
+- Conhecer o básico da interface do BQ é importante para o entendimento do artigo. Caso você não tenha familiariadade ou queria revisitar a interface, sugerimos 3 trilhas:
+1. Nosso guia utilizando as [tabelas da RAIS - Relação Anual de Informações Sociais](https://dev.to/basedosdados/bigquery-101-45pk) 
+2. Nosso acervo de [vídeos no youtube](https://www.youtube.com/@BasedosDados)
+3. A introdução a interface [feita pelo Google](https://cloud.google.com/bigquery/docs/bigquery-web-ui?hl=pt-br#open-ui)
 
-1. **Selecione somente as colunas de interesse**
-	- No Big Query os dados possuem o armazenamento orientado a colunas, isto é, cada coluna é armazenada separadamente. Esta característica tem uma implicação clara quanto aos custos de processamento: **quanto mais colunas forem selecionadas, maior será o custo.**
+
+### Veja como usufruir ao máximo das consultas gratuitas
+
+Nesta seção, apresentamos algumas dicas simples para reduzir os custos das consulta e aproveitar ao máximo os dados da BD! Antes de partir para os exemplos, apresentaremos o mecanismo básico de previsão de custos de processamento de consultas no Big Query (BQ). 
+
+!!! Tip "Estimativas de custos"
+  No canto superior direito da interface do BQ é informado um aviso com estimativa do custo de processamento que será cobrado do seu projeto apos a execução da consulta.
+  
+  ![](images/bq_query_estimated_costs.png){ width=100% }
+
+
+- Este é o mecanismo básico e prontamente acessível de previsibilidade dos custos de processamento. Infelizmente, não funciona para todas as tabelas. Por motivos de limitação interna do próprio Big Query, consultas à tabelas específicas não exibem estimativas de custos. É o caso das tabelas que possuem **Row Access Policy**. Isto é, tabelas onde o número de linhas acessíveis é limitada a depender do usuário. Este é o caso das tabelas que fazem parte do serviço [BDpro](https://info.basedosdados.org/bd-pro)
+
+- Exemplo da tabela `agencia` do conjunto `br_bcb_estban`. 
+  
+  ![](images/bq_query_estimated_costs_row_security.png) { width=100% }
+
+
+### **Selecione somente as colunas de interesse**
 	
-	- **Evite**: Selecionar colunas em excesso
+- A arquitetura do Big Query utiliza o armazenamento orientado a colunas, isto é, cada coluna é armazenada separadamente. Esta característica tem uma implicação clara quanto aos custos de processamento: **quanto mais colunas forem selecionadas, maior será o custo.**
+	
+
+- **Evite**: Selecionar colunas em excesso
+
 ```sql 
     SELECT * 
 ```
-	- **Prática recomendada**: selecione somente as colunas de interesse para reduzir o custo final da consulta.
+
+- **Prática recomendada**: selecione somente as colunas de interesse para reduzir o custo final da consulta.
+
 ```sql
 SELECT coluna1, coluna2 
 ```
-	- **Exemplo**: tabela [microdados](https://basedosdados.org/dataset/5beeec93-cbf3-43f6-9eea-9bee6a0d1683?table=dea823a5-cad7-4014-b77c-4aa33b3b0541) do conjunto br_ms_sim.
-	- Possui 31 milhões de linhas e 53 colunas
+- **Exemplo**: tabela [`microdados`](https://basedosdados.org/dataset/5beeec93-cbf3-43f6-9eea-9bee6a0d1683?table=dea823a5-cad7-4014-b77c-4aa33b3b0541) do conjunto `br_ms_sim`.
+
 ```sql
-SELECT sequencial_obito, tipo_obito, data_obito FROM `basedosdados.br_ms_sim.microdados
+SELECT sequencial_obito, tipo_obito, data_obito FROM `basedosdados.br_ms_sim.microdados`
 ``` 
-- custo estimado: 531 MB
+- **custo estimado**: 531 MB
+
 ```sql
-SELECT * FROM `basedosdados.br_ms_sim.microdados
+SELECT * FROM `basedosdados.br_ms_sim.microdados`
 ```
-- custo estimado:  5.83 GB
-		
+- **custo estimado**:  5.83 GB
+	
 - Para entender mais a fundo a arquitetura colunar, consulte a documentação oficial do [Big Query](https://cloud.google.com/bigquery/docs/storage_overview?hl=pt-br)
 
-### Utilize colunas particionadas para filtrar os dados
+### Utilize colunas particionadas e clusterizadas para filtrar os dados
 
--  As partições são divisões feitas em uma tabela para facilitar o gerenciamento e a consulta dos dados. No momento de execução da consulta o Big Query ignora linhas que possuem um valor da partição diferente do utilizado no filtro. Isto normalmente reduz significativamente a quantidade de linhas lidas e, o que nos interessa, reduz o custo de processamento.
+-  As partições são divisões feitas em uma tabela para facilitar o gerenciamento e a consulta dos dados. No momento de execução da consulta, o Big Query ignora linhas que possuem um valor da partição diferente do utilizado no filtro. Isto normalmente reduz significativamente a quantidade de linhas lidas e, o que nos interessa, **reduz o custo de processamento**.
 
-- Como saber qual coluna foi utilizada para particionar uma tabela específica?
-  1. Pelos metadados na página de tabela do site da [BD](https://basedosdados.org/dataset/5beeec93-cbf3-43f6-9eea-9bee6a0d1683?table=dea823a5-cad7-4014-b77c-4aa33b3b0541)
-    1. 
-![Image](https://github.com/basedosdados/mais/assets/61624649/5c95f7d4-90cb-45a3-9712-9b5a7292c1c8)
+- Clusters são agrupamentos organizados em uma tabela com base nos valores de uma ou mais colunas especificadas. Durante a execução de uma consulta, o BigQuery otimiza a leitura dos dados, acessando apenas os segmentos que contêm os valores relevantes das colunas de cluster. Isso significa que, ao invés de escanear toda a tabela, apenas as partes necessárias são lidas, o que geralmente reduz a quantidade de dados processados e, consequentemente, **reduz o custo de processamento.**
 
-  2. Pelos metadados na página de 'Detalhes' no Big Query
-    1. 
-![Image](https://github.com/basedosdados/mais/assets/61624649/6ff43089-2af9-4bbe-83e6-41a2cda5d925)		
-  - **Prática recomendada**: sempre que possível, utilize colunas particionadas para filtrar os dados.
-  - **Exemplo**
-    -  Consulta utilizado a coluna particionada como filtro:
+- Como saber qual coluna foi utilizada para particionar e clusterizar uma tabela específica?
+
+  1. Pelos metadados na página de 'Detalhes' no Big Query
+  
+  ![](images/bq_metadada_table_partitions_clusters.gif)
+
+  - Note que são elencadas ambas informações: **partições** e **clusters**. Neste caso, a coluna **ano** foi definida como partição e a coluna **sigla_uf** como cluster.
+  
+  2. Pelos metadados na página de tabela no site da [BD](https://basedosdados.org/dataset/5beeec93-cbf3-43f6-9eea-9bee6a0d1683?table=dea823a5-cad7-4014-b77c-4aa33b3b0541)
+
+  ![](images/website_metadata_table_partitions.gif)
+
+  - Note que o campo **Partições no Big Query** elenca tanto as partições quanto os clusters.
+  
+
+
+- **Prática recomendada**: sempre que possível, utilize colunas particionadas e clusterizadas para filtrar/agregar os dados.
+
+- **Exemplo**
+  -  Consulta utilizado a coluna particionada como filtro:
 ```sql
 SELECT sequencial_obito, tipo_obito, data_obito FROM `basedosdados.br_ms_sim.microdados` where ano = 2015
 ```
-  - custo estimado: 31.32 MB
+  - custo estimado: 31.32 MB. A combinação de técnicas de seleção de colunas e filtro utilizando partição **reduziu o custo** estimado da consulta inicial de **5.83 GB** para somente **31.32 MB**
 
 ### Muita atenção ao realizar joins entre tabelas
 
@@ -168,7 +189,7 @@ SELECT sequencial_obito, tipo_obito, data_obito FROM `basedosdados.br_ms_sim.mic
   - Certifique-se de que o join é realmente necessário para a análise que você está realizando. Às vezes, operações alternativas como subconsultas ou agregações podem ser mais eficientes.
 
 - **Entenda a Lógica do JOIN**
-  - Diferentes tipos de joins (INNER, LEFT, RIGHT, FULL) têm diferentes implicações de desempenho e resultado. Gastar um tempinho entendo a melhor opção para seu objetivo de análise pode ajudar a ter um controle de custos mais eficiênte. 
+  - Diferentes tipos de joins (INNER, LEFT, RIGHT, FULL) têm diferentes implicações de desempenho e resultado. Gastar um tempinho entendo a melhor opção para seu objetivo de análise pode ajudar a ter um controle de custos mais eficiente. 
   - Um dos problemas que geralmente ocorrem é a multiplicação de linhas indesejadas no resultado final. 
 
 - **Utilize as dicas anteriores**
