@@ -94,10 +94,9 @@ Só clicar em **Executar** e pronto!
 
 ## Entenda o uso gratuito do Big Query BQ
 
+Está seção é dedicada a apresentar dicas de como reduzir custos de processamento para aproveitar ao máximo os dados da BD! 
+
 Para usuários que acessam os dados em projetos públicos como o da Base dos Dados o único tipo de custo associado se refere ao custo de **processamento das consultas**. A notícia boa, como mencionado acima, é que todo usuário possui *1 TB gratuito por mês para consultar livremente os dados do maior data lake público do Brasil*. Se você ainda não possui um projeto no BQ consulte nosso [guia](https://basedosdados.github.io/mais/access_data_bq/#primeiros-passos) para criá-lo.
-
-
-
 
 - Conhecer o básico da interface do BQ é importante para o entendimento do artigo. Caso você não tenha familiariadade ou queria revisitar a interface, sugerimos 3 trilhas:
 1. Nosso guia utilizando as [tabelas da RAIS - Relação Anual de Informações Sociais](https://dev.to/basedosdados/bigquery-101-45pk) 
@@ -107,7 +106,7 @@ Para usuários que acessam os dados em projetos públicos como o da Base dos Dad
 
 ### Veja como usufruir ao máximo das consultas gratuitas
 
-Nesta seção, apresentamos algumas dicas simples para reduzir os custos das consulta e aproveitar ao máximo os dados da BD! Antes de partir para os exemplos, apresentaremos o mecanismo básico de previsão de custos de processamento de consultas no Big Query (BQ). 
+Nesta seção, apresentamos algumas dicas simples para reduzir os custos das consultas no Big Query e aproveitar ao máximo os dados da BD! Antes de partir para os exemplos, apresentaremos o mecanismo básico de previsão de custos de processamento de consultas no Big Query (BQ). 
 
 !!! Tip "Estimativas de custos"
   No canto superior direito da interface do BQ é informado um aviso com estimativa do custo de processamento que será cobrado do seu projeto apos a execução da consulta.
@@ -122,7 +121,7 @@ Nesta seção, apresentamos algumas dicas simples para reduzir os custos das con
   ![](images/bq_query_estimated_costs_row_security.png) { width=100% }
 
 
-### **Selecione somente as colunas de interesse**
+### DICA 1: **Selecione somente as colunas de interesse**
 	
 - A arquitetura do Big Query utiliza o armazenamento orientado a colunas, isto é, cada coluna é armazenada separadamente. Esta característica tem uma implicação clara quanto aos custos de processamento: **quanto mais colunas forem selecionadas, maior será o custo.**
 	
@@ -152,7 +151,7 @@ SELECT * FROM `basedosdados.br_ms_sim.microdados`
 	
 - Para entender mais a fundo a arquitetura colunar, consulte a documentação oficial do [Big Query](https://cloud.google.com/bigquery/docs/storage_overview?hl=pt-br)
 
-### Utilize colunas particionadas e clusterizadas para filtrar os dados
+### DICA 2: Utilize colunas particionadas e clusterizadas para filtrar os dados
 
 -  As partições são divisões feitas em uma tabela para facilitar o gerenciamento e a consulta dos dados. No momento de execução da consulta, o Big Query ignora linhas que possuem um valor da partição diferente do utilizado no filtro. Isto normalmente reduz significativamente a quantidade de linhas lidas e, o que nos interessa, **reduz o custo de processamento**.
 
@@ -181,9 +180,9 @@ SELECT * FROM `basedosdados.br_ms_sim.microdados`
 ```sql
 SELECT sequencial_obito, tipo_obito, data_obito FROM `basedosdados.br_ms_sim.microdados` where ano = 2015
 ```
-  - custo estimado: 31.32 MB. A combinação de técnicas de seleção de colunas e filtro utilizando partição **reduziu o custo** estimado da consulta inicial de **5.83 GB** para somente **31.32 MB**
+  - **custo estimado**: 31.32 MB. A combinação de técnicas de seleção de colunas e filtro utilizando partição **reduziu o custo** estimado da consulta inicial de **5.83 GB** para somente **31.32 MB**
 
-### Muita atenção ao realizar joins entre tabelas
+### DICA 3: Muita atenção ao realizar joins entre tabelas
 
 - **Avalie a real necessidade do JOIN**
   - Certifique-se de que o join é realmente necessário para a análise que você está realizando. Às vezes, operações alternativas como subconsultas ou agregações podem ser mais eficientes.
@@ -191,6 +190,7 @@ SELECT sequencial_obito, tipo_obito, data_obito FROM `basedosdados.br_ms_sim.mic
 - **Entenda a Lógica do JOIN**
   - Diferentes tipos de joins (INNER, LEFT, RIGHT, FULL) têm diferentes implicações de desempenho e resultado. Gastar um tempinho entendo a melhor opção para seu objetivo de análise pode ajudar a ter um controle de custos mais eficiente. 
   - Um dos problemas que geralmente ocorrem é a multiplicação de linhas indesejadas no resultado final. 
+  - Para entender a fundo boas práticas e problemas recorrentes com joins sugerimos os guias [SQL Joins na prática](https://medium.com/@aneuk3/sql-joins-defcf817e8cf) e [Maximizando a Eficiência com JOIN em Consultas SQL para Combinar Tabelas](https://medium.com/comunidadeds/maximizando-a-eficiência-com-join-em-consultas-sql-para-combinar-tabelas-55bd3b62fa09) 
 
 - **Utilize as dicas anteriores**
   - Selecione somente colunas de interesse
