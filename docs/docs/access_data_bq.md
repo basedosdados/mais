@@ -96,7 +96,7 @@ Só clicar em **Executar** e pronto!
 
 Está seção é dedicada a apresentar dicas de como reduzir custos de processamento para aproveitar ao máximo os dados da BD! 
 
-Para usuários que acessam os dados em projetos públicos como o da Base dos Dados o único tipo de custo associado se refere ao custo de **processamento das consultas**. A notícia boa, como mencionado acima, é que todo usuário possui *1 TB gratuito por mês para consultar livremente os dados do maior data lake público do Brasil*. Se você ainda não possui um projeto no BQ consulte nosso [guia](https://basedosdados.github.io/mais/access_data_bq/#primeiros-passos) para criá-lo.
+Para usuários que acessam os dados em projetos públicos como o da Base dos Dados o único tipo de custo associado se refere ao custo de **processamento das consultas**. A notícia boa, como mencionado acima, é que todo usuário possui *1 TB gratuito por mês para consultar livremente os dados do maior data lake público do Brasil*. Se você ainda não possui um projeto no BQ consulte [a sessão acima](https://basedosdados.github.io/mais/access_data_bq/#primeiros-passos) para criá-lo.
 
 - Conhecer o básico da interface do BQ é importante para o entendimento do artigo. Caso você não tenha familiariadade ou queria revisitar a interface, sugerimos 3 trilhas:
 1. Nosso guia utilizando as [tabelas da RAIS - Relação Anual de Informações Sociais](https://dev.to/basedosdados/bigquery-101-45pk) 
@@ -137,17 +137,15 @@ Nesta seção, apresentamos algumas dicas simples para reduzir os custos das con
 ```sql
 SELECT coluna1, coluna2 
 ```
-- **Exemplo**: tabela [`microdados`](https://basedosdados.org/dataset/5beeec93-cbf3-43f6-9eea-9bee6a0d1683?table=dea823a5-cad7-4014-b77c-4aa33b3b0541) do conjunto `br_ms_sim`.
+- Veja este a diferença obtida com a tabela [`microdados`](https://basedosdados.org/dataset/5beeec93-cbf3-43f6-9eea-9bee6a0d1683?table=dea823a5-cad7-4014-b77c-4aa33b3b0541) do conjunto `br_ms_sim`.
+
+  - **Sem seleção de colunas:** custo estimado 5.83 GB
+  - **Selecionando 3 colunas:** custo estimado 0.531 GB (531 MB)
 
 ```sql
 SELECT sequencial_obito, tipo_obito, data_obito FROM `basedosdados.br_ms_sim.microdados`
 ``` 
-- **custo estimado**: 531 MB
 
-```sql
-SELECT * FROM `basedosdados.br_ms_sim.microdados`
-```
-- **custo estimado**:  5.83 GB
 	
 - Para entender mais a fundo a arquitetura colunar, consulte a documentação oficial do [Big Query](https://cloud.google.com/bigquery/docs/storage_overview?hl=pt-br)
 
@@ -159,19 +157,17 @@ SELECT * FROM `basedosdados.br_ms_sim.microdados`
 
 - Como saber qual coluna foi utilizada para particionar e clusterizar uma tabela específica?
 
-  1. Pelos metadados na página de 'Detalhes' no Big Query
-  
-  ![](images/bq_metadada_table_partitions_clusters.gif)
-
-  - Note que são elencadas ambas informações: **partições** e **clusters**. Neste caso, a coluna **ano** foi definida como partição e a coluna **sigla_uf** como cluster.
-  
-  2. Pelos metadados na página de tabela no site da [BD](https://basedosdados.org/dataset/5beeec93-cbf3-43f6-9eea-9bee6a0d1683?table=dea823a5-cad7-4014-b77c-4aa33b3b0541)
+  1. Pelos metadados na página de tabela no site da [BD](https://basedosdados.org/dataset/5beeec93-cbf3-43f6-9eea-9bee6a0d1683?table=dea823a5-cad7-4014-b77c-4aa33b3b0541)
 
   ![](images/website_metadata_table_partitions.gif)
 
   - Note que o campo **Partições no Big Query** elenca tanto as partições quanto os clusters.
-  
 
+  2. Pelos metadados na página de 'Detalhes' no Big Query
+  
+  ![](images/bq_metadada_table_partitions_clusters.gif)
+
+  - Note que são elencadas ambas informações: **partições** e **clusters**. Neste caso, a coluna **ano** foi definida como partição e a coluna **sigla_uf** como cluster.  
 
 - **Prática recomendada**: sempre que possível, utilize colunas particionadas e clusterizadas para filtrar/agregar os dados.
 
@@ -189,7 +185,7 @@ SELECT sequencial_obito, tipo_obito, data_obito FROM `basedosdados.br_ms_sim.mic
 
 - **Entenda a Lógica do JOIN**
   - Diferentes tipos de joins (INNER, LEFT, RIGHT, FULL) têm diferentes implicações de desempenho e resultado. Gastar um tempinho entendo a melhor opção para seu objetivo de análise pode ajudar a ter um controle de custos mais eficiente. 
-  - Um dos problemas que geralmente ocorrem é a multiplicação de linhas indesejadas no resultado final. 
+  - Um dos problemas mais comuns é a multiplicação de linhas indesejadas no resultado final. 
   - Para entender a fundo boas práticas e problemas recorrentes com joins sugerimos os guias [SQL Joins na prática](https://medium.com/@aneuk3/sql-joins-defcf817e8cf) e [Maximizando a Eficiência com JOIN em Consultas SQL para Combinar Tabelas](https://medium.com/comunidadeds/maximizando-a-eficiência-com-join-em-consultas-sql-para-combinar-tabelas-55bd3b62fa09) 
 
 - **Utilize as dicas anteriores**
