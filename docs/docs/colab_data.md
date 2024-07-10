@@ -1,5 +1,3 @@
-
-
 # Suba dados na BD
 
 ## Por que minha organização deve subir dados na BD?
