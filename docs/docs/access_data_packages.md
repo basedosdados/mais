@@ -1,4 +1,3 @@
-
 # Pacotes
 
 Os pacotes da Base dos Dados permitem o acesso ao *datalake* público

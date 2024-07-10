@@ -12,15 +12,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up poetry
         run: pipx install poetry
+
       - name: Set up python
         uses: actions/setup-python@v4
         with:
           cache: poetry
           python-version: '3.7'
+
       - name: Install requirements
+        working-directory: ./python-package
         run: poetry install --only=docs
-      - run: mkdocs gh-deploy --force
+
+      - name: Build and deploy docs
+        working-directory: ./docs
+        run: mkdocs gh-deploy --force
         env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
