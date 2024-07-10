@@ -5,7 +5,7 @@ on:
       - main
       - master
     paths:
-      - docs
+      - docs/**
 jobs:
   deploy:
     runs-on: ubuntu-latest
