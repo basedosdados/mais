@@ -24,7 +24,9 @@ jobs:
 
       - name: Install requirements
         working-directory: ./python-package
-        run: poetry install --only=docs
+        run: |
+          pip install requests-toolbelt
+          poetry install --only=docs
 
       - name: Build and deploy docs
         working-directory: ./docs
