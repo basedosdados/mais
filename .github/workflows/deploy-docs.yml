@@ -20,13 +20,11 @@ jobs:
           cache: poetry
           python-version: '3.7'
 
-      - name: Install requirements
+      - name: Install requirements and activate environment
         working-directory: ./python-package
-        run: poetry install
-
-      - name: Activate virtual environment
-        working-directory: ./python-package
-        run: source $(poetry env info --path)/bin/activate
+        run: |
+          poetry install
+          echo "$(poetry env info --path)/bin" >> $GITHUB_PATH
 
       - name: Build and deploy docs
         working-directory: ./docs
