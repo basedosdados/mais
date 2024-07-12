@@ -25,6 +25,7 @@ jobs:
         run: poetry install
 
       - name: Activate virtual environment
+        working-directory: ./python-package
         run: source $(poetry env info --path)/bin/activate
 
       - name: Build and deploy docs
