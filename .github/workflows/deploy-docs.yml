@@ -4,6 +4,9 @@ on:
     branches:
       - main
       - master
+    paths:
+      - 'docs/**'
+      - '.github/workflows/deploy-docs.yml'
 jobs:
   deploy:
     runs-on: ubuntu-latest
