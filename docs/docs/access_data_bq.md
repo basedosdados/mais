@@ -1,4 +1,3 @@
-
 # BigQuery
 
 O BigQuery é o um serviço de banco de dados em nuvem da
