@@ -28,6 +28,6 @@ jobs:
 
       - name: Build and deploy docs
         working-directory: ./docs
-        run: mkdocs gh-deploy --force
+        run: python -m mkdocs gh-deploy --force
         env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
