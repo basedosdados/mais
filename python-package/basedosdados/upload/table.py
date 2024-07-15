@@ -566,7 +566,6 @@ class Table(Base):
                 table_id=self.table_id,
                 config_path=self.config_path,
                 bucket_name=self.bucket_name,
-                overwrite_cli_config=self.overwrite_cli_config,
             ).upload(
                 path=path,
                 mode="staging",
