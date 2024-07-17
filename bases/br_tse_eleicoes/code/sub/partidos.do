@@ -138,7 +138,7 @@ foreach ano of numlist 1990 1994(2)2022 {
 		merge m:1 id_municipio_tse using `diretorio'
 		drop if _merge == 2
 		drop _merge
-		order id_municipio, b(id_municipio_tse)
+		order id_municipio id_municipio_tse, a(sigla_uf)
 		
 		//------------------//
 		// limpa strings
@@ -193,13 +193,15 @@ foreach ano of numlist 1990 1994(2)2022 {
 	
 	duplicates drop
 	
-	duplicates tag ano turno tipo_eleicao sigla_uf id_municipio_tse cargo numero, gen(dup)
-	drop if dup > 0 & strpos(nome_coligacao, "¿") > 0
-	drop dup
+	//duplicates tag ano turno tipo_eleicao sigla_uf id_municipio_tse cargo numero, gen(dup)
+	//drop if dup > 0 & strpos(nome_coligacao, "¿") > 0
+	//drop dup
 	
+	gen aux = (tipo_agremiacao == "coligacao")
+	bys ano turno tipo_eleicao sigla_uf id_municipio_tse cargo numero: egen aux_coligacao = max(aux)
 	duplicates tag ano turno tipo_eleicao sigla_uf id_municipio_tse cargo numero, gen(dup)
-	drop if dup > 0 & tipo_agremiacao == "partido isolado" // assumimos que tem coligacao, quando tem duplicada.
-	drop dup	
+	drop if dup > 0 & aux_coligacao == 1 & tipo_agremiacao == "partido isolado" // assumimos que quando há coligacao reportada, essa é a verdade
+	drop dup aux*
 	
 	duplicates drop ano turno tipo_eleicao sigla_uf id_municipio_tse cargo numero, force
 		// se sobram duplicadas, pegamos um aleatorio (perdendo sequencial_coligacao, nome_coligacao, composicao_coligacao)
