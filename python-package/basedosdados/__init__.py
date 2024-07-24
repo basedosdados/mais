@@ -1,6 +1,7 @@
 """
 Importing the module will automatically import the submodules.
 """
+
 import os
 import sys
 
@@ -10,9 +11,9 @@ from basedosdados._warnings import show_warnings
 show_warnings()
 
 sys.path.append(f"{os.getcwd()}/python-package")
-
 from basedosdados.backend import Backend
 from basedosdados.constants import config, constants
+from basedosdados.core.base import Base
 from basedosdados.download.download import download, read_sql, read_table
 from basedosdados.download.metadata import (
     get_columns,
