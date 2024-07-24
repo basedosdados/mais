@@ -224,13 +224,13 @@ class Storage(Base):
                         "to 'replace' to overwrite data."
                     )
 
-            logger.success(
-                " {object} {filename}_{mode} was {action}!",
-                filename=filepath.name,
-                mode=m,
-                object="File",
-                action="uploaded",
-            )
+                logger.success(
+                    " {object} {filename}_{mode} was {action}!",
+                    filename=filepath.name,
+                    mode=m,
+                    object="File",
+                    action="uploaded",
+                )
 
     def download(
         self,
