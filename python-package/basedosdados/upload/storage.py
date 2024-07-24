@@ -1,6 +1,7 @@
 """
 Class for managing the files in cloud storage.
 """
+
 import sys
 
 
@@ -223,13 +224,13 @@ class Storage(Base):
                         "to 'replace' to overwrite data."
                     )
 
-            logger.success(
-                " {object} {filename}_{mode} was {action}!",
-                filename=filepath.name,
-                mode=m,
-                object="File",
-                action="uploaded",
-            )
+                logger.success(
+                    " {object} {filename}_{mode} was {action}!",
+                    filename=filepath.name,
+                    mode=m,
+                    object="File",
+                    action="uploaded",
+                )
 
     def download(
         self,
@@ -401,8 +402,7 @@ class Storage(Base):
             )
         # Divides table_blobs list for maximum batch request size
         table_blobs_chunks = [
-            table_blobs[i : i + 999]
-            for i in range(0, len(table_blobs), 999)  # noqa
+            table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)  # noqa
         ]
 
         for i, source_table in enumerate(
