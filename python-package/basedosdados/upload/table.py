@@ -561,7 +561,12 @@ class Table(Base):
                 Path,
             ),
         ):
-            Storage(self.dataset_id, self.table_id).upload(
+            Storage(
+                dataset_id=self.dataset_id,
+                table_id=self.table_id,
+                config_path=self.config_path,
+                bucket_name=self.bucket_name,
+            ).upload(
                 path=path,
                 mode="staging",
                 if_exists=if_storage_data_exists,
