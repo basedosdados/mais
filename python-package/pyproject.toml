@@ -1,0 +1,59 @@
+[tool.poetry]
+name = "basedosdados"
+version = "2.0.0-beta.16"
+description = "Organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery."
+authors = ["Joao Carabetta <joao.carabetta@gmail.com>", "Ricardo Dahis", "Diego Oliveira"]
+classifiers = [
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+homepage = "https://github.com/basedosdados/mais"
+repository = "https://github.com/basedosdados/mais"
+license = "MIT"
+packages = [
+    {include = "basedosdados"},
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8.1,<4"
+google-api-python-client = "^2.86"
+google-cloud-bigquery = "^3.10"
+google-cloud-bigquery-connection = "^1.12"
+google-cloud-bigquery-storage = "^2.19"
+google-cloud-storage = "^2.9"
+gql = { version = "^3.4", optional = true }
+loguru = "^0.7.0"
+pandas = "^2.0"
+pandas-gbq = "^0.19"
+pandavro = { version = "^1.7", optional = true }
+pydata-google-auth = "^1.8"
+requests-toolbelt = { version = "^1", optional = true }
+tomlkit = "^0.11"
+tqdm = "^4"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.3.3"
+ruff = "^0.4.3"
+semgrep = "^1.36.0"
+taskipy = "^1.12.0"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.2.3"
+mkdocs-click = "^0.5.0"
+mkdocs-material = "^8.2.7"
+mkdocstrings = "^0.18.1"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.2.1"
+
+[tool.poetry.extras]
+all = ["gql", "pandavro", "requests-toolbelt"]
+avro = ["pandavro"]
+upload = ["gql", "requests-toolbelt"]
+
+[pytest]
+addopts = "-p no:warnings"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,16 @@
+# What is the bucket that you are saving all the data?
+# It should be an unique name.
+bucket_name = ""
+
+[gcloud-projects]
+
+    [gcloud-projects.staging]
+    name = ""
+    credentials_path = ""
+
+    [gcloud-projects.prod]
+    name = ""
+    credentials_path = ""
+
+[api]
+url = ""
