@@ -16,7 +16,7 @@ save `dir_uf'
 
 !mkdir "output/microdados_estabelecimentos"
 
-foreach ano of numlist 2022 { // 1985(1)2022 {
+foreach ano of numlist 1985(1)2022 {
 	
 	if `ano' >= 1985 & `ano' <= 2001	local arquivo ESTB`ano'
 	if `ano' == 2002					local arquivo consulta21554418

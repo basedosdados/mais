@@ -9,13 +9,13 @@ set varabbrev off
 
 cd "~/Downloads/dados_TSE"
 
-do "code/fnc/clean_string.do"
-do "code/fnc/limpa_tipo_eleicao.do"
-do "code/fnc/limpa_instrucao.do"
-do "code/fnc/limpa_estado_civil.do"
-do "code/fnc/limpa_resultado.do"
-do "code/fnc/limpa_partido.do"
-do "code/fnc/limpa_candidato.do"
+do "~/Dropbox/BD/mais/bases/br_tse_eleicoes/code/fnc/clean_string.do"
+do "~/Dropbox/BD/mais/bases/br_tse_eleicoes/code/fnc/limpa_tipo_eleicao.do"
+do "~/Dropbox/BD/mais/bases/br_tse_eleicoes/code/fnc/limpa_instrucao.do"
+do "~/Dropbox/BD/mais/bases/br_tse_eleicoes/code/fnc/limpa_estado_civil.do"
+do "~/Dropbox/BD/mais/bases/br_tse_eleicoes/code/fnc/limpa_resultado.do"
+do "~/Dropbox/BD/mais/bases/br_tse_eleicoes/code/fnc/limpa_partido.do"
+do "~/Dropbox/BD/mais/bases/br_tse_eleicoes/code/fnc/limpa_candidato.do"
 
 //----------------------------------------------------------------------------//
 // build

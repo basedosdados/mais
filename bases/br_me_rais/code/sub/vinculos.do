@@ -16,7 +16,7 @@ save `dir_uf'
 
 !mkdir "output/microdados_vinculos"
 
-foreach ano of numlist 2022 { // 1985(1)2022 {
+foreach ano of numlist 1985(1)2022 {
 	
 	if `ano' == 1985                  	local ufs AC AL AM AP BA CE DF ES GO    MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP
 	if `ano' == 1986                  	local ufs AC AL AM AP BA CE DF ES GO MA MG MS MT    PB PE PI PR RJ RN RO RR RS SC SE SP

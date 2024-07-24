@@ -58,6 +58,8 @@ foreach ano of numlist 1945 1947 1955(5)1965 1950(4)1990 1989 { // 1933 1934
 			
 			foreach estado in `estados_`ano'_candidato' {
 				
+				//local ano 1945
+				//local estado BA
 				cap import delimited "input/votacao_candidato_uf/votacao_candidato_uf_`ano'_br/VOTACAO_CANDIDATO_UF_`ano'_`estado'.txt", ///
 					delim(";") varn(nonames) stringcols(_all) clear
 				
@@ -160,7 +162,7 @@ foreach ano of numlist 1945 1947 1955(5)1965 1950(4)1990 1989 { // 1933 1934
 				//------------------//
 				
 				foreach k of varlist _all {
-					cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "#AVULSO#")
+					cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "#AVULSO#", "-1", "-3")
 				}
 				*
 				
@@ -240,7 +242,7 @@ foreach ano of numlist 1945 1947 1955(5)1965 1950(4)1990 1989 { // 1933 1934
 				//------------------//
 				
 				foreach k of varlist _all {
-					cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE")
+					cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "-1", "-3")
 				}
 				*
 				

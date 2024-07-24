@@ -28,12 +28,12 @@ local estados_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve) stringcols(_all)
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
 keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
 
-foreach ano of numlist 2018(2)2022 { // 1990 1994(2)2022 {
+foreach ano of numlist 1990 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		
@@ -46,13 +46,19 @@ foreach ano of numlist 2018(2)2022 { // 1990 1994(2)2022 {
 		
 		if `ano' <= 2012 {
 			
-			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v17 v18
+			if mod(`ano', 4) == 2 {
+				keep v3 v4 v5 v7 v10 v11 v12 v13 v14 v16 v17 v18
+				ren v7 sigla_uf
+			}
+			else {
+				keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v17 v18
+				ren v6 sigla_uf
+				ren v7 id_municipio_tse
+			}
 			
 			ren v3	ano
 			ren v4	turno
 			ren v5	tipo_eleicao
-			ren v6	sigla_uf
-			ren v7	id_municipio_tse
 			ren v10	cargo
 			ren v11	tipo_agremiacao
 			ren v12	numero
@@ -67,13 +73,19 @@ foreach ano of numlist 2018(2)2022 { // 1990 1994(2)2022 {
 			
 			drop in 1
 			
-			keep v3 v5 v6 v10 v11 v14 v15 v16 v17 v18 v19 v20 v21
+			if mod(`ano', 4) == 2 {
+				keep v3 v5 v6 v11 v14 v15 v16 v17 v18 v19 v20 v21
+				ren v11 sigla_uf
+			}
+			else {
+				keep v3 v5 v6 v10 v11 v14 v15 v16 v17 v18 v19 v20 v21
+				ren v10 sigla_uf
+				ren v11 id_municipio_tse
+			}
 			
 			ren v3	ano
 			ren v5	tipo_eleicao
 			ren v6	turno
-			ren v10	sigla_uf
-			ren v11	id_municipio_tse
 			ren v14	cargo
 			ren v15	tipo_agremiacao
 			ren v16	numero
@@ -88,13 +100,19 @@ foreach ano of numlist 2018(2)2022 { // 1990 1994(2)2022 {
 			
 			drop in 1
 			
-			keep v3 v5 v6 v10 v11 v14 v15 v16 v17 v18 v19 v20 v21 v22 v23 v24 v25 v27
+			if mod(`ano', 4) == 2 {
+				keep v3 v5 v6 v11 v14 v15 v16 v17 v18 v19 v20 v21 v22 v23 v24 v25 v27
+				ren v11 sigla_uf
+			}
+			else {
+				keep v3 v5 v6 v10 v11 v14 v15 v16 v17 v18 v19 v20 v21 v22 v23 v24 v25 v27
+				ren v10 sigla_uf
+				ren v11 id_municipio_tse
+			}
 			
 			ren v3	ano
 			ren v5	tipo_eleicao
 			ren v6	turno
-			ren v10	sigla_uf
-			ren v11	id_municipio_tse
 			ren v14	cargo
 			ren v15	tipo_agremiacao
 			ren v16	numero
@@ -112,23 +130,28 @@ foreach ano of numlist 2018(2)2022 { // 1990 1994(2)2022 {
 		}
 		*
 		
-		destring ano turno, replace force
+		replace sigla_uf = "" if sigla_uf == "BR"
+		cap gen id_municipio_tse = ""
+		
+		destring ano turno id_municipio_tse, replace force
 		
 		merge m:1 id_municipio_tse using `diretorio'
 		drop if _merge == 2
 		drop _merge
-		order id_municipio, b(id_municipio_tse)
+		order id_municipio id_municipio_tse, a(sigla_uf)
 		
 		//------------------//
 		// limpa strings
 		//------------------//
+		
+		replace nome = "PARTIDO HUMANISTA DA SOLIDARIEDADE" if nome == "PARTIDO DA HUMANISTA DA SOLIDARIEDADE"
 		
 		replace sequencial_coligacao = "" if inlist(sequencial_coligacao, "-3", "-1")
 		if `ano' >= 2022 {
 			replace numero_federacao = "" if inlist(numero_federacao, "-3", "-1")
 		}
 		
-		foreach k in nome_coligacao nome_federacacao sigla_federacao composicao_federacao nome_coligacao {
+		foreach k in nome_coligacao nome_federacacao sigla_federacao composicao_federacao nome_coligacao composicao_coligacao {
 			cap replace `k' = "" if `k' == "#NE#" | `k' == "#NULO#"
 		}
 		
@@ -138,6 +161,10 @@ foreach ano of numlist 2018(2)2022 { // 1990 1994(2)2022 {
 		
 		limpa_tipo_eleicao	`ano'
 		limpa_partido		`ano' sigla
+		
+		//------------------//
+		// salva
+		//------------------//
 		
 		order tipo_agremiacao, a(nome)
 		order ano turno tipo_eleicao
@@ -159,6 +186,25 @@ foreach ano of numlist 2018(2)2022 { // 1990 1994(2)2022 {
 		}
 	}
 	*
+	
+	//------------------//
+	// duplicadas
+	//------------------//
+	
+	duplicates drop
+	
+	//duplicates tag ano turno tipo_eleicao sigla_uf id_municipio_tse cargo numero, gen(dup)
+	//drop if dup > 0 & strpos(nome_coligacao, "¿") > 0
+	//drop dup
+	
+	gen aux = (tipo_agremiacao == "coligacao")
+	bys ano turno tipo_eleicao sigla_uf id_municipio_tse cargo numero: egen aux_coligacao = max(aux)
+	duplicates tag ano turno tipo_eleicao sigla_uf id_municipio_tse cargo numero, gen(dup)
+	drop if dup > 0 & aux_coligacao == 1 & tipo_agremiacao == "partido isolado" // assumimos que quando há coligacao reportada, essa é a verdade
+	drop dup aux*
+	
+	duplicates drop ano turno tipo_eleicao sigla_uf id_municipio_tse cargo numero, force
+		// se sobram duplicadas, pegamos um aleatorio (perdendo sequencial_coligacao, nome_coligacao, composicao_coligacao)
 	
 	compress
 	

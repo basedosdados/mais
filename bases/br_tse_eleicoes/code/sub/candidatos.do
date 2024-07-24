@@ -7,43 +7,117 @@
 // lista de estados
 //------------------------//
 
-local estados_1994	AC AL AM AP BA BR          GO MA    MS             PI             RR RS    SE SP TO
-local estados_1996	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
-local estados_1998	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2000	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2002	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2004	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2006	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2008	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2010	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2012	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2014	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2016	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2018	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_1994	AC AL AM AP BA BR          GO MA    MS             PI             RR RS    SE SP TO
+local ufs_1996	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
+local ufs_1998	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2000	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2002	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2004	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2006	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2008	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2010	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2012	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2014	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2016	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2018	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local ufs_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 
 //------------------------//
 // loops
 //------------------------//
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") stringcols(_all)
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") //stringcols(_all)
 keep id_municipio id_municipio_tse
 tempfile municipio
 save `municipio'
 
-foreach ano of numlist 2022 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
-	foreach estado in `estados_`ano'' {
+	foreach uf in `ufs_`ano'' {
 		
-		di "`ano'_`estado'_candidatos"
+		di "`ano'_`uf'_candidatos"
 		
-		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.txt", ///
+		//local ano 2022
+		//local uf BA
+		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`uf'.txt", ///
 			delim(";") varn(nonames) stripquotes(yes) bindquotes(nobind) stringcols(_all) clear
-		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.csv", ///
+		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`uf'.csv", ///
 			delim(";") varn(nonames) stripquotes(yes) bindquotes(nobind) stringcols(_all) clear
 		
-		if `ano' == 1994 & "`estado'" == "BR" {
+		if `ano' <= 2014 | `ano' == 2018 {
+			
+			drop in 1
+			
+			keep v3 v6 v8 v11 v12 v15 v16 v17 v18 v19 v21 v22 v26 v28 v29 v35 v36 v38 v39 v41 v43 v45 v47 v49 v51 v54
+			
+			ren v3 ano
+			ren v6 turno
+			ren v8 tipo_eleicao
+			ren v11 sigla_uf
+			ren v12 id_municipio_tse
+			ren v15 cargo
+			ren v16 sequencial
+			ren v17 numero
+			ren v18 nome
+			ren v19 nome_urna
+			ren v21 cpf
+			ren v22 email
+			ren v26 situacao
+			ren v28 numero_partido
+			ren v29 sigla_partido
+			ren v35 nacionalidade
+			ren v36 sigla_uf_nascimento
+			ren v38 municipio_nascimento
+			ren v39 data_nascimento
+			ren v41 titulo_eleitoral
+			ren v43 genero
+			ren v45 instrucao
+			ren v47 estado_civil
+			ren v49 raca
+			ren v51 ocupacao
+			ren v54 resultado
+			
+		}
+		else if `ano' == 2016 | `ano' >= 2020 {
+			
+			drop in 1
+			
+			keep v3 v6 v8 v11 v12 v15 v16 v17 v18 v19 v21 v22 v26 v28 v29 v39 v40 v42 v43 v45 v47 v49 v51 v53 v55 v58
+			
+			ren v3 ano
+			ren v6 turno
+			ren v8 tipo_eleicao
+			ren v11 sigla_uf
+			ren v12 id_municipio_tse
+			ren v15 cargo
+			ren v16 sequencial
+			ren v17 numero
+			ren v18 nome
+			ren v19 nome_urna
+			ren v21 cpf
+			ren v22 email
+			ren v26 situacao
+			ren v28 numero_partido
+			ren v29 sigla_partido
+			ren v39 nacionalidade
+			ren v40 sigla_uf_nascimento
+			ren v42 municipio_nascimento
+			ren v43 data_nascimento
+			ren v45 titulo_eleitoral
+			ren v47 genero
+			ren v49 instrucao
+			ren v51 estado_civil
+			ren v53 raca
+			ren v55 ocupacao
+			ren v58 resultado
+			
+		}
+		
+		
+		
+		/*
+		if `ano' == 1994 & "`uf'" == "BR" {
 			
 			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
 			
@@ -75,7 +149,7 @@ foreach ano of numlist 2022 { // 1994(2)2022 {
 			ren v44 resultado
 			
 		}
-		else if (`ano' <= 1998 | (`ano' >= 2002 & `ano' <= 2006) | `ano' == 2010) & !(`ano' == 1994 & "`estado'" == "BR") {
+		else if (`ano' <= 1998 | (`ano' >= 2002 & `ano' <= 2006) | `ano' == 2010) & !(`ano' == 1994 & "`uf'" == "BR") {
 			
 			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
 			
@@ -901,31 +975,33 @@ foreach ano of numlist 2022 { // 1994(2)2022 {
 		*
 		
 		if `ano' >= 2020 drop in 1
+		*/
+		
+		//------------------//
+		// limpa strings
+		//------------------//
+		
+		destring ano turno id_municipio_tse, replace force
+		replace sequencial = "" if sequencial == "-1"
 		
 		merge m:1 id_municipio_tse using `municipio'
 		drop if _merge == 2
 		drop _merge
 		order id_municipio, b(id_municipio_tse)
 		
-		//------------------//
-		// limpa strings
-		//------------------//
-		
-		destring ano turno, replace force
-		replace sequencial = "" if sequencial == "-1"
-		
 		foreach k of varlist _all {
 			cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "##VERIFICAR BASE 1994##", "NÃO DIVULGÁVEL")
 		}
 		*
 		
-		foreach k in tipo_eleicao cargo situacao nacionalidade genero instrucao estado_civil raca ocupacao email resultado {
+		foreach k in tipo_eleicao cargo situacao nacionalidade genero instrucao estado_civil raca ocupacao resultado {
 			cap clean_string `k'
 		}
 		foreach k in nome nome_urna municipio_nascimento {
 			cap replace `k' = ustrtitle(`k')
 		}
-		*
+		
+		replace email = lower(email)
 		
 		limpa_tipo_eleicao	`ano'
 		limpa_partido		`ano' sigla_partido
@@ -933,6 +1009,13 @@ foreach ano of numlist 2022 { // 1994(2)2022 {
 		limpa_instrucao
 		limpa_estado_civil
 		limpa_resultado
+		
+		replace cpf = "0"      + cpf if length(cpf) == 10
+		replace cpf = "00"     + cpf if length(cpf) == 9
+		replace cpf = "000"    + cpf if length(cpf) == 8
+		replace cpf = "0000"   + cpf if length(cpf) == 7
+		replace cpf = "00000"  + cpf if length(cpf) == 6
+		replace cpf = "000000" + cpf if length(cpf) == 5
 		
 		replace cargo = "vice-presidente" 		if cargo == "vice presidente"
 		replace cargo = "vice-prefeito"   		if cargo == "vice prefeito"
@@ -955,6 +1038,7 @@ foreach ano of numlist 2022 { // 1994(2)2022 {
 		// limpa data_nascimento
 		//------------------//
 		
+		/*
 		replace data_nascimento = substr(data_nascimento, 1, 4) + "1" + substr(data_nascimento, 6, .) if strlen(data_nascimento) == 8 & substr(data_nascimento, 5, 1) == "0"
 		if `ano' == 1994 {
 			replace data_nascimento = subinstr(data_nascimento, "/", "", .)
@@ -983,9 +1067,9 @@ foreach ano of numlist 2022 { // 1994(2)2022 {
 			replace aux_mes = "12" if substr(data_nascimento, 4, 3) == "DEC"
 			replace data_nascimento = substr(data_nascimento, 1, 2) + aux_mes + "19" + substr(data_nascimento, 8, 9)
 		}
-		*
+		*/
 		
-		replace data_nascimento = substr(data_nascimento, 5, 4) + "-" + substr(data_nascimento, 3, 2) + "-" + substr(data_nascimento, 1, 2)
+		replace data_nascimento = substr(data_nascimento, 7, 4) + "-" + substr(data_nascimento, 4, 2) + "-" + substr(data_nascimento, 1, 2)
 		
 		replace data_nascimento = "" if real(substr(data_nascimento, 1, 4)) < 1900
 		
@@ -1007,8 +1091,8 @@ foreach ano of numlist 2022 { // 1994(2)2022 {
 		
 		duplicates drop
 		
-		tempfile candidatos_`estado'_`ano'
-		save `candidatos_`estado'_`ano''
+		tempfile candidatos_`uf'_`ano'
+		save `candidatos_`uf'_`ano''
 		
 	}
 	*
@@ -1018,9 +1102,9 @@ foreach ano of numlist 2022 { // 1994(2)2022 {
 	//------------------//
 	
 	use `candidatos_AC_`ano'', clear
-	foreach estado in `estados_`ano'' {
-		if "`estado'" != "AC" {
-			append using `candidatos_`estado'_`ano''
+	foreach uf in `ufs_`ano'' {
+		if "`uf'" != "AC" {
+			append using `candidatos_`uf'_`ano''
 		}
 	}
 	*

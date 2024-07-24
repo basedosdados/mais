@@ -25,135 +25,54 @@ keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
 
-foreach ano of numlist 2022 { //2008(2)2022 {
+foreach ano of numlist 2016(2)2022 { // 2008(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		
 		if `ano' <= 2010 {
 			
-			cap import delimited "input/perfil_eleitorado_secao/perfil_eleitor_secao_`ano'_`estado'/perfil_eleitor_secao_`ano'_`estado'.txt", delim(";") stringcols(_all) varn(nonames) clear
-			cap import delimited "input/perfil_eleitorado_secao/perfil_eleitor_secao_`ano'_`estado'/perfil_eleitor_secao_`ano'_`estado'.csv", delim(";") stringcols(_all) varn(nonames) clear
-			
-			keep v3 v4 v5 v7 v8 v10 v12 v14 v16 v17
-			
-			ren v3	ano
-			ren v4	sigla_uf
-			ren v5	id_municipio_tse
-			ren v7	zona
-			ren v8	secao
-			ren v10	estado_civil
-			ren v12	grupo_idade
-			ren v14	instrucao
-			ren v16	genero
-			ren v17	eleitores
-			
-			gen situacao_biometria = ""
-			gen eleitores_biometria = ""
-			gen eleitores_deficiencia = ""
-			gen eleitores_inclusao_nome_social = ""
-			
-			order ano sigla_uf id_municipio_tse situacao_biometria zona secao ///
-				genero estado_civil grupo_idade instrucao ///
-				eleitores eleitores_biometria eleitores_deficiencia eleitores_inclusao_nome_social
-			
+			cap import delimited "input/perfil_eleitorado_secao/perfil_eleitor_secao_`ano'_`estado'.txt", delim(";") stringcols(_all) clear
+			cap import delimited "input/perfil_eleitorado_secao/perfil_eleitor_secao_`ano'_`estado'.csv", delim(";") stringcols(_all) clear
+		
 		}
-		if `ano' == 2012 {
+		else {
 			
 			cap import delimited "input/perfil_eleitorado_secao/perfil_eleitor_secao_`ano'_`estado'/perfil_eleitor_secao_`ano'_`estado'.txt", delim(";") stringcols(_all) clear
 			cap import delimited "input/perfil_eleitorado_secao/perfil_eleitor_secao_`ano'_`estado'/perfil_eleitor_secao_`ano'_`estado'.csv", delim(";") stringcols(_all) clear
-			
-			keep ano_eleicao sg_uf cd_municipio ds_mun_sit_biometria nr_zona nr_secao ///
-				ds_genero ds_estado_civil ds_faixa_etaria ds_grau_escolaridade ///
-				qt_eleitores_perfil qt_eleitores_biometria qt_eleitores_deficiencia qt_eleitores_inc_nm_social
-			
-			ren ano_eleicao					ano
-			ren sg_uf						sigla_uf
-			ren cd_municipio				id_municipio_tse
-			ren ds_mun_sit_biometria		situacao_biometria
-			ren nr_zona						zona
-			ren nr_secao					secao
-			ren ds_genero					genero
-			ren ds_estado_civil				estado_civil
-			ren ds_faixa_etaria				grupo_idade
-			ren ds_grau_escolaridade		instrucao
-			ren qt_eleitores_perfil			eleitores
-			ren qt_eleitores_biometria		eleitores_biometria
-			ren qt_eleitores_deficiencia	eleitores_deficiencia
-			ren qt_eleitores_inc_nm_social	eleitores_inclusao_nome_social
-			
-		}
-		if `ano' >= 2014 {
-			
-			cap import delimited "input/perfil_eleitorado_secao/perfil_eleitor_secao_`ano'_`estado'/perfil_eleitor_secao_`ano'_`estado'.txt", delim(";") stringcols(_all) clear
-			cap import delimited "input/perfil_eleitorado_secao/perfil_eleitor_secao_`ano'_`estado'/perfil_eleitor_secao_`ano'_`estado'.csv", delim(";") stringcols(_all) clear
-			
-			if "`estado'" == "DF" & `ano' == 2014 {
-				
-				keep aa_eleicao sg_uf cd_municipio nr_zona nr_secao ///
-					ds_genero ds_estado_civil ds_faixa_etaria ds_grau_escolaridade ///
-					qt_eleitores_perfil qt_eleitores_biometria qt_eleitores_deficiencia qt_eleitores_inc_nm_social
-				
-				ren aa_eleicao					ano
-				ren sg_uf						sigla_uf
-				ren cd_municipio				id_municipio_tse
-				ren nr_zona						zona
-				ren nr_secao					secao
-				ren ds_genero					genero
-				ren ds_estado_civil				estado_civil
-				ren ds_faixa_etaria				grupo_idade
-				ren ds_grau_escolaridade		instrucao
-				ren qt_eleitores_perfil			eleitores
-				ren qt_eleitores_biometria		eleitores_biometria
-				ren qt_eleitores_deficiencia	eleitores_deficiencia
-				ren qt_eleitores_inc_nm_social	eleitores_inclusao_nome_social
-				
-				gen situacao_biometria = ""
-				
-			}
-			else {
-				
-				if `ano' == 2022 ren ds_mun_sit_biometrica ds_mun_sit_biometria
-				
-				keep ano_eleicao sg_uf cd_municipio ds_mun_sit_biometria nr_zona nr_secao ///
-					ds_genero ds_estado_civil ds_faixa_etaria ds_grau_escolaridade ///
-					qt_eleitores_perfil qt_eleitores_biometria qt_eleitores_deficiencia qt_eleitores_inc_nm_social
-				
-				ren ano_eleicao					ano
-				ren sg_uf						sigla_uf
-				ren cd_municipio				id_municipio_tse
-				ren ds_mun_sit_biometria		situacao_biometria
-				ren nr_zona						zona
-				ren nr_secao					secao
-				ren ds_genero					genero
-				ren ds_estado_civil				estado_civil
-				ren ds_faixa_etaria				grupo_idade
-				ren ds_grau_escolaridade		instrucao
-				ren qt_eleitores_perfil			eleitores
-				ren qt_eleitores_biometria		eleitores_biometria
-				ren qt_eleitores_deficiencia	eleitores_deficiencia
-				ren qt_eleitores_inc_nm_social	eleitores_inclusao_nome_social
-				
-			}
-			
-		}
-		*
 		
-		destring id_municipio_tse zona secao, replace force
+		}
 		
-		foreach k of varlist zona secao eleitores* {
+		if "`estado'" == "DF" & `ano' == 2014 gen situacao_biometrica = ""
+		
+		keep ano_eleicao sg_uf cd_municipio cd_mun_sit_biometrica nr_zona nr_secao ///
+			cd_genero cd_estado_civil cd_faixa_etaria cd_grau_escolaridade ///
+			qt_eleitores_perfil qt_eleitores_biometria qt_eleitores_deficiencia qt_eleitores_inc_nm_social
+		
+		ren ano_eleicao					ano
+		ren sg_uf						sigla_uf
+		ren cd_municipio				id_municipio_tse
+		ren cd_mun_sit_biometrica		situacao_biometria
+		ren nr_zona						zona
+		ren nr_secao					secao
+		ren cd_genero					genero
+		ren cd_estado_civil				estado_civil
+		ren cd_faixa_etaria				grupo_idade
+		ren cd_grau_escolaridade		instrucao
+		ren qt_eleitores_perfil			eleitores
+		ren qt_eleitores_biometria		eleitores_biometria
+		ren qt_eleitores_deficiencia	eleitores_deficiencia
+		ren qt_eleitores_inc_nm_social	eleitores_inclusao_nome_social
+		
+		foreach k of varlist eleitores* {
 			
 			cap replace `k' = "" if `k' == "-1"
 			
 		}
 		*
 		
-		foreach k in situacao_biometria genero grupo_idade instrucao estado_civil {
-			cap clean_string `k'
-		}
-		*
+		destring id_municipio_tse zona secao eleitores*, replace force
 		
-		cap limpa_instrucao
-		cap limpa_estado_civil
+		collapse (sum) eleitores*, by(ano sigla_uf id_municipio_tse situacao_biometria zona secao genero estado_civil grupo_idade instrucao) // depois da limpeza de strings
 		
 		merge m:1 id_municipio_tse using `diretorio'
 		drop if _merge == 2
