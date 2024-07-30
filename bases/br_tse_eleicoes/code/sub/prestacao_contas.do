@@ -5,13 +5,13 @@
 
 foreach ano of numlist 2006(2)2022 {
 	
-	if mod(`ano', 4) == 0 local estados AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-	if mod(`ano', 4) == 2 local estados AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+	if mod(`ano', 4) == 0 local ufs AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+	if mod(`ano', 4) == 2 local ufs AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 	
-	foreach estado in `estados' {
+	foreach uf in `ufs' {
 		
-		cap import delimited "input/bem_candidato/bem_candidato_`ano'/bem_candidato_`ano'_`estado'.txt", clear delim(";") varnames(nonames) stringc(_all)
-		cap import delimited "input/bem_candidato/bem_candidato_`ano'/bem_candidato_`ano'_`estado'.csv", clear delim(";") varnames(nonames) stringc(_all)
+		cap import delimited "input/bem_candidato/bem_candidato_`ano'/bem_candidato_`ano'_`uf'.txt", clear delim(";") varnames(nonames) stringc(_all)
+		cap import delimited "input/bem_candidato/bem_candidato_`ano'/bem_candidato_`ano'_`uf'.csv", clear delim(";") varnames(nonames) stringc(_all)
 		
 		if `ano' <= 2012 {
 		
@@ -24,30 +24,22 @@ foreach ano of numlist 2006(2)2022 {
 			ren v9	descricao_item
 			ren v10	valor_item
 			
-			foreach k in tipo_eleicao {
-				cap clean_string `k'
-			}
-			*
-			
-			limpa_tipo_eleicao `ano'
-			
-			replace descricao_item = "" if descricao_item == "#NULO#"
-			replace valor_item = subinstr(valor_item, ",", ".", .)
-			
-			destring ano valor_item, replace force
-			
 			gen id_tipo_item = .
 			gen tipo_item = ""
+			gen id_eleicao = ""
+			gen data_eleicao = ""
 			
 		}
 		if `ano' >= 2014 {
 			
 			drop in 1
 			
-			keep v3 v5 v9 v12 v14 v15 v16 v17
+			keep v3 v6 v7 v8 v9 v12 v14 v15 v16 v17
 			
 			ren v3	ano
-			ren v5	tipo_eleicao
+			ren v6  id_eleicao
+			ren v7	tipo_eleicao
+			ren v8  data_eleicao
 			ren v9	sigla_uf
 			ren v12	sequencial_candidato
 			ren v14	id_tipo_item
@@ -55,41 +47,46 @@ foreach ano of numlist 2006(2)2022 {
 			ren v16	descricao_item
 			ren v17	valor_item
 			
-			clean_string tipo_eleicao
-			limpa_tipo_eleicao `ano'
-			
-			replace descricao_item = "" if descricao_item == "#NULO#"
-			
-			replace valor_item = subinstr(valor_item, ",", ".", .)
-			destring ano valor_item, replace force
-			
 		}
 		*
+		
+		clean_string tipo_eleicao
+		limpa_tipo_eleicao `ano'
+		
+		replace descricao_item = "" if descricao_item == "#NULO#"
+		
+		replace valor_item = subinstr(valor_item, ",", ".", .)
+		destring ano valor_item, replace force
+		
+		foreach k in eleicao {
+			replace data_`k' = substr(data_`k', 7, 4) + "-" + substr(data_`k', 4, 2) + "-" + substr(data_`k', 1, 2) if data_`k' != ""
+			replace data_`k' = "" if real(substr(data_`k', 1, 4)) < 1900
+		}
 		
 		drop if ano == .	// casos de leitura problematica do csv
 		
 		compress
 		
-		tempfile bens_`ano'_`estado'
-		save `bens_`ano'_`estado''
+		tempfile bens_`ano'_`uf'
+		save `bens_`ano'_`uf''
 		
 	}
 	*
 	
 	use `bens_`ano'_AC', clear
-	foreach estado in `estados' {
-		if "`estado'" != "AC" {
-			qui append using `bens_`ano'_`estado''
+	foreach uf in `ufs' {
+		if "`uf'" != "AC" {
+			qui append using `bens_`ano'_`uf''
 		}
 	}
 	*
 	
-	order ano tipo_eleicao sigla_uf sequencial_candidato id_tipo_item tipo_item descricao_item valor_item
+	order ano id_eleicao tipo_eleicao data_eleicao sigla_uf sequencial_candidato id_tipo_item tipo_item descricao_item valor_item
 	
 	save "output/bens_candidato_`ano'.dta", replace
 	
 }
-*/
+*
 
 //----------------------------------------------------------------------------//
 // build: prestacao de contas
@@ -151,7 +148,9 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
+		gen id_eleicao   = ""
 		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
 		
 	}
 	if `ano' == 2004 {
@@ -209,7 +208,9 @@ foreach ano of numlist 2002(2)2022 {
 		
 		destring id_municipio_tse*, replace force
 		
+		gen id_eleicao = ""
 		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
 		
 	}
 	if `ano' == 2006 {
@@ -262,7 +263,9 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
+		gen id_eleicao = ""
 		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
 		
 	}
 	if `ano' == 2008 {
@@ -323,16 +326,18 @@ foreach ano of numlist 2002(2)2022 {
 		
 		destring id_municipio_tse*, replace force
 		
+		gen id_eleicao = ""
 		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
 		
 	}
 	if `ano' == 2010 {
 		
-		local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_contas_2010/candidato/`estado'/ReceitasCandidatos.txt", ///
+			import delimited "input/prestacao_contas/prestacao_contas_2010/candidato/`uf'/ReceitasCandidatos.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
@@ -357,16 +362,16 @@ foreach ano of numlist 2002(2)2022 {
 			ren v18	natureza_receita
 			ren v19	descricao_receita
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 		
 		}
 		*
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -399,16 +404,18 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
+		gen id_eleicao = ""
 		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
 		
 	}
 	if `ano' == 2012 {
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_final_2012/receitas_candidatos_2012_`estado'.txt", ///
+			import delimited "input/prestacao_contas/prestacao_final_2012/receitas_candidatos_2012_`uf'.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
@@ -436,16 +443,16 @@ foreach ano of numlist 2002(2)2022 {
 			ren v21	natureza_receita
 			ren v22	descricao_receita
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 		
 		}
 		*
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -478,7 +485,9 @@ foreach ano of numlist 2002(2)2022 {
 		
 		destring id_municipio_tse*, replace force
 		
+		gen id_eleicao = ""
 		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
 		
 	}
 	if `ano' == 2014 {
@@ -487,16 +496,17 @@ foreach ano of numlist 2002(2)2022 {
 		// final
 		//---------------//
 		
-		local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_final_2014/receitas_candidatos_2014_`estado'.txt", ///
+			import delimited "input/prestacao_contas/prestacao_final_2014/receitas_candidatos_2014_`uf'.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
-			drop v1 v3
+			drop v3
 			
+			ren v1  id_eleicao
 			ren v2	tipo_eleicao
 			ren v4	cnpj_prestador_contas
 			ren v5	sequencial_candidato
@@ -528,18 +538,19 @@ foreach ano of numlist 2002(2)2022 {
 			ren v31	descricao_cnae_2_doador_orig
 			ren v32	nome_doador_orig_rf
 			
+			gen data_eleicao = ""
 			replace data_receita = substr(data_receita, 1, 10)
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 		
 		}
 		*
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -552,11 +563,12 @@ foreach ano of numlist 2002(2)2022 {
 		//---------------//
 		
 		import delimited "input/prestacao_contas/prestacao_contas_final_sup_2014/receitas_candidatos_prestacao_contas_final_2014_sup.txt", ///
-			clear varnames(nonames) delim(";") stringc(_all)
+		clear varnames(nonames) delim(";") stringc(_all)
 		
 		drop in 1
-		drop v1 v3 v7 v8
+		drop v3 v7 v8
 		
+		ren v1  id_eleicao
 		ren v2	tipo_eleicao
 		ren v4	cnpj_prestador_contas
 		ren v5	sequencial_candidato
@@ -589,6 +601,7 @@ foreach ano of numlist 2002(2)2022 {
 		ren v34	descricao_cnae_2_doador_orig
 		ren v35	nome_doador_orig_rf
 		
+		gen data_eleicao = ""
 		replace data_receita = substr(data_receita, 1, 10)
 		
 		tempfile suplementar
@@ -636,16 +649,17 @@ foreach ano of numlist 2002(2)2022 {
 		// completo
 		//---------------//
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_contas_2016/receitas_candidatos_2016_`estado'.txt", ///
+			import delimited "input/prestacao_contas/prestacao_contas_2016/receitas_candidatos_2016_`uf'.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
-			drop v1 v3 v8
+			drop v3 v8
 			
+			ren v1  id_eleicao
 			ren v2	tipo_eleicao
 			ren v4	cnpj_prestador_contas
 			ren v5	sequencial_candidato
@@ -679,18 +693,19 @@ foreach ano of numlist 2002(2)2022 {
 			ren v34	descricao_cnae_2_doador_orig
 			ren v35	nome_doador_orig_rf
 			
+			gen data_eleicao = ""
 			replace data_receita = substr(data_receita, 1, 10)
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 		
 		}
 		*
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -700,11 +715,11 @@ foreach ano of numlist 2002(2)2022 {
 		// final
 		//---------------//
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_contas_final_2016/receitas_candidatos_prestacao_contas_final_2016_`estado'.txt", ///
+			import delimited "input/prestacao_contas/prestacao_contas_final_2016/receitas_candidatos_prestacao_contas_final_2016_`uf'.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
@@ -745,16 +760,16 @@ foreach ano of numlist 2002(2)2022 {
 			
 			replace data_receita = substr(data_receita, 1, 10)
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 		
 		}
 		*
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -859,17 +874,19 @@ foreach ano of numlist 2002(2)2022 {
 		// candidato
 		//-------------------//
 		
-		local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_de_contas_eleitorais_candidatos_2018/receitas_candidatos_2018_`estado'.csv", ///
+			import delimited "input/prestacao_contas/prestacao_de_contas_eleitorais_candidatos_2018/receitas_candidatos_2018_`uf'.csv", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
-			drop v1 v2 v3 v4 v6 v7 v8 v14 v15 v17 v27 v29 v31 v33 v40 v44 v47 v58 v59 v60
+			drop v1 v2 v3 v4 v5 v14 v15 v17 v27 v29 v31 v33 v40 v44 v47 v58 v59 v60
 			
-			ren v5	tipo_eleicao
+			ren v6  id_eleicao
+			ren v7	tipo_eleicao
+			ren v8  data_eleicao
 			ren v9	turno
 			ren v10	tipo_prestacao_contas
 			ren v11	data_prestacao_contas
@@ -912,16 +929,16 @@ foreach ano of numlist 2002(2)2022 {
 			
 			replace data_receita = substr(data_receita, 1, 10)
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 		
 		}
 		*
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -963,18 +980,20 @@ foreach ano of numlist 2002(2)2022 {
 	}
 	if `ano' >= 2020 {
 		
-		if `ano' == 2020 local estados AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-		if `ano' == 2022 local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2020 local ufs AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2022 local ufs AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_de_contas_eleitorais_candidatos_`ano'/receitas_candidatos_`ano'_`estado'.csv", ///
+			import delimited "input/prestacao_contas/prestacao_de_contas_eleitorais_candidatos_`ano'/receitas_candidatos_`ano'_`uf'.csv", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
-			drop v1 v2 v3 v4 v6 v7 v8 v15 v17 v27 v29 v31 v33 v40 v44 v47 v58 v59 v60
+			drop v1 v2 v3 v4 v5 v15 v17 v27 v29 v31 v33 v40 v44 v47 v58 v59 v60
 			
-			ren v5	tipo_eleicao
+			ren v6  id_eleicao
+			ren v7	tipo_eleicao
+			ren v8  data_eleicao
 			ren v9	turno
 			ren v10	tipo_prestacao_contas
 			ren v11	data_prestacao_contas
@@ -1018,16 +1037,16 @@ foreach ano of numlist 2002(2)2022 {
 			
 			replace data_receita = substr(data_receita, 1, 10)
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 		
 		}
 		*
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -1068,6 +1087,11 @@ foreach ano of numlist 2002(2)2022 {
 		
 	}
 	*
+	
+	foreach k in eleicao {
+		replace data_`k' = substr(data_`k', 7, 4) + "-" + substr(data_`k', 4, 2) + "-" + substr(data_`k', 1, 2) if data_`k' != ""
+		replace data_`k' = "" if real(substr(data_`k', 1, 4)) < 1900
+	}
 	
 	cap gen id_municipio_tse = .
 	merge m:1 id_municipio_tse using `diretorio'
@@ -1137,6 +1161,10 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_despesa = subinstr(valor_despesa, ",", ".", .)
 		
+		gen id_eleicao   = ""
+		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
+		
 	}
 	if `ano' == 2004 {
 		
@@ -1185,6 +1213,10 @@ foreach ano of numlist 2002(2)2022 {
 		
 		destring id_municipio_tse, replace force
 		
+		gen id_eleicao   = ""
+		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
+		
 	}
 	if `ano' == 2006 {
 		
@@ -1231,6 +1263,10 @@ foreach ano of numlist 2002(2)2022 {
 		*
 		
 		replace valor_despesa = subinstr(valor_despesa, ",", ".", .)
+		
+		gen id_eleicao   = ""
+		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
 		
 	}
 	if `ano' == 2008 {
@@ -1282,14 +1318,18 @@ foreach ano of numlist 2002(2)2022 {
 		
 		destring id_municipio_tse, replace force
 		
+		gen id_eleicao   = ""
+		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
+		
 	}
 	if `ano' == 2010 {
 		
-		local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_contas_2010/candidato/`estado'/DespesasCandidatos.txt", ///
+			import delimited "input/prestacao_contas/prestacao_contas_2010/candidato/`uf'/DespesasCandidatos.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
@@ -1313,15 +1353,15 @@ foreach ano of numlist 2002(2)2022 {
 			ren v18	especie_recurso
 			ren v19	descricao_despesa
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 			
 		}
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -1350,6 +1390,10 @@ foreach ano of numlist 2002(2)2022 {
 		
 		replace valor_despesa = subinstr(valor_despesa, ",", ".", .)
 		
+		gen id_eleicao   = ""
+		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
+		
 	}
 	if `ano' == 2012 {
 		
@@ -1357,11 +1401,11 @@ foreach ano of numlist 2002(2)2022 {
 		// final
 		//---------------//
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_final_2012/despesas_candidatos_`ano'_`estado'.txt", ///
+			import delimited "input/prestacao_contas/prestacao_final_2012/despesas_candidatos_`ano'_`uf'.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
@@ -1386,15 +1430,15 @@ foreach ano of numlist 2002(2)2022 {
 			ren v19	tipo_despesa
 			ren v20	descricao_despesa
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 			
 		}
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -1469,6 +1513,10 @@ foreach ano of numlist 2002(2)2022 {
 		
 		destring id_municipio_tse*, replace force
 		
+		gen id_eleicao = ""
+		gen tipo_eleicao = "eleicao ordinaria"
+		gen data_eleicao = ""
+		
 	}
 	if `ano' == 2014 {
 		
@@ -1476,16 +1524,17 @@ foreach ano of numlist 2002(2)2022 {
 		// final
 		//---------------//
 		
-		local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_final_2014/despesas_candidatos_`ano'_`estado'.txt", ///
+			import delimited "input/prestacao_contas/prestacao_final_2014/despesas_candidatos_`ano'_`uf'.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
-			drop v1 v3
+			drop v3
 			
+			ren v1  id_eleicao
 			ren v2	tipo_eleicao
 			ren v4	cnpj_prestador_contas
 			ren v5	sequencial_candidato
@@ -1507,15 +1556,15 @@ foreach ano of numlist 2002(2)2022 {
 			ren v21	tipo_despesa
 			ren v22	descricao_despesa
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 			
 		}
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -1596,6 +1645,8 @@ foreach ano of numlist 2002(2)2022 {
 		
 		limpa_tipo_eleicao `ano'
 		
+		gen data_eleicao = ""
+		
 	}
 	if `ano' == 2016 {
 		
@@ -1603,16 +1654,17 @@ foreach ano of numlist 2002(2)2022 {
 		// final
 		//---------------//
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_contas_final_2016/despesas_candidatos_prestacao_contas_final_`ano'_`estado'.txt", ///
+			import delimited "input/prestacao_contas/prestacao_contas_final_2016/despesas_candidatos_prestacao_contas_final_`ano'_`uf'.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
-			drop v1 v3 v8
+			drop v3 v8
 			
+			ren v1  id_eleicao
 			ren v2	tipo_eleicao
 			ren v4	cnpj_prestador_contas
 			ren v5	sequencial_candidato
@@ -1636,15 +1688,17 @@ foreach ano of numlist 2002(2)2022 {
 			ren v24	tipo_despesa
 			ren v25	descricao_despesa
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			gen data_eleicao = ""
+			
+			tempfile f_`uf'
+			save `f_`uf''
 			
 		}
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -1654,11 +1708,11 @@ foreach ano of numlist 2002(2)2022 {
 		// final
 		//---------------//
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_contas_final_`ano'/despesas_candidatos_prestacao_contas_final_`ano'_`estado'.txt", ///
+			import delimited "input/prestacao_contas/prestacao_contas_final_`ano'/despesas_candidatos_prestacao_contas_final_`ano'_`uf'.txt", ///
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
@@ -1687,15 +1741,15 @@ foreach ano of numlist 2002(2)2022 {
 			ren v24	tipo_despesa
 			ren v25	descricao_despesa
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 			
 		}
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -1780,17 +1834,19 @@ foreach ano of numlist 2002(2)2022 {
 	}
 	if `ano' == 2018 {
 		
-		local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_de_contas_eleitorais_candidatos_`ano'/despesas_contratadas_candidatos_`ano'_`estado'.csv", ///
+			import delimited "input/prestacao_contas/prestacao_de_contas_eleitorais_candidatos_`ano'/despesas_contratadas_candidatos_`ano'_`uf'.csv", ///
 				clear varnames(nonames) delim(";") stringc(_all) // rowr(1:1000)
 			
 			drop in 1
-			drop v1 v2 v3 v4 v6 v7 v8 v15 v17 v27 v34 v38 v41 v48
+			drop v1 v2 v3 v4 v5 v15 v17 v27 v34 v38 v41 v48
 			
-			ren v5	tipo_eleicao
+			ren v6  id_eleicao
+			ren v7	tipo_eleicao
+			ren v8  data_eleicao
 			ren v9	turno
 			ren v10	tipo_prestacao_contas
 			ren v11	data_prestacao_contas
@@ -1830,15 +1886,15 @@ foreach ano of numlist 2002(2)2022 {
 			ren v52	descricao_despesa
 			ren v53	valor_despesa
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 			
 		}
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -1883,18 +1939,20 @@ foreach ano of numlist 2002(2)2022 {
 	*
 	if `ano' >= 2020 {
 		
-		if `ano' == 2020 local estados AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-		if `ano' == 2022 local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2020 local ufs AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2022 local ufs AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
-		foreach estado in `estados' {
+		foreach uf in `ufs' {
 			
-			import delimited "input/prestacao_contas/prestacao_de_contas_eleitorais_candidatos_`ano'/despesas_contratadas_candidatos_`ano'_`estado'.csv", ///
+			import delimited "input/prestacao_contas/prestacao_de_contas_eleitorais_candidatos_`ano'/despesas_contratadas_candidatos_`ano'_`uf'.csv", ///
 				clear varnames(nonames) delim(";") stringc(_all) // rowr(1:1000)
 			
 			drop in 1
-			drop v1 v2 v3 v4 v6 v7 v8 v15 v17 v27 v34 v38 v41 v48
+			drop v1 v2 v3 v4 v5 v15 v17 v27 v34 v38 v41 v48
 			
-			ren v5	tipo_eleicao
+			ren v6  id_eleicao
+			ren v7	tipo_eleicao
+			ren v8  data_eleicao
 			ren v9	turno
 			ren v10	tipo_prestacao_contas
 			ren v11	data_prestacao_contas
@@ -1934,15 +1992,15 @@ foreach ano of numlist 2002(2)2022 {
 			ren v52	descricao_despesa
 			ren v53	valor_despesa
 			
-			tempfile f_`estado'
-			save `f_`estado''
+			tempfile f_`uf'
+			save `f_`uf''
 			
 		}
 		
 		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
+		foreach uf in `ufs' {
+			if "`uf'" != "AC" {
+				qui append using `f_`uf''
 			}
 		}
 		*
@@ -1987,6 +2045,11 @@ foreach ano of numlist 2002(2)2022 {
 	*
 	
 	replace sigla_uf = "" if sigla_uf == "BR"
+	
+	foreach k in eleicao {
+		replace data_`k' = substr(data_`k', 7, 4) + "-" + substr(data_`k', 4, 2) + "-" + substr(data_`k', 1, 2) if data_`k' != ""
+		replace data_`k' = "" if real(substr(data_`k', 1, 4)) < 1900
+	}
 	
 	cap gen id_municipio_tse = .
 	merge m:1 id_municipio_tse using `diretorio'

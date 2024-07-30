@@ -119,7 +119,7 @@ drop dup
 
 duplicates drop ano sigla_uf id_municipio_tse sequencial numero cpf, force // algumas dezenas de observações. preferimos não tomar decisões sobre a bagunça do TSE.
 
-order ano tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
+order ano id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse ///
 	id_candidato_bd cpf titulo_eleitoral sequencial numero nome nome_urna numero_partido sigla_partido cargo
 
 compress
@@ -147,7 +147,6 @@ foreach ano in `anos' {
 	
 }
 *
-
 
 //-------------------------------------------------//
 // norm_partidos
@@ -229,7 +228,7 @@ save `candidatos_mod2_presid'
 !mkdir "output/resultados_candidato_municipio_zona"
 !mkdir "output/resultados_partido_municipio_zona"
 
-foreach ano of numlist 2004 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
 	//---------------------//
 	// candidato-municipio-zona
@@ -283,10 +282,9 @@ foreach ano of numlist 2004 { // 1994(2)2022 {
 	
 	drop nome_candidato nome_urna_candidato
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado votos
-	
-	order `vars'
-	sort  `vars'
+	order ano turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse ///
+		zona cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd ///
+		resultado votos
 	
 	tempfile resultados_candidato_munzona
 	save `resultados_candidato_munzona'
@@ -318,12 +316,9 @@ foreach ano of numlist 2004 { // 1994(2)2022 {
 	
 	use "output/resultados_partido_municipio_zona_`ano'.dta", clear
 	
-	//drop coligacao composicao
-	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo numero_partido sigla_partido votos_nominais votos_legenda
-	
-	order `vars'
-	sort  `vars'
+	order ano turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse zona ///
+				cargo numero_partido sigla_partido ///
+				votos_nominais votos_legenda
 	
 	tempfile resultados_partido_munzona
 	save `resultados_partido_munzona'
@@ -397,8 +392,6 @@ foreach ano of numlist 1994(2)2022 {
 		// candidato
 		//---------------------//
 		
-		//local ano 2022
-		//local uf RJ
 		use "output/resultados_candidato_secao_`ano'.dta" if sigla_uf == "`uf'", clear
 		
 		ren numero_candidato numero
@@ -440,7 +433,9 @@ foreach ano of numlist 1994(2)2022 {
 		ren sequencial	sequencial_candidato
 		ren numero		numero_candidato
 		
-		local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd votos
+		local vars ano turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse zona secao ///
+			cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd ///
+			votos
 		
 		order `vars'
 		sort  `vars'
@@ -469,7 +464,8 @@ foreach ano of numlist 1994(2)2022 {
 		ren numero numero_partido
 		ren sigla  sigla_partido
 		
-		local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo numero_partido sigla_partido
+		local vars ano turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse zona secao ///
+			cargo numero_partido sigla_partido
 		
 		order `vars'
 		sort  `vars'
@@ -698,7 +694,7 @@ foreach ano of numlist 2006(2)2022 {
 	
 	ren sequencial sequencial_candidato
 	
-	order ano tipo_eleicao sigla_uf sequencial_candidato id_candidato_bd id_tipo_item tipo_item descricao_item valor_item
+	order ano id_eleicao tipo_eleicao data_eleicao sigla_uf sequencial_candidato id_candidato_bd id_tipo_item tipo_item descricao_item valor_item
 	
 	drop ano
 	export delimited "output/bens_candidato/ano=`ano'/bens_candidato.csv", replace
@@ -821,7 +817,7 @@ foreach ano of numlist 2002(2)2022 {
 	
 	ren numero numero_candidato
 	
-	order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
+	order ano turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse ///
 		sequencial_candidato numero_candidato cpf_candidato cnpj_candidato titulo_eleitor_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido nome_partido sigla_partido cargo ///
 		sequencial_receita data_receita fonte_receita origem_receita natureza_receita especie_receita situacao_receita descricao_receita valor_receita ///
 		sequencial_candidato_doador cpf_cnpj_doador sigla_uf_doador id_municipio_tse_doador nome_doador nome_doador_rf cargo_candidato_doador numero_partido_doador sigla_partido_doador nome_partido_doador esfera_partidaria_doador numero_candidato_doador cnae_2_doador descricao_cnae_2_doador ///
@@ -955,7 +951,7 @@ foreach ano of numlist 2002(2)2022 {
 	
 	ren numero numero_candidato
 	
-	order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
+	order ano turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse ///
 		sequencial_candidato numero_candidato cpf_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
 		sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
 		tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas cnpj_candidato ///
@@ -971,8 +967,6 @@ foreach ano of numlist 2002(2)2022 {
 	
 }
 *
-
-
 
 //-------------------------------------------------//
 // filiacao partidaria

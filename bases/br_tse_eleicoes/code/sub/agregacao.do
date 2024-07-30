@@ -27,7 +27,7 @@ foreach ano of numlist 1994(2)2022 {
 		import delimited "output/resultados_candidato_municipio_zona/ano=`ano'/sigla_uf=`sigla_uf'/resultados_candidato_municipio_zona.csv", ///
 			clear varn(1) encoding("utf-8") case(preserve)
 		
-		collapse (sum) votos, by(turno tipo_eleicao id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado)
+		collapse (sum) votos, by(turno id_eleicao tipo_eleicao data_eleicao id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado)
 		
 		export delimited "output/resultados_candidato_municipio/ano=`ano'/sigla_uf=`sigla_uf'/resultados_candidato_municipio.csv", replace
 		
@@ -54,7 +54,7 @@ foreach ano of numlist 1994(2)2022 {
 		
 		import delimited "output/resultados_partido_municipio_zona/ano=`ano'/sigla_uf=`sigla_uf'/resultados_partido_municipio_zona.csv", clear varn(1) encoding("utf-8") case(preserve)
 		
-		collapse (sum) votos*, by(turno tipo_eleicao id_municipio id_municipio_tse cargo numero_partido sigla_partido)
+		collapse (sum) votos*, by(turno id_eleicao tipo_eleicao data_eleicao id_municipio id_municipio_tse cargo numero_partido sigla_partido)
 		
 		export delimited "output/resultados_partido_municipio/ano=`ano'/sigla_uf=`sigla_uf'/resultados_partido_municipio.csv", replace
 		
@@ -99,13 +99,15 @@ foreach ano of numlist 1945 1947 1955(5)1965 1950(4)1990 1989 {
 	gen id_municipio = .
 	gen id_municipio_tse = .
 	
+	cap gen id_eleicao = ""
+	cap gen data_eleicao = ""
 	cap gen numero_partido = ""
 	cap gen sequencial_candidato = ""
 	cap gen numero_candidato = ""
 	cap gen id_candidato_bd = ""
 	
-	collapse (sum) votos, by(turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado)
-	order                    turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado votos
+	collapse (sum) votos, by(turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado)
+	order                    turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado votos
 	
 	duplicates tag turno tipo_eleicao sigla_uf id_municipio_tse cargo sequencial_candidato numero_candidato nome_candidato, gen(dup)
 	drop if dup > 0  // TODO: fazer limpeza mais cuidadosa, deletando linhas específicas
@@ -174,8 +176,8 @@ foreach ano of numlist 1994(2)2022 {
 	replace id_municipio = .		if mod(ano, 4) == 2
 	replace id_municipio_tse = .	if mod(ano, 4) == 2
 	
-	collapse (sum) votos, by(turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado)
-	order                    turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado votos
+	collapse (sum) votos, by(turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado)
+	order                    turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd nome_candidato resultado votos
 	
 	export delimited "output/resultados_candidato/ano=`ano'/resultados_candidato.csv", replace
 	
@@ -201,7 +203,8 @@ foreach ano of numlist 1994(2)2022 {
 		
 		import delimited "output/detalhes_votacao_municipio_zona/ano=`ano'/sigla_uf=`sigla_uf'/detalhes_votacao_municipio_zona.csv", clear varn(1) case(preserve)
 		
-		collapse (sum) aptos secoes secoes_agregadas aptos_totalizadas secoes_totalizadas comparecimento abstencoes votos_*, by(turno tipo_eleicao id_municipio id_municipio_tse cargo)
+		collapse (sum) aptos secoes secoes_agregadas aptos_totalizadas secoes_totalizadas comparecimento abstencoes votos_*, ///
+			by(turno id_eleicao tipo_eleicao data_eleicao id_municipio id_municipio_tse cargo)
 		
 		gen proporcao_comparecimento = 100 * comparecimento / aptos
 		gen proporcao_votos_validos	 = 100 * votos_validos  / comparecimento

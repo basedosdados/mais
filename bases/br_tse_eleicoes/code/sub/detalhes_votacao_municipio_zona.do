@@ -45,14 +45,16 @@ foreach ano of numlist 1994(2)2022 {
 			
 			drop in 1
 			
-			keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v24 v26 ///
+			keep v3 v6 v7 v8 v9 v11 v14 v16 v18 v19 v20 v21 v24 v26 ///
 				v31 v32 ///
 				v41 ///
 				v43 v44 v45
 			
-			ren v3 ano
-			ren v6 turno
-			ren v8 tipo_eleicao
+			ren v3  ano
+			ren v6  turno
+			ren v7  id_eleicao
+			ren v8  tipo_eleicao
+			ren v9  data_eleicao
 			ren v11 sigla_uf
 			ren v14 id_municipio_tse
 			ren v16 zona
@@ -81,11 +83,13 @@ foreach ano of numlist 1994(2)2022 {
 			
 			drop in 1
 			
-			keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v22 v23 v24 v25 v27 v28 v29 v30
+			keep v3 v6 v7 v8 v9 v11 v14 v16 v18 v19 v20 v21 v22 v23 v24 v25 v27 v28 v29 v30
 			
-			ren v3 ano
-			ren v6 turno
-			ren v8 tipo_eleicao
+			ren v3  ano
+			ren v6  turno
+			ren v7  id_eleicao
+			ren v8  tipo_eleicao
+			ren v9  data_eleicao
 			ren v11 sigla_uf
 			ren v14 id_municipio_tse
 			ren v16 zona
@@ -111,11 +115,13 @@ foreach ano of numlist 1994(2)2022 {
 			
 			drop in 1
 			
-			keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v22 v23 v24 v25 v27 v28 v29 v30
+			keep v3 v6 v7 v8 v9 v11 v14 v16 v18 v19 v20 v21 v22 v23 v24 v25 v27 v28 v29 v30
 			
-			ren v3 ano
-			ren v6 turno
-			ren v8 tipo_eleicao
+			ren v3  ano
+			ren v6  turno
+			ren v7  id_eleicao
+			ren v8  tipo_eleicao
+			ren v9  data_eleicao
 			ren v11 sigla_uf
 			ren v14 id_municipio_tse
 			ren v16 zona
@@ -141,11 +147,13 @@ foreach ano of numlist 1994(2)2022 {
 			
 			drop in 1
 			
-			keep v3 v6 v8 v11 v14 v16 v18 v19 v20 v21 v24 v26 v30 v31 v41 v42 v32
+			keep v3 v6 v7 v8 v9 v11 v14 v16 v18 v19 v20 v21 v24 v26 v30 v31 v41 v42 v32
 			
-			ren v3 ano
-			ren v6 turno
-			ren v8 tipo_eleicao
+			ren v3  ano
+			ren v6  turno
+			ren v7  id_eleicao
+			ren v8  tipo_eleicao
+			ren v9  data_eleicao
 			ren v11 sigla_uf
 			ren v14 id_municipio_tse
 			ren v16 zona
@@ -153,8 +161,6 @@ foreach ano of numlist 1994(2)2022 {
 			ren v19 aptos
 			ren v20 secoes
 			ren v21 secoes_agregadas
-			//ren v22 aptos_totalizadas
-			//ren v23 secoes_totalizadas
 			ren v24 comparecimento
 			ren v26 abstencoes
 			ren v30 votos_validos
@@ -200,12 +206,17 @@ foreach ano of numlist 1994(2)2022 {
 		// erro dados TSE vindo com valores diferentes para identificadores duplicados
 		//duplicates tag ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo, gen(d)
 		//sort d ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo
-		collapse (sum) aptos* secoes* comparecimento abstencoes votos*, by(ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo)
+		collapse (sum) aptos* secoes* comparecimento abstencoes votos*, by(ano turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio_tse zona cargo)
 		
 		merge m:1 id_municipio_tse using `municipio'
 		drop if _merge == 2
 		drop _merge
 		order id_municipio, b(id_municipio_tse)
+		
+		foreach k in eleicao {
+			replace data_`k' = substr(data_`k', 7, 4) + "-" + substr(data_`k', 4, 2) + "-" + substr(data_`k', 1, 2)
+			replace data_`k' = "" if real(substr(data_`k', 1, 4)) < 1900
+		}
 		
 		gen proporcao_comparecimento = 100 * comparecimento / aptos
 		la var proporcao_comparecimento "% Comparecimento"
@@ -241,7 +252,7 @@ foreach ano of numlist 1994(2)2022 {
 	}
 	*
 	
-	order	ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo aptos secoes secoes_agregadas aptos_totalizadas secoes_totalizadas ///
+	order	ano turno id_eleicao tipo_eleicao data_eleicao sigla_uf id_municipio id_municipio_tse zona cargo aptos secoes secoes_agregadas aptos_totalizadas secoes_totalizadas ///
 			comparecimento abstencoes votos_validos votos_brancos votos_nulos votos_nominais votos_legenda ///
 			proporcao_*
 	
