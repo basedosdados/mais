@@ -101,7 +101,7 @@ keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
 
-foreach ano of numlist 2002(2)2022 {
+foreach ano of numlist 2012 { // 2002(2)2022 {
 	
 	if `ano' == 2002 {
 		
@@ -411,7 +411,7 @@ foreach ano of numlist 2002(2)2022 {
 	}
 	if `ano' == 2012 {
 		
-		local ufs AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local ufs brasil // AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach uf in `ufs' {
 			
@@ -419,7 +419,35 @@ foreach ano of numlist 2002(2)2022 {
 				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
+			drop v3 v7 v18
 			
+			ren v1  id_eleicao
+			ren v2  tipo_eleicao
+			ren v4	sequencial_candidato
+			ren v5	sigla_uf
+			ren v6	id_municipio_tse
+			ren v8	sigla_partido
+			ren v9	numero_candidato
+			ren v10	cargo
+			ren v11	nome_candidato
+			ren v12	cpf_candidato
+			ren v13	numero_recibo_eleitoral
+			ren v14	numero_documento
+			ren v15	cpf_cnpj_doador
+			ren v16	nome_doador
+			ren v17	nome_doador_rf
+			ren v19	numero_partido_doador
+			ren v20	numero_candidato_doador
+			ren v21	cnae_2_doador
+			ren v22	descricao_cnae_2_doador
+			ren v23	data_receita
+			ren v24	valor_receita
+			ren v25	origem_receita
+			ren v26	fonte_receita
+			ren v27	natureza_receita
+			ren v28	descricao_receita
+			
+			/*
 			drop v1 v5
 			
 			ren v2	sequencial_candidato
@@ -442,6 +470,7 @@ foreach ano of numlist 2002(2)2022 {
 			ren v20	fonte_receita
 			ren v21	natureza_receita
 			ren v22	descricao_receita
+			*/
 			
 			tempfile f_`uf'
 			save `f_`uf''
@@ -449,13 +478,15 @@ foreach ano of numlist 2002(2)2022 {
 		}
 		*
 		
+		use `f_brasil', clear
+		/*
 		use `f_AC', clear
 		foreach uf in `ufs' {
 			if "`uf'" != "AC" {
 				qui append using `f_`uf''
 			}
 		}
-		*
+		*/
 		
 		foreach k in sigla_uf {
 			replace `k' = "" if `k' == "BR"
@@ -467,14 +498,21 @@ foreach ano of numlist 2002(2)2022 {
 		}
 		*
 		
-		foreach var of varlist cargo descricao_cnae_2_doador ///
+		replace cpf_cnpj_doador = "000" + cpf_cnpj_doador if length(cpf_cnpj_doador) == 8
+		replace cpf_cnpj_doador = "00"  + cpf_cnpj_doador if length(cpf_cnpj_doador) == 9
+		replace cpf_cnpj_doador = "0"   + cpf_cnpj_doador if length(cpf_cnpj_doador) == 10
+		replace cpf_cnpj_doador = ""                      if length(cpf_cnpj_doador) <  8
+		
+		foreach var of varlist tipo_eleicao cargo descricao_cnae_2_doador ///
 			origem_receita fonte_receita natureza_receita {
 			clean_string `var'
 		}
 		*
 		
+		
 		foreach k in receita {
 			
+			replace data_`k' = substr(data_`k', 1, 10)
 			replace data_`k' = "0" + data_`k' if length(data_`k') == 9
 			replace data_`k' = substr(data_`k', 7, 4) + "-" + substr(data_`k', 4, 2) + "-" + substr(data_`k', 1, 2) if length(data_`k') > 0
 		
@@ -485,8 +523,8 @@ foreach ano of numlist 2002(2)2022 {
 		
 		destring id_municipio_tse*, replace force
 		
-		gen id_eleicao = ""
-		gen tipo_eleicao = "eleicao ordinaria"
+		limpa_tipo_eleicao `ano'
+		
 		gen data_eleicao = ""
 		
 	}
@@ -539,6 +577,7 @@ foreach ano of numlist 2002(2)2022 {
 			ren v32	nome_doador_orig_rf
 			
 			gen data_eleicao = ""
+			
 			replace data_receita = substr(data_receita, 1, 10)
 			
 			tempfile f_`uf'
