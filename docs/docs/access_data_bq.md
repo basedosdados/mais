@@ -51,6 +51,8 @@ hover="background-color: var(--md-primary-fg-color--dark)">
 
 Agora você precisa fixar o projeto da BD no seu BigQuery, é bem simples, veja:
 
+!!! Warning A opção **Fixar um projeto** pode aparecer também como **Marcar projeto com estrela por nome**
+
 ![](images/bq_access_project_new.gif)
 
 Dentro do projeto existem dois níveis de organização dos dados,
