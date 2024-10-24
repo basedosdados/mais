@@ -34,6 +34,51 @@ repo_name: basedosdados/mais
 
 extra:
   version: 2.0
+  i18n:
+    default_language: pt
+    languages:
+      pt:
+        nav:
+          - Home: index.md
+          - Aprenda sobre a BD: index.md
+          - BigQuery: access_data_bq.md
+          - Pacotes: access_data_packages.md
+          - API:
+            - Python: api_reference_python.md
+            - R: api_reference_r.md
+            - Stata: api_reference_stata.md
+          - Contribua:
+            - Dados: colab_data.md
+            - Infraestrutura: colab_infrastructure.md
+            - Manual de estilo: style_data.md
+      en:
+        nav:
+          - Home: index.md
+          - Learn about DB: index.md
+          - BigQuery: access_data_bq.md
+          - Packages: access_data_packages.md
+          - API:
+            - Python: api_reference_python.md
+            - R: api_reference_r.md
+            - Stata: api_reference_stata.md
+          - Contribute:
+            - Data: colab_data.md
+            - Infrastructure: colab_infrastructure.md
+            - Style guide: style_data.md
+      es:
+        nav:
+          - Home: index.md
+          - Aprenda sobre a BD: index.md
+          - BigQuery: access_data_bq.md
+          - Pacotes: access_data_packages.md
+          - API:
+            - Python: api_reference_python.md
+            - R: api_reference_r.md
+            - Stata: api_reference_stata.md
+          - Contribua:
+            - Dados: colab_data.md
+            - Infraestrutura: colab_infrastructure.md
+            - Manual de estilo: style_data.md
   social:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/basedosdados
@@ -51,21 +96,6 @@ extra:
   analytics:
     provider: google
     # property: !ENV GOOGLE_ANALYTICS_KEY
-
-nav:
-  - Home:
-    - Aprenda sobre a BD: index.md
-    - BigQuery: access_data_bq.md
-    - Pacotes: access_data_packages.md
-    - API:
-      - Python: api_reference_python.md
-      - R: api_reference_r.md
-      - Stata: api_reference_stata.md
-    - Contribua:
-      - Dados: colab_data.md
-      - Infraestrutura: colab_infrastructure.md
-      - Manual de estilo: style_data.md
-    #   - Como citar a Base dos Dados: index.md # TODO
 
 markdown_extensions:
   - admonition
@@ -92,6 +122,7 @@ plugins:
           setup_commands:
             - import sys
             - sys.path.insert(0, "python-package")
+  - mkdocs-static-i18n
 
 extra_css:
 - css/termynal.css
