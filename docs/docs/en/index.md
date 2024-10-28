@@ -1,57 +1,58 @@
-# Aprenda sobre a BD
+# Hello, world!
 
-A missão da Base dos Dados é universalizar o uso de dados de qualidade
-no Brasil. Para isso, criamos uma ferramenta que te permite **acessar
-recursos importantes de diversos conjuntos de dados públicos**, como:
+Data Basis' mission is to universalize the use of quality data
+worldwide. For this, we created a tool that allows you to **access
+important resources from various public datasets**, such as:
 
-- **Tabelas tratadas BD+**: Tabelas completas, já tratadas e prontas
-  para análise, disponíveis no nosso datalake público.
+- **Processed Tables**: Complete tables, already processed and ready
+  for analysis, available in our public datalake.
 
-- **Dados originais**: Links com informações úteis para explorar mais
-  sobre o conjunto de dados, como a fonte original e outros.
+- **Original Data**: Links with useful information to explore more
+  about the dataset, such as the original source and others.
 
-!!! Info "Temos um time de Dados e voluntários(as) de todo o Brasil que ajudam a limpar e manter as tabelas tratadas BD+. [Saiba como fazer parte](colab_data)"
+!!! Info "We have a Data team and volunteers from all over Brazil and abroad who help clean and maintain processed tables. [Learn how to be part of it](colab_data)."
 
-## Acessando tabelas tratadas BD+
+## Accessing DB processed tables
 
-No nosso site você encontra a lista de todas as tabelas tratadas de
-cada conjunto de dados. Apresentamos também informações importantes de todas
-as tabelas, como a lista de colunas, cobertura temporal, periodicidade, entre
-outras informações. Você pode consultar os dados das tabelas via:
+On our website you'll find the list of all processed tables for
+each dataset. We also present important information about all
+tables, such as the list of columns, temporal coverage, periodicity, among
+other information. You can query the table data via:
 
 ### Download
 
-Você pode baixar o arquivo CSV completo da tabela direto no site. Este
-tipo de Consulta não está disponível para arquivos que ultrapassem 200 mil linhas.
+You can download the complete CSV file of the table directly from the website. This
+type of query is not available for files exceeding 200 thousand rows.
 
 ### BigQuery (SQL)
 
-O BigQuery é o um serviço de banco de dados em nuvem da
-Google. Direto do navegador, você pode fazer consultas às tabelas
-tratadas com:
+BigQuery is Google's cloud database service.
+Directly from your browser, you can query the processed
+tables with:
 
-- Rapidez: Mesmo queries muito longas demoram apenas minutos para serem processadas.
+- Speed: Even very long queries take only minutes to process.
 
-- Escala: O BigQuery escala magicamente para hexabytes se necessário.
+- Scale: BigQuery magically scales to hexabytes if needed.
 
-- Economia: Todo usuário possui *1 TB gratuito por mês para consulta
-  aos dados*.
+- Economy: Every user has *1 TB free per month for querying
+  the data*.
 
 <a
 href="access_data_bq"
 title="{{ lang.t('source.link.title')}}" class="md-button"
 hover="background-color: var(--md-primary-fg-color--dark)">
-    Aprenda
+    Learn More
     :material-arrow-right:
 </a>
 
-### Pacotes
+### Packages
 
-Os pacotes da Base dos Dados permitem o acesso ao *datalake* público
-direto do seu computador ou ambiente de desenvolvimento. Outra forma
-de acessar os recursos da BD é diretamente pelos endpoints, conforme
-documentado em [BD Open API](https://basedosdados.org/openapi).
-Os pacotes atualmente disponíveis são:
+Base dos Dados packages allow access to the public *data lake*
+directly from your computer or development environment.
+<!-- Another way to access BD resources is directly through the endpoints, as
+documented in [BD Open API](https://basedosdados.org/openapi).
+ -->
+The currently available packages are:
 
 - **:material-language-python: Python**
 - **:material-language-r: R**
@@ -61,16 +62,16 @@ Os pacotes atualmente disponíveis são:
 href="access_data_packages"
 title="{{ lang.t('source.link.title')}}" class="md-button"
 hover="background-color: var(--md-primary-fg-color--dark)">
-    Aprenda
+    Learn More
     :material-arrow-right:
 </a>
 
-## Dicas para melhor uso dos dados
+## Tips for better data usage
 
-Nosso time de dados trabalha constantemente em desenvolver **melhores
-padrões e metodologias** para facilitar o processo de análise de dados.
-Separamos alguns materiais úteis para você entender melhor o que fazemos
-e como tirar o melhor proveito dos dados:
+Our data team constantly works on developing **better
+standards and methodologies** to facilitate the data analysis process.
+We've separated some useful materials for you to better understand what we do
+and how to make the best use of the data:
 
-- [Cruzar dados de diferentes organizações de forma rápida](tutorial_cross_tables)
-- [Entender padrões de tabelas, conjuntos e variáveis](style_data)
+- [Join tables from different organizations quickly](tutorial_join_tables)
+- [Understand patterns of tables, datasets and variables](style_data)

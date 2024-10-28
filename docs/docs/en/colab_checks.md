@@ -1,50 +1,39 @@
-# Colaborando com testes na BD+
+# Collaborating with tests on DB
 
-Para manter a qualidade dos bases de dados presentes na BD+, nós contamos com um
-conjunto de checagens automáticas que são realizadas durante a inserção e
-atualização de cada base. Essas checagens são necessárias, mas não suficientes
-para garantir a qualidade dos dados. Elas realizam consultas basicas, como se a
-tabela existe ou se tem colunas totalmente nulas.
+To maintain the quality of databases present in DB, we rely on a set of automatic checks that are performed during the insertion and update of each database. These checks are necessary but not sufficient to ensure data quality. They perform basic queries, such as whether the table exists or if it has completely null columns.
 
-Você pode colaborar com a BD aumentando a cobertura dos testes, diminuindo assim
-o trabalho de revisão dos dados. Para isso basta criar consultas que testem a
-qualidade dos dados em SQL, como as seguintes:
+You can collaborate with DB by increasing test coverage, thus reducing data review work. To do this, simply create SQL queries that test data quality, such as:
 
-- Verificar se colunas com proporção possuem valores entre 0 e 100
-- Verificar se colunas com datas seguem o padrão YYYY-MM-DD HH:MM:SS
+- Verify if columns with proportions have values between 0 and 100
+- Verify if date columns follow the YYYY-MM-DD HH:MM:SS pattern
 
 <!----------------------------------------------------------------------------->
 
-## Qual o procedimento?
+## What's the procedure?
 
-Incluir testes de dados deve seguir o fluxo de trabalho:
+Including data tests should follow this workflow:
 
-- [Colaborando com testes na BD+](#colaborando-com-testes-na-bd)
-  - [Qual o procedimento?](#qual-o-procedimento)
-  - [1. Informe seu interesse](#1-informe-seu-interesse)
-  - [2. Escreva sua consulta](#2-escreva-sua-consulta)
-  - [3. Submeta sua consulta](#3-submeta-sua-consulta)
+- [Collaborating with tests on BD+](#collaborating-with-tests-on-bd)
+  - [What's the procedure?](#whats-the-procedure)
+  - [1. Express your interest](#1-express-your-interest)
+  - [2. Write your query](#2-write-your-query)
+  - [3. Submit your query](#3-submit-your-query)
 
-!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
-
-<!----------------------------------------------------------------------------->
-
-## 1. Informe seu interesse
-
-Converse conosco no bate-papo da infra ou reuniões às 19h da segunda-feira, ambos
-no Discord. Caso não tenha uma sugestão de melhoria podemos procurar alguma consulta
-que ainda não foi escrita.
+!!! Tip "We suggest joining our [Discord channel](https://discord.gg/huKWpsVYx4) to ask questions and interact with other contributors! :)"
 
 <!----------------------------------------------------------------------------->
 
-## 2. Escreva sua consulta
+## 1. Express your interest
 
-Faça um fork do repositório da [Base dos Dados+](https://github.com/basedosdados/mais/tree/master).
-Em seguida adicione novas consultas e suas respectivas funções de execução nos arquivos
-[checks.yaml](https://github.com/basedosdados/mais/blob/master/.github/workflows/data-check/checks.yaml)
-e [test_data.py](https://github.com/basedosdados/mais/blob/master/.github/workflows/data-check/test_data.py).
+Chat with us in the infra chat or Monday meetings at 7 PM BRT, both on Discord. If you don't have an improvement suggestion, we can look for a query that hasn't been written yet.
 
-As consultas são escritas em um arquivo YAML com `Jinja` e SQL, da forma:
+<!----------------------------------------------------------------------------->
+
+## 2. Write your query
+
+Fork the [Data Basis](https://github.com/basedosdados/mais/tree/master) repository. Then add new queries and their respective execution functions in the files [checks.yaml](https://github.com/basedosdados/mais/blob/master/.github/workflows/data-check/checks.yaml) and [test_data.py](https://github.com/basedosdados/mais/blob/master/.github/workflows/data-check/test_data.py).
+
+Queries are written in a YAML file with `Jinja` and SQL, in the following way:
 
 ```yaml
 test_select_all_works:
@@ -56,7 +45,7 @@ test_select_all_works:
     ) AS failure
 ```
 
-E executadas como testes do pacote `pytest`:
+And executed as `pytest` package tests:
 
 ```python
 def test_select_all_works(configs):
@@ -64,14 +53,10 @@ def test_select_all_works(configs):
     assert result.failure.values == False
 ```
 
-Não se assuste caso não conheça algo da sintaxe acima, podemos lhe ajudar durante
-o processo. Note que os valores entre chaves são variáveis contidas em arquivos
-`table_config.yaml`, que contém metadados das tabelas. Logo a escrita de consulta
-é limitada pelos metadados existentes. Recomendamos consultar estes arquivos
-no diretório das [bases](https://github.com/basedosdados/mais/tree/master/bases).
+Don't worry if you're not familiar with some of the syntax above; we can help you during the process. Note that the values between curly braces are variables contained in `table_config.yaml` files, which contain table metadata. Therefore, query writing is limited by existing metadata. We recommend consulting these files in the [bases](https://github.com/basedosdados/mais/tree/master/bases) directory.
 
 <!----------------------------------------------------------------------------->
 
-## 3. Submeta sua consulta
+## 3. Submit your query
 
-Por fim realize um pull request para o repositório principal para que seja realizada uma revisão da consulta.
+Finally, make a pull request to the main repository for the query to be reviewed.

@@ -1,30 +1,27 @@
-
 # Stata
 
-Esta API é composta por módulos para **requisição de dados**: para aquele(as) que desejam
-  somente consultar os dados e metadados do nosso projeto (ou qualquer outro
-  projeto no Google Cloud).
+This API consists of modules for **data requests**: for those who wish to only query data and metadata from our project (or any other project on Google Cloud).
 
-!!! Info "Toda documentação do código abaixo está em inglês"
+!!! Info "All code documentation below is in English"
 
-## Módulos (Requisição de dados)
+## Modules (Data Request)
 
-Se é a sua primeira vez utilizando o pacote, digite ```db basedosdados``` e confirme novamente se as etapas acima foram concluídas com sucesso.
+If this is your first time using the package, type ```db basedosdados``` and verify again if the steps above were completed successfully.
 
-O pacote contém 7 comandos, conforme suas funcionalidades descritas abaixo:
+The package contains 7 commands, with their functionalities described below:
 
-| __Comando__               | __Descrição__                                                                  |
-|---------------------------|--------------------------------------------------------------------------------|
-| `bd_download`             | baixa dados da Base dos Dados (BD+).                                           |
-| `bd_read_sql`             | baixa tabelas da BD+ usando consultas específicas.                             |
-| `bd_read_table`           | baixa tabelas da BD+ usando `dataset_id` e `table_id`.                         |
-| `bd_list_datasets`        | lista o `dataset_id` dos conjuntos de dados disponíveis em `query_project_id`. |
-| `bd_list_dataset_tables`  | lista `table_id` para tabelas disponíveis no `dataset_id` especificado.        |
-| `bd_get_table_description`| mostra a descrição completa da tabela BD+.                                     |
-| `bd_get_table_columns`    | mostra os nomes, tipos e descrições das colunas na tabela especificada.        |
+| __Command__               | __Description__                                                                |
+|--------------------------|--------------------------------------------------------------------------------|
+| `bd_download`            | downloads data from Data Basis (DB).                                      |
+| `bd_read_sql`            | downloads DB tables using specific queries.                                   |
+| `bd_read_table`          | downloads DB tables using `dataset_id` and `table_id`.                       |
+| `bd_list_datasets`       | lists the `dataset_id` of available datasets in `query_project_id`.           |
+| `bd_list_dataset_tables` | lists `table_id` for available tables in the specified `dataset_id`.          |
+| `bd_get_table_description`| shows the complete description of the DB table.                             |
+| `bd_get_table_columns`   | shows the names, types, and descriptions of columns in the specified table.   |
 
-Cada comando tem um __help file__ de apoio, bastando abrir o help e seguir as instruções:
+Each command has a supporting __help file__, just open the help and follow the instructions:
 
 ```
-help [comando]
+help [command]
 ```

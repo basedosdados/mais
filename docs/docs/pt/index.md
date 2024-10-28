@@ -1,18 +1,18 @@
-# Aprenda sobre a BD
+# Hello, world!
 
 A missão da Base dos Dados é universalizar o uso de dados de qualidade
-no Brasil. Para isso, criamos uma ferramenta que te permite **acessar
+no Brasil e no mundo. Para isso, criamos uma ferramenta que te permite **acessar
 recursos importantes de diversos conjuntos de dados públicos**, como:
 
-- **Tabelas tratadas BD+**: Tabelas completas, já tratadas e prontas
+- **Tabelas tratadas**: Tabelas completas, já tratadas e prontas
   para análise, disponíveis no nosso datalake público.
 
 - **Dados originais**: Links com informações úteis para explorar mais
   sobre o conjunto de dados, como a fonte original e outros.
 
-!!! Info "Temos um time de Dados e voluntários(as) de todo o Brasil que ajudam a limpar e manter as tabelas tratadas BD+. [Saiba como fazer parte](colab_data)"
+!!! Info "Temos um time de Dados e voluntários(as) de todo o Brasil que ajudam a limpar e manter as tabelas tratadas BD. [Saiba como fazer parte](colab_data)"
 
-## Acessando tabelas tratadas BD+
+## Acessando tabelas tratadas BD
 
 No nosso site você encontra a lista de todas as tabelas tratadas de
 cada conjunto de dados. Apresentamos também informações importantes de todas
@@ -47,10 +47,10 @@ hover="background-color: var(--md-primary-fg-color--dark)">
 
 ### Pacotes
 
-Os pacotes da Base dos Dados permitem o acesso ao *datalake* público
-direto do seu computador ou ambiente de desenvolvimento. Outra forma
-de acessar os recursos da BD é diretamente pelos endpoints, conforme
-documentado em [BD Open API](https://basedosdados.org/openapi).
+Os pacotes da Base dos Dados permitem o acesso ao *data lake* público
+direto do seu computador ou ambiente de desenvolvimento.
+<!-- Outra forma de acessar os recursos da BD é diretamente pelos endpoints, conforme
+documentado em [BD Open API](https://basedosdados.org/openapi). -->
 Os pacotes atualmente disponíveis são:
 
 - **:material-language-python: Python**
@@ -72,5 +72,5 @@ padrões e metodologias** para facilitar o processo de análise de dados.
 Separamos alguns materiais úteis para você entender melhor o que fazemos
 e como tirar o melhor proveito dos dados:
 
-- [Cruzar dados de diferentes organizações de forma rápida](tutorial_cross_tables)
+- [Cruzar dados de diferentes organizações de forma rápida](tutorial_join_tables)
 - [Entender padrões de tabelas, conjuntos e variáveis](style_data)

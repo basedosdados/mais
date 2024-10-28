@@ -210,7 +210,7 @@ dados da [RAIS - Ministério da Economia](https://dev.to/basedosdados/bigquery-1
 O BigQuery possui um mecanismo de busca que permite buscar por nomes
 de *datasets* (conjuntos), *tables* (tabelas) ou *labels* (grupos).
 Construímos regras de nomeação simples e práticas para facilitar sua
-busca - [veja mais](../style_data).
+busca - [veja mais](style_data.md).
 
 ### Entenda o uso gratuito do Big Query (BQ)
 

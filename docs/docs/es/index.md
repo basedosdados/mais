@@ -1,57 +1,57 @@
-# Aprenda sobre a BD
+# Hello, world!
 
-A missão da Base dos Dados é universalizar o uso de dados de qualidade
-no Brasil. Para isso, criamos uma ferramenta que te permite **acessar
-recursos importantes de diversos conjuntos de dados públicos**, como:
+La misión de Base de los Datos es universalizar el uso de datos de calidad
+en Brasil y el mundo. Para ello, creamos una herramienta que te permite **acceder a
+recursos importantes de diversos conjuntos de datos públicos**, como:
 
-- **Tabelas tratadas BD+**: Tabelas completas, já tratadas e prontas
-  para análise, disponíveis no nosso datalake público.
+- **Tablas procesadas BD+**: Tablas completas, ya procesadas y listas
+  para análisis, disponibles en nuestro datalake público.
 
-- **Dados originais**: Links com informações úteis para explorar mais
-  sobre o conjunto de dados, como a fonte original e outros.
+- **Datos originales**: Enlaces con información útil para explorar más
+  sobre el conjunto de datos, como la fuente original y otros.
 
-!!! Info "Temos um time de Dados e voluntários(as) de todo o Brasil que ajudam a limpar e manter as tabelas tratadas BD+. [Saiba como fazer parte](colab_data)"
+!!! Info "Tenemos un equipo de Datos y voluntarios(as) de todo Brasil que ayudan a limpiar y mantener las tablas procesadas. [Aprende cómo formar parte](colab_data.md)"
 
-## Acessando tabelas tratadas BD+
+## Accediendo a tablas procesadas BD+
 
-No nosso site você encontra a lista de todas as tabelas tratadas de
-cada conjunto de dados. Apresentamos também informações importantes de todas
-as tabelas, como a lista de colunas, cobertura temporal, periodicidade, entre
-outras informações. Você pode consultar os dados das tabelas via:
+En nuestro sitio encontrarás la lista de todas las tablas procesadas de
+cada conjunto de datos. También presentamos información importante de todas
+las tablas, como la lista de columnas, cobertura temporal, periodicidad, entre
+otra información. Puedes consultar los datos de las tablas vía:
 
-### Download
+### Descarga
 
-Você pode baixar o arquivo CSV completo da tabela direto no site. Este
-tipo de Consulta não está disponível para arquivos que ultrapassem 200 mil linhas.
+Puedes descargar el archivo CSV completo de la tabla directamente en el sitio. Este
+tipo de consulta no está disponible para archivos que excedan 200 mil filas.
 
 ### BigQuery (SQL)
 
-O BigQuery é o um serviço de banco de dados em nuvem da
-Google. Direto do navegador, você pode fazer consultas às tabelas
-tratadas com:
+BigQuery es un servicio de base de datos en la nube de
+Google. Directamente desde el navegador, puedes realizar consultas a las tablas
+procesadas con:
 
-- Rapidez: Mesmo queries muito longas demoram apenas minutos para serem processadas.
+- Rapidez: Incluso las consultas muy largas tardan solo minutos en procesarse.
 
-- Escala: O BigQuery escala magicamente para hexabytes se necessário.
+- Escala: BigQuery escala mágicamente a hexabytes si es necesario.
 
-- Economia: Todo usuário possui *1 TB gratuito por mês para consulta
-  aos dados*.
+- Economía: Cada usuario tiene *1 TB gratuito por mes para consultar
+  los datos*.
 
 <a
 href="access_data_bq"
 title="{{ lang.t('source.link.title')}}" class="md-button"
 hover="background-color: var(--md-primary-fg-color--dark)">
-    Aprenda
+    Aprende
     :material-arrow-right:
 </a>
 
-### Pacotes
+### Paquetes
 
-Os pacotes da Base dos Dados permitem o acesso ao *datalake* público
-direto do seu computador ou ambiente de desenvolvimento. Outra forma
-de acessar os recursos da BD é diretamente pelos endpoints, conforme
-documentado em [BD Open API](https://basedosdados.org/openapi).
-Os pacotes atualmente disponíveis são:
+Los paquetes de Base de los Datos permiten el acceso al *data lake* público
+directamente desde tu computadora o entorno de desarrollo.
+<!-- Otra forma de acceder a los recursos de BD es directamente a través de los endpoints, como está
+documentado en [BD Open API](https://basedosdados.org/openapi). -->
+Los paquetes actualmente disponibles son:
 
 - **:material-language-python: Python**
 - **:material-language-r: R**
@@ -61,16 +61,16 @@ Os pacotes atualmente disponíveis são:
 href="access_data_packages"
 title="{{ lang.t('source.link.title')}}" class="md-button"
 hover="background-color: var(--md-primary-fg-color--dark)">
-    Aprenda
+    Aprende
     :material-arrow-right:
 </a>
 
-## Dicas para melhor uso dos dados
+## Consejos para un mejor uso de los datos
 
-Nosso time de dados trabalha constantemente em desenvolver **melhores
-padrões e metodologias** para facilitar o processo de análise de dados.
-Separamos alguns materiais úteis para você entender melhor o que fazemos
-e como tirar o melhor proveito dos dados:
+Nuestro equipo de datos trabaja constantemente en desarrollar **mejores
+estándares y metodologías** para facilitar el proceso de análisis de datos.
+Hemos separado algunos materiales útiles para que entiendas mejor lo que hacemos
+y cómo sacar el mejor provecho de los datos:
 
-- [Cruzar dados de diferentes organizações de forma rápida](tutorial_cross_tables)
-- [Entender padrões de tabelas, conjuntos e variáveis](style_data)
+- [Cruzar datos de diferentes organizaciones de forma rápida](tutorial_join_tables.md)
+- [Entender patrones de tablas, conjuntos y variables](style_data.md)

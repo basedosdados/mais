@@ -1,6 +1,6 @@
-# Colaborando com testes na BD+
+# Colaborando com testes na BD
 
-Para manter a qualidade dos bases de dados presentes na BD+, nós contamos com um
+Para manter a qualidade dos bases de dados presentes na BD, nós contamos com um
 conjunto de checagens automáticas que são realizadas durante a inserção e
 atualização de cada base. Essas checagens são necessárias, mas não suficientes
 para garantir a qualidade dos dados. Elas realizam consultas basicas, como se a
@@ -19,7 +19,7 @@ qualidade dos dados em SQL, como as seguintes:
 
 Incluir testes de dados deve seguir o fluxo de trabalho:
 
-- [Colaborando com testes na BD+](#colaborando-com-testes-na-bd)
+- [Colaborando com testes na BD](#colaborando-com-testes-na-bd)
   - [Qual o procedimento?](#qual-o-procedimento)
   - [1. Informe seu interesse](#1-informe-seu-interesse)
   - [2. Escreva sua consulta](#2-escreva-sua-consulta)
@@ -31,15 +31,13 @@ Incluir testes de dados deve seguir o fluxo de trabalho:
 
 ## 1. Informe seu interesse
 
-Converse conosco no bate-papo da infra ou reuniões às 19h da segunda-feira, ambos
-no Discord. Caso não tenha uma sugestão de melhoria podemos procurar alguma consulta
-que ainda não foi escrita.
+Converse conosco no bate-papo da infra no Discord. Caso não tenha uma sugestão de melhoria podemos procurar alguma consulta que ainda não foi escrita.
 
 <!----------------------------------------------------------------------------->
 
 ## 2. Escreva sua consulta
 
-Faça um fork do repositório da [Base dos Dados+](https://github.com/basedosdados/mais/tree/master).
+Faça um fork do repositório da [Base dos Dados](https://github.com/basedosdados/mais/tree/master).
 Em seguida adicione novas consultas e suas respectivas funções de execução nos arquivos
 [checks.yaml](https://github.com/basedosdados/mais/blob/master/.github/workflows/data-check/checks.yaml)
 e [test_data.py](https://github.com/basedosdados/mais/blob/master/.github/workflows/data-check/test_data.py).

@@ -1,45 +1,45 @@
-# Pacotes
+# Paquetes
 
-Os pacotes da Base dos Dados permitem o acesso ao *datalake* público
-direto do seu computador ou ambiente de desenvolvimento. Atualmente disponíveis em:
+Los paquetes de Base de los Datos permiten el acceso al *data lake* público
+directamente desde tu computadora o entorno de desarrollo. Actualmente disponibles en:
 
 - **:material-language-python: Python**
 - **:material-language-r: R**
 - **Stata**
 - **:octicons-terminal-16: CLI (terminal)**
 
-Pronto(a) para começar? Nesta página você encontra:
+¿Listo(a) para empezar? En esta página encontrarás:
 
-- [Primeiros passos](#primeiros-passos)
-- [Tutoriais](#tutoriais)
-- [Manuais de referência](#manuais-de-referencia-api)
+- [Primeros pasos](#primeros-pasos)
+- [Tutoriales](#tutoriales)
+- [Manuales de referencia](#manuales-de-referencia-api)
 
-## Primeiros passos
+## Primeros pasos
 
-### Antes de começar: Crie o seu projeto no Google Cloud
+### Antes de empezar: Crea tu proyecto en Google Cloud
 
-Para criar um projeto no Google Cloud basta ter um email cadastrado no
-Google. É necessário ter um projeto seu, mesmo que vazio, para você
-fazer queries em nosso *datalake* público.
+Para crear un proyecto en Google Cloud solo necesitas tener un correo registrado en
+Google. Es necesario tener un proyecto propio, aunque esté vacío, para poder
+hacer consultas en nuestro *data lake* público.
 
-1. **[Acesse o Google Cloud](https://console.cloud.google.com/projectselector2/home/dashboard)**.
-   Caso for a sua primeira vez, aceite o Termo de Serviços.
-2. **Clique em `Create Project/Criar Projeto`**. Escolha um nome bacana para o projeto.
-3. **Clique em `Create/Criar`**
+1. **[Accede a Google Cloud](https://console.cloud.google.com/projectselector2/home/dashboard)**.
+   Si es tu primera vez, acepta los Términos de Servicio.
+2. **Haz clic en `Create Project/Crear Proyecto`**. Elige un buen nombre para el proyecto.
+3. **Haz clic en `Create/Crear`**
 
-??? Info "Por que eu preciso criar um projeto no Google Cloud?"
-    A Google fornece 1 TB gratuito por mês de uso do BigQuery para cada
-    projeto que você possui. Um projeto é necessário para ativar os
-    serviços do Google Cloud, incluindo a permissão de uso do BigQuery.
-    Pense no projeto como a "conta" na qual a Google vai contabilizar o
-    quanto de processamento você já utilizou. **Não é necessário adicionar
-    nenhum cartão ou forma de pagamento - O BigQuery inicia automaticamente no modo Sandbox, que permite você utilizar seus recursos sem adicionar um modo de pagamento. [Leia mais aqui](https://cloud.google.com/bigquery/docs/sandbox/?hl=pt).**
+??? Info "¿Por qué necesito crear un proyecto en Google Cloud?"
+    Google proporciona 1 TB gratuito por mes de uso de BigQuery para cada
+    proyecto que posees. Un proyecto es necesario para activar los
+    servicios de Google Cloud, incluyendo el permiso de uso de BigQuery.
+    Piensa en el proyecto como la "cuenta" en la que Google contabilizará
+    cuánto procesamiento has utilizado. **No es necesario agregar
+    ninguna tarjeta o forma de pago - BigQuery inicia automáticamente en modo Sandbox, que te permite utilizar sus recursos sin agregar un método de pago. [Lee más aquí](https://cloud.google.com/bigquery/docs/sandbox/?hl=es).**
 
-### Instalando o pacote
+### Instalando el paquete
 
-Para instalação do pacote em Python e linha de comando, você pode usar o
-`pip` direto do seu terminal. Em R, basta instalar diretamente no
-RStudio ou editor de sua preferência.
+Para la instalación del paquete en Python y línea de comandos, puedes usar
+`pip` directamente desde tu terminal. En R, basta con instalarlo directamente en
+RStudio o el editor de tu preferencia.
 
 === "**Python/CLI**"
     ```bash
@@ -53,45 +53,44 @@ RStudio ou editor de sua preferência.
 
 === "**Stata**"
 
-Requerimentos:
+Requerimientos:
 
-1. Garantir que seu Stata seja a __versão 16+__
-2. Garantir que o Python esteja instalado no seu computador.
+1. Asegurarte de que tu Stata sea la __versión 16+__
+2. Asegurarte de que Python esté instalado en tu computadora.
 
-Com os requerimentos satisfeitos, rodar os comandos abaixo:
+Con los requerimientos satisfechos, ejecutar los comandos siguientes:
 ```stata
 net install basedosdados, from("https://raw.githubusercontent.com/basedosdados/mais/master/stata-package")
 ```
 
-### Configurando o pacote
+### Configurando el paquete
 
-Uma vez com seu projeto, você precisa configurar o pacote para usar o ID
-desse projeto nas consultas ao *datalake*. Para isso, você deve usar o
-`project_id` que a Google fornece para você assim que o
-projeto é criado.
+Una vez con tu proyecto, necesitas configurar el paquete para usar el ID
+de ese proyecto en las consultas al *datalake*. Para esto, debes usar el
+`project_id` que Google te proporciona tan pronto como el
+proyecto es creado.
 
-![Exemplo de ID do Projeto no BigQuery](images/project_id_example.png)
+![Ejemplo de ID del Proyecto en BigQuery](images/project_id_example.png)
 
 === "Python/CLI"
-    *Não é necessário configurar o projeto de antemão. Assim que você
-    roda a 1ª consulta, o pacote irá indicar os passos para configuração.*
+    *No es necesario configurar el proyecto de antemano. Tan pronto como ejecutes
+    la primera consulta, el paquete indicará los pasos para la configuración.*
 
 === "R"
-    *Uma vez com o `project_id`, você deve passar essa
-    informação para o pacote usando a função `set_billing_id`.*
+    *Una vez con el `project_id`, debes pasar esta
+    información al paquete usando la función `set_billing_id`.*
     ```R
     set_billing_id("<YOUR_PROJECT_ID>")
     ```
 
 === "Stata"
-    *É necessário especificar o `project_id` a cada vez que usar o pacote.*
+    *Es necesario especificar el `project_id` cada vez que uses el paquete.*
 
+### Haz tu primera consulta
 
-### Faça sua primeira consulta
-
-Um exemplo simples para começar a explorar o *datalake* é puxar informações cadastrais de
-municípios direto na nossa base de [Diretórios Brasileiros (tabela `municipio`)](https://basedosdados.org/dataset/br-bd-diretorios-brasil). Para isso, vamos usar a
-função `download`, baixando os dados direto para nossa máquina.
+Un ejemplo simple para empezar a explorar el *datalake* es obtener información catastral de
+municipios directamente en nuestra base de [Directorios Brasileños (tabla `municipio`)](https://basedosdados.org/dataset/br-bd-diretorios-brasil). Para esto, usaremos la
+función `download`, descargando los datos directamente a nuestra máquina.
 
 === "Python"
     ```python
@@ -100,7 +99,7 @@ função `download`, baixando os dados direto para nossa máquina.
     dataset_id="br-bd-diretorios-brasil", table_id="municipio")
     ```
 
-    *Para entender mais sobre a função `download`, leia o [manual de referência](../api_reference_python).*
+    *Para entender más sobre la función `download`, lee el [manual de referencia](../api_reference_python).*
 
 === "R"
     ```R
@@ -110,7 +109,7 @@ função `download`, baixando os dados direto para nossa máquina.
     data <- download(query, "<PATH>")
     ```
 
-    *Para entender mais sobre a função `download`, leia o [manual de referência](../api_reference_r).*
+    *Para entender más sobre la función `download`, lee el [manual de referencia](../api_reference_r).*
 
 === "Stata"
     ```stata
@@ -127,42 +126,42 @@ função `download`, baixando os dados direto para nossa máquina.
     --query 'SELECT * FROM
     `basedosdados.br_bd_diretorios_brasil.municipio`'
     ```
-    *Para entender mais sobre a função `download`, leia o [manual de referência](../api_reference_cli).*
+    *Para entender más sobre la función `download`, lee el [manual de referencia](../api_reference_cli).*
 
-## Tutoriais
+## Tutoriales
 
-### Como usar os pacotes
+### Cómo usar los paquetes
 
-Preparamos tutoriais apresentando as principais funções de cada pacote
-para você começar a usá-los.
+Preparamos tutoriales presentando las principales funciones de cada paquete
+para que empieces a usarlos.
 
 === "**Python**"
     Blog:
 
-    - [Introdução ao pacote Python](https://dev.to/basedosdados/base-dos-dados-python-101-44lc)
-    - [Introdução ao pacote Python (cont.)](https://dev.to/basedosdados/base-dos-dados-python-102-50k0)
+    - [Introducción al paquete Python](https://dev.to/basedosdados/base-dos-dados-python-101-44lc)
+    - [Introducción al paquete Python (cont.)](https://dev.to/basedosdados/base-dos-dados-python-102-50k0)
 
-    Vídeos:
+    Videos:
 
-    - [Workshop: Aplicações em Python](https://www.youtube.com/watch?v=wI2xEioDPgM)
+    - [Workshop: Aplicaciones en Python](https://www.youtube.com/watch?v=wI2xEioDPgM)
 
 === "**R**"
     Blog:
 
-    - [Introdução ao pacote R](https://dev.to/basedosdados/como-usar-a-biblioteca-basedosdados-no-r-capitulo-1-46kb)
-    - [Explorando o Censo Escolar](https://dev.to/basedosdados/explorando-o-censo-escolar-com-a-base-dos-dados-1a89)
-    - [Análise: O Brasil nas Olimpíadas](https://dev.to/basedosdados/o-brasil-nas-olimpiadas-2g6n)
+    - [Introducción al paquete R](https://dev.to/basedosdados/como-usar-a-biblioteca-basedosdados-no-r-capitulo-1-46kb)
+    - [Explorando el Censo Escolar](https://dev.to/basedosdados/explorando-o-censo-escolar-com-a-base-dos-dados-1a89)
+    - [Análisis: Brasil en las Olimpiadas](https://dev.to/basedosdados/o-brasil-nas-olimpiadas-2g6n)
 
-    Vídeos:
+    Videos:
 
-    - [Workshop: Aprenda a acessar dados públicos em R](https://www.youtube.com/watch?v=M9ayiseIjvI&t=250s)
+    - [Workshop: Aprende a acceder a datos públicos en R](https://www.youtube.com/watch?v=M9ayiseIjvI&t=250s)
 
 === "**Stata**"
-    Documentação:
+    Documentación:
 
     - [GitHub](https://github.com/basedosdados/mais/tree/master/stata-package)
 
-## Manuais de referência (API)
+## Manuales de referencia (API)
 
 * [:material-language-python: Python](../api_reference_python)
 * [:material-language-r: R](../api_reference_r)

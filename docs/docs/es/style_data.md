@@ -1,254 +1,238 @@
 # Manual de estilo
 
-Nessa seção listamos todos os padrões do nosso manual de estilo e diretrizes de dados que usamos na Base dos Dados. Eles nos ajudam a manter os dados e metadados que publicamos com qualidade alta.
+En esta sección listamos todos los estándares de nuestro manual de estilo y directrices de datos que usamos en Base de los Datos. Estos nos ayudan a mantener los datos y metadatos que publicamos con alta calidad.
 
-!!! Tip "Você pode usar o menu esquerdo para navegar pelos diferentes tópicos dessa página."
-<!-- **Resumo**:
-
-- [Nomeação de bases e tabelas](#nomeação-de-bases-e-tabelas)
-- [Formatos de tabelas](#formatos-de-tabelas)
-- [Nomeação de variáveis](#nomeacao-de-variaveis)
-- [Ordenamento de variáveis](#ordenamento-de-variáveis)
-- [Tipos de variáveis](#tipos-de-variaveis)
-- [Unidades de medida](#unidades-de-medida)
-- [Quais variáveis manter, quais adicionar e quais remover](#quais-variáveis-manter-quais-adicionar-e-quais-remover)
-- [Cobertura temporal](#cobertura-temporal)
-- [Limpando STRINGs](#limpando-strings)
-- [Formatos de valores](#formatos-de-valores)
-- [Particionamento de tabelas](#particionamento-de-tabelas)
-- [Número de bases por _pull request_](#número-de-bases-por-pull-request)
-- [Dicionários](#dicionarios)
-- [Diretórios](#diretorios) -->
+!!! Tip "Puedes usar el menú izquierdo para navegar por los diferentes temas de esta página."
 
 ---
 
-## Nomeação de bases e tabelas
+## Nomenclatura de bases y tablas
 
-### Conjuntos de dados (`dataset_id`)
+### Conjuntos de datos (`dataset_id`)
 
-Nomeamos conjuntos no formato `<organization_id\>_<descrição\>`, onde
-`organization_id` segue por padrão a **abrangência geográfica da
-organização** que publica o conjunto:
+Nombramos conjuntos en el formato `<organization_id>_<descripción>`, donde
+`organization_id` sigue por defecto la **cobertura geográfica de la
+organización** que publica el conjunto:
 
 |           | organization_id                         |
 |-----------|----------------------------------------------|
-| Mundial   | mundo_<organizacao\>                         |
-| Federal   | <sigla_pais\>\_<organizacao\>                         |
-| Estadual  | <sigla_pais\>\_<sigla_uf\>\_<organizacao\>             |
-| Municipal | <sigla_pais\>\_<sigla_uf\>\_<cidade\>\_<organizacao\>   |
+| Mundial   | mundo_<organizacion>                         |
+| Federal   | <sigla_pais>_<organizacion>                         |
+| Estatal   | <sigla_pais>_<sigla_estado>_<organizacion>             |
+| Municipal | <sigla_pais>_<sigla_estado>_<ciudad>_<organizacion>   |
 
-* `sigla_pais` e `sigla_uf` são sempre 2 letras minúsculas;
-* `organizacao` é o nome ou sigla (de preferência) da organização que
-  publicou os dados orginais (ex: `ibge`, `tse`, `inep`).
-* `descricao` é uma breve descrição do conjunto de dados, que pode ser
+* `sigla_pais` y `sigla_estado` son siempre 2 letras minúsculas;
+* `organizacion` es el nombre o sigla (preferentemente) de la organización que
+  publicó los datos originales (ej: `ibge`, `tse`, `inep`).
+* `descripcion` es una breve descripción del conjunto de datos
 
-Por exemplo, o conjunto de dados do PIB do IBGE tem como `dataset_id`: `br_ibge_pib`
+Por ejemplo, el conjunto de datos del PIB del IBGE tiene como `dataset_id`: `br_ibge_pib`
 
-!!! Tip "Não sabe como nomear a organização?"
-    Sugerimos que vá no site da mesma e veja como ela se autodenomina (ex: DETRAN-RJ seria `br_rj_detran`)
+!!! Tip "¿No sabes cómo nombrar la organización?"
+    Sugerimos que vayas al sitio web de la misma y veas cómo se autodenomina (ej: DETRAN-RJ sería `br_rj_detran`)
 
-### Tabelas
+### Tablas
 
-Nomear tabelas é algo menos estruturado e, por isso, requer bom senso. Mas temos algumas regras:
+Nombrar tablas es algo menos estructurado y, por eso, requiere sentido común. Pero tenemos algunas reglas:
 
-- Se houver tabelas para diferentes entidades, incluir a entidade no começo do nome. Exemplo: `municipio_valor`, `uf_valor`.
-- Não incluir a unidade temporal no nome. Exemplo: nomear `municipio`, e não `municipio_ano`.
-- Deixar nomes no singular. Exemplo: `escola`, e não `escolas`.
-- Nomear de `microdados` as tabelas mais desagregadas. Em geral essas tem dados a nível de pessoa ou transação.
+- Si hay tablas para diferentes entidades, incluir la entidad al principio del nombre. Ejemplo: `municipio_valor`, `uf_valor`.
+- No incluir la unidad temporal en el nombre. Ejemplo: nombrar `municipio`, y no `municipio_ano`.
+- Dejar nombres en singular. Ejemplo: `escuela`, y no `escuelas`.
+- Nombrar como `microdatos` las tablas más desagregadas. En general estas tienen datos a nivel de persona o transacción.
 
-### Exemplos de `dataset_id.table_id`
+### Ejemplos de `dataset_id.table_id`
 
 |           |                                           |                                                     |
 |-----------|-------------------------------------------|-----------------------------------------------------|
-| Mundial   | `mundo_waze.alertas`                      | Dados de alertas do Waze de diferentes cidades.    |
-| Federal   | `br_tse_eleicoes.candidatos`              | Dados de candidatos a cargos políticos do TSE.      |
-| Federal   | `br_ibge_pnad.microdados`                 | Microdados da Pesquisa Nacional por Amostra de Domicílios produzidos pelo IBGE. |
-| Federal   | `br_ibge_pnadc.microdados`                | Microdados da Pesquisa Nacional por Amostra de Domicílios Contínua (PNAD-C) produzidos pelo IBGE. |
-| Estadual  | `br_sp_see_docentes.carga_horaria`        | Carga horária anonimizado de docentes ativos da rede estadual de ensino de SP. |
-| Municipal | `br_rj_riodejaneiro_cmrj_legislativo.votacoes` | Dados de votação da Câmara Municipal do Rio de Janeiro (RJ). |
+| Mundial   | `mundo_waze.alertas`                      | Datos de alertas de Waze de diferentes ciudades.    |
+| Federal   | `br_tse_eleicoes.candidatos`              | Datos de candidatos a cargos políticos del TSE.      |
+| Federal   | `br_ibge_pnad.microdados`                 | Microdatos de la Encuesta Nacional por Muestra de Hogares producidos por el IBGE. |
+| Federal   | `br_ibge_pnadc.microdados`                | Microdatos de la Encuesta Nacional por Muestra de Hogares Continua (PNAD-C) producidos por el IBGE. |
+| Estatal   | `br_sp_see_docentes.carga_horaria`        | Carga horaria anonimizada de docentes activos de la red estatal de enseñanza de SP. |
+| Municipal | `br_rj_riodejaneiro_cmrj_legislativo.votaciones` | Datos de votación de la Cámara Municipal de Río de Janeiro (RJ). |
 
-## Formatos de tabelas
+## Formatos de tablas
 
-Tabelas devem, na medida do possível, estar no formato `long`, ao invés de `wide`.
+Las tablas deben, en la medida de lo posible, estar en formato `long`, en lugar de `wide`.
 
-## Nomeação de variáveis
+## Nomenclatura de variables
 
-Nomes de variáveis devem respeitar algumas regras:
+Los nombres de variables deben respetar algunas reglas:
 
-- Usar ao máximo nomes já presentes no repositório. Exemplos: `ano`, `mes`, `id_municipio`, `sigla_uf`, `idade`, `cargo`, `resultado`, `votos`, `receita`, `despesa`, `preco`, etc.
-- Respeitar padrões das tabelas de diretórios.
-- Ser o mais intuitivo, claro e extenso possível.
-- Ter todas letras minúsculas (inclusive siglas), sem acentos, conectados por `_`.
-- Não incluir conectores como `de`, `da`, `dos`, `e`, `a`, `em`, etc.
-- Só ter o prefixo `id_` quando a variável representar chaves primárias de entidades (que eventualmente teriam uma tabela de diretório).
-    - Exemplos que tem: `id_municipio`, `id_uf`, `id_escola`, `id_pessoa`.
-    - Exemplos que não tem: `rede`, `localizacao`.
-    - **Importante**: quando a base está em inglês id vira um sufixo
-- Só ter sufixos de entidade quando a entidade da coluna for diferente da entidade da tabela.
-    - Exemplos que tem: numa tabela com entidade `pessoa`, uma coluna sobre PIB municipal se chamaria `pib_municipio`.
-    - Exemplos que não tem: numa tabela com entidade `pessoa`, características da pessoa se chamariam `nome`, `idade`, `sexo`, etc.
-- Lista de **prefixos permitidos**
-    - `nome_`,
-    - `data_`,
+- Usar al máximo nombres ya presentes en el repositorio. Ejemplos: `ano`, `mes`, `id_municipio`, `sigla_uf`, `edad`, `cargo`, `resultado`, `votos`, `ingreso`, `gasto`, `precio`, etc.
+- Respetar patrones de las tablas de directorios.
+- Ser lo más intuitivo, claro y extenso posible.
+- Tener todas las letras minúsculas (inclusive siglas), sin acentos, conectados por `_`.
+- No incluir conectores como `de`, `la`, `los`, `y`, `en`, etc.
+- Solo tener el prefijo `id_` cuando la variable represente claves primarias de entidades (que eventualmente tendrían una tabla de directorio).
+    - Ejemplos que tienen: `id_municipio`, `id_uf`, `id_escuela`, `id_persona`.
+    - Ejemplos que no tienen: `red`, `localizacion`.
+    - **Importante**: cuando la base está en inglés id se convierte en un sufijo
+- Solo tener sufijos de entidad cuando la entidad de la columna sea diferente de la entidad de la tabla.
+    - Ejemplos que tienen: en una tabla con entidad `persona`, una columna sobre PIB municipal se llamaría `pib_municipio`.
+    - Ejemplos que no tienen: en una tabla con entidad `persona`, características de la persona se llamarían `nombre`, `edad`, `sexo`, etc.
+- Lista de **prefijos permitidos**
+    - `nombre_`,
+    - `fecha_`,
     - `numero_`,
-    - `quantidade_`,
-    - `proporcao_` (variáveis de porcentagem 0-100%),
-    - `taxa_`,
-    - `razao_`,
+    - `cantidad_`,
+    - `proporcion_` (variables de porcentaje 0-100%),
+    - `tasa_`,
+    - `razon_`,
     - `indice_`,
-    - `indicador_` (variáveis do tipo booleano),
+    - `indicador_` (variables de tipo booleano),
     - `tipo_`,
     - `sigla_`,
-    - `sequencial_`.
-- Lista de **sufixos comuns**
-    - `_pc` (per capita)
+    - `secuencial_`.
+- Lista de **sufijos comunes**
+    - `_pc` (per cápita)
 
-## Ordenamento de variáveis
+## Ordenamiento de variables
 
-A ordem de variáveis em tabelas é padronizada para manter uma consistência no repositório. Nossas regras são:
+El orden de variables en tablas está estandarizado para mantener una consistencia en el repositorio. Nuestras reglas son:
 
-- Chaves primárias à esquerda, em ordem descendente de abrangência;
-- No meio devem estar variáveis qualitativas da linha;
-- As últimas variáveis devem ser os valores quantitativos em ordem crescente de relevância;
-- Exemplo de ordem: `ano`, `sigla_uf`, `id_municipio`, `id_escola`, `rede`, `nota_ideb`;
-- Dependendo da tabela, pode ser recomendado agrupar e ordenar variáveis por temas.
+- Claves primarias a la izquierda, en orden descendente de cobertura;
+- En el medio deben estar variables cualitativas de la línea;
+- Las últimas variables deben ser los valores cuantitativos en orden creciente de relevancia;
+- Ejemplo de orden: `ano`, `sigla_uf`, `id_municipio`, `id_escuela`, `red`, `nota_ideb`;
+- Dependiendo de la tabla, puede ser recomendado agrupar y ordenar variables por temas.
 
-## Tipos de variáveis
+## Tipos de variables
 
-Nós utilizamos algumas das opções de [tipos do BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types): `string`, `int64`, `float64`, `date`, `time`, `geography`.
+Utilizamos algunas de las opciones de [tipos de BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types): `string`, `int64`, `float64`, `date`, `time`, `geography`.
 
-Quando escolher:
+Cuándo elegir:
 
 - `string`:
-    - Variáveis de texto
-    - Chaves de variáveis categóricas com dicionário ou diretório
+    - Variables de texto
+    - Claves de variables categóricas con diccionario o directorio
 - `int64`:
-    - Variáveis de números inteiros com as quais é possível fazer contas (adição, subtração)
-    - Variáveis do tipo booleanas que preenchemos com 0 ou 1
+    - Variables de números enteros con las que es posible hacer cálculos (adición, sustracción)
+    - Variables de tipo booleanas que llenamos con 0 o 1
 - `float64`:
-    - Variáveis de números com casas decimais com as quais é possível fazer contas (adição, subtração)
+    - Variables de números con decimales con las que es posible hacer cálculos (adición, sustracción)
 - `date`:
-    - Variáveis de data no formato `YYYY-MM-DD`
+    - Variables de fecha en formato `YYYY-MM-DD`
 - `time`:
-    - Variáveis de tempo no formato `HH:MM:SS`
+    - Variables de tiempo en formato `HH:MM:SS`
 - `geography`:
-    - Variáveis de geografia
+    - Variables de geografía
 
 ## Unidades de medida
 
-A regra é manter variáveis com suas unidades de medida originais listadas nesse [código](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py), com a exceção de variáveis financeiras onde convertermos moedas antigas para as atuais (e.g. Cruzeiro para Real).
+La regla es mantener variables con sus unidades de medida originales listadas en este [código](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py), con la excepción de variables financieras donde convertimos monedas antiguas a las actuales (ej. Cruzeiro a Real).
 
-Catalogamos unidades de medida em formato padrão na tabela de arquitetura. [Lista completa aqui](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py) Exemplos: `m`, `km/h`, `BRL`.
+Catalogamos unidades de medida en formato estándar en la tabla de arquitectura. [Lista completa aquí](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py) Ejemplos: `m`, `km/h`, `BRL`.
 
-Para colunas financeiras deflacionadas, listamos a moeda com o ano base. Exemplo: uma coluna medida em reais de 2010 tem unidade `BRL_2010`.
+Para columnas financieras deflactadas, listamos la moneda con el año base. Ejemplo: una columna medida en reales de 2010 tiene unidad `BRL_2010`.
 
-Variáveis devem ter sempre unidades de medida com base 1. Ou seja, ter `BRL` ao invés de `1000 BRL`, ou `pessoa` ao invés de `1000 pessoas`. Essa informação, como outros metadados de colunas, são registradas na tabela de arquitetura da tabela.
+Las variables deben tener siempre unidades de medida con base 1. Es decir, tener `BRL` en lugar de `1000 BRL`, o `persona` en lugar de `1000 personas`. Esta información, como otros metadatos de columnas, se registra en la tabla de arquitectura de la tabla.
 
-## Quais variáveis manter, quais adicionar e quais remover
+## Qué variables mantener, cuáles añadir y cuáles eliminar
 
-Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/database-normalization.html), e temos regras para quais variáveis incluirmos em produção. Elas são:
+Mantenemos nuestras tablas parcialmente [normalizadas](https://www.guru99.com/database-normalization.html), y tenemos reglas para qué variables incluir en producción. Estas son:
 
-- Remover variáveis de nomes de entidades que já estão em diretórios. Exemplo: retirar `municipio` da tabela que já inclui `id_municipio`.
-- Remover variáveis servindo de partição. Exemplo: remover `ano` e `sigla_uf` se a tabela é particionada nessas duas dimensões.
-- Adicionar chaves primárias principais para cada entidade já existente. Exemplo: adicionar `id_municipio` a tabelas que só incluem `id_municipio_tse`.
-- Manter todas as chaves primárias que já vem com a tabela, mas (1) adicionar chaves relevantes (e.g. `sigla_uf`, `id_municipio`) e (2) retirar chaves irrelevantes (e.g. `regiao`).
+- Eliminar variables de nombres de entidades que ya están en directorios. Ejemplo: retirar `municipio` de la tabla que ya incluye `id_municipio`.
+- Eliminar variables que sirven de partición. Ejemplo: eliminar `ano` y `sigla_uf` si la tabla está particionada en estas dos dimensiones.
+- Añadir claves primarias principales para cada entidad ya existente. Ejemplo: añadir `id_municipio` a tablas que solo incluyen `id_municipio_tse`.
+- Mantener todas las claves primarias que ya vienen con la tabla, pero (1) añadir claves relevantes (ej. `sigla_uf`, `id_municipio`) y (2) retirar claves irrelevantes (ej. `region`).
 
 ## Cobertura temporal
 
-Preencher a coluna `cobertura_temporal` nos metadados de tabela, coluna e chave (em dicionários) segue o seguinte padrão.
+Llenar la columna `cobertura_temporal` en los metadatos de tabla, columna y clave (en diccionarios) sigue el siguiente patrón.
 
-- Formato geral: `data_inicial(unidade_temporal)data_final`
-    - `data_inicial` e `data_final` estão na correspondente unidade temporal.
-        - Exemplo: tabela com unidade `ano` tem cobertura `2005(1)2018`.
-        - Exemplo: tabela com unidade `mes` tem cobertura `2005-08(1)2018-12`.
-        - Exemplo: tabela com unidade `semana` tem cobertura `2005-08-01(7)2018-08-31`.
-        - Exemplo: tabela com unidade `dia` tem cobertura `2005-08-01(1)2018-12-31`.
+- Formato general: `fecha_inicial(unidad_temporal)fecha_final`
+    - `fecha_inicial` y `fecha_final` están en la correspondiente unidad temporal.
+        - Ejemplo: tabla con unidad `ano` tiene cobertura `2005(1)2018`.
+        - Ejemplo: tabla con unidad `mes` tiene cobertura `2005-08(1)2018-12`.
+        - Ejemplo: tabla con unidad `semana` tiene cobertura `2005-08-01(7)2018-08-31`.
+        - Ejemplo: tabla con unidad `dia` tiene cobertura `2005-08-01(1)2018-12-31`.
 
-- Regras para preenchimento
-    - Metadados de tabela
-        - Preencher no formato geral.
-    - Metadados de coluna
-        - Preencher no formato geral, exceto quando a `data_inicial` ou `data_final` sejam iguais aos da tabela. Nesse caso deixe vazio.
-        - Exemplo: suponha que a cobertura da tabela seja `2005(1)2018`.
-            - Se uma coluna aparece só em 2012 e existe até 2018, preenchemos sua cobertura como `2012(1)`.
-            - Se uma coluna desaparece em 2013, preenchemos sua cobertura como `(1)2013`.
-            - Se uma coluna existe na mesma cobertura temporal da tabela, preenchemos sua cobertura como `(1)`.
-    - Metadados de chave
-        - Preencher no mesmo padrão de colunas, mas a referência sendo a coluna correspondente, e não a tabela.
+- Reglas para llenado
+    - Metadatos de tabla
+        - Llenar en el formato general.
+    - Metadatos de columna
+        - Llenar en el formato general, excepto cuando la `fecha_inicial` o `fecha_final` sean iguales a las de la tabla. En ese caso dejar vacío.
+        - Ejemplo: suponga que la cobertura de la tabla sea `2005(1)2018`.
+            - Si una columna aparece solo en 2012 y existe hasta 2018, llenamos su cobertura como `2012(1)`.
+            - Si una columna desaparece en 2013, llenamos su cobertura como `(1)2013`.
+            - Si una columna existe en la misma cobertura temporal que la tabla, llenamos su cobertura como `(1)`.
+    - Metadatos de clave
+        - Llenar en el mismo patrón de columnas, pero la referencia siendo la columna correspondiente, y no la tabla.
 
-## Limpando STRINGs
+## Limpiando STRINGs
 
-- Variáveis categóricas: inicial maiúscula e resto minúsculo, com acentos.
-- STRINGs não-estruturadas: manter igual aos dados originais.
+- Variables categóricas: inicial mayúscula y resto minúscula, con acentos.
+- STRINGs no estructuradas: mantener igual a los datos originales.
 
 ## Formatos de valores
 
-- Decimal: formato americano, i.e. sempre `.` (ponto) ao invés de `,` (vírgula).
-- Data: `YYYY-MM-DD`
-- Horário (24h): `HH:MM:SS`
+- Decimal: formato americano, es decir siempre `.` (punto) en lugar de `,` (coma).
+- Fecha: `YYYY-MM-DD`
+- Horario (24h): `HH:MM:SS`
 - Datetime ([ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)): `YYYY-MM-DDTHH:MM:SS.sssZ`
-- Valor nulo: `""` (csv), `NULL` (Python), `NA` (R), `.` ou `""` (Stata)
-- Proporção/porcentagem: entre 0-100
+- Valor nulo: `""` (csv), `NULL` (Python), `NA` (R), `.` o `""` (Stata)
+- Proporción/porcentaje: entre 0-100
 
-## Particionamento de tabelas
+## Particionamiento de tablas
 
-### **O que é particionamento e qual seu objetivo ?**
+### **¿Qué es el particionamiento y cuál es su objetivo?**
 
-De forma resumida, particionar uma tabela é dividi-la em vários blocos/partes. O objetivo central é diminuir os custos financeiros e aumentar a perfomance, visto que, quanto maior o volume de dados, consequentemente será maior o custo de armazenamento e consulta.
+De forma resumida, particionar una tabla es dividirla en varios bloques/partes. El objetivo central es disminuir los costos financieros y aumentar el rendimiento, ya que, cuanto mayor sea el volumen de datos, consecuentemente será mayor el costo de almacenamiento y consulta.
 
-A redução de custos e o aumento de perfomance acontece, principalmente, porque a partição permite a reorganização do conjunto de dados em pequenos **blocos agrupados**. Na prática, realizando o particionamento, é possível evitar que uma consulta percorra toda a tabela só para trazer um pequeno recorte de dados.
+La reducción de costos y el aumento de rendimiento ocurre, principalmente, porque la partición permite la reorganización del conjunto de datos en pequeños **bloques agrupados**. En la práctica, realizando el particionamiento, es posible evitar que una consulta recorra toda la tabla solo para traer un pequeño recorte de datos.
 
-Um exemplo prático da nossa querida RAIS:
+Un ejemplo práctico de nuestra querida RAIS:
 
-- Sem utilizar filtro de partição:
+- Sin utilizar filtro de partición:
 
-Para esse caso o Bigquery varreu todas (*) as colunas e linhas do conjunto. Vale salientar que esse custo ainda não é tão grande, visto que a base já foi particionada. Caso esse conjunto não tivesse passado pelo processo de particionamento, essa consulta custaria muito mais dinheiro e tempo, já que se trata de um volume considerável de dados.
+Para este caso, BigQuery recorrió todas (*) las columnas y filas del conjunto. Vale señalar que este costo aún no es tan grande, ya que la base ya fue particionada. Si este conjunto no hubiera pasado por el proceso de particionamiento, esta consulta costaría mucho más dinero y tiempo, ya que se trata de un volumen considerable de datos.
 
 ![image](https://user-images.githubusercontent.com/58278652/185815101-68ed5797-fff8-4968-84e2-e6a47bba58d0.png)
 
-- Com filtro de partição:
+- Con filtro de partición:
 
-Aqui, filtramos pelas colunas particionadas `ano` e `sigla_uf`. Dessa forma, o Bigquery só **consulta** e **retorna** os valores da pasta **ano** e da subpasta **sigla_uf**.
+Aquí, filtramos por las columnas particionadas `ano` y `sigla_uf`. De esta forma, BigQuery solo **consulta** y **retorna** los valores de la carpeta **ano** y la subcarpeta **sigla_uf**.
 
 ![image](https://user-images.githubusercontent.com/58278652/185815135-fb012a2c-535b-457e-af2a-7984961168b3.png)
 
-### **Quando particionar uma tabela?**
+### **¿Cuándo particionar una tabla?**
 
-A primeira pergunta que surge quando se trata de particionamento é: _a partir de qual quantidade de linhas uma tabela deve ser particionada?_ A documentação do [GCP ](https://cloud.google.com/bigquery/docs/partitioned-tables?hl=pt-br) não define uma quantidade _x_ ou _y_  de linhas que deve ser particionada. O ideal é que as tabelas sejam particionadas, com poucas exceções. Por exemplo, tabelas com menos de 10.000 linhas, que não receberão mais ingestão de dados, não tem um custo de armazenamento e processamento altos e, portanto, não há necessidade de serem particionadas.
+La primera pregunta que surge cuando se trata de particionamiento es: _¿a partir de qué cantidad de filas una tabla debe ser particionada?_ La documentación de [GCP](https://cloud.google.com/bigquery/docs/partitioned-tables?hl=es) no define una cantidad _x_ o _y_ de filas que debe ser particionada. Lo ideal es que las tablas sean particionadas, con pocas excepciones. Por ejemplo, tablas con menos de 10.000 filas, que no recibirán más ingestión de datos, no tienen un costo de almacenamiento y procesamiento altos y, por lo tanto, no hay necesidad de ser particionadas.
 
-### **Como particionar uma tabela?**
+### **¿Cómo particionar una tabla?**
 
-Se os dados estão guardados localmente, é necessário:
+Si los datos están guardados localmente, es necesario:
 
-1. Criar as pastas particionadas na sua pasta de `/output`, na linguagem que você estiver utilizando.
+1. Crear las carpetas particionadas en tu carpeta de `/output`, en el lenguaje que estés utilizando.
 
-Exemplo de uma tabela particionada por `ano` e `mes`, utilizando `python`:
-
-```python
-for ano in [*range(2005, 2020)]:
-  for mes in [*range(1, 13)]:
-    particao = output + f'table_id/ano={ano}/mes={mes}'
-    if not os.path.exists(particao):
-      os.makedirs(particao)
-```
-2. Salvar os arquivos particionados.
+Ejemplo de una tabla particionada por `ano` y `mes`, utilizando `python`:
 
 ```python
 for ano in [*range(2005, 2020)]:
   for mes in [*range(1, 13)]:
-    df_particao = df[df['ano'] == ano].copy() # O .copy não é necessário é apenas uma boa prática
-    df_particao = df_particao[df_particao['mes'] == mes]
-    df_particao.drop(['ano', 'mes'], axis=1, inplace=True) # É preciso excluir as colunas utilizadas para partição
-    particao = output + f'table_id/ano={ano}/mes={mes}/tabela.csv'
-    df_particao.to_csv(particao, index=False, encoding='utf-8', na_rep='')
+    particion = output + f'table_id/ano={ano}/mes={mes}'
+    if not os.path.exists(particion):
+      os.makedirs(particion)
+```
+2. Guardar los archivos particionados.
+
+```python
+for ano in [*range(2005, 2020)]:
+  for mes in [*range(1, 13)]:
+    df_particion = df[df['ano'] == ano].copy() # El .copy no es necesario, es solo una buena práctica
+    df_particion = df_particion[df_particion['mes'] == mes]
+    df_particion.drop(['ano', 'mes'], axis=1, inplace=True) # Es necesario excluir las columnas utilizadas para partición
+    particion = output + f'table_id/ano={ano}/mes={mes}/tabla.csv'
+    df_particion.to_csv(particion, index=False, encoding='utf-8', na_rep='')
 ```
 
-Exemplos de tabelas particionadas em `R`:
+Ejemplos de tablas particionadas en `R`:
 
 - [PNADC](https://github.com/basedosdados/mais/blob/master/bases/br_ibge_pnadc/code/microdados.R)
 - [PAM](https://github.com/basedosdados/mais/blob/master/bases/br_ibge_pam/code/permanentes_usando_api.R)
 
-Exemplo de como particionar uma tabela em `SQL`:
+Ejemplo de cómo particionar una tabla en `SQL`:
 
 ```sql
 CREATE TABLE `dataset_id.table_id` as (
@@ -257,70 +241,69 @@ CREATE TABLE `dataset_id.table_id` as (
     col1 STRING,
     col1 STRING
 ) PARTITION BY ano, mes
-OPTIONS (Description='Descrição da tabela')
+OPTIONS (Description='Descripción de la tabla')
 ```
 
-### **Regras importantes de particionamento.**
+### **Reglas importantes de particionamiento**
 
-- Os tipos de colunas que o BigQuery aceita como partição são:
+- Los tipos de columnas que BigQuery acepta como partición son:
 
-  * **Coluna de unidade de tempo**: as tabelas são particionadas com base em uma coluna de `TIMESTAMP`, `DATE` ou `DATETIME`.
-  * **Tempo de processamento**: as tabelas são particionadas com base no carimbo de `data/hora` quando o BigQuery processa os dados.
-  * **Intervalo de números inteiros**: as tabelas são particionadas com base em uma coluna de números inteiros.
+  * **Columna de unidad de tiempo**: las tablas son particionadas con base en una columna de `TIMESTAMP`, `DATE` o `DATETIME`.
+  * **Tiempo de procesamiento**: las tablas son particionadas con base en el sello de `fecha/hora` cuando BigQuery procesa los datos.
+  * **Intervalo de números enteros**: las tablas son particionadas con base en una columna de números enteros.
 
-- Os tipos de colunas que o BigQuery **não** aceita como partição são: `BOOL`, `FLOAT64`, `BYTES`, etc.
+- Los tipos de columnas que BigQuery **no** acepta como partición son: `BOOL`, `FLOAT64`, `BYTES`, etc.
 
-- O BigQuery aceita no máximo 4.000 partições por tabela.
+- BigQuery acepta como máximo 4.000 particiones por tabla.
 
-- Aqui na BD as tabelas geralmente são particionadas por: `ano`, `mes`, `trimestre` e `sigla_uf`.
+- Aquí en BD las tablas generalmente son particionadas por: `ano`, `mes`, `trimestre` y `sigla_uf`.
 
-- Note que ao particionar uma tabela é preciso excluir a coluna correspondente. Exemplo: é preciso excluir a coluna `ano` ao particionar por `ano`.
-
+- Note que al particionar una tabla es necesario excluir la columna correspondiente. Ejemplo: es necesario excluir la columna `ano` al particionar por `ano`.
 
 ## Número de bases por _pull request_
 
-Pull requests no Github devem incluir no máximo um conjunto, mas pode incluir mais de uma base. Ou seja, podem envolver uma ou mais tabela dentro do mesmo conjunto.
+Los pull requests en Github deben incluir como máximo un conjunto, pero pueden incluir más de una base. Es decir, pueden involucrar una o más tablas dentro del mismo conjunto.
 
-## Dicionários
+## Diccionarios
 
-- Cada base inclui somente um dicionário (que cobre uma ou mais tabelas).
-- Para cada tabela, coluna, e cobertura temporal, cada chave mapeia unicamente um valor.
-- Chaves não podem ter valores nulos.
-- Dicionários devem cobrir todas as chaves disponíveis nas tabelas originais.
-- Chaves só podem possuir zeros à esquerda quando o número de dígitos da variável tiver significado. Quando a variável for `enum` padrão, nós excluimos os zeros à esquerda.
-    - Exemplo: mantemos o zero à esquerda da variável `br_bd_diretorios_brasil.cbo_2002:cbo_2002`, que tem seis dígitos, pois o primeiro dígito `0` significa a categoria ser do `grande grupo = "Membros das forças armadas, policiais e bombeiros militares"`.
-    - Para outros casos, como por exemplo `br_inep_censo_escolar.turma:etapa_ensino`, nós excluimos os zeros à esquerda. Ou seja, mudamos `01` para `1`.
-- Valores são padronizados: sem espaços extras, inicial maiúscula e resto minúsculo, etc.
+- Cada base incluye solamente un diccionario (que cubre una o más tablas).
+- Para cada tabla, columna, y cobertura temporal, cada clave mapea únicamente un valor.
+- Las claves no pueden tener valores nulos.
+- Los diccionarios deben cubrir todas las claves disponibles en las tablas originales.
+- Las claves solo pueden poseer ceros a la izquierda cuando el número de dígitos de la variable tenga significado. Cuando la variable sea `enum` estándar, excluimos los ceros a la izquierda.
+    - Ejemplo: mantenemos el cero a la izquierda de la variable `br_bd_diretorios_brasil.cbo_2002:cbo_2002`, que tiene seis dígitos, pues el primer dígito `0` significa que la categoría es del `gran grupo = "Miembros de las fuerzas armadas, policías y bomberos militares"`.
+    - Para otros casos, como por ejemplo `br_inep_censo_escolar.turma:etapa_ensino`, excluimos los ceros a la izquierda. Es decir, cambiamos `01` por `1`.
+- Los valores son estandarizados: sin espacios extras, inicial mayúscula y resto minúscula, etc.
 
-### **Como preencher os metadados da tabela dicionário?**
-- Não preencher o *`spatial_coverage`* (`cobertura_espacial`), ou seja, deixar o campo vazio.
-- Não preencher o *`temporal_coverage`* (`cobertura_temporal`), ou seja, deixar o campo vazio.
-- Não preencher o *`observation_level`* (`nivel_observacao`), ou seja, deixar o campo vazio.
+### **¿Cómo llenar los metadatos de la tabla diccionario?**
+- No llenar el *`spatial_coverage`* (`cobertura_espacial`), es decir, dejar el campo vacío.
+- No llenar el *`temporal_coverage`* (`cobertura_temporal`), es decir, dejar el campo vacío.
+- No llenar el *`observation_level`* (`nivel_observacion`), es decir, dejar el campo vacío.
 
-## Diretórios
+## Directorios
 
-Diretórios são as pedras fundamentais da estrutura do nosso _datalake_. Nossas regras para gerenciar diretórios são:
+Los directorios son las piedras fundamentales de la estructura de nuestro _data lake_. Nuestras reglas para gestionar directorios son:
 
-- Diretórios representam _entidades_ do repositório que tenham chaves primárias (e.g. `uf`, `município`, `escola`) e unidades de data-tempo (e.g. `data`, `tempo`, `dia`, `mes`, `ano`).
-- Cada tabela de diretório tem ao menos uma chave primária com valores únicos e sem nulos. Exemplos: `municipio:id_municipio`, `uf:sigla_uf`.
-- Nomes de variáveis com prefixo `id_` são reservadas para chaves
-  primárias de entidades.
+- Los directorios representan _entidades_ del repositorio que tengan claves primarias (ej. `uf`, `municipio`, `escuela`) y unidades de fecha-tiempo (ej. `fecha`, `tiempo`, `dia`, `mes`, `ano`).
+- Cada tabla de directorio tiene al menos una clave primaria con valores únicos y sin nulos. Ejemplos: `municipio:id_municipio`, `uf:sigla_uf`.
+- Los nombres de variables con prefijo `id_` están reservados para claves
+  primarias de entidades.
 
-Veja todas as [tabelas já disponíveis aqui.](https://basedosdados.org/dataset?organization=br-bd&order_by=score&q=%22diret%C3%B3rios%22)
+Vea todas las [tablas ya disponibles aquí.](https://basedosdados.org/dataset?organization=br-bd&order_by=score&q=%22directorios%22)
 
-### **Como preencher os metadados das tabelas de diretório?**
-- Preencher o *`spatial_coverage`* (`cobertura_espacial`), que é a máxima unidade espacial que a tabela cobre. Exemplo: sa.br, que significa que o nível de agregação espacial da tabela é o Brasil.
-- Não preencher o *`temporal_coverage`* (`cobertura_temporal`), ou seja, deixar o campo vazio.
-- Preencher o *`observation_level`* (`nivel_observacao`), que consiste no nível de observação da tabela, ou seja, o que representa cada linha.
-- Não preencher o *`temporal_coverage`* (`cobertura_temporal`) das colunas da tabela, ou seja, deixar o campo vazio.
+### **¿Cómo llenar los metadatos de las tablas de directorio?**
+- Llenar el *`spatial_coverage`* (`cobertura_espacial`), que es la máxima unidad espacial que la tabla cubre. Ejemplo: sa.br, que significa que el nivel de agregación espacial de la tabla es Brasil.
+- No llenar el *`temporal_coverage`* (`cobertura_temporal`), es decir, dejar el campo vacío.
+- Llenar el *`observation_level`* (`nivel_observacion`), que consiste en el nivel de observación de la tabla, es decir, lo que representa cada fila.
+- No llenar el *`temporal_coverage`* (`cobertura_temporal`) de las columnas de la tabla, es decir, dejar el campo vacío.
 
-## Fontes Originais
+## Fuentes Originales
 
-O campo se refere aos dados na fonte original, que ainda não passaram pela metodologia de tratamento da Base dos Dados, ou seja, nosso `_input_`. Ao clicar nele, a ideia é redirecionar o usuário para a página da fonte original dos dados. As regras para gerenciar as Fontes Originais são:
+El campo se refiere a los datos en la fuente original, que aún no han pasado por la metodología de tratamiento de Base de los Datos, es decir, nuestro `_input_`. Al hacer clic en él, la idea es redirigir al usuario a la página de la fuente original de los datos. Las reglas para gestionar las Fuentes Originales son:
 
-- Incluir o nome do link externo que leva à fonte original. Como padrão, esse nome deve ser da organização ou do portal que armazenena os dados. Exemplos: `Sinopses Estatísticas da Educação Básica: Dados Abertos do Inep`, `Penn World Tables: Groningen Growth and Development Centre`.
-- Preencher os metadados de Fontes Originais: Descrição, URL, Língua, Tem Dados Estruturados, Tem uma API, É de Graça, Requer Registro, Disponibilidade, Requer IP de Algum País, Tipo de Licença, Cobertura Temporal, Cobertura Espacial e Nível da Observação.
+- Incluir el nombre del enlace externo que lleva a la fuente original. Como estándar, este nombre debe ser de la organización o del portal que almacena los datos. Ejemplos: `Sinopsis Estadísticas de la Educación Básica: Datos Abiertos del Inep`, `Penn World Tables: Groningen Growth and Development Centre`.
+- Llenar los metadatos de Fuentes Originales: Descripción, URL, Idioma, Tiene Datos Estructurados, Tiene una API, Es Gratuito, Requiere Registro, Disponibilidad, Requiere IP de Algún País, Tipo de Licencia, Cobertura Temporal, Cobertura Espacial y Nivel de Observación.
 
-## **Pensou em melhorias para os padrões definidos?**
+## **¿Pensaste en mejoras para los estándares definidos?**
 
-Abra um [issue no nosso Github](https://github.com/basedosdados/mais/labels/docs) ou mande uma mensagem no [Discord](https://discord.gg/huKWpsVYx4) para conversarmos :)
+Abre un [issue en nuestro Github](https://github.com/basedosdados/mais/labels/docs) o envía un mensaje en [Discord](https://discord.gg/huKWpsVYx4) para conversar :)

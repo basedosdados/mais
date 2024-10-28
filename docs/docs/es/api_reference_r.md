@@ -1,50 +1,50 @@
 # R
 
-Esta API é composta somente de módulos para **requisição de dados**, ou
-seja, download e/ou carregamento de dados do projeto no seu ambiente de
-análise).
-Para fazer **gerenciamento de dados** no Google Cloud, busque as funções
-na API de [linha de comando](../api_reference_cli) ou em [Python](../api_reference_python/#classes-gerenciamento-de-dados).
+Esta API está compuesta solamente de módulos para **solicitud de datos**, es
+decir, descarga y/o carga de datos del proyecto en tu entorno de
+análisis.
+Para realizar la **gestión de datos** en Google Cloud, busca las funciones
+en la API de [línea de comandos](../api_reference_cli) o en [Python](../api_reference_python/#classes-gerenciamento-de-dados).
 
-A documentação completa encontra-se na página do CRAN do projeto, e
-segue baixo.
+La documentación completa se encuentra en la página CRAN del proyecto, y
+sigue abajo.
 
-!!! Info "Toda documentação do código abaixo está em inglês"
+!!! Info "Toda la documentación del código abajo está en inglés"
 
 <object data="https://cran.r-project.org/web/packages/basedosdados/basedosdados.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="https://cran.r-project.org/web/packages/basedosdados/basedosdados.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://cran.r-project.org/web/packages/basedosdados/basedosdados.pdf">Download PDF</a>.</p>
+        <p>Este navegador no soporta PDFs. Por favor descarga el PDF para verlo: <a href="https://cran.r-project.org/web/packages/basedosdados/basedosdados.pdf">Descargar PDF</a>.</p>
     </embed>
 </object>
 
-## Ih rapaz, deu erro! E agora?
-Os principais erros encontrados do pacote da Base dos Dados no Rstudio são derivados de dois fatores:
+## ¡Ups, hubo un error! ¿Y ahora qué?
+Los principales errores encontrados en el paquete de Base de los Datos en Rstudio se derivan de dos factores:
 
-    * Autenticação
+    * Autenticación
 
-    * Versão do pacote `dbplyr`
+    * Versión del paquete `dbplyr`
 
-Portanto, se algum erro aparecer para você, por favor, tente primeiro checar se ele está relacionado a esses dois fatores.
+Por lo tanto, si aparece algún error, por favor, primero intenta verificar si está relacionado con estos dos factores.
 
-### Autenticação
-A maioria dos erros do nosso pacote estão relacionados a problemas de autenticação. O pacote `basedosdados` requer que o usuário forneça todas as autenticações solicitadas pela função `basedosdados::set_billing_id`, inclusive aquelas que aparecem como optativas. Por isso, é necessário estar atento se você marcou todas as caixinhas de seleção quando o Rstudio disponibiliza essa tela no navegador:
+### Autenticación
+La mayoría de los errores de nuestro paquete están relacionados con problemas de autenticación. El paquete `basedosdados` requiere que el usuario proporcione todas las autenticaciones solicitadas por la función `basedosdados::set_billing_id`, incluso aquellas que aparecen como opcionales. Por eso, es necesario estar atento si marcaste todas las casillas de selección cuando Rstudio muestra esta pantalla en el navegador:
 
 ![Capturar](https://user-images.githubusercontent.com/26544494/190700064-1326a74c-8de0-4254-a562-32f9aa10ae07.PNG)
 
-**Note que é preciso marcar inclusive as duas últimas "caixinhas", que aparecem como opcionais**. Caso você tenha esquecido de marcá-las, todas as outras funções do pacote não irão funcionar posteriormente.
+**Ten en cuenta que es necesario marcar incluso las dos últimas "casillas", que aparecen como opcionales**. Si olvidaste marcarlas, todas las otras funciones del paquete no funcionarán posteriormente.
 
-Caso você já tenha autenticado com autorização incompleta, é preciso repetir o processo de autenticação. Você pode fazer isso rodando `gargle::gargle_oauth_sitrep()`. Você deverá checar a pasta em que estão salvas as autenticações do seu R, entrar nesta pasta e deletar aquela referente ao Google Cloud/Bigquery. Feito isso, ao rodar `basedosdados::set_billing_id` você poderá autenticar novamente.
+Si ya te has autenticado con autorización incompleta, es necesario repetir el proceso de autentificación. Puedes hacer esto ejecutando `gargle::gargle_oauth_sitrep()`. Deberás verificar la carpeta donde están guardadas las autenticaciones de tu R, entrar en esta carpeta y eliminar la referente a Google Cloud/Bigquery. Hecho esto, al ejecutar `basedosdados::set_billing_id` podrás autenticarte nuevamente.
 
-Veja como é simples:
+Mira qué simple es:
 
 ![gif_gargle](https://user-images.githubusercontent.com/62671380/194094167-99dadbd7-f7de-46f9-ac88-fb464e646e6c.gif)
 
-Realizados todos esses procedimentos, é bem provável que os erros anteriores não ocorram mais.
+Realizados todos estos procedimientos, es muy probable que los errores anteriores no ocurran más.
 
-### Versão do pacote `dbplyr`
-Outro erro comum está relacionado ao uso da função `basedosdados::bdplyr`. Nosso pacote em R foi construído utilizando outros pacotes disponíveis na comunidade. Isso significa que atualizações destes pacotes podem alterar o funcionamento destes e gerar efeitos em cascata a outros pacotes desenvolvidos em cima deles. Neste contexto, o nosso pacote funciona apenas com a versão 2.1.1 do pacote `dbplyr`, e **não** funciona com versões posteriores.
+### Versión del paquete `dbplyr`
+Otro error común está relacionado con el uso de la función `basedosdados::bdplyr`. Nuestro paquete en R fue construido utilizando otros paquetes disponibles en la comunidad. Esto significa que las actualizaciones de estos paquetes pueden alterar su funcionamiento y generar efectos en cascada en otros paquetes desarrollados sobre ellos. En este contexto, nuestro paquete funciona solo con la versión 2.1.1 del paquete `dbplyr`, y **no** funciona con versiones posteriores.
 
-Você pode checar a sua versão do `dbplyr` rodando `utils::packageVersion("dbplyr")` no seu R. Caso ela seja superior à versão 2.1.1, você precisa dar um _downgrade_ para a versão correta. Para isso, você pode rodar `devtools::install_version("dbplyr", version = "2.1.1", repos = "http://cran.us.r-project.org")`.
+Puedes verificar la versión de tu `dbplyr` ejecutando `utils::packageVersion("dbplyr")` en tu R. Si es superior a la versión 2.1.1, necesitas dar un _downgrade_ a la versión correcta. Para esto, puedes ejecutar `devtools::install_version("dbplyr", version = "2.1.1", repos = "http://cran.us.r-project.org")`.
 
-### Outros erros
-Caso os erros persistam, você pode abrir uma _issue_ no nosso Github clicando [aqui](https://github.com/basedosdados/mais/issues). Você também visitar as _issues_ que já foram resolvidas e estão atribuídas com o a etiqueta `R` em nosso Github [aqui](https://github.com/basedosdados/mais/issues?q=is%3Aissue+is%3Aclosed).
+### Otros errores
+Caso los errores persistan, puedes abrir una _issue_ en nuestro Github clicando [aqui](https://github.com/basedosdados/mais/issues). También puedes visitar las _issues_ que ya fueron resueltas y están atribuídas con la etiqueta `R` en nuestro Github [aqui](https://github.com/basedosdados/mais/issues?q=is%3Aissue+is%3Aclosed).

@@ -1,62 +1,50 @@
-# Infra da BD
+# DB Infrastructure
 
-Nosso time de infraestrutura cuida para que todos os pacotes e pipelines
-estejam funcionando da melhor forma para o público. Utilizamos o Github
-para gerir todo o código e mantê-lo organizado, onde você pode encontrar
-issues de novas features, bugs e melhorias que estamos trabalhando.
-## Como funciona nossa infraestrutura
+Our infrastructure team ensures that all packages and pipelines are working optimally for the public. We use Github to manage all code and keep it organized, where you can find issues for new features, bugs, and improvements we're working on.
 
-Nossa infraestrutura é composta de 3 frentes principais:
+## How our infrastructure works
 
-- [**Sistema de ingestão de dados**](#sistema-de-ingestao-de-dados): desde o upload até a
-  disponibilização em produção;
-- [**Pacotes de acesso**](#pacotes-de-acesso)
-- [**Website**](#website): Front-end, Back-end e APIs.
+Our infrastructure consists of 3 main fronts:
 
-Atualmente é possível colaborar em todas as frentes, com destaque ao
-desenvolvimento dos pesos e contrapesos e atualização do site.
+- [**Data ingestion system**](#data-ingestion-system): from upload to production deployment;
+- [**Access packages**](#access-packages)
+- [**Website**](#website): Front-end, Back-end, and APIs.
 
-!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
+Currently, it's possible to collaborate on all fronts, with emphasis on developing checks and balances and website updates.
+
+!!! Tip "We suggest joining our [Discord channel](https://discord.gg/huKWpsVYx4) to ask questions and interact with other contributors! :)"
 
 
-## Sistema de ingestão de dados
+## Data ingestion system
 
-O sistema possui ambientes de desenvolvimento
-(`basedosdados-dev`), homologação (`basedosdados-staging`) e produção
-(`basedosdados`) no BigQuery. Os processos para subida de dados são
-detalhados na imagem abaixo, sendo alguns deles automatizados
-via Github Actions.
+The system has development (`basedosdados-dev`), staging (`basedosdados-staging`), and production (`basedosdados`) environments in BigQuery. The data upload processes are detailed in the image below, with some of them being automated via Github Actions.
 
 ![](images/bd_infra_diagram.png)
 
-Explicamos com mais detalhes do funcionamento desse sistema [no blog](https://dev.to/basedosdados/como-funciona-o-sistema-de-insercao-de-dados-na-bd-25dk).
+We explain the system's operation in more detail [on our blog](https://dev.to/basedosdados/como-funciona-o-sistema-de-insercao-de-dados-na-bd-25dk).
 
-### Como contribuir?
+### How to contribute?
 
-- Melhorando a documentação do sistema aqui :)
-- [Criando checagens automáticas de qualidade de dados e metadados (em Python)](https://github.com/basedosdados/mais/issues/376)
-- [Criando novos issues e sugestões de melhorias](https://github.com/basedosdados/mais/issues/new/choose)
+- Improving system documentation here :)
+- [Creating automatic data and metadata quality checks (in Python)](https://github.com/basedosdados/mais/issues/376)
+- [Creating new issues and improvement suggestions](https://github.com/basedosdados/mais/issues/new/choose)
 
-## Pacotes de acesso
+## Access packages
 
-Os pacotes de acesso ao *datalake* estão em constante melhoria e você
-pode colaborar com a gente com novas features, conserto de bugs e muito
-mais.
+The *datalake* access packages are constantly being improved, and you can collaborate with us on new features, bug fixes, and much more.
 
-### Como contribuir?
+### How to contribute?
 
-- [Explore os issues do pacote Python](https://github.com/basedosdados/mais/labels/python)
-- [Explore os issues do pacote R](https://github.com/basedosdados/mais/labels/R)
-- [Ajude a desenvolver o pacote em Stata](https://github.com/basedosdados/mais/pull/754)
+- [Explore Python package issues](https://github.com/basedosdados/mais/labels/python)
+- [Explore R package issues](https://github.com/basedosdados/mais/labels/R)
+- [Help develop the Stata package](https://github.com/basedosdados/mais/pull/754)
 
 ## Website
 
-Nosso website é desenvolvido em
-[Next.js](https://nextjs.org/learn/basics/create-nextjs-app) e consome
-uma API de metadados do CKAN. O código do site está também no nosso [Github](https://github.com/basedosdados/website).
+Our website is developed in [Next.js](https://nextjs.org/learn/basics/create-nextjs-app) and consumes a CKAN metadata API. The site's code is also on our [Github](https://github.com/basedosdados/website).
 
-### Como contribuir?
+### How to contribute?
 
-- [Melhore o UX do site (Next, CSS, HTML)](https://github.com/basedosdados/website#editando-html)
-- [Ajudando em issues abertas de BE, FE ou API](https://github.com/basedosdados/website/issues)
-- [Criando novos issues e sugestões de melhorias](https://github.com/basedosdados/website/issues/new)
+- [Improve site UX (Next, CSS, HTML)](https://github.com/basedosdados/website#editando-html)
+- [Help with open BE, FE, or API issues](https://github.com/basedosdados/website/issues)
+- [Create new issues and improvement suggestions](https://github.com/basedosdados/website/issues/new)

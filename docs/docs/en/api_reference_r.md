@@ -1,15 +1,11 @@
 # R
 
-Esta API é composta somente de módulos para **requisição de dados**, ou
-seja, download e/ou carregamento de dados do projeto no seu ambiente de
-análise).
-Para fazer **gerenciamento de dados** no Google Cloud, busque as funções
-na API de [linha de comando](../api_reference_cli) ou em [Python](../api_reference_python/#classes-gerenciamento-de-dados).
+This API consists only of modules for **data requests** (i.e., downloading and/or loading project data into your analysis environment).
+For **data management** in Google Cloud, look for functions in the [command line](../api_reference_cli) or [Python](../api_reference_python/#classes-gerenciamento-de-dados) APIs.
 
-A documentação completa encontra-se na página do CRAN do projeto, e
-segue baixo.
+The complete documentation can be found on the project's CRAN page, as shown below.
 
-!!! Info "Toda documentação do código abaixo está em inglês"
+!!! Info "All documentation for the code below is in English"
 
 <object data="https://cran.r-project.org/web/packages/basedosdados/basedosdados.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="https://cran.r-project.org/web/packages/basedosdados/basedosdados.pdf">
@@ -17,34 +13,34 @@ segue baixo.
     </embed>
 </object>
 
-## Ih rapaz, deu erro! E agora?
-Os principais erros encontrados do pacote da Base dos Dados no Rstudio são derivados de dois fatores:
+## Oops, got an error! What now?
+The main errors found in the Base dos Dados package in RStudio are derived from two factors:
 
-    * Autenticação
+    * Authentication
 
-    * Versão do pacote `dbplyr`
+    * Version of the `dbplyr` package
 
-Portanto, se algum erro aparecer para você, por favor, tente primeiro checar se ele está relacionado a esses dois fatores.
+Therefore, if any error appears, please first try to check if it's related to these two factors.
 
-### Autenticação
-A maioria dos erros do nosso pacote estão relacionados a problemas de autenticação. O pacote `basedosdados` requer que o usuário forneça todas as autenticações solicitadas pela função `basedosdados::set_billing_id`, inclusive aquelas que aparecem como optativas. Por isso, é necessário estar atento se você marcou todas as caixinhas de seleção quando o Rstudio disponibiliza essa tela no navegador:
+### Authentication
+Most errors in our package are related to authentication problems. The `basedosdados` package requires users to provide all authentications requested by the `basedosdados::set_billing_id` function, including those that appear as optional. Therefore, you need to be careful to check all selection boxes when RStudio displays this screen in the browser:
 
-![Capturar](https://user-images.githubusercontent.com/26544494/190700064-1326a74c-8de0-4254-a562-32f9aa10ae07.PNG)
+![Capture](https://user-images.githubusercontent.com/26544494/190700064-1326a74c-8de0-4254-a562-32f9aa10ae07.PNG)
 
-**Note que é preciso marcar inclusive as duas últimas "caixinhas", que aparecem como opcionais**. Caso você tenha esquecido de marcá-las, todas as outras funções do pacote não irão funcionar posteriormente.
+**Note that you need to check even the last two "boxes" that appear as optional**. If you forgot to check them, all other package functions will not work afterward.
 
-Caso você já tenha autenticado com autorização incompleta, é preciso repetir o processo de autenticação. Você pode fazer isso rodando `gargle::gargle_oauth_sitrep()`. Você deverá checar a pasta em que estão salvas as autenticações do seu R, entrar nesta pasta e deletar aquela referente ao Google Cloud/Bigquery. Feito isso, ao rodar `basedosdados::set_billing_id` você poderá autenticar novamente.
+If you have already authenticated with incomplete authorization, you need to repeat the authentication process. You can do this by running `gargle::gargle_oauth_sitrep()`. You should check the folder where your R authentications are saved, enter this folder, and delete the one referring to Google Cloud/BigQuery. After that, when running `basedosdados::set_billing_id`, you can authenticate again.
 
-Veja como é simples:
+See how simple it is:
 
 ![gif_gargle](https://user-images.githubusercontent.com/62671380/194094167-99dadbd7-f7de-46f9-ac88-fb464e646e6c.gif)
 
-Realizados todos esses procedimentos, é bem provável que os erros anteriores não ocorram mais.
+After completing all these procedures, it's very likely that the previous errors will no longer occur.
 
-### Versão do pacote `dbplyr`
-Outro erro comum está relacionado ao uso da função `basedosdados::bdplyr`. Nosso pacote em R foi construído utilizando outros pacotes disponíveis na comunidade. Isso significa que atualizações destes pacotes podem alterar o funcionamento destes e gerar efeitos em cascata a outros pacotes desenvolvidos em cima deles. Neste contexto, o nosso pacote funciona apenas com a versão 2.1.1 do pacote `dbplyr`, e **não** funciona com versões posteriores.
+### Version of the `dbplyr` package
+Another common error is related to the use of the `basedosdados::bdplyr` function. Our R package was built using other packages available in the community. This means that updates to these packages can change their functionality and generate cascade effects on other packages developed on top of them. In this context, our package only works with version 2.1.1 of the `dbplyr` package, and does **not** work with later versions.
 
-Você pode checar a sua versão do `dbplyr` rodando `utils::packageVersion("dbplyr")` no seu R. Caso ela seja superior à versão 2.1.1, você precisa dar um _downgrade_ para a versão correta. Para isso, você pode rodar `devtools::install_version("dbplyr", version = "2.1.1", repos = "http://cran.us.r-project.org")`.
+You can check your `dbplyr` version by running `utils::packageVersion("dbplyr")` in R. If it's higher than version 2.1.1, you need to downgrade to the correct version. To do this, you can run `devtools::install_version("dbplyr", version = "2.1.1", repos = "http://cran.us.r-project.org")`.
 
-### Outros erros
-Caso os erros persistam, você pode abrir uma _issue_ no nosso Github clicando [aqui](https://github.com/basedosdados/mais/issues). Você também visitar as _issues_ que já foram resolvidas e estão atribuídas com o a etiqueta `R` em nosso Github [aqui](https://github.com/basedosdados/mais/issues?q=is%3Aissue+is%3Aclosed).
+### Other errors
+If errors persist, you can open an issue on our Github by clicking [here](https://github.com/basedosdados/mais/issues). You can also visit the issues that have already been resolved and are tagged with the `R` label on our Github [here](https://github.com/basedosdados/mais/issues?q=is%3Aissue+is%3Aclosed).

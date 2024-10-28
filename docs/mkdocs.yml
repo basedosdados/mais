@@ -1,4 +1,4 @@
-site_name: Documentação
+site_name: Docs
 
 theme:
   name: material
@@ -17,7 +17,6 @@ theme:
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
-  language: pt
   font:
     text: Lato
   favicon: images/bd_minilogo.png
@@ -29,56 +28,11 @@ theme:
     - toc.integrate
     - navigation.tabs
 
-repo_url: https://github.com/basedosdados/mais/docs/
+repo_url: https://github.com/basedosdados/mais
 repo_name: basedosdados/mais
 
 extra:
   version: 2.0
-  i18n:
-    default_language: pt
-    languages:
-      pt:
-        nav:
-          - Home: index.md
-          - Aprenda sobre a BD: index.md
-          - BigQuery: access_data_bq.md
-          - Pacotes: access_data_packages.md
-          - API:
-            - Python: api_reference_python.md
-            - R: api_reference_r.md
-            - Stata: api_reference_stata.md
-          - Contribua:
-            - Dados: colab_data.md
-            - Infraestrutura: colab_infrastructure.md
-            - Manual de estilo: style_data.md
-      en:
-        nav:
-          - Home: index.md
-          - Learn about DB: index.md
-          - BigQuery: access_data_bq.md
-          - Packages: access_data_packages.md
-          - API:
-            - Python: api_reference_python.md
-            - R: api_reference_r.md
-            - Stata: api_reference_stata.md
-          - Contribute:
-            - Data: colab_data.md
-            - Infrastructure: colab_infrastructure.md
-            - Style guide: style_data.md
-      es:
-        nav:
-          - Home: index.md
-          - Aprenda sobre a BD: index.md
-          - BigQuery: access_data_bq.md
-          - Pacotes: access_data_packages.md
-          - API:
-            - Python: api_reference_python.md
-            - R: api_reference_r.md
-            - Stata: api_reference_stata.md
-          - Contribua:
-            - Dados: colab_data.md
-            - Infraestrutura: colab_infrastructure.md
-            - Manual de estilo: style_data.md
   social:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/basedosdados
@@ -112,6 +66,20 @@ extra_javascript:
 - js/termynal.js
 - js/custom.js
 
+nav:
+  - Home: index.md
+  - BigQuery: access_data_bq.md
+  - Pacotes: access_data_packages.md
+  - APIs:
+    - Python: api_reference_python.md
+    - R: api_reference_r.md
+    - Stata: api_reference_stata.md
+  - Contribua:
+    - Dados: colab_data.md
+    - Manual de estilo: style_data.md
+    - Infraestrutura: colab_infrastructure.md
+    - Testes: colab_checks.md
+
 plugins:
   - search
   - mkdocstrings:
@@ -122,7 +90,34 @@ plugins:
           setup_commands:
             - import sys
             - sys.path.insert(0, "python-package")
-  - mkdocs-static-i18n
+  - i18n:
+      default_language: pt
+      docs_structure: folder
+      languages:
+        pt:
+          name: Português
+          default: true
+          build: true
+        en:
+          name: English
+          build: true
+          nav_translations:
+            Pacotes: Packages
+            Contribua: Contribute
+            Dados: Data
+            Manual de estilo: Style guide
+            Infraestrutura: Infrastructure
+            Testes: Tests
+        es:
+          name: Español
+          build: true
+          nav_translations:
+            Pacotes: Paquetes
+            Contribua: Contribuir
+            Dados: Datos
+            Manual de estilo: Manual de estilo
+            Infraestrutura: Infraestructura
+            Testes: Pruebas
 
 extra_css:
 - css/termynal.css

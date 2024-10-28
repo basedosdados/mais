@@ -1,13 +1,8 @@
 
 # Python
 
-Esta API é composta por funções com 2 tipos de funcionalidade:
+This API is composed of functions with two types of functionality:
 
-- Módulos para **requisição de dados**: para aquele(as) que desejam
-  somente consultar os dados e metadados do nosso projeto.
+- Modules for **data request**: for those who only want to consult the data and metadata of our project.
 
-- Classes para **gerenciamento de dados** no Google Cloud: para
-  aqueles(as) que desejam subir dados no nosso projeto (ou qualquer outro
-  projeto no Google Cloud, seguindo a nossa metodologia e infraestrutura).
-
-!!! Info "Toda documentação do código abaixo está em inglês"
+- Classes for **data management** in Google Cloud: for those who want to upload data to our project (or any other project in Google Cloud, following our methodology and infrastructure).

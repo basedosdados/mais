@@ -1,231 +1,204 @@
 # BigQuery
 
-O BigQuery é o um serviço de banco de dados em nuvem da
-Google. Você faz consultas ao banco em SQL direto do navegador com:
+BigQuery is Google's cloud database service. You can query the database using SQL directly in your browser with:
 
-- **Rapidez**: Mesmo queries muito longas demoram apenas minutos para serem processadas.
+- **Speed**: Even very long queries take only minutes to process.
 
-- **Escala**: O BigQuery escala magicamente para hexabytes se necessário.
+- **Scale**: BigQuery magically scales to hexabytes if needed.
 
-- **Economia**: Todo usuário possui *1 TB gratuito por mês para consulta
-  aos dados*.
+- **Economy**: Every user gets *1 TB free per month for querying data*.
 
-Pronto(a) para começar? Nesta página você encontra:
+Ready to start? On this page you'll find:
 
-- [Primeiros passos](#primeiros-passos)
-- [Entenda o uso gratuito do Big Query BQ](#entenda-o-uso-gratuito-do-big-query-bq)
-- [Tutoriais](#tutoriais)
-- [Manuais e Cursos de SQL](#manuais-e-cursos-de-sql)
+- [Getting Started](#getting-started)
+- [Understanding BigQuery's Free Usage](#understanding-bigquerys-free-usage)
+- [Tutorials](#tutorials)
+- [SQL Manuals and Courses](#sql-manuals-and-courses)
 
-## Primeiros passos
+## Getting Started
 
-### Antes de começar: Crie o seu projeto no Google Cloud
+### Before starting: Create your Google Cloud project
 
-Para criar um projeto no Google Cloud basta ter um email cadastrado no
-Google. É necessário ter um projeto seu, mesmo que vazio, para você
-fazer queries em nosso *datalake* público.
+To create a Google Cloud project, you just need an email registered with Google. You need to have your own project, even if empty, to make queries in our public *datalake*.
 
-1. **[Acesse o Google Cloud](https://console.cloud.google.com/projectselector2/home/dashboard)**.
-   Caso for a sua primeira vez, aceite o Termo de Serviços.
-3. **Clique em `Create Project/Criar Projeto`**. Escolha um nome bacana para o projeto.
-5. **Clique em `Create/Criar`**
+1. **[Access Google Cloud](https://console.cloud.google.com/projectselector2/home/dashboard)**.
+   If it's your first time, accept the Terms of Service.
+3. **Click on `Create Project`**. Choose a nice name for the project.
+5. **Click on `Create`**
 
-??? Info "Por que eu preciso criar um projeto no Google Cloud?"
-    A Google fornece 1 TB gratuito por mês de uso do BigQuery para cada
-    projeto que você possui. Um projeto é necessário para ativar os
-    serviços do Google Cloud, incluindo a permissão de uso do BigQuery.
-    Pense no projeto como a "conta" na qual a Google vai contabilizar o
-    quanto de processamento você já utilizou. **Não é necessário adicionar
-    nenhum cartão ou forma de pagamento - O BigQuery inicia automaticamente no modo Sandbox, que permite você utilizar seus recursos sem adicionar um modo de pagamento. [Leia mais aqui](https://cloud.google.com/bigquery/docs/sandbox/?hl=pt).**
+??? Info "Why do I need to create a Google Cloud project?"
+    Google provides 1 TB free per month of BigQuery usage for each project you own. A project is necessary to activate Google Cloud services, including BigQuery usage permission. Think of the project as the "account" where Google will track how much processing you've already used. **You don't need to add any card or payment method - BigQuery automatically starts in Sandbox mode, which allows you to use its resources without adding a payment method. [Read more here](https://cloud.google.com/bigquery/docs/sandbox/?hl=en).**
     
-### Acessando o datalake da `basedosdados`
+### Accessing the `basedosdados` datalake
 
-O botão abaixo via te direcionar ao nosso projeto no Google BigQuery:
+The button below will direct you to our project in Google BigQuery:
 
 <a
 href="https://console.cloud.google.com/bigquery?p=basedosdados&page=project"
 title="{{ lang.t('source.link.title')}}" class="md-button"
 hover="background-color: var(--md-primary-fg-color--dark)">
-    Ir para BigQuery :material-arrow-right:
+    Go to BigQuery :material-arrow-right:
 </a>
 
-Agora você precisa fixar o projeto da BD no seu BigQuery, é bem simples, veja:
+Now you need to pin the DB project in your BigQuery, it's quite simple, see:
 
-!!! Warning A opção **Fixar um projeto** pode aparecer também como **Marcar projeto com estrela por nome**
+!!! Warning The **Pin a project** option may also appear as **Star project by name**
 
 ![](images/bq_access_project_new.gif)
 
-Dentro do projeto existem dois níveis de organização dos dados,
-<strong>*datasets*</strong> (conjuntos de dados) e
-<strong>*tables*</strong> (tabelas), nos quais:
+Within the project there are two levels of data organization,
+<strong>*datasets*</strong> and <strong>*tables*</strong>, where:
 
-- **Todas as tabelas estão organizadas dentro de cojuntos de dados**, que
-  representaam sua organização/tema (ex: o conjunto
-  `br_ibge_populacao` contém uma tabela `municipio` com a série
-  histórica de população a
-  nível municipal)
-- **Cada tabela pertence a um único conjunto de dados** (ex: a tabela
-  `municipio` em `br_ibge_populacao` é diferente de `municipio` em `br_bd_diretorios`)
+- **All tables are organized within datasets**, which represent their organization/theme (e.g., the dataset `br_ibge_populacao` contains a `municipio` table with the historical population series at municipal level)
+- **Each table belongs to a single dataset** (e.g., the `municipio` table in `br_ibge_populacao` is different from `municipio` in `br_bd_diretorios`)
   
-!!! Tip "[Veja aqui o guia do Google de como funciona a interface do BigQuery](https://cloud.google.com/bigquery/docs/bigquery-web-ui)."
+!!! Tip "[See Google's guide on how the BigQuery interface works here](https://cloud.google.com/bigquery/docs/bigquery-web-ui)."
 
 ![](images/bq_dataset_tables_structure.png){ width=100% }
 
-!!! Warning "Caso não apareçam as tabelas na 1ª vez que você acessar, atualize a página."
+!!! Warning "If tables don't appear the first time you access, refresh the page."
 
-### Faça sua primeira consulta!
+### Make your first query!
 
-Que tal fazer uma consulta simples? Vamos usar o *Editor de Consultas do
-BigQuery* para ver as informações sobre municípios direto na nossa base de diretórios brasileiros. Para isso,
-copiar e colar o código abaixo:
+How about making a simple query? Let's use the *BigQuery Query Editor* to see information about municipalities directly in our Brazilian directories database. To do this, copy and paste the code below:
 
 ```sql
 SELECT * FROM `basedosdados.br_bd_diretorios_brasil.municipio`
 ```
 
-Só clicar em **Executar** e pronto!
+Just click **Run** and you're done!
 
 ![](images/bq_query_municipios.png){ width=100% }
 
-!!! Tip "Dica"
-    Clicando no botão `🔍 Consultar tabela/Query View`, o BigQuery cria
-    automaticamente a estrutura básica da sua query em `Query Editor/Editor
-    de consultas` - basta você completar com os campos e filtros que
-    achar necessários.
+!!! Tip "Tip"
+    By clicking the `🔍 Query Table` button, BigQuery automatically creates
+    the basic structure of your query in the `Query Editor` - you just need to complete it with the fields and filters you find necessary.
 
-## Entenda o uso gratuito do Big Query BQ
+## Understanding BigQuery's Free Usage
 
-Está seção é dedicada a apresentar dicas de como reduzir custos de processamento para aproveitar ao máximo os dados da BD! 
+This section is dedicated to presenting tips on how to reduce processing costs to maximize the data from BD! 
 
-Para usuários que acessam os dados em projetos públicos como o da Base dos Dados o único tipo de custo associado se refere ao custo de **processamento das consultas**. A notícia boa, como mencionado acima, é que todo usuário possui *1 TB gratuito por mês para consultar livremente os dados do maior data lake público do Brasil*. Se você ainda não possui um projeto no BQ consulte [a sessão acima](https://basedosdados.github.io/mais/access_data_bq/#primeiros-passos) para criá-lo.
+For users who access data in public projects like the BD, the only type of cost associated is the cost of **processing queries**. The good news, as mentioned above, is that every user gets *1 TB free per month for querying data*. If you still don't have a project in BQ, consult [the section above](#getting-started) to create one.
 
-- Conhecer o básico da interface do BQ é importante para o entendimento do artigo. Caso você não tenha familiariadade ou queria revisitar a interface, sugerimos 3 trilhas:
-1. Nosso guia utilizando as [tabelas da RAIS - Relação Anual de Informações Sociais](https://dev.to/basedosdados/bigquery-101-45pk) 
-2. Nosso acervo de [vídeos no youtube](https://www.youtube.com/@BasedosDados)
-3. A introdução a interface [feita pelo Google](https://cloud.google.com/bigquery/docs/bigquery-web-ui?hl=pt-br#open-ui)
+- Knowing the basics of the BQ interface is important for understanding the article. If you don't have familiariadade or want to revisit the interface, we recommend 3 tracks:
+1. Our guide using the [RAIS - Annual Relation of Information Society](https://dev.to/basedosdados/bigquery-101-45pk) tables 
+2. Our collection of [videos on YouTube](https://www.youtube.com/@BasedosDados)
+3. The introduction to the interface [done by Google](https://cloud.google.com/bigquery/docs/bigquery-web-ui?hl=en#open-ui)
 
 
-### Veja como usufruir ao máximo das consultas gratuitas
+### See how to maximize the benefits of free queries
 
-Nesta seção, apresentamos algumas dicas simples para reduzir os custos das consultas no Big Query e aproveitar ao máximo os dados da BD! Antes de partir para os exemplos, apresentaremos o mecanismo básico de previsão de custos de processamento de consultas no Big Query (BQ). 
+In this section, we present some simple tips to reduce the costs of queries in Big Query and maximize the data from BD! Before moving on to the examples, we'll introduce the basic mechanism for predicting query processing costs in Big Query (BQ). 
 
-!!! Tip "Estimativas de custos"
-  No canto superior direito da interface do BQ é informado um aviso com estimativa do custo de processamento que será cobrado do seu projeto apos a execução da consulta.
+!!! Tip "Cost estimates"
+  In the upper right corner of the BQ interface, there's a notice with an estimate of the processing cost that will be charged to your project after the query execution.
   
   ![](images/bq_query_estimated_costs.png){ width=100% }
 
 
-- Este é o mecanismo básico e prontamente acessível de previsibilidade dos custos de processamento. Infelizmente, não funciona para todas as tabelas. Por motivos de limitação interna do próprio Big Query, consultas à tabelas específicas não exibem estimativas de custos. É o caso das tabelas que possuem **Row Access Policy**. Isto é, tabelas onde o número de linhas acessíveis é limitada a depender do usuário. Este é o caso das tabelas que fazem parte do serviço [BDpro](https://info.basedosdados.org/bd-pro)
+- This is the basic and readily accessible mechanism for predictability of processing costs. Unfortunately, it doesn't work for all tables. Due to limitations within Big Query itself, queries to specific tables don't display cost estimates. This is the case of tables with **Row Access Policy**. This means that the number of accessible rows is limited depending on the user. This is the case of tables that are part of the [BD Pro](https://info.basedosdados.org/en/bd-pro) service
 
-- Exemplo da tabela `agencia` do conjunto `br_bcb_estban`. 
+- Example of the `agencia` table from the `br_bcb_estban` dataset. 
   
   ![](images/bq_query_estimated_costs_row_security.png) { width=100% }
 
 
-### DICA 1: **Selecione somente as colunas de interesse**
+### TIP 1: **Select only the columns of interest**
 	
-- A arquitetura do Big Query utiliza o armazenamento orientado a colunas, isto é, cada coluna é armazenada separadamente. Esta característica tem uma implicação clara quanto aos custos de processamento: **quanto mais colunas forem selecionadas, maior será o custo.**
+- The Big Query architecture uses column-oriented storage, meaning that each column is stored separately. This characteristic has a clear implication regarding processing costs: **the more columns are selected, the higher the cost.**
 	
 
-- **Evite**: Selecionar colunas em excesso
+- **Avoid**: Selecting too many columns
 
 ```sql 
     SELECT * 
 ```
 
-- **Prática recomendada**: selecione somente as colunas de interesse para reduzir o custo final da consulta.
+- **Recommended practice**: select only the columns of interest to reduce the final cost of the query.
 
 ```sql
 SELECT coluna1, coluna2 
 ```
-- Veja este a diferença obtida com a tabela [`microdados`](https://basedosdados.org/dataset/5beeec93-cbf3-43f6-9eea-9bee6a0d1683?table=dea823a5-cad7-4014-b77c-4aa33b3b0541) do conjunto `br_ms_sim`.
+- See the difference obtained with the table [`microdados`](https://basedosdados.org/en/dataset/5beeec93-cbf3-43f6-9eea-9bee6a0d1683?table=dea823a5-cad7-4014-b77c-4aa33b3b0541) from the `br_ms_sim` set.
 
-  - **Sem seleção de colunas:** custo estimado 5.83 GB
-  - **Selecionando 3 colunas:** custo estimado 0.531 GB (531 MB)
+  - **Without column selection:** estimated cost 5.83 GB
+  - **Selecting 3 columns:** estimated cost 0.531 GB (531 MB)
 
 ```sql
 SELECT sequencial_obito, tipo_obito, data_obito FROM `basedosdados.br_ms_sim.microdados`
 ``` 
 
 	
-- Para entender mais a fundo a arquitetura colunar, consulte a documentação oficial do [Big Query](https://cloud.google.com/bigquery/docs/storage_overview?hl=pt-br)
+- To understand the columnar architecture in depth, consult the official [Big Query](https://cloud.google.com/bigquery/docs/storage_overview?hl=en#open-ui) documentation
 
-### DICA 2: Utilize colunas particionadas e clusterizadas para filtrar os dados
+### TIP 2: Use partitioned and clustered columns to filter data
 
--  As partições são divisões feitas em uma tabela para facilitar o gerenciamento e a consulta dos dados. No momento de execução da consulta, o Big Query ignora linhas que possuem um valor da partição diferente do utilizado no filtro. Isto normalmente reduz significativamente a quantidade de linhas lidas e, o que nos interessa, **reduz o custo de processamento**.
+- Partitions are divisions made in a table to facilitate data management and query. During query execution, Big Query ignores rows that have a partition value different from the one used in the filter. This usually significantly reduces the number of rows read and, what we're interested in, **reduces the processing cost.**
 
-- Clusters são agrupamentos organizados em uma tabela com base nos valores de uma ou mais colunas especificadas. Durante a execução de uma consulta, o BigQuery otimiza a leitura dos dados, acessando apenas os segmentos que contêm os valores relevantes das colunas de cluster. Isso significa que, ao invés de escanear toda a tabela, apenas as partes necessárias são lidas, o que geralmente reduz a quantidade de dados processados e, consequentemente, **reduz o custo de processamento.**
+- Clusters are organized groups in a table based on the values of one or more specified columns. During query execution, Big Query optimizes data reading, accessing only the segments that contain the relevant values of the cluster columns. This means that instead of scanning the entire table, only the necessary parts are read, which generally reduces the amount of processed data and, consequently, **reduces the processing cost.**
 
-- Como saber qual coluna foi utilizada para particionar e clusterizar uma tabela específica?
+- How to know which column was used to partition and cluster a specific table?
 
-  1. Pelos metadados na página de tabela no site da [BD](https://basedosdados.org/dataset/5beeec93-cbf3-43f6-9eea-9bee6a0d1683?table=dea823a5-cad7-4014-b77c-4aa33b3b0541)
+  1. By the metadata on the table page on the BD website
 
   ![](images/website_metadata_table_partitions.gif)
 
-  - Note que o campo **Partições no Big Query** elenca tanto as partições quanto os clusters.
+  - Note that the **Partitions in Big Query** lists both partitions and clusters.
 
-  2. Pelos metadados na página de 'Detalhes' no Big Query
+  2. By the metadata on the 'Details' page in Big Query
   
   ![](images/bq_metadada_table_partitions_clusters.gif)
 
-  - Note que são elencadas ambas informações: **partições** e **clusters**. Neste caso, a coluna **ano** foi definida como partição e a coluna **sigla_uf** como cluster.  
+  - Note that both **partitions** and **clusters** are listed. In this case, the column **ano** was defined as a partition and the column **sigla_uf** as a cluster.  
 
-- **Prática recomendada**: sempre que possível, utilize colunas particionadas e clusterizadas para filtrar/agregar os dados.
+- **Recommended practice**: always try to use partitioned and clustered columns to filter/aggregate data.
 
-- **Exemplo**
-  -  Consulta utilizado a coluna particionada como filtro:
+- **Example**
+  -  Query used with a partitioned column as a filter:
 ```sql
 SELECT sequencial_obito, tipo_obito, data_obito FROM `basedosdados.br_ms_sim.microdados` where ano = 2015
 ```
-  - **custo estimado**: 31.32 MB. A combinação de técnicas de seleção de colunas e filtro utilizando partição **reduziu o custo** estimado da consulta inicial de **5.83 GB** para somente **31.32 MB**
+  - **estimated cost**: 31.32 MB. The combination of column selection techniques and filtering using partition **reduced the estimated cost** from the initial query of **5.83 GB** to only **31.32 MB**
 
-### DICA 3: Muita atenção ao realizar joins entre tabelas
+### TIP 3: Pay close attention when performing joins between tables
 
-- **Avalie a real necessidade do JOIN**
-  - Certifique-se de que o join é realmente necessário para a análise que você está realizando. Às vezes, operações alternativas como subconsultas ou agregações podem ser mais eficientes.
+- **Evaluate the real need for JOIN**
+    - Make sure the join is really necessary for the analysis you're performing. Sometimes, alternative operations like subqueries or aggregations can be more efficient.
 
-- **Entenda a Lógica do JOIN**
-  - Diferentes tipos de joins (INNER, LEFT, RIGHT, FULL) têm diferentes implicações de desempenho e resultado. Gastar um tempinho entendo a melhor opção para seu objetivo de análise pode ajudar a ter um controle de custos mais eficiente. 
-  - Um dos problemas mais comuns é a multiplicação de linhas indesejadas no resultado final. 
-  - Para entender a fundo boas práticas e problemas recorrentes com joins sugerimos os guias [SQL Joins na prática](https://medium.com/@aneuk3/sql-joins-defcf817e8cf) e [Maximizando a Eficiência com JOIN em Consultas SQL para Combinar Tabelas](https://medium.com/comunidadeds/maximizando-a-eficiência-com-join-em-consultas-sql-para-combinar-tabelas-55bd3b62fa09) 
+- **Understand the JOIN logic**
+    - Different types of joins (INNER, LEFT, RIGHT, FULL) have different implications for performance and result. Taking a moment to understand the best option for your analysis goal can help you have more efficient cost control. 
+    - One of the most common problems is the multiplication of unwanted rows in the final result. 
+    - To understand the full picture of good practices and common issues with joins, we recommend the guides [SQL Joins in Practice](https://medium.com/@aneuk3/sql-joins-defcf817e8cf) and [Maximizing Efficiency with JOIN in SQL Queries to Combine Tables](https://medium.com/comunidadeds/maximizando-a-eficiência-com-join-em-consultas-sql-para-combinar-tabelas-55bd3b62fa09) 
 
-- **Utilize as dicas anteriores**
-  - Selecione somente colunas de interesse
-  - Faça uso das colunas particionadas para filtrar os dados
-  - Atente-se a estimativa de custos antes de executar a consulta
+- **Use the tips above**
+    - Select only the columns of interest
+    - Use the partitioned columns to filter the data
+    - Pay attention to cost estimates before executing the query
 
 
-## Tutoriais
+## Tutorials
 
-### Como navegar pelo BigQuery
+### How to navigate BigQuery
 
-Para entender mais sobre a interface do BigQuery e como explorar os
-dados, preparamos um texto completo no blog com um exemplo de busca dos
-dados da [RAIS - Ministério da Economia](https://dev.to/basedosdados/bigquery-101-45pk).
+To understand more about the BigQuery interface and how to explore the data, we prepared a complete text in the blog with an example of searching for data from the [RAIS - Ministry of Economy](https://dev.to/basedosdados/bigquery-101-45pk).
 
-*Cansado(a) da leitura? Temos também um [vídeo completo no nosso Youtube](https://www.youtube.com/watch?v=nGM2OwTUY_M&t=1285s).*
+*Tired of reading? We also have a [complete video on our YouTube](https://www.youtube.com/watch?v=nGM2OwTUY_M&t=1285s).*
 
-### Entenda os dados
+### Understand the data
 
-O BigQuery possui um mecanismo de busca que permite buscar por nomes
-de *datasets* (conjuntos), *tables* (tabelas) ou *labels* (grupos).
-Construímos regras de nomeação simples e práticas para facilitar sua
-busca - [veja mais](../style_data).
+BigQuery has a search mechanism that allows you to search by *datasets* (sets), *tables* (tables), or *labels* (groups).
+We created simple naming rules and practices to facilitate your search - [see more](style_data.md).
 
-### Entenda o uso gratuito do Big Query (BQ)
+### Understand the use of BigQuery (BQ) for free
 
-### Conectando com o PowerBI
+### Connecting with PowerBI
 
-O Power BI é uma das tecnologias mais populares para o desenvolvimento
-de dashboards com dados relacionais. Por isso, preparamos um tutorial
-para você descobrir [como usar os dados do *datalake* no desenvolvimento dos seus dashboards](https://dev.to/basedosdados/tutorial-power-bi-j6d).
+Power BI is one of the most popular technologies for developing dashboards with relational data. That's why we prepared a tutorial for you to discover [how to use the *datalake* data in the development of your dashboards](https://dev.to/basedosdados/tutorial-power-bi-j6d).
 
-### Manuais e Cursos de SQL
+### SQL Manuals and Courses
 
-Está começando a aprender sobre SQL para fazer suas consultas? Abaixo
-colocamos algumas recomendações usadas pela nossa equipe tanto no
-aprendizado quanto no dia-a-dia:
+We're starting to learn about SQL to make our queries? Below we provide some recommendations used by our team both in learning and in everyday life:
 
-- [Lista de funções em SQL da W3](https://www.w3schools.com/sql/default.Asp)
-- [Curso SQL na Codeacademy](https://www.codecademy.com/learn/learn-sql)
-- [Curso de SQL do Programação Dinâmica](https://www.youtube.com/watch?v=z32438Yehl4&list=PL5TJqBvpXQv5n1N15kcK1m9oKJm_cv-m6&index=2)
+- [List of SQL functions in W3](https://www.w3schools.com/sql/default.Asp)
+- [SQL Course on Codeacademy](https://www.codecademy.com/learn/learn-sql)
+- [SQL Course from Dynamic Programming](https://www.youtube.com/watch?v=z32438Yehl4&list=PL5TJqBvpXQv5n1N15kcK1m9oKJm_cv-m6&index=2)

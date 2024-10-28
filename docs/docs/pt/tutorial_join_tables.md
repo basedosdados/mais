@@ -5,19 +5,19 @@ intituições e temas seja tão simples quanto qualquer outra consulta.
 Para isso, definimos uma metodologia padrão para tratamento dos dados,
 nomeação de colunas, tabelas e conjuntos.
 
-??? Info "Como funciona a metolodiga BD+?"
+??? Info "Como funciona a metolodiga BD?"
     Alguma frase sobre ....
     Para saber mais, leia a documentação sobre tratamento e arquitetura
     de dados.
 
 Informações de diferentes tabelas podem ser agregadas por meiode
 **chaves identificadora**. Uma chave identificadora é uma coluna cujo nome
-é único em todas as tabelas do *datalake* e é utilizada para
+é único em todas as tabelas do *data lake* e é utilizada para
 identificar uma entidade.
 
 ## Exemplo de chave identificadora
 
-A coluna `ano` tem esse mesmo nome em todas as tabelas do *datalake* -
+A coluna `ano` tem esse mesmo nome em todas as tabelas do *data lake* -
 ela sempre se refere a variável que tem como valor quaisquer anos do
 nosso calendário.
 
