@@ -16,10 +16,10 @@ organización** que publica el conjunto:
 
 |           | organization_id                         |
 |-----------|----------------------------------------------|
-| Mundial   | mundo_<organizacion>                         |
-| Federal   | <sigla_pais>_<organizacion>                         |
-| Estatal   | <sigla_pais>_<sigla_estado>_<organizacion>             |
-| Municipal | <sigla_pais>_<sigla_estado>_<ciudad>_<organizacion>   |
+| Mundial   | `mundo_<organizacion>`                         |
+| Federal   | `<sigla_pais>_<organizacion>`                         |
+| Estatal   | `<sigla_pais>_<sigla_estado>_<organizacion>`             |
+| Municipal | `<sigla_pais>_<sigla_estado>_<ciudad>_<organizacion>`   |
 
 * `sigla_pais` y `sigla_estado` son siempre 2 letras minúsculas;
 * `organizacion` es el nombre o sigla (preferentemente) de la organización que
