@@ -26,7 +26,6 @@ theme:
     - navigation.sections
     - navigation.top
     - toc.integrate
-    - navigation.tabs
 
 repo_url: https://github.com/basedosdados/mais
 repo_name: basedosdados/mais
