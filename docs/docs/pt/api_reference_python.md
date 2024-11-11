@@ -11,3 +11,59 @@ Esta API é composta por funções com 2 tipos de funcionalidade:
   projeto no Google Cloud, seguindo a nossa metodologia e infraestrutura).
 
 !!! Info "Toda documentação do código abaixo está em inglês"
+
+## Módulos (Requisição de dados)
+
+::: basedosdados.download.metadata
+    handler: python
+    rendering:
+            show_root_heading: no
+            heading_level: 3
+    selection:
+      docstring_style: google  # this is the default
+      docstring_options:
+        replace_admonitions: no
+
+::: basedosdados.download.download
+    handler: python
+    rendering:
+            show_root_heading: no
+            heading_level: 3
+    selection:
+      docstring_style: google  # this is the default
+      docstring_options:
+        replace_admonitions: no
+
+## Classes (Gerenciamento de dados)
+
+::: basedosdados.upload.storage
+    handler: python
+    rendering:
+            show_root_heading: no
+            heading_level: 3
+    selection:
+      docstring_style: google  # this is the default
+      docstring_options:
+        replace_admonitions: no
+
+---
+::: basedosdados.upload.dataset
+    handler: python
+    rendering:
+            show_root_heading: no
+            heading_level: 3
+    selection:
+      docstring_style: google  # this is the default
+      docstring_options:
+        replace_admonitions: no
+
+---
+::: basedosdados.upload.table
+    handler: python
+    rendering:
+            show_root_heading: no
+            heading_level: 3
+    selection:
+      docstring_style: google  # this is the default
+      docstring_options:
+        replace_admonitions: no
