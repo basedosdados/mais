@@ -27,8 +27,8 @@ theme:
     - navigation.top
     - toc.integrate
 
-repo_url: https://github.com/basedosdados/mais
-repo_name: basedosdados/mais
+repo_url: https://github.com/basedosdados/sdk
+repo_name: basedosdados/sdk
 
 extra:
   version: 2.0
@@ -38,7 +38,7 @@ extra:
     - icon: fontawesome/brands/discord
       link: https://discord.com/invite/huKWpsVYx4
     - icon: fontawesome/brands/github
-      link: https://github.com/basedosdados/mais
+      link: https://github.com/basedosdados/sdk
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/basedosdados
     - icon: fontawesome/brands/whatsapp
