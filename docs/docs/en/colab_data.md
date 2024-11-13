@@ -105,15 +105,15 @@ The RAIS architecture tables [can be consulted here](https://docs.google.com/spr
 !!! Tip "A each beginning and end of step, consult our [style guide](style_data.md) to ensure you're following the BD standardization"
 
 1. List all the variables in the data in the `original_name` column
-   - Obs: If the base changes the name of the variables over time (like RAIS), it's necessary to make compatibilities between years for all the variables by filling in the `original_name_YYYY` column for each year or month available
+    - Obs: If the base changes the name of the variables over time (like RAIS), it's necessary to make compatibilities between years for all the variables by filling in the `original_name_YYYY` column for each year or month available
 2. Rename the variables according to our [manual](style_data.md) in the `name` column
 3. Understand the type of variable and fill in the `bigquery_type` column
 4. Fill in the description in the `description` column according to the [manual](style_data.md)
 5. From the compatibilities between years and/or queries to the raw data, fill in the temporal coverage in `temporal_coverage` for each variable
-   - Obs: If the variables have the same temporal coverage as the table, fill in only with '(1)'
+    - Obs: If the variables have the same temporal coverage as the table, fill in only with '(1)'
 6. Indicate with 'yes' or 'no' if there's a dictionary for the variables in `covered_by_dictionary`
 7. Check if the variables represent any entity present in the [directories](https://basedosdados.org/dataset?q=diret%C3%B3rio&datasets_with=open_tables&organization=bd&page=1) to fill in the `directory_column`
-8 For variables of type `int64` or `float64`, check if it's necessary to include a [measurement unit](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py)
+8. For variables of type `int64` or `float64`, check if it's necessary to include a [measurement unit](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py)
 9. Reorder the variables according to the [manual](style_data.md)
 
 !!! Tip "When you finish filling in the architecture tables, contact the Data Basis team to validate everything. It's necessary that it's clear what the final format of the data should be _before_ starting to write the code. This way we avoid redoing the work."
