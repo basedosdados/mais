@@ -112,7 +112,7 @@ As tabelas de arquitetura da RAIS [podem ser consultadas aqui](https://docs.goog
 3. Entender o tipo da variável e preencher a coluna `bigquery_type`
 4. Preencher a descrição em `description` conforme o [manual](style_data.md)
 5. A partir da compatibilização entre anos e/ou consultas aos dados brutos, preencher a cobertura temporal em `temporal_coverage` de cada variável
-    - Obs: Caso a as variáveis tenham a mesma cobertura temporal da tabela preencher apenas com '(1)'
+    - Obs: Caso as variáveis tenham a mesma cobertura temporal da tabela preencher apenas com '(1)'
 6. Indicar com 'yes' ou 'no' se há dicionário para as variáveis em `covered_by_dictionary`
 7. Verificar se as variáveis representam alguma entidade presente nos [diretórios](https://basedosdados.org/dataset?q=diret%C3%B3rio&datasets_with=open_tables&organization=bd&page=1) para preencher o `directory_column`
 8. Para as variáveis do tipo `int64` ou `float64` verificar se é necessário incluir uma [unidade de medida](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py)
