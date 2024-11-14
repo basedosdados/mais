@@ -90,7 +90,6 @@ Nomes de variáveis devem respeitar algumas regras:
 - Lista de **prefixos permitidos**
     - `nome_`,
     - `data_`,
-    - `numero_`,
     - `quantidade_`,
     - `proporcao_` (variáveis de porcentagem 0-100%),
     - `taxa_`,
